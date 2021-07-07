@@ -111,6 +111,12 @@ This is an app that allows users to browse & sign up for volunteer opportunities
 
 ### [BONUS] Digital Wireframes & Mockups
 
+##Login and Signup##
+<img src="Login_Signup_Wireframe.jpg" width=600>
+
+##General Table View##
+<img src="General_Table_Wireframe.jpg" width=600>
+
 ### [BONUS] Interactive Prototype
 
 ## Schema 
