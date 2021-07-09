@@ -122,10 +122,144 @@ This is an app that allows users to browse & sign up for volunteer opportunities
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### User
+Property | Type | Description
+--- | --- | ---
+username |  String | unique username for each user/org 
+name |  String | actual name of the org/person 
+description |  String | description of org or person
+image | File | profile image of user
+latitude |  Number | latitude of the org/person location
+longitude |  Number | longitude of the org/person location
+createdAt |  DateTime | time when user is created (default)
+updatedAt |  DateTime | time when user is last updated (default)
+totalScore |  Number | sum of all ratings
+numReviews | Number | number of ratings
+amountDonated | Number | total amount donated via app
+volunteerOps | Array | array of volunteering opportunities user has participated in
+donations | Array | array of donations user has made
+shadowingOps | Array | array of shadowing opportunities user has participated in
+reviews | Array | array of reviews user has made
+
+#### Volunteering Opportunity
+Property | Type | Description
+--- | --- | ---
+objectId |  String | unique ID for the opportunity 
+author |  Pointer to User | author/org of the opportunity 
+description |  String | description of opportunity
+createdAt |  DateTime | time when post is created (default)
+updatedAt |  DateTime | time when post is last updated (default)
+tags |  Array | array of tags/topics associated with the opportunity
+url | String | URL to page to sign up
+latitude* |  Number | derived from author
+longitude* |  Number | derived from author
+
+#### Rating/Review
+Property | Type | Description
+--- | --- | ---
+objectId |  String | unique ID for the review 
+author |  Pointer to User | author/org of the review 
+comment |  String | comment for the review
+stars | Number | star count for the review (out of 5)
+createdAt |  DateTime | time when review is created (default)
+updatedAt |  DateTime | time when review is last updated (default)
+
+#### Donation
+Property | Type | Description
+--- | --- | ---
+objectId |  String | unique ID for the fundraiser 
+author |  Pointer to User | author/org of the fundraiser 
+description |  String | description of fundraiser
+goalAmount | Number | target amount of money raised
+currentAmount | Number | current amount of money raised
+createdAt |  DateTime | time when post is created (default)
+updatedAt |  DateTime | time when post is last updated (default)
+tags |  Array | array of tags/topics associated with the fundraiser
+url | String | URL to page to sign up
+
+#### Shadowing Opportunity
+Property | Type | Description
+--- | --- | ---
+objectId |  String | unique ID for the opportunity 
+author |  Pointer to User | author/org of the opportunity 
+description |  String | description of opportunity
+createdAt |  DateTime | time when post is created (default)
+updatedAt |  DateTime | time when post is last updated (default)
+tags |  Array | array of tags/topics associated with the opportunity
+url | String | URL to page to sign up
+latitude* |  Number | derived from author
+longitude* |  Number | derived from author
+
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Volunteering Opportunities Screen
+    - (Read/GET) Query gets all volunteering opportunities (optional filters on screen to user to filter their search)
+    ```objectivec
+    PFQuery *query = [PFQuery queryWithClassName:@"Volunteering_Ops"];
+    [query includeKey:@"author"];
+    [query includeKey:@"description"];
+    [query includeKey:@"tags"];
+    [query includeKey:@"url"];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            // do something with the array of object returned by the call
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    ```
+- Donations Screen
+    - (Read/GET) Query gets all donations (optional filters on screen to user to filter their search)
+- Shadowing Opportunities Screen
+    - (Read/GET) Query gets all shadowing opportunities (optional filters on screen to user to filter their search)
+- Suggested Opportunities Screen
+    - (Read/GET) Query gets all volunteering opportunities, presented in a sorted order that reflects user's past interests and organizations (optional filters on screen to user to filter their search)
+- User Profile Screen
+    - (Read/GET) Query gets all user info and displays it (username, stats, reviews, etc.)
+    - (Update/PUT) Update user profile image
+    ```objectivec
+   PFQuery *query = [PFQuery queryWithClassName:@"Users"];
+   [query whereKey:@"username" equalTo:[PFUser currentUser].username];
+   
+   [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+       if (users != nil) {
+           // Set user = users[0] 
+           // Set user[@"image"] = new image
+           // Saving changes to user
+           [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+               if (succeeded) {
+                   // Do something
+               } else {
+                   NSLog(@"Error: %@", error.localizedDescription);
+               }
+           }];
+
+       } else {
+           NSLog(@"%@", error.localizedDescription);
+       }
+   }];
+    ```
+- Organization Profile Screen
+    - (Read/GET) Query gets all user info and displays it (username, stats, reviews, etc.)
+    - (Delete) Delete existing reviews
+    ```objectivec
+    PFQuery *query = [PFQuery queryWithClassName:@"Reviews"];
+    [query whereKey:@"objectID" equalTo:self.review.objectID];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+      if (object) {
+            [object deleteInBackground];
+      } else {
+        NSLog(@"Unable to retrieve object with title %@.", theTitleString);
+      }
+    }];
+    ```
+- Login Screen
+    - (Read/GET) Authenticate entered info with stored user info
+- Sign Up Screen
+    - (Create/POST) Create new user account
+- Write Review Screen
+    - (Create/POST) Post new reviews and ratings for organizations
