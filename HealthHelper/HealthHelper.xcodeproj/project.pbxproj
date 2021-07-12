@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		126237028BECCD0B252D187F /* Pods_HealthHelperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5214698713E43AC6A69292C9 /* Pods_HealthHelperTests.framework */; };
+		499F864764F28DD807151F99 /* Pods_HealthHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */; };
+		8E3535F9A9E0E72943C87CB5 /* Pods_HealthHelper_HealthHelperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */; };
 		D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9198444269CAF19009ADD0D /* AppDelegate.m */; };
 		D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9198447269CAF19009ADD0D /* SceneDelegate.m */; };
 		D919844E269CAF19009ADD0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D919844C269CAF19009ADD0D /* Main.storyboard */; };
@@ -24,6 +27,7 @@
 		D970C4F0269CE8F7003DA544 /* PastOpportunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */; };
 		D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F2269CEBC1003DA544 /* DetailsViewController.m */; };
 		D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F5269CF8A4003DA544 /* SettingsViewController.m */; };
+		D970C4F8269CFD51003DA544 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D970C4F7269CFD51003DA544 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EF6448BD361405906DF3266 /* Pods-HealthHelper-HealthHelperUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelper-HealthHelperUITests.debug.xcconfig"; path = "Target Support Files/Pods-HealthHelper-HealthHelperUITests/Pods-HealthHelper-HealthHelperUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0FB0EC0D1A6697B066AAECAF /* Pods-HealthHelper-HealthHelperUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelper-HealthHelperUITests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelper-HealthHelperUITests/Pods-HealthHelper-HealthHelperUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2ECB2F064E2FE39283750C71 /* Pods-HealthHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelper.release.xcconfig"; path = "Target Support Files/Pods-HealthHelper/Pods-HealthHelper.release.xcconfig"; sourceTree = "<group>"; };
+		4510B623D4B42E215B05DCDC /* Pods-HealthHelperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.debug.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5214698713E43AC6A69292C9 /* Pods_HealthHelperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthHelperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6D0C49354B4AA0BC84C56B7 /* Pods-HealthHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelper.debug.xcconfig"; path = "Target Support Files/Pods-HealthHelper/Pods-HealthHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthHelper_HealthHelperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9198440269CAF19009ADD0D /* HealthHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9198443269CAF19009ADD0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9198444269CAF19009ADD0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -78,6 +90,8 @@
 		D970C4F2269CEBC1003DA544 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = HealthHelper/DetailsViewController.m; sourceTree = SOURCE_ROOT; };
 		D970C4F4269CF8A4003DA544 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = HealthHelper/SettingsViewController.h; sourceTree = SOURCE_ROOT; };
 		D970C4F5269CF8A4003DA544 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = HealthHelper/SettingsViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C4F7269CFD51003DA544 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499F864764F28DD807151F99 /* Pods_HealthHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				126237028BECCD0B252D187F /* Pods_HealthHelperTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,12 +115,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3535F9A9E0E72943C87CB5 /* Pods_HealthHelper_HealthHelperUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FDD8705CC3F0CD4FF0BC1EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C6D0C49354B4AA0BC84C56B7 /* Pods-HealthHelper.debug.xcconfig */,
+				2ECB2F064E2FE39283750C71 /* Pods-HealthHelper.release.xcconfig */,
+				0EF6448BD361405906DF3266 /* Pods-HealthHelper-HealthHelperUITests.debug.xcconfig */,
+				0FB0EC0D1A6697B066AAECAF /* Pods-HealthHelper-HealthHelperUITests.release.xcconfig */,
+				4510B623D4B42E215B05DCDC /* Pods-HealthHelperTests.debug.xcconfig */,
+				F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A97FF74E64B01D01C6F46C35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */,
+				CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */,
+				5214698713E43AC6A69292C9 /* Pods_HealthHelperTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D9198437269CAF19009ADD0D = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +153,8 @@
 				D919845E269CAF1A009ADD0D /* HealthHelperTests */,
 				D9198469269CAF1A009ADD0D /* HealthHelperUITests */,
 				D9198441269CAF19009ADD0D /* Products */,
+				0FDD8705CC3F0CD4FF0BC1EF /* Pods */,
+				A97FF74E64B01D01C6F46C35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +182,7 @@
 				D919844F269CAF1A009ADD0D /* Assets.xcassets */,
 				D9198451269CAF1A009ADD0D /* LaunchScreen.storyboard */,
 				D9198454269CAF1A009ADD0D /* Info.plist */,
+				D970C4F7269CFD51003DA544 /* Keys.plist */,
 				D9198455269CAF1A009ADD0D /* main.m */,
 			);
 			path = HealthHelper;
@@ -208,9 +252,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D919846F269CAF1B009ADD0D /* Build configuration list for PBXNativeTarget "HealthHelper" */;
 			buildPhases = (
+				02C129C5D32CA73E2CCA9720 /* [CP] Check Pods Manifest.lock */,
 				D919843C269CAF19009ADD0D /* Sources */,
 				D919843D269CAF19009ADD0D /* Frameworks */,
 				D919843E269CAF19009ADD0D /* Resources */,
+				C2207242716FFF41A4467042 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +271,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9198472269CAF1B009ADD0D /* Build configuration list for PBXNativeTarget "HealthHelperTests" */;
 			buildPhases = (
+				79E7B2A08D89D25FABCB288F /* [CP] Check Pods Manifest.lock */,
 				D9198457269CAF1A009ADD0D /* Sources */,
 				D9198458269CAF1A009ADD0D /* Frameworks */,
 				D9198459269CAF1A009ADD0D /* Resources */,
@@ -243,9 +290,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9198475269CAF1B009ADD0D /* Build configuration list for PBXNativeTarget "HealthHelperUITests" */;
 			buildPhases = (
+				050E39E65418E3CB70F45965 /* [CP] Check Pods Manifest.lock */,
 				D9198462269CAF1A009ADD0D /* Sources */,
 				D9198463269CAF1A009ADD0D /* Frameworks */,
 				D9198464269CAF1A009ADD0D /* Resources */,
+				A728C5DE7449529C610C6D04 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D970C4F8269CFD51003DA544 /* Keys.plist in Resources */,
 				D9198453269CAF1A009ADD0D /* LaunchScreen.storyboard in Resources */,
 				D9198450269CAF1A009ADD0D /* Assets.xcassets in Resources */,
 				D919844E269CAF19009ADD0D /* Main.storyboard in Resources */,
@@ -324,6 +374,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02C129C5D32CA73E2CCA9720 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HealthHelper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		050E39E65418E3CB70F45965 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HealthHelper-HealthHelperUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79E7B2A08D89D25FABCB288F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HealthHelperTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A728C5DE7449529C610C6D04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HealthHelper-HealthHelperUITests/Pods-HealthHelper-HealthHelperUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HealthHelper-HealthHelperUITests/Pods-HealthHelper-HealthHelperUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HealthHelper-HealthHelperUITests/Pods-HealthHelper-HealthHelperUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2207242716FFF41A4467042 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HealthHelper/Pods-HealthHelper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HealthHelper/Pods-HealthHelper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HealthHelper/Pods-HealthHelper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D919843C269CAF19009ADD0D /* Sources */ = {
@@ -510,6 +663,7 @@
 		};
 		D9198470269CAF1B009ADD0D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6D0C49354B4AA0BC84C56B7 /* Pods-HealthHelper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -528,6 +682,7 @@
 		};
 		D9198471269CAF1B009ADD0D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ECB2F064E2FE39283750C71 /* Pods-HealthHelper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -546,6 +701,7 @@
 		};
 		D9198473269CAF1B009ADD0D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4510B623D4B42E215B05DCDC /* Pods-HealthHelperTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -566,6 +722,7 @@
 		};
 		D9198474269CAF1B009ADD0D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -586,6 +743,7 @@
 		};
 		D9198476269CAF1B009ADD0D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EF6448BD361405906DF3266 /* Pods-HealthHelper-HealthHelperUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G48Q633AD8;
@@ -604,6 +762,7 @@
 		};
 		D9198477269CAF1B009ADD0D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FB0EC0D1A6697B066AAECAF /* Pods-HealthHelper-HealthHelperUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G48Q633AD8;

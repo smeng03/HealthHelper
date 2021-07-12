@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cv3-B2-cLQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -48,6 +48,9 @@
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6kE-Zt-HmV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igI-zR-ZDR">
                                 <rect key="frame" x="79" y="824" width="256" height="32"/>
@@ -56,12 +59,13 @@
                                     <color key="titleColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="XAf-Jd-3Om" kind="show" id="i8j-KH-jhL"/>
+                                    <segue destination="XAf-Jd-3Om" kind="presentation" modalTransitionStyle="flipHorizontal" id="i8j-KH-jhL"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="t0d-3R-FXC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="2hH-PO-d8L"/>
                             <constraint firstAttribute="bottom" secondItem="igI-zR-ZDR" secondAttribute="bottom" constant="40" id="8kV-Yu-jSh"/>
@@ -79,6 +83,9 @@
                             <constraint firstItem="t0d-3R-FXC" firstAttribute="top" secondItem="siv-aY-btp" secondAttribute="bottom" constant="50" id="izm-v5-Qp8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qN3-80-fLV" secondAttribute="trailing" constant="40" id="kmd-FD-ytJ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="J7v-m0-puZ" appends="YES" id="uNO-yN-cNM"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="4iz-Ox-lFx"/>
                     <connections>
@@ -89,6 +96,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="J7v-m0-puZ">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="EvT-w2-IKS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-955" y="78"/>
         </scene>
@@ -114,7 +126,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passwrod" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-a3-xLG">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rpL-a3-xLG">
                                 <rect key="frame" x="40" y="431" width="334" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="KN3-JV-vEC"/>
@@ -132,6 +144,9 @@
                                 <state key="normal" title="SIGN UP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapSignUp:" destination="XAf-Jd-3Om" eventType="touchUpInside" id="y3d-Tx-Nqm"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4L-gu-e25">
                                 <rect key="frame" x="97.5" y="824" width="219" height="32"/>
@@ -140,7 +155,7 @@
                                     <color key="titleColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="dqX-1a-28K"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="flipHorizontal" id="dqX-1a-28K"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3XO-37-VnL">
@@ -154,6 +169,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="U52-5J-79c"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="W9B-UN-GjF" firstAttribute="top" secondItem="3XO-37-VnL" secondAttribute="bottom" constant="50" id="2jw-Rr-NMF"/>
                             <constraint firstItem="U52-5J-79c" firstAttribute="trailing" secondItem="3XO-37-VnL" secondAttribute="trailing" constant="40" id="368-fj-sWo"/>
@@ -175,6 +191,9 @@
                             <constraint firstItem="3XO-37-VnL" firstAttribute="leading" secondItem="U52-5J-79c" secondAttribute="leading" constant="40" id="nho-ue-qcg"/>
                             <constraint firstItem="d4L-gu-e25" firstAttribute="centerX" secondItem="RPZ-NG-NSF" secondAttribute="centerX" id="oUr-kn-czc"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5t3-Sp-Gak" appends="YES" id="mPi-Ry-PAZ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="8C0-1T-sek"/>
                     <connections>
@@ -186,14 +205,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZU-0U-PzO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5t3-Sp-Gak">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="XAf-Jd-3Om" id="ALe-XM-fg2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-112" y="78"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="W1H-v8-RNw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dVV-E4-6ZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tabBarController modalPresentationStyle="fullScreen" id="cv3-B2-cLQ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalPresentationStyle="fullScreen" id="cv3-B2-cLQ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="B7f-BW-NXa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -204,6 +227,7 @@
                         <segue destination="0o8-xj-zSt" kind="relationship" relationship="viewControllers" id="C2d-Rw-2ka"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dVV-E4-6ZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-530" y="807"/>
         </scene>
@@ -326,7 +350,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Opportunities" id="P1c-N7-mkZ"/>
-                    <navigationItem key="navigationItem" title="Opportunities" id="YY0-SV-yFE"/>
+                    <navigationItem key="navigationItem" title="Opportunities" id="YY0-SV-yFE">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vvt-Vo-iJa">
+                            <connections>
+                                <action selector="didTapLogout:" destination="Gqx-Wa-L6v" id="d3x-2J-fRo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kLs-BB-Px5" id="Hfy-Jd-LW3"/>
                     </connections>
@@ -384,7 +414,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kag-g7-Opb">
                                                         <rect key="frame" x="10" y="10" width="394" height="1096"/>
-                                                        <mutableString key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.
+                                                        <string key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.
 
 Requirements 
 
@@ -396,7 +426,7 @@ Working Conditions: Working conditions may involve an occasional exposure to dus
 
 Physical Demands: Duties may require exerting up to ten pounds of force occasionally and/or small amounts of force frequently. Any sedentary work typically involving sitting most of the time, however as tasks vary per department/role, the volunteer may be subjected to brief and/or extended walking or standing, pushing, pulling, lifting, bending, and stooping.
 
-Other: Community Volunteers work at least four hours each volunteer session and commit to a minimum of 100 service hours per year. Annually, all volunteers must update their PPD and Flu shots with Occupational Health, and successfully complete NRH mandatories including but not limited to: HIPPA, Fire and Safety, Hazardous Materials, Infection Control, Injury Prevention and Workplace Violence. The duties stated are intended to describe the general nature and level of work being performed. They are not intended to be construed as an exhaustive list of all responsibilities, duties and skills required of volunteers. Other related duties may be assigned within scope of ability.</mutableString>
+Other: Community Volunteers work at least four hours each volunteer session and commit to a minimum of 100 service hours per year. Annually, all volunteers must update their PPD and Flu shots with Occupational Health, and successfully complete NRH mandatories including but not limited to: HIPPA, Fire and Safety, Hazardous Materials, Infection Control, Injury Prevention and Workplace Violence. The duties stated are intended to describe the general nature and level of work being performed. They are not intended to be construed as an exhaustive list of all responsibilities, duties and skills required of volunteers. Other related duties may be assigned within scope of ability.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -610,6 +640,11 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="8iu-Ob-IDi"/>
                     <navigationItem key="navigationItem" title="Your Profile" id="tp8-FH-K7r">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Sqe-fg-Kax">
+                            <connections>
+                                <action selector="didTapLogout:" destination="3kE-eC-XsR" id="7HD-fn-xbf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape" catalog="system" id="tXR-9a-rHN">
                             <connections>
                                 <segue destination="hNz-0G-Mik" kind="show" id="iXu-KX-bhA"/>
@@ -679,7 +714,6 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i8j-KH-jhL"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>
