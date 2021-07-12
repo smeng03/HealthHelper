@@ -49,6 +49,8 @@ This is an app that allows users to browse & sign up for volunteer opportunities
 * Options to filter opporunties based on tags, location, hours of volunteering, etc.
 * Profile screen for each organization (profile picture, description of their mission, link to website, etc.)
 * Settings screen (for UI customization or other customization of the fundamental user experience)
+* Icons showing if each opportunity is volunteering, donating, or shadowing
+* Allow users to follow orgs, have page displaying orgs you've followed
 
 ### 2. Screen Archetypes
 
