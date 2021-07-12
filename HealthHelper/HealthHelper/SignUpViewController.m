@@ -1,28 +1,29 @@
 //
-//  LoginViewController.m
+//  SignUpViewController.m
 //  HealthHelper
 //
 //  Created by Sabrina P Meng on 7/12/21.
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "LoginViewController.h"
+#import "SignUpViewController.h"
 
-@interface LoginViewController ()
+@interface SignUpViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordField;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @end
 
-@implementation LoginViewController
+@implementation SignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Rounded corners
-    self.loginButton.layer.cornerRadius = 10;
+    // Rounded button corners
+    self.signUpButton.layer.cornerRadius = 10;
 }
 
 /*

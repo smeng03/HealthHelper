@@ -17,6 +17,13 @@
 		D919846B269CAF1A009ADD0D /* HealthHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D919846A269CAF1A009ADD0D /* HealthHelperUITests.m */; };
 		D970C4DD269CB235003DA544 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4DC269CB235003DA544 /* User.m */; };
 		D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4E0269CB2AD003DA544 /* LoginViewController.m */; };
+		D970C4E4269CD93B003DA544 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4E3269CD93B003DA544 /* SignUpViewController.m */; };
+		D970C4E7269CDC62003DA544 /* OpportunitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4E6269CDC62003DA544 /* OpportunitiesViewController.m */; };
+		D970C4EA269CDD3A003DA544 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4E9269CDD3A003DA544 /* ProfileViewController.m */; };
+		D970C4ED269CE26A003DA544 /* OpportunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4EC269CE26A003DA544 /* OpportunityCell.m */; };
+		D970C4F0269CE8F7003DA544 /* PastOpportunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */; };
+		D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F2269CEBC1003DA544 /* DetailsViewController.m */; };
+		D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F5269CF8A4003DA544 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +64,20 @@
 		D970C4DE269CB23F003DA544 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		D970C4DF269CB2AD003DA544 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D970C4E0269CB2AD003DA544 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D970C4E2269CD93B003DA544 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = HealthHelper/SignUpViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C4E3269CD93B003DA544 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = HealthHelper/SignUpViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C4E5269CDC62003DA544 /* OpportunitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpportunitiesViewController.h; path = HealthHelper/OpportunitiesViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C4E6269CDC62003DA544 /* OpportunitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OpportunitiesViewController.m; path = HealthHelper/OpportunitiesViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C4E8269CDD3A003DA544 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = HealthHelper/ProfileViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C4E9269CDD3A003DA544 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = HealthHelper/ProfileViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C4EB269CE26A003DA544 /* OpportunityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpportunityCell.h; path = HealthHelper/OpportunityCell.h; sourceTree = SOURCE_ROOT; };
+		D970C4EC269CE26A003DA544 /* OpportunityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = OpportunityCell.m; path = HealthHelper/OpportunityCell.m; sourceTree = SOURCE_ROOT; };
+		D970C4EE269CE8F7003DA544 /* PastOpportunityCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PastOpportunityCell.h; path = HealthHelper/PastOpportunityCell.h; sourceTree = SOURCE_ROOT; };
+		D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PastOpportunityCell.m; path = HealthHelper/PastOpportunityCell.m; sourceTree = SOURCE_ROOT; };
+		D970C4F1269CEBC1003DA544 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = HealthHelper/DetailsViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C4F2269CEBC1003DA544 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = HealthHelper/DetailsViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C4F4269CF8A4003DA544 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = HealthHelper/SettingsViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C4F5269CF8A4003DA544 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = HealthHelper/SettingsViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +165,16 @@
 		D970C4D6269CAFE1003DA544 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D970C4F4269CF8A4003DA544 /* SettingsViewController.h */,
+				D970C4F5269CF8A4003DA544 /* SettingsViewController.m */,
+				D970C4F1269CEBC1003DA544 /* DetailsViewController.h */,
+				D970C4F2269CEBC1003DA544 /* DetailsViewController.m */,
+				D970C4E8269CDD3A003DA544 /* ProfileViewController.h */,
+				D970C4E9269CDD3A003DA544 /* ProfileViewController.m */,
+				D970C4E5269CDC62003DA544 /* OpportunitiesViewController.h */,
+				D970C4E6269CDC62003DA544 /* OpportunitiesViewController.m */,
+				D970C4E2269CD93B003DA544 /* SignUpViewController.h */,
+				D970C4E3269CD93B003DA544 /* SignUpViewController.m */,
 				D970C4DF269CB2AD003DA544 /* LoginViewController.h */,
 				D970C4E0269CB2AD003DA544 /* LoginViewController.m */,
 			);
@@ -162,6 +193,10 @@
 		D970C4D8269CAFEE003DA544 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D970C4EE269CE8F7003DA544 /* PastOpportunityCell.h */,
+				D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */,
+				D970C4EB269CE26A003DA544 /* OpportunityCell.h */,
+				D970C4EC269CE26A003DA544 /* OpportunityCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,9 +330,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D970C4ED269CE26A003DA544 /* OpportunityCell.m in Sources */,
 				D970C4DD269CB235003DA544 /* User.m in Sources */,
+				D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */,
+				D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,
+				D970C4EA269CDD3A003DA544 /* ProfileViewController.m in Sources */,
+				D970C4E4269CD93B003DA544 /* SignUpViewController.m in Sources */,
+				D970C4F0269CE8F7003DA544 /* PastOpportunityCell.m in Sources */,
 				D9198456269CAF1A009ADD0D /* main.m in Sources */,
+				D970C4E7269CDC62003DA544 /* OpportunitiesViewController.m in Sources */,
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
 				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
 			);
