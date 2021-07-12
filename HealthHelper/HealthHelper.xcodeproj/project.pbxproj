@@ -15,8 +15,8 @@
 		D9198456269CAF1A009ADD0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9198455269CAF1A009ADD0D /* main.m */; };
 		D9198460269CAF1A009ADD0D /* HealthHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D919845F269CAF1A009ADD0D /* HealthHelperTests.m */; };
 		D919846B269CAF1A009ADD0D /* HealthHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D919846A269CAF1A009ADD0D /* HealthHelperUITests.m */; };
-		D970C4DB269CB071003DA544 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4DA269CB071003DA544 /* LoginViewController.m */; };
 		D970C4DD269CB235003DA544 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4DC269CB235003DA544 /* User.m */; };
+		D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4E0269CB2AD003DA544 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +53,10 @@
 		D9198466269CAF1A009ADD0D /* HealthHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealthHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D919846A269CAF1A009ADD0D /* HealthHelperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthHelperUITests.m; sourceTree = "<group>"; };
 		D919846C269CAF1A009ADD0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D970C4D9269CB071003DA544 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = HealthHelper/LoginViewController.h; sourceTree = SOURCE_ROOT; };
-		D970C4DA269CB071003DA544 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = HealthHelper/LoginViewController.m; sourceTree = SOURCE_ROOT; };
 		D970C4DC269CB235003DA544 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		D970C4DE269CB23F003DA544 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		D970C4DF269CB2AD003DA544 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D970C4E0269CB2AD003DA544 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +144,8 @@
 		D970C4D6269CAFE1003DA544 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D970C4D9269CB071003DA544 /* LoginViewController.h */,
-				D970C4DA269CB071003DA544 /* LoginViewController.m */,
+				D970C4DF269CB2AD003DA544 /* LoginViewController.h */,
+				D970C4E0269CB2AD003DA544 /* LoginViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -296,10 +296,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D970C4DD269CB235003DA544 /* User.m in Sources */,
-				D970C4DB269CB071003DA544 /* LoginViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,
 				D9198456269CAF1A009ADD0D /* main.m in Sources */,
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
+				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
