@@ -39,14 +39,7 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     
-    if (self.passwordField.text != self.confirmPasswordField.text) {
-        // Passwords do not match, need to re-enter
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Passwords do not match, please try again" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:^{
-        }];
-    } else {
+    if ([self.passwordField.text isEqualToString:self.confirmPasswordField.text]) {
         // Call sign up function on the object
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
             if (error != nil) {
@@ -62,6 +55,13 @@
                 // Manually segue to logged in view
                 [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
             }
+        }];
+    } else {
+        // Passwords do not match, need to re-enter
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Passwords do not match, please try again" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:^{
         }];
     }
 }
