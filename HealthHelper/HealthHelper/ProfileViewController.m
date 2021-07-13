@@ -142,20 +142,34 @@
     NSData *imageData = UIImagePNGRepresentation(self.updatedProfileImage);
     user[@"image"] = [PFFileObject fileObjectWithName:@"image.png" data:imageData contentType:@"image/png"];
     
-    // Update in database
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (succeeded) {
-            // Display new profile image
-            self.profileImageView.image = self.updatedProfileImage;
-        } else {
-            // Otherwise, displays an alert
-            NSLog(@"Problem saving image: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-            [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:^{}];
-        }
-    }];
+    // Progress HUD while post is saved
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Update image in database
+        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (succeeded) {
+                // Display new profile image
+                self.profileImageView.image = self.updatedProfileImage;
+            } else {
+                // Otherwise, displays an alert
+                NSLog(@"Problem saving image: %@", error.localizedDescription);
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:^{}];
+            }
+            
+            // Adding a slight delay so progress HUD doesn't just flash
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+        }];
+    });
+}
+
+- (void)stopAnimation {
+    // Stopping progress HUD
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
 }
 
 /*
