@@ -511,12 +511,16 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC">
                                 <rect key="frame" x="10" y="98" width="100" height="100"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Lsa-az-hun"/>
                                     <constraint firstAttribute="width" constant="100" id="jK7-sc-FYS"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LX6-2N-SyH" appends="YES" id="vXw-fV-0ub"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5C-zn-7EF">
                                 <rect key="frame" x="120" y="98" width="94.5" height="24"/>
@@ -661,6 +665,11 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPn-s8-OZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="LX6-2N-SyH">
+                    <connections>
+                        <action selector="didTapProfilePicture:" destination="3kE-eC-XsR" id="idi-F3-BXs"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-113.04347826086958" y="2231.9196428571427"/>
         </scene>

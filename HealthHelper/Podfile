@@ -7,6 +7,8 @@ target 'HealthHelper' do
 
   # Pods for HealthHelper
   pod 'Parse'
+  pod 'AFNetworking'
+  pod 'MBProgressHUD'
 
   target 'HealthHelperTests' do
     inherit! :search_paths

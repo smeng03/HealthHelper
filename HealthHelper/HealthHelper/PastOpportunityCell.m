@@ -6,12 +6,15 @@
 //
 
 #import "PastOpportunityCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PastOpportunityCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    // Round profile images
+    self.profileImageView.layer.cornerRadius = 40;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

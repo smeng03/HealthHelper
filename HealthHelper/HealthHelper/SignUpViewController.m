@@ -51,6 +51,9 @@
                 }];
             } else {
                 NSLog(@"User registered successfully");
+                
+                // Set default profile image
+                [self setProfileImage];
 
                 // Manually segue to logged in view
                 [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
@@ -69,6 +72,27 @@
 - (IBAction)dismissKeyboard:(id)sender {
     // Dismisses keyboard when screen is tapped
     [self.view endEditing:YES];
+}
+
+- (void)setProfileImage {
+    // Save default profile image to current user object
+    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"user2"]);
+    PFUser *user = PFUser.currentUser;
+    user[@"image"] = [PFFileObject fileObjectWithName:@"image.png" data:imageData contentType:@"image/png"];
+    
+    // Save to database
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (succeeded) {
+            NSLog(@"Success!");
+        } else {
+            // Otherwise, displays an alert
+            NSLog(@"Problem creating profile: %@", error.localizedDescription);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:^{}];
+        }
+    }];
 }
 
 /*
