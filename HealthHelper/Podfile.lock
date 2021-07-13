@@ -15,6 +15,12 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.1)
+  - GoogleMaps (5.1.0):
+    - GoogleMaps/Maps (= 5.1.0)
+  - GoogleMaps/Base (5.1.0)
+  - GoogleMaps/Maps (5.1.0):
+    - GoogleMaps/Base
+  - GooglePlaces (5.0.0)
   - MBProgressHUD (1.2.0)
   - Parse (1.19.2):
     - Parse/Core (= 1.19.2)
@@ -23,6 +29,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - GoogleMaps
+  - GooglePlaces
   - MBProgressHUD
   - Parse
 
@@ -30,15 +38,19 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - Bolts
+    - GoogleMaps
+    - GooglePlaces
     - MBProgressHUD
     - Parse
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  GoogleMaps: 086ae1dab659eaa7339bdb30fc88e2f44e7c597c
+  GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
 
-PODFILE CHECKSUM: ec7aedf5e57cf6b25aac54fe87ae01d4864b2518
+PODFILE CHECKSUM: 23990641ea962dd48459ea951481166ac4fe942b
 
 COCOAPODS: 1.10.1

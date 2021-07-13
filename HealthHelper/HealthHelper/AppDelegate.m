@@ -7,6 +7,8 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+@import GoogleMaps;
+@import GooglePlaces;
 
 @interface AppDelegate ()
 
@@ -24,6 +26,8 @@
       configuration.applicationId= [dict objectForKey: @"applicationID"];
       configuration.clientKey = [dict objectForKey: @"clientKey"];
       configuration.server = @"https://parseapi.back4app.com/";
+      [GMSServices provideAPIKey:[dict objectForKey: @"mapsAPIKey"]];
+      [GMSPlacesClient provideAPIKey:[dict objectForKey: @"mapsAPIKey"]];
     }];
     [Parse initializeWithConfiguration:configuration];
     return YES;
