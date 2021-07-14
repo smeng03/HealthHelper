@@ -29,6 +29,7 @@
 		D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F5269CF8A4003DA544 /* SettingsViewController.m */; };
 		D970C4F8269CFD51003DA544 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D970C4F7269CFD51003DA544 /* Keys.plist */; };
 		D970C53B269E597B003DA544 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D970C53A269E597B003DA544 /* CoreLocation.framework */; };
+		D970C540269F4760003DA544 /* loading_square.gif in Resources */ = {isa = PBXBuildFile; fileRef = D970C53F269F4760003DA544 /* loading_square.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		D970C4F5269CF8A4003DA544 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = HealthHelper/SettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		D970C4F7269CFD51003DA544 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		D970C53A269E597B003DA544 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D970C53F269F4760003DA544 /* loading_square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading_square.gif; path = ../../../../../Downloads/loading_square.gif; sourceTree = "<group>"; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +176,7 @@
 		D9198442269CAF19009ADD0D /* HealthHelper */ = {
 			isa = PBXGroup;
 			children = (
+				D970C53C269F44FC003DA544 /* GIFs */,
 				D970C4D7269CAFE8003DA544 /* Models */,
 				D970C4D8269CAFEE003DA544 /* Views */,
 				D970C4D6269CAFE1003DA544 /* View Controllers */,
@@ -246,6 +249,14 @@
 				D970C4EC269CE26A003DA544 /* OpportunityCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D970C53C269F44FC003DA544 /* GIFs */ = {
+			isa = PBXGroup;
+			children = (
+				D970C53F269F4760003DA544 /* loading_square.gif */,
+			);
+			path = GIFs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D970C4F8269CFD51003DA544 /* Keys.plist in Resources */,
+				D970C540269F4760003DA544 /* loading_square.gif in Resources */,
 				D9198453269CAF1A009ADD0D /* LaunchScreen.storyboard in Resources */,
 				D9198450269CAF1A009ADD0D /* Assets.xcassets in Resources */,
 				D919844E269CAF19009ADD0D /* Main.storyboard in Resources */,

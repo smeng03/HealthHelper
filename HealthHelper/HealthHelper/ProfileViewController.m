@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
+#import <SDWebImage/SDWebImage.h>
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -41,6 +42,9 @@
     
     // Round profile images
     self.profileImageView.layer.cornerRadius = 50;
+    
+    // Placeholder image
+    self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
 }
 
 - (void)loadBasicProfile {
@@ -60,7 +64,7 @@
             
             // Set profile image
             PFFileObject *image = user[@"image"];
-            [self.profileImageView setImageWithURL:[NSURL URLWithString:image.url]];
+            [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }

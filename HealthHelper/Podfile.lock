@@ -26,6 +26,9 @@ PODS:
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
     - Bolts/Tasks (= 1.9.1)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -33,6 +36,7 @@ DEPENDENCIES:
   - GooglePlaces
   - MBProgressHUD
   - Parse
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -42,6 +46,7 @@ SPEC REPOS:
     - GooglePlaces
     - MBProgressHUD
     - Parse
+    - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
@@ -50,7 +55,8 @@ SPEC CHECKSUMS:
   GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 23990641ea962dd48459ea951481166ac4fe942b
+PODFILE CHECKSUM: b2957d61a92952686717c83d699df9592dc9ae8d
 
 COCOAPODS: 1.10.1

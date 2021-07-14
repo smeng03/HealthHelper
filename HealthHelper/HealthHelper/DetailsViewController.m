@@ -41,6 +41,9 @@ CLLocationManager *locationManager;
     // Rounded button corners
     self.registerButton.layer.cornerRadius = 10;
     
+    // Rounded profile images
+    self.profileImageView.layer.cornerRadius = 50;
+    
     // Get current location
     [self getCurrentLocation];
     

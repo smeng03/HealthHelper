@@ -11,6 +11,7 @@ target 'HealthHelper' do
   pod 'MBProgressHUD'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'SDWebImage'
 
   target 'HealthHelperTests' do
     inherit! :search_paths

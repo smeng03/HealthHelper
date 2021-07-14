@@ -522,7 +522,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC" customClass="SDAnimatedImageView">
                                 <rect key="frame" x="10" y="98" width="100" height="100"/>
                                 <gestureRecognizers/>
                                 <constraints>
