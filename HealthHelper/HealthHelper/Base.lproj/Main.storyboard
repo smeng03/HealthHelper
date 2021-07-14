@@ -386,8 +386,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance: 3.8 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-8E-BuH">
-                                <rect key="frame" x="120" y="132" width="122.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance: -- mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-8E-BuH">
+                                <rect key="frame" x="120" y="132" width="113.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -471,7 +471,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: Front Desk Volunteer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-ex-0ig">
-                                <rect key="frame" x="120" y="157.5" width="284" height="21"/>
+                                <rect key="frame" x="120" y="158" width="284" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -714,19 +714,153 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jov-kd-Uxj">
                                 <rect key="frame" x="345" y="188.5" width="51" height="31"/>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigation Bar Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqC-VF-afH">
+                                <rect key="frame" x="20" y="256" width="180" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiL-MK-cJj">
+                                <rect key="frame" x="20" y="305" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.15294117647058825" green="0.20784313725490194" blue="0.59999999999999998" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6SG-vf-e7S"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="8lY-jo-XKV"/>
+                                    <constraint firstAttribute="width" constant="40" id="veR-Vb-8cb"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setColor1:" destination="hNz-0G-Mik" eventType="touchUpInside" id="uof-gU-zCv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b75-p9-fzi">
+                                <rect key="frame" x="103.5" y="305" width="40" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.8784313725490196" blue="0.47843137254901957" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="18x-Ph-A6b"/>
+                                    <constraint firstAttribute="height" constant="40" id="scI-C7-coM"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setColor2:" destination="hNz-0G-Mik" eventType="touchUpInside" id="JWR-fF-vMh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hF1-fy-jGd">
+                                <rect key="frame" x="187" y="305" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.73333333333333328" green="0.91764705882352937" blue="0.57647058823529407" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mKV-kK-wrD"/>
+                                    <constraint firstAttribute="width" constant="40" id="qru-vl-5li"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setColor3:" destination="hNz-0G-Mik" eventType="touchUpInside" id="XT7-Gw-tXx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eQ-5t-jtI">
+                                <rect key="frame" x="270.5" y="305" width="40" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.8784313725490196" blue="0.89803921568627454" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="6ps-Mh-JIr"/>
+                                    <constraint firstAttribute="height" constant="40" id="atd-6P-f73"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setColor4:" destination="hNz-0G-Mik" eventType="touchUpInside" id="01b-Yg-u9s"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bt-gP-iYJ">
+                                <rect key="frame" x="354" y="305" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1Bv-9i-OWJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="iAP-63-NSm"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setColor5:" destination="hNz-0G-Mik" eventType="touchUpInside" id="11K-7c-e9f"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3A-tQ-G3v">
+                                <rect key="frame" x="60" y="305" width="43.5" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6Ec-ke-gW2"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dbZ-Gp-av4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZz-uu-0Ev">
+                                <rect key="frame" x="143.5" y="305" width="43.5" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vJi-nu-OQS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bU7-WY-4I7">
+                                <rect key="frame" x="227" y="305" width="43.5" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="QFe-HS-0qZ"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8m-Cs-4w8">
+                                <rect key="frame" x="310.5" y="305" width="43.5" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BDS-Km-lj3"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sez-4N-axM">
+                                <rect key="frame" x="157" y="375" width="100" height="40"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="70v-6l-Ycl"/>
+                                    <constraint firstAttribute="height" constant="40" id="MAL-TT-nxe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="RESET">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetColor:" destination="hNz-0G-Mik" eventType="touchUpInside" id="Py4-2U-ztT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="l6a-V3-Uk2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="b75-p9-fzi" firstAttribute="top" secondItem="aiL-MK-cJj" secondAttribute="top" id="0Ju-ow-McU"/>
                             <constraint firstItem="yE2-Jj-Gg6" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="2gy-fJ-CIM"/>
                             <constraint firstItem="Jov-kd-Uxj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CNj-EV-Q65" secondAttribute="trailing" constant="20" id="5ah-7Z-IMw"/>
+                            <constraint firstItem="b75-p9-fzi" firstAttribute="leading" secondItem="H3A-tQ-G3v" secondAttribute="trailing" id="6Iu-o5-TgC"/>
+                            <constraint firstItem="2bt-gP-iYJ" firstAttribute="top" secondItem="8eQ-5t-jtI" secondAttribute="top" id="7s5-PF-QLC"/>
+                            <constraint firstItem="AqC-VF-afH" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="8Gc-23-O7m"/>
+                            <constraint firstItem="hF1-fy-jGd" firstAttribute="top" secondItem="b75-p9-fzi" secondAttribute="top" id="9NQ-ZW-14H"/>
+                            <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="2bt-gP-iYJ" secondAttribute="trailing" constant="20" id="ADk-Rb-mYM"/>
+                            <constraint firstItem="8eQ-5t-jtI" firstAttribute="leading" secondItem="bU7-WY-4I7" secondAttribute="trailing" id="AiX-an-FpG"/>
+                            <constraint firstItem="bU7-WY-4I7" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="Bzb-6S-Emz"/>
+                            <constraint firstItem="bU7-WY-4I7" firstAttribute="leading" secondItem="hF1-fy-jGd" secondAttribute="trailing" id="FeU-Zc-rFk"/>
+                            <constraint firstItem="U8m-Cs-4w8" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="GKf-cE-UfW"/>
+                            <constraint firstItem="8eQ-5t-jtI" firstAttribute="top" secondItem="hF1-fy-jGd" secondAttribute="top" id="H9Y-PH-SHH"/>
+                            <constraint firstItem="hF1-fy-jGd" firstAttribute="centerX" secondItem="sNN-Q5-k6X" secondAttribute="centerX" id="HUW-Gf-1Ol"/>
+                            <constraint firstItem="BZz-uu-0Ev" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="Inx-DT-iR9"/>
                             <constraint firstItem="yE2-Jj-Gg6" firstAttribute="top" secondItem="l6a-V3-Uk2" secondAttribute="top" constant="40" id="Lzk-PI-pv4"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="ovg-MR-eNO" secondAttribute="trailing" constant="20" id="V1a-Y8-zNi"/>
                             <constraint firstItem="CNj-EV-Q65" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="W2H-Pm-yRl"/>
+                            <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AqC-VF-afH" secondAttribute="trailing" constant="20" id="Zi0-OK-6fC"/>
                             <constraint firstItem="ovg-MR-eNO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yE2-Jj-Gg6" secondAttribute="trailing" constant="20" id="bFX-qC-oa6"/>
+                            <constraint firstItem="U8m-Cs-4w8" firstAttribute="width" secondItem="H3A-tQ-G3v" secondAttribute="width" id="en0-WC-6mq"/>
+                            <constraint firstItem="AqC-VF-afH" firstAttribute="top" secondItem="CNj-EV-Q65" secondAttribute="bottom" constant="40" id="fEc-QZ-fiw"/>
                             <constraint firstItem="ovg-MR-eNO" firstAttribute="centerY" secondItem="yE2-Jj-Gg6" secondAttribute="centerY" id="fRK-u0-UwZ"/>
+                            <constraint firstItem="BZz-uu-0Ev" firstAttribute="width" secondItem="H3A-tQ-G3v" secondAttribute="width" id="k8a-Br-90L"/>
+                            <constraint firstItem="aiL-MK-cJj" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="mLk-Du-yMz"/>
+                            <constraint firstItem="2bt-gP-iYJ" firstAttribute="leading" secondItem="U8m-Cs-4w8" secondAttribute="trailing" id="psx-Fo-23f"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="Jov-kd-Uxj" secondAttribute="trailing" constant="20" id="qBa-Pg-lL6"/>
+                            <constraint firstItem="hF1-fy-jGd" firstAttribute="leading" secondItem="BZz-uu-0Ev" secondAttribute="trailing" id="qWu-Kl-P2c"/>
+                            <constraint firstItem="BZz-uu-0Ev" firstAttribute="leading" secondItem="b75-p9-fzi" secondAttribute="trailing" id="rP9-pX-uWh"/>
+                            <constraint firstItem="H3A-tQ-G3v" firstAttribute="top" secondItem="aiL-MK-cJj" secondAttribute="top" id="sxt-QO-U03"/>
+                            <constraint firstItem="H3A-tQ-G3v" firstAttribute="leading" secondItem="aiL-MK-cJj" secondAttribute="trailing" id="tFe-Dt-7kB"/>
+                            <constraint firstItem="U8m-Cs-4w8" firstAttribute="leading" secondItem="8eQ-5t-jtI" secondAttribute="trailing" id="tI8-Ir-MZY"/>
+                            <constraint firstItem="Sez-4N-axM" firstAttribute="centerX" secondItem="sNN-Q5-k6X" secondAttribute="centerX" id="taf-sr-G1c"/>
                             <constraint firstItem="CNj-EV-Q65" firstAttribute="top" secondItem="yE2-Jj-Gg6" secondAttribute="bottom" constant="40" id="toF-s5-aVR"/>
+                            <constraint firstItem="aiL-MK-cJj" firstAttribute="top" secondItem="AqC-VF-afH" secondAttribute="bottom" constant="25" id="urC-NW-QLK"/>
+                            <constraint firstItem="bU7-WY-4I7" firstAttribute="width" secondItem="H3A-tQ-G3v" secondAttribute="width" id="vav-vQ-Hdp"/>
+                            <constraint firstItem="Sez-4N-axM" firstAttribute="top" secondItem="hF1-fy-jGd" secondAttribute="bottom" constant="30" id="vvG-Eq-QgH"/>
                             <constraint firstItem="Jov-kd-Uxj" firstAttribute="centerY" secondItem="CNj-EV-Q65" secondAttribute="centerY" id="wZF-3K-WHX"/>
                         </constraints>
                     </view>
@@ -737,7 +871,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-Qi-GJI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="2232"/>
+            <point key="canvasLocation" x="630.43478260869574" y="2231.9196428571427"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

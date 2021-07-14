@@ -55,6 +55,12 @@ CLLocationManager *locationManager;
     // Loads in user-picked color and dark mode settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    int navColor = [defaults integerForKey:@"nav_color"];
+    
+    // Set bar color
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [self colorWithHex:navColor];
+    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
     
     // Set dark mode or light mode
     if (darkModeStatus) {
@@ -201,9 +207,20 @@ CLLocationManager *locationManager;
 }
 */
 
+/*
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
     NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+}
+ */
+
+// UIColor from hex color
+-(UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
  
 

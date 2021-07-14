@@ -26,6 +26,12 @@
     // Loads in user-picked color and dark mode settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    int navColor = [defaults integerForKey:@"nav_color"];
+    
+    // Set bar color
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [self colorWithHex:navColor];
+    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
     
     // Set dark mode or light mode
     if (darkModeStatus) {
@@ -53,6 +59,63 @@
     
     // Reload the view
     [self viewWillAppear:true];
+}
+
+- (IBAction)setColor1:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0x273599 forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+- (IBAction)setColor2:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0xFFE07A forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+- (IBAction)setColor3:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0xBBEA93 forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+- (IBAction)setColor4:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0xFFE0E5 forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+- (IBAction)setColor5:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0x333333 forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+- (IBAction)resetColor:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
+    [defaults synchronize];
+    
+    [self viewWillAppear:true];
+}
+
+// UIColor from hex color
+-(UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
 /*
