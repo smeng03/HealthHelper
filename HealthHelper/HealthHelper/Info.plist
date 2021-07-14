@@ -62,11 +62,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Need library access to upload images</string>
-    <key>NSCameraUsageDescription</key> 
-    <string>Need camera access to take pictures</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Show opportunity locations on the map</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need library access to upload images</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need camera access to take pictures</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Show opportunity locations on the map</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Show opportunity locations on the map</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Show opportunity locations on the map</string>
 </dict>
 </plist>

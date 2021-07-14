@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F2269CEBC1003DA544 /* DetailsViewController.m */; };
 		D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C4F5269CF8A4003DA544 /* SettingsViewController.m */; };
 		D970C4F8269CFD51003DA544 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D970C4F7269CFD51003DA544 /* Keys.plist */; };
+		D970C53B269E597B003DA544 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D970C53A269E597B003DA544 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		D970C4F4269CF8A4003DA544 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = HealthHelper/SettingsViewController.h; sourceTree = SOURCE_ROOT; };
 		D970C4F5269CF8A4003DA544 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = HealthHelper/SettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		D970C4F7269CFD51003DA544 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		D970C53A269E597B003DA544 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D970C53B269E597B003DA544 /* CoreLocation.framework in Frameworks */,
 				499F864764F28DD807151F99 /* Pods_HealthHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,13 +135,13 @@
 				4510B623D4B42E215B05DCDC /* Pods-HealthHelperTests.debug.xcconfig */,
 				F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		A97FF74E64B01D01C6F46C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D970C53A269E597B003DA544 /* CoreLocation.framework */,
 				D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */,
 				CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */,
 				5214698713E43AC6A69292C9 /* Pods_HealthHelperTests.framework */,

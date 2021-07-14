@@ -22,19 +22,25 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (strong, nonatomic) GMSPlacesClient *placesClient;
+@property (strong, nonatomic) NSNumber *latValue;
+@property (strong, nonatomic) NSNumber *lngValue;
 
 @end
 
-@implementation DetailsViewController
+@implementation DetailsViewController 
+
+CLLocationManager *locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    locationManager = [[CLLocationManager alloc] init];
     
     // Rounded button corners
     self.registerButton.layer.cornerRadius = 10;
     
     // Get current location
-    // [self getCurrentLocation];
+    [self getCurrentLocation];
     
     // Get location from address
     [self getLocationFromAddress:@"1600 Amphitheatre Parkway, Mountain View, CA"];
@@ -83,16 +89,15 @@
     [task resume];
 }
 
-/*
+
 - (void)getCurrentLocation {
     // Get current user location
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
     [locationManager startUpdatingLocation];
     
-    // Placing marker
+    /*// Placing marker
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
@@ -101,23 +106,22 @@
     
     // Re-centering map
     self.mapView.camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:10];
+    */
+}
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
+    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
+    NSLog(@"%@", self.latValue);
     [locationManager stopUpdatingLocation];
 }
 
--(void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLoc
-           fromLocation:(CLLocation *)oldLoc
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-
-    NSLog(@"in locationmanager did update %f",newLoc.coordinate.latitude);
-    MKCoordinateRegion region =
-    MKCoordinateRegionMakeWithDistance(newLoc.coordinate, 0.01,      0.02);
-    [self.mapView setRegion:region animated:YES];
-    [self.locationManager stopUpdatingLocation];
-
+    NSLog(@"didFailWithError: %@", error);
 }
- */
+
 
 /*
 - (void)locationManager:(CLLocationManager *)manager
@@ -138,12 +142,13 @@
                        degrees, minutes, seconds];
     NSLog(@" Current Longitude : %@",longt);
 }
+*/
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
     NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 }
- */
+ 
 
 /*
 - (void)getCurrentLocation {
