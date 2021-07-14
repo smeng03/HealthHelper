@@ -24,6 +24,8 @@
 @property (strong, nonatomic) GMSPlacesClient *placesClient;
 @property (strong, nonatomic) NSNumber *latValue;
 @property (strong, nonatomic) NSNumber *lngValue;
+@property (strong, nonatomic) NSNumber *destinationLatValue;
+@property (strong, nonatomic) NSNumber *destinationLngValue;
 
 @end
 
@@ -42,11 +44,39 @@ CLLocationManager *locationManager;
     // Get current location
     [self getCurrentLocation];
     
-    // Get location from address
-    [self getLocationFromAddress:@"1600 Amphitheatre Parkway, Mountain View, CA"];
-    
     // Map setup
     self.mapView.myLocationEnabled = true;
+}
+
+- (void)getDistanceFromCoords {
+    // Getting API Key
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
+    
+    // Formatting request
+    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%@,%@&destinations=%@,%@&key=%@", self.latValue, self.lngValue, self.destinationLatValue, self.destinationLngValue, apiKey];
+    NSLog(@"%@", requestString);
+    
+    // API request
+    NSURL *url = [NSURL URLWithString:requestString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            // Retrieving latitude and longitude
+            NSString *distance = dataDictionary[@"rows"][0][@"elements"][0][@"distance"][@"text"];
+            
+            // Setting distance label
+            self.distanceLabel.text = distance;
+        }
+    }];
+    
+    [task resume];
 }
 
 - (void)getLocationFromAddress:(NSString *) address {
@@ -83,6 +113,13 @@ CLLocationManager *locationManager;
             
             // Re-centering map
             self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[lat intValue] longitude:[lng intValue] zoom:10];
+            
+            // Storing coordinates
+            self.destinationLatValue = lat;
+            self.destinationLngValue = lng;
+            
+            // Get distance
+            [self getDistanceFromCoords];
         }
     }];
     
@@ -113,8 +150,11 @@ CLLocationManager *locationManager;
     CLLocation *location = [locations lastObject];
     self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
     self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
-    NSLog(@"%@", self.latValue);
     [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    
+    // Get location from address
+    [self getLocationFromAddress:@"1600 Amphitheatre Parkway, Mountain View, CA"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
