@@ -154,19 +154,7 @@ CLLocationManager *locationManager;
     // Get current user location
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
     [locationManager startUpdatingLocation];
-    
-    /*// Placing marker
-    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(locationManager.location.coordinate.latitude, locationManager.location.coordinate.longitude);
-    GMSMarker *marker = [GMSMarker markerWithPosition:position];
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
-    marker.title = @"Your Location";
-    marker.map = self.mapView;
-    
-    // Re-centering map
-    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:10];
-    */
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -185,34 +173,9 @@ CLLocationManager *locationManager;
     NSLog(@"didFailWithError: %@", error);
 }
 
-
-/*
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    int degrees = newLocation.coordinate.latitude;
-    double decimal = fabs(newLocation.coordinate.latitude - degrees);
-    int minutes = decimal * 60;
-    double seconds = decimal * 3600 - minutes * 60;
-    NSString *lat = [NSString stringWithFormat:@"%d° %d' %1.4f\"",
-                     degrees, minutes, seconds];
-    NSLog(@" Current Latitude : %@",lat);
-    degrees = newLocation.coordinate.longitude;
-    decimal = fabs(newLocation.coordinate.longitude - degrees);
-    minutes = decimal * 60;
-    seconds = decimal * 3600 - minutes * 60;
-    NSString *longt = [NSString stringWithFormat:@"%d° %d' %1.4f\"",
-                       degrees, minutes, seconds];
-    NSLog(@" Current Longitude : %@",longt);
+- (IBAction)didTapOrganizationProfile:(id)sender {
+    [self performSegueWithIdentifier:@"toOrganizationDetails" sender:nil];
 }
-*/
-
-/*
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
-    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-}
- */
 
 // UIColor from hex color
 -(UIColor *)colorWithHex:(UInt32)col {
@@ -222,26 +185,6 @@ CLLocationManager *locationManager;
     r = (col >> 16) & 0xFF;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
- 
-
-/*
-- (void)getCurrentLocation {
-    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPlaceID);
-    [self.placesClient findPlaceLikelihoodsFromCurrentLocationWithPlaceFields:fields callback:^(NSArray<GMSPlaceLikelihood *> * _Nullable likelihoods, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"An error occurred %@", [error localizedDescription]);
-            return;
-        }
-        if (likelihoods != nil) {
-            for (GMSPlaceLikelihood *likelihood in likelihoods) {
-                GMSPlace *place = likelihood.place;
-                NSLog(@"Current place name: %@", place.name);
-                NSLog(@"Place ID: %@", place.placeID);
-            }
-        }
-        }];
-}
- */
 
 /*
 #pragma mark - Navigation

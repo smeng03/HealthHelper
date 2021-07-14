@@ -51,8 +51,6 @@
     
     // Placeholder shimmer while loading
     // self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
-    
-    
     self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
     self.shimmeringView.contentView = self.profileImageView;
     [self.view addSubview:self.shimmeringView];

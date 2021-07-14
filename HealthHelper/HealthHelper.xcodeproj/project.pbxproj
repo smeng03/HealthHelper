@@ -30,6 +30,8 @@
 		D970C4F8269CFD51003DA544 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D970C4F7269CFD51003DA544 /* Keys.plist */; };
 		D970C53B269E597B003DA544 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D970C53A269E597B003DA544 /* CoreLocation.framework */; };
 		D970C540269F4760003DA544 /* loading_square.gif in Resources */ = {isa = PBXBuildFile; fileRef = D970C53F269F4760003DA544 /* loading_square.gif */; };
+		D970C543269F86F7003DA544 /* OrganizationInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C542269F86F7003DA544 /* OrganizationInfoViewController.m */; };
+		D970C546269F8FD6003DA544 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C545269F8FD6003DA544 /* ComposeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,10 @@
 		D970C4F7269CFD51003DA544 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		D970C53A269E597B003DA544 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D970C53F269F4760003DA544 /* loading_square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading_square.gif; path = ../../../../../Downloads/loading_square.gif; sourceTree = "<group>"; };
+		D970C541269F86F7003DA544 /* OrganizationInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrganizationInfoViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C542269F86F7003DA544 /* OrganizationInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrganizationInfoViewController.m; sourceTree = SOURCE_ROOT; };
+		D970C544269F8FD6003DA544 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComposeViewController.h; path = HealthHelper/ComposeViewController.h; sourceTree = SOURCE_ROOT; };
+		D970C545269F8FD6003DA544 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ComposeViewController.m; path = HealthHelper/ComposeViewController.m; sourceTree = SOURCE_ROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +221,10 @@
 		D970C4D6269CAFE1003DA544 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D970C544269F8FD6003DA544 /* ComposeViewController.h */,
+				D970C545269F8FD6003DA544 /* ComposeViewController.m */,
+				D970C541269F86F7003DA544 /* OrganizationInfoViewController.h */,
+				D970C542269F86F7003DA544 /* OrganizationInfoViewController.m */,
 				D970C4F4269CF8A4003DA544 /* SettingsViewController.h */,
 				D970C4F5269CF8A4003DA544 /* SettingsViewController.m */,
 				D970C4F1269CEBC1003DA544 /* DetailsViewController.h */,
@@ -540,10 +550,12 @@
 				D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,
 				D970C4EA269CDD3A003DA544 /* ProfileViewController.m in Sources */,
+				D970C543269F86F7003DA544 /* OrganizationInfoViewController.m in Sources */,
 				D970C4E4269CD93B003DA544 /* SignUpViewController.m in Sources */,
 				D970C4F0269CE8F7003DA544 /* PastOpportunityCell.m in Sources */,
 				D9198456269CAF1A009ADD0D /* main.m in Sources */,
 				D970C4E7269CDC62003DA544 /* OpportunitiesViewController.m in Sources */,
+				D970C546269F8FD6003DA544 /* ComposeViewController.m in Sources */,
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
 				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
 			);
