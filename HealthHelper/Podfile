@@ -12,6 +12,7 @@ target 'HealthHelper' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'SDWebImage'
+  pod 'Shimmer'
 
   target 'HealthHelperTests' do
     inherit! :search_paths

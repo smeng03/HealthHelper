@@ -51,6 +51,20 @@ CLLocationManager *locationManager;
     self.mapView.myLocationEnabled = true;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color and dark mode settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    
+    // Set dark mode or light mode
+    if (darkModeStatus) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    }
+    else {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+}
+
 - (void)getDistanceFromCoords {
     // Getting API Key
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];

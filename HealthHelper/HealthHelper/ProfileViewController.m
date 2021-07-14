@@ -14,6 +14,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
 #import <SDWebImage/SDWebImage.h>
+#import "FBShimmering.h"
+#import "FBShimmeringView.h"
+#import "FBShimmeringLayer.h"
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -25,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *hoursShadowedLabel;
 @property (strong, nonatomic) UIImage *updatedProfileImage;
 @property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) FBShimmeringView *shimmeringView;
 
 @end
 
@@ -43,8 +47,82 @@
     // Round profile images
     self.profileImageView.layer.cornerRadius = 50;
     
-    // Placeholder image
+    [self.tableView reloadData];
+    
+    // Placeholder shimmer while loading
     self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
+    
+    /*
+    self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
+    self.shimmeringView.contentView = self.profileImageView;
+    
+    CGRect newFrame = self.shimmeringView.frame;
+    newFrame.size.width = 100;
+    newFrame.size.height = 100;
+    [self.view addSubview:self.shimmeringView];
+    [self.shimmeringView setFrame:newFrame];
+    
+    [self.shimmeringView addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.hoursShadowedLabel
+                                      attribute:NSLayoutAttributeLeading
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.shimmeringView
+                                      attribute:NSLayoutAttributeTrailing
+                                      multiplier: 1
+                                      constant:10]];
+    
+    [self.shimmeringView addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.hoursVolunteeredLabel
+                                      attribute:NSLayoutAttributeLeading
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.shimmeringView
+                                      attribute:NSLayoutAttributeTrailing
+                                      multiplier: 1
+                                      constant:10]];
+    
+    [self.shimmeringView addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.amountDonatedLabel
+                                      attribute:NSLayoutAttributeLeading
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.shimmeringView
+                                      attribute:NSLayoutAttributeTrailing
+                                      multiplier: 1
+                                      constant:10]];
+    
+    [self.shimmeringView addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.usernameLabel
+                                      attribute:NSLayoutAttributeLeading
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.shimmeringView
+                                      attribute:NSLayoutAttributeTrailing
+                                      multiplier: 1
+                                      constant:10]];
+    
+    [self.shimmeringView addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.tableView
+                                      attribute:NSLayoutAttributeTop
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.shimmeringView
+                                      attribute:NSLayoutAttributeBottom
+                                      multiplier: 1
+                                      constant:50]];
+
+    self.shimmeringView.shimmering = YES;
+    */
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color and dark mode settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    
+    // Set dark mode or light mode
+    if (darkModeStatus) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    }
+    else {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
 }
 
 - (void)loadBasicProfile {
@@ -65,6 +143,7 @@
             // Set profile image
             PFFileObject *image = user[@"image"];
             [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
+            self.shimmeringView.shimmering = NO;
         } else {
             NSLog(@"%@", error.localizedDescription);
         }

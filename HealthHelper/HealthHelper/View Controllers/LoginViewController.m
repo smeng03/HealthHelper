@@ -29,6 +29,20 @@
     self.passwordField.secureTextEntry = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color and dark mode settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    
+    // Set dark mode or light mode
+    if (darkModeStatus) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    }
+    else {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+}
+
 - (IBAction)didTapLogin:(id)sender {
     // Retrieving user-entered credentials
     NSString *username = self.usernameField.text;

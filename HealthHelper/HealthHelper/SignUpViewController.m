@@ -31,6 +31,20 @@
     self.confirmPasswordField.secureTextEntry = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color and dark mode settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    
+    // Set dark mode or light mode
+    if (darkModeStatus) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    }
+    else {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+}
+
 - (IBAction)didTapSignUp:(id)sender {
     // Initialize a user object
     PFUser *newUser = [PFUser user];

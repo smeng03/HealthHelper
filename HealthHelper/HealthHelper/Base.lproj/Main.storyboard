@@ -524,6 +524,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC" customClass="SDAnimatedImageView">
                                 <rect key="frame" x="10" y="98" width="100" height="100"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Lsa-az-hun"/>
@@ -687,7 +688,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         <!--Settings-->
         <scene sceneID="dvU-ne-HNh">
             <objects>
-                <viewController id="hNz-0G-Mik" sceneMemberID="viewController">
+                <viewController id="hNz-0G-Mik" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sNN-Q5-k6X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -706,6 +707,9 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovg-MR-eNO">
                                 <rect key="frame" x="345" y="124.5" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didToggleDarkMode:" destination="hNz-0G-Mik" eventType="valueChanged" id="IpE-1p-s6v"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jov-kd-Uxj">
                                 <rect key="frame" x="345" y="188.5" width="51" height="31"/>
@@ -727,6 +731,9 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="os5-mi-Ef0"/>
+                    <connections>
+                        <outlet property="darkModeSwitch" destination="ovg-MR-eNO" id="p5Q-vE-VrF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-Qi-GJI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
