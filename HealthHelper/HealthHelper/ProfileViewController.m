@@ -50,16 +50,18 @@
     [self.tableView reloadData];
     
     // Placeholder shimmer while loading
-    self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
+    // self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
     
-    /*
+    
     self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
     self.shimmeringView.contentView = self.profileImageView;
+    [self.view addSubview:self.shimmeringView];
+    self.shimmeringView.shimmering = YES;
     
+    /*
     CGRect newFrame = self.shimmeringView.frame;
     newFrame.size.width = 100;
     newFrame.size.height = 100;
-    [self.view addSubview:self.shimmeringView];
     [self.shimmeringView setFrame:newFrame];
     
     [self.shimmeringView addConstraint:[NSLayoutConstraint
@@ -106,8 +108,6 @@
                                       attribute:NSLayoutAttributeBottom
                                       multiplier: 1
                                       constant:50]];
-
-    self.shimmeringView.shimmering = YES;
     */
 }
 
