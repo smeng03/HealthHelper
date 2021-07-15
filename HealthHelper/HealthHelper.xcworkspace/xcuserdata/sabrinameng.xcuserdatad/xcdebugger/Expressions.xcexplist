@@ -3,14 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "image.url">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[Organization initOrganizationWithObject:]:Organization.m">
          <PersistentStrings>
             <PersistentString
@@ -22,6 +14,25 @@
          contextName = "-[PFObjectSubclassingController _rawRegisterSubclass:]:PFObjectSubclassingController.m">
       </ContextState>
       <ContextState
+         contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[Opportunity createOpportunityArray:]:Opportunity.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ComposeViewController viewDidLoad]:ComposeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.opportunity">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OpportunityCell setCell:]:OpportunityCell.m">
          <PersistentStrings>
             <PersistentString
@@ -29,6 +40,17 @@
             </PersistentString>
             <PersistentString
                value = "opportunity.author.imageURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OrganizationInfoViewController viewDidLoad]:OrganizationInfoViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.opportunity.author.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.opportunity.author.imageURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

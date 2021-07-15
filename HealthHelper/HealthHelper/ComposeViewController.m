@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) FBShimmeringView *shimmeringView;
+@property (strong, nonatomic) NSNumber *rating;
 @property (weak, nonatomic) IBOutlet UITextView *composeField;
 @property (weak, nonatomic) IBOutlet UIImageView *star1;
 @property (weak, nonatomic) IBOutlet UIImageView *star2;
@@ -81,18 +82,49 @@
 }
 
 - (IBAction)didTapStar1:(id)sender {
+    NSLog(@"tapped!");
+    self.star1.image = [UIImage imageNamed:@"star.filled"];
+    self.star2.image = [UIImage imageNamed:@"star"];
+    self.star3.image = [UIImage imageNamed:@"star"];
+    self.star4.image = [UIImage imageNamed:@"star"];
+    self.star5.image = [UIImage imageNamed:@"star"];
+    self.rating = [NSNumber numberWithInt:1];
 }
 
 - (IBAction)didTapStar2:(id)sender {
+    self.star1.image = [UIImage imageNamed:@"star.filled"];
+    self.star2.image = [UIImage imageNamed:@"star.filled"];
+    self.star3.image = [UIImage imageNamed:@"star"];
+    self.star4.image = [UIImage imageNamed:@"star"];
+    self.star5.image = [UIImage imageNamed:@"star"];
+    self.rating = [NSNumber numberWithInt:2];
 }
 
 - (IBAction)didTapStar3:(id)sender {
+    self.star1.image = [UIImage imageNamed:@"star.filled"];
+    self.star2.image = [UIImage imageNamed:@"star.filled"];
+    self.star3.image = [UIImage imageNamed:@"star.filled"];
+    self.star4.image = [UIImage imageNamed:@"star"];
+    self.star5.image = [UIImage imageNamed:@"star"];
+    self.rating = [NSNumber numberWithInt:3];
 }
 
 - (IBAction)didTapStar4:(id)sender {
+    self.star1.image = [UIImage imageNamed:@"star.filled"];
+    self.star2.image = [UIImage imageNamed:@"star.filled"];
+    self.star3.image = [UIImage imageNamed:@"star.filled"];
+    self.star4.image = [UIImage imageNamed:@"star.filled"];
+    self.star5.image = [UIImage imageNamed:@"star"];
+    self.rating = [NSNumber numberWithInt:4];
 }
 
 - (IBAction)didTapStar5:(id)sender {
+    self.star1.image = [UIImage imageNamed:@"star.filled"];
+    self.star2.image = [UIImage imageNamed:@"star.filled"];
+    self.star3.image = [UIImage imageNamed:@"star.filled"];
+    self.star4.image = [UIImage imageNamed:@"star.filled"];
+    self.star5.image = [UIImage imageNamed:@"star.filled"];
+    self.rating = [NSNumber numberWithInt:5];
 }
 
 

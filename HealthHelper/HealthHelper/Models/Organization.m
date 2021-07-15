@@ -28,7 +28,7 @@
 + (Organization *)initOrganizationWithObject:(PFObject *)object {
     // Setting Organization object given PFObject
     Organization *organization = [Organization new];
-    organization.text = object[@"text"];
+    organization.text = object[@"description"];
     organization.address = object[@"address"];
     PFFileObject *image = object[@"image"];
     organization.imageURL = image.url;

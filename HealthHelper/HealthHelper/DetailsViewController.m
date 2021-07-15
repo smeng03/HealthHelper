@@ -7,6 +7,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "DetailsViewController.h"
+#import "OrganizationInfoViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <SDWebImage/SDWebImage.h>
 @import GoogleMaps;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) NSNumber *lngValue;
 @property (strong, nonatomic) NSNumber *destinationLatValue;
 @property (strong, nonatomic) NSNumber *destinationLngValue;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -198,6 +200,10 @@ CLLocationManager *locationManager;
     [self performSegueWithIdentifier:@"toOrganizationDetails" sender:nil];
 }
 
+- (IBAction)didTapRegister:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.opportunity.signUpLink] options:@{} completionHandler:nil];
+}
+
 // UIColor from hex color
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
@@ -207,14 +213,12 @@ CLLocationManager *locationManager;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqual:@"toOrganizationDetails"]) {
+        // Sending current opportunity to next view controller
+        OrganizationInfoViewController *organizationInfoViewController = [segue destinationViewController];
+        organizationInfoViewController.opportunity = self.opportunity;
+    }
 }
-*/
 
 @end
