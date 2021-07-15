@@ -276,9 +276,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kLs-BB-Px5">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="52n-p2-nhP">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OpportunityCell" rowHeight="304" id="SJO-5I-i3J" customClass="OpportunityCell">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="304"/>
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="304"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SJO-5I-i3J" id="Gsx-Wn-IXy">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
@@ -370,6 +375,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="52n-p2-nhP" id="gCo-mH-KtO"/>
                         <outlet property="tableView" destination="kLs-BB-Px5" id="Hfy-Jd-LW3"/>
                     </connections>
                 </viewController>

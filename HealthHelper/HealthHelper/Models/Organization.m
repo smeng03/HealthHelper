@@ -25,12 +25,9 @@
     return @"Organization";
 }
 
-/*
 + (Organization *)initOrganizationWithObject:(PFObject *)object {
     // Setting Organization object given PFObject
-    NSLog(@"%@", object[@"username"]);
     Organization *organization = [Organization new];
-    //organization.username = @"username";
     organization.text = object[@"text"];
     organization.address = object[@"address"];
     PFFileObject *image = object[@"image"];
@@ -38,12 +35,12 @@
     organization.totalScore = object[@"totalScore"];
     organization.numReviews = object[@"numReviews"];
     organization.reviews = object[@"reviews"];
+    organization.username = object[@"username"];
     organization.organizationId = object.objectId;
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;
     
     return organization;
 }
- */
     
 @end

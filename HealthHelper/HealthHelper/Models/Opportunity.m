@@ -14,7 +14,7 @@
 @dynamic opportunityId;
 @dynamic timeCreatedAt;
 @dynamic timeUpdatedAt;
-//@dynamic author;
+@dynamic author;
 @dynamic text;
 @dynamic tags;
 @dynamic signUpLink;
@@ -37,19 +37,7 @@
     self.opportunityId = object.objectId;
     self.timeCreatedAt = object.createdAt;
     self.timeUpdatedAt = object.updatedAt;
-    PFObject *author = object[@"author"];
-    //self.author = [Organization new];
-    //self.author.text = author[@"description"];
-    //self.author.address = author[@"address"];
-    PFFileObject *image = author[@"image"];
-    self.imageURL = image.url;
-    self.username = author[@"username"];
-    //self.author.totalScore = author[@"totalScore"];
-    //self.author.numReviews = author[@"numReviews"];
-    //self.author.reviews = author[@"reviews"];
-    //self.author.organizationId = author.objectId;
-    //self.author.timeCreatedAt = author.createdAt;
-    //self.author.timeUpdatedAt = author.updatedAt;
+    self.author = [Organization initOrganizationWithObject:object[@"author"]];
 }
 
 + (NSMutableArray *)createOpportunityArray:(NSArray *)objects {

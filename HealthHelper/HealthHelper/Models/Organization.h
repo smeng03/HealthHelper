@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
-@interface Organization : NSObject
+@interface Organization : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *organizationId;
 @property (nonatomic, strong) NSString *username;
@@ -21,8 +21,7 @@
 @property (nonatomic, strong) NSNumber *numReviews;
 @property (nonatomic, strong) NSArray *reviews;
 
-/*
 + (Organization *)initOrganizationWithObject:(PFObject *)object;
- */
+ 
     
 @end

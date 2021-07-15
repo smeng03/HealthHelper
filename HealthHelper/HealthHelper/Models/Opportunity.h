@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *position;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *imageURL;
-//@property (nonatomic, strong) Organization *author;
+@property (nonatomic, strong) Organization *author;
 
 - (void)initOpportunityWithObject:(PFObject *)object;
 + (NSMutableArray *)createOpportunityArray:(NSArray *)objects;

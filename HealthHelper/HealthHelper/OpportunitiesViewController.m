@@ -13,10 +13,12 @@
 #import "LoginViewController.h"
 #import "Opportunity.h"
 
-@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *opportunities;
+@property (strong, nonatomic) NSMutableArray *filteredOpportunities;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -28,6 +30,9 @@
     // Table view delegate and data source
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    // Search bar delegate and data source
+    self.searchBar.delegate = self;
     
     // Setting initial theme to light mode
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -126,6 +131,28 @@
     r = (col >> 16) & 0xFF;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
+
+/*
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (searchText.length != 0) {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
+            return [evaluatedObject containsString:searchText];
+        }];
+        self.filteredData = [self.data filteredArrayUsingPredicate:predicate];
+        
+        NSLog(@"%@", self.filteredData);
+        
+    }
+    else {
+        self.filteredData = self.data;
+    }
+    
+    [self.tableView reloadData];
+ 
+}
+*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 }
