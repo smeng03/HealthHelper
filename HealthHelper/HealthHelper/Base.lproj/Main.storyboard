@@ -701,7 +701,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="Pqu-oj-mHI">
-                                <rect key="frame" x="10" y="108" width="100" height="100"/>
+                                <rect key="frame" x="20" y="108" width="100" height="100"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Mav-gu-jmv"/>
@@ -712,13 +712,13 @@
                                 </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u29-OU-lPp">
-                                <rect key="frame" x="120" y="108" width="176" height="24"/>
+                                <rect key="frame" x="130" y="108" width="176" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance: -- mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-8E-BuH">
-                                <rect key="frame" x="120" y="142" width="113.5" height="21"/>
+                                <rect key="frame" x="130" y="142" width="113.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -763,7 +763,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qas-go-kjp" customClass="GMSMapView">
-                                                        <rect key="frame" x="10" y="10" width="394" height="300"/>
+                                                        <rect key="frame" x="20" y="10" width="374" height="300"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="300" id="Thq-DD-fwS"/>
@@ -775,10 +775,10 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                                     <constraint firstItem="kag-g7-Opb" firstAttribute="top" secondItem="qas-go-kjp" secondAttribute="bottom" constant="20" id="1an-57-H1O"/>
                                                     <constraint firstAttribute="trailing" secondItem="kag-g7-Opb" secondAttribute="trailing" constant="20" id="8BD-Za-gMs"/>
                                                     <constraint firstAttribute="bottom" secondItem="kag-g7-Opb" secondAttribute="bottom" constant="20" id="WWh-8q-G6a"/>
-                                                    <constraint firstAttribute="trailing" secondItem="qas-go-kjp" secondAttribute="trailing" constant="10" id="lHw-bm-1eb"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qas-go-kjp" secondAttribute="trailing" constant="20" id="lHw-bm-1eb"/>
                                                     <constraint firstItem="qas-go-kjp" firstAttribute="top" secondItem="sIC-1y-fdZ" secondAttribute="top" constant="10" id="mFm-cj-f2R"/>
                                                     <constraint firstItem="kag-g7-Opb" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="20" id="qpS-1F-WBB"/>
-                                                    <constraint firstItem="qas-go-kjp" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="10" id="rjr-1r-fiB"/>
+                                                    <constraint firstItem="qas-go-kjp" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="20" id="rjr-1r-fiB"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -802,7 +802,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: Front Desk Volunteer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-ex-0ig">
-                                <rect key="frame" x="120" y="168" width="230" height="21"/>
+                                <rect key="frame" x="130" y="168" width="230" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -816,7 +816,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" secondItem="MDr-Jb-qHM" secondAttribute="trailing" constant="40" id="82j-DH-LgZ"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="60g-8E-BuH" secondAttribute="trailing" constant="20" id="8KY-ic-vGo"/>
                             <constraint firstItem="u29-OU-lPp" firstAttribute="leading" secondItem="Pqu-oj-mHI" secondAttribute="trailing" constant="10" id="Dek-BD-8BY"/>
-                            <constraint firstItem="Pqu-oj-mHI" firstAttribute="leading" secondItem="twr-O9-iiq" secondAttribute="leading" constant="10" id="GOw-zg-HPc"/>
+                            <constraint firstItem="Pqu-oj-mHI" firstAttribute="leading" secondItem="twr-O9-iiq" secondAttribute="leading" constant="20" id="GOw-zg-HPc"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" secondItem="kHG-y7-DlF" secondAttribute="trailing" id="H4P-Rm-nQ3"/>
                             <constraint firstItem="kHG-y7-DlF" firstAttribute="top" secondItem="Pqu-oj-mHI" secondAttribute="bottom" constant="20" id="IbQ-tc-Ce9"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="bottom" secondItem="MDr-Jb-qHM" secondAttribute="bottom" constant="40" id="JBp-bo-bgA"/>
