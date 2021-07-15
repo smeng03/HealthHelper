@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Organization initOrganizationWithObject:]:Organization.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "object[@&quot;author&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PFObjectSubclassingController _rawRegisterSubclass:]:PFObjectSubclassingController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OpportunityCell setCell:]:OpportunityCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "opportunity.text">
+            </PersistentString>
+            <PersistentString
+               value = "opportunity.author.imageURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -11,10 +11,12 @@
 #import <Parse/Parse.h>
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
+#import "Opportunity.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *opportunities;
 
 @end
 
@@ -32,6 +34,9 @@
     [defaults setBool:false forKey:@"dark_mode_on"];
     [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
     [defaults synchronize];
+    
+    // Load opportunities
+    [self loadOpportunities];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,15 +59,49 @@
     }
 }
 
+- (void)loadOpportunities {
+    // Construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Opportunity"];
+    [query includeKey:@"description"];
+    [query includeKey:@"tags"];
+    [query includeKey:@"signUpLink"];
+    [query includeKey:@"opportunityType"];
+    [query includeKey:@"author"];
+    [query includeKey:@"author.image"];
+    [query includeKey:@"author.description"];
+    [query includeKey:@"author.address"];
+    [query includeKey:@"author.totalScore"];
+    [query includeKey:@"author.numReviews"];
+    [query includeKey:@"author.reviews"];
+    [query includeKey:@"position"];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    
+    // Fetch posts asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
+        if (opportunities != nil) {
+            // Create and store array of Post objects from retrieved posts
+            self.opportunities = [Opportunity createOpportunityArray:opportunities];
+            [self.tableView reloadData];
+            //[self.refreshControl endRefreshing];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     OpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OpportunityCell"];
     
+    // Setting cell and style
+    [cell setCell:self.opportunities[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.opportunities.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {

@@ -277,28 +277,41 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OpportunityCell" rowHeight="266" id="SJO-5I-i3J" customClass="OpportunityCell">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="266"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OpportunityCell" rowHeight="304" id="SJO-5I-i3J" customClass="OpportunityCell">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="304"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SJO-5I-i3J" id="Gsx-Wn-IXy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="266"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-qN-E5N">
-                                                    <rect key="frame" x="10" y="20" width="80" height="80"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-qN-E5N" customClass="SDAnimatedImageView">
+                                                    <rect key="frame" x="20" y="20" width="80" height="80"/>
+                                                    <color key="backgroundColor" systemColor="systemGray3Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="LtL-ZL-Qf5"/>
                                                         <constraint firstAttribute="width" constant="80" id="aOg-fi-As1"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="General Hospital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJ8-cp-Hvc">
-                                                    <rect key="frame" x="100" y="20" width="153" height="24"/>
+                                                    <rect key="frame" x="110" y="20" width="153" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2s-uW-ytz">
+                                                    <rect key="frame" x="110" y="52" width="284" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type: --" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfX-VP-eYw">
+                                                    <rect key="frame" x="110" y="77" width="284" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7f-S7-1bS">
-                                                    <rect key="frame" x="100" y="90" width="304" height="150"/>
+                                                    <rect key="frame" x="20" y="113" width="374" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Nag-XB-98Z"/>
                                                     </constraints>
@@ -307,25 +320,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: Front Desk Volunteer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2s-uW-ytz">
-                                                    <rect key="frame" x="100" y="54" width="304" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l7f-S7-1bS" secondAttribute="bottom" constant="10" id="1sK-vs-WGi"/>
-                                                <constraint firstItem="KEI-qN-E5N" firstAttribute="leading" secondItem="Gsx-Wn-IXy" secondAttribute="leading" constant="10" id="69K-Uh-PvF"/>
-                                                <constraint firstItem="l7f-S7-1bS" firstAttribute="leading" secondItem="KEI-qN-E5N" secondAttribute="trailing" constant="10" id="BMh-xb-wnO"/>
-                                                <constraint firstItem="g2s-uW-ytz" firstAttribute="leading" secondItem="KEI-qN-E5N" secondAttribute="trailing" constant="10" id="IZv-dd-Ylf"/>
-                                                <constraint firstItem="l7f-S7-1bS" firstAttribute="top" secondItem="g2s-uW-ytz" secondAttribute="bottom" constant="15" id="WhW-cP-lc6"/>
-                                                <constraint firstAttribute="trailing" secondItem="g2s-uW-ytz" secondAttribute="trailing" constant="10" id="bUF-Pv-xNI"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l7f-S7-1bS" secondAttribute="bottom" constant="20" id="1sK-vs-WGi"/>
+                                                <constraint firstItem="KEI-qN-E5N" firstAttribute="leading" secondItem="Gsx-Wn-IXy" secondAttribute="leading" constant="20" id="69K-Uh-PvF"/>
+                                                <constraint firstItem="l7f-S7-1bS" firstAttribute="leading" secondItem="Gsx-Wn-IXy" secondAttribute="leading" constant="20" id="BMh-xb-wnO"/>
+                                                <constraint firstItem="l7f-S7-1bS" firstAttribute="top" secondItem="vfX-VP-eYw" secondAttribute="bottom" constant="15" id="CVd-Wt-oB3"/>
+                                                <constraint firstItem="vfX-VP-eYw" firstAttribute="leading" secondItem="g2s-uW-ytz" secondAttribute="leading" id="EIO-c3-1bX"/>
+                                                <constraint firstItem="g2s-uW-ytz" firstAttribute="leading" secondItem="Gsx-Wn-IXy" secondAttribute="leading" constant="110" id="IZv-dd-Ylf"/>
+                                                <constraint firstAttribute="trailing" secondItem="vfX-VP-eYw" secondAttribute="trailing" constant="20" id="Yrs-kU-6up"/>
+                                                <constraint firstItem="vfX-VP-eYw" firstAttribute="top" secondItem="g2s-uW-ytz" secondAttribute="bottom" constant="4" id="aRg-jj-yr6"/>
+                                                <constraint firstAttribute="trailing" secondItem="g2s-uW-ytz" secondAttribute="trailing" constant="20" id="bUF-Pv-xNI"/>
                                                 <constraint firstItem="MJ8-cp-Hvc" firstAttribute="top" secondItem="Gsx-Wn-IXy" secondAttribute="top" constant="20" id="cRV-Ww-SXi"/>
-                                                <constraint firstAttribute="trailing" secondItem="l7f-S7-1bS" secondAttribute="trailing" constant="10" id="eJj-1Y-GxT"/>
-                                                <constraint firstItem="MJ8-cp-Hvc" firstAttribute="leading" secondItem="KEI-qN-E5N" secondAttribute="trailing" constant="10" id="k72-j6-KXf"/>
-                                                <constraint firstItem="g2s-uW-ytz" firstAttribute="top" secondItem="MJ8-cp-Hvc" secondAttribute="bottom" constant="10" id="lfE-uh-4Wa"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MJ8-cp-Hvc" secondAttribute="trailing" constant="10" id="oNw-mv-Iu2"/>
+                                                <constraint firstAttribute="trailing" secondItem="l7f-S7-1bS" secondAttribute="trailing" constant="20" id="eJj-1Y-GxT"/>
+                                                <constraint firstItem="MJ8-cp-Hvc" firstAttribute="leading" secondItem="Gsx-Wn-IXy" secondAttribute="leading" constant="110" id="k72-j6-KXf"/>
+                                                <constraint firstItem="g2s-uW-ytz" firstAttribute="top" secondItem="MJ8-cp-Hvc" secondAttribute="bottom" constant="8" id="lfE-uh-4Wa"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MJ8-cp-Hvc" secondAttribute="trailing" constant="20" id="oNw-mv-Iu2"/>
                                                 <constraint firstItem="KEI-qN-E5N" firstAttribute="top" secondItem="Gsx-Wn-IXy" secondAttribute="top" constant="20" id="pPW-gV-ZNs"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KEI-qN-E5N" secondAttribute="bottom" constant="10" id="w9G-O9-5KS"/>
                                             </constraints>
@@ -333,7 +343,9 @@
                                         <connections>
                                             <outlet property="descriptionLabel" destination="l7f-S7-1bS" id="gJq-HI-WEi"/>
                                             <outlet property="organizationNameLabel" destination="MJ8-cp-Hvc" id="pMR-Lz-gM0"/>
+                                            <outlet property="positionLabel" destination="g2s-uW-ytz" id="wxs-77-R0R"/>
                                             <outlet property="profileImageView" destination="KEI-qN-E5N" id="erB-wC-xKV"/>
+                                            <outlet property="typeLabel" destination="vfX-VP-eYw" id="2s6-jY-xYa"/>
                                             <segue destination="Gsj-xL-0bm" kind="show" id="Ejj-hJ-n4y"/>
                                         </connections>
                                     </tableViewCell>
@@ -390,11 +402,11 @@
                                 <rect key="frame" x="0.0" y="228" width="414" height="585"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0El-Qa-ziq">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="628.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="649"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uv8-9d-i7p">
-                                                <rect key="frame" x="10" y="20" width="394" height="588.5"/>
-                                                <mutableString key="text">At St. Michael’s Hospital we recognize the value of every person and are guided by our commitment to excellence and leadership. We demonstrate this by: 
+                                                <rect key="frame" x="20" y="20" width="374" height="609"/>
+                                                <string key="text">At St. Michael’s Hospital we recognize the value of every person and are guided by our commitment to excellence and leadership. We demonstrate this by: 
 
 * Providing exemplary physical, emotional and spiritual care for each of our patients and their families 
 * Balancing the continued commitment to the care of the poor and those most in need with the provision of highly specialized services to a broader community 
@@ -402,7 +414,7 @@
 * Advancing excellence in health services education 
 * Fostering a culture of discovery in all of our activities and supporting exemplary health sciences research 
 * Strengthening our relationships with universities, colleges, other hospitals, agencies and our community 
-* Demonstrating social responsibility through the just use of our resources. The commitment of our staff, physicians, volunteers, students, community partners and friends to our mission permits us to maintain a quality of presence and tradition of caring, which are the hallmarks of St. Michael’s Hospital.</mutableString>
+* Demonstrating social responsibility through the just use of our resources. The commitment of our staff, physicians, volunteers, students, community partners and friends to our mission permits us to maintain a quality of presence and tradition of caring, which are the hallmarks of St. Michael’s Hospital.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -411,9 +423,9 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Uv8-9d-i7p" secondAttribute="bottom" constant="20" id="76y-dg-6Z3"/>
-                                            <constraint firstItem="Uv8-9d-i7p" firstAttribute="leading" secondItem="0El-Qa-ziq" secondAttribute="leading" constant="10" id="Ner-sJ-kGa"/>
+                                            <constraint firstItem="Uv8-9d-i7p" firstAttribute="leading" secondItem="0El-Qa-ziq" secondAttribute="leading" constant="20" id="Ner-sJ-kGa"/>
                                             <constraint firstItem="Uv8-9d-i7p" firstAttribute="top" secondItem="0El-Qa-ziq" secondAttribute="top" constant="20" id="Pcb-q6-n0u"/>
-                                            <constraint firstAttribute="trailing" secondItem="Uv8-9d-i7p" secondAttribute="trailing" constant="10" id="uEI-ma-hFb"/>
+                                            <constraint firstAttribute="trailing" secondItem="Uv8-9d-i7p" secondAttribute="trailing" constant="20" id="uEI-ma-hFb"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -455,7 +467,7 @@
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="10" id="Y9f-VZ-JkN"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="trailing" secondItem="MN9-Pq-nQi" secondAttribute="trailing" id="alS-0M-st1"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="top" secondItem="Zar-3q-aIr" secondAttribute="bottom" constant="20" id="iYO-KN-AOb"/>
-                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BnX-QH-LgV" secondAttribute="trailing" constant="10" id="jgt-ky-deZ"/>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BnX-QH-LgV" secondAttribute="trailing" constant="20" id="jgt-ky-deZ"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="oCK-Ky-2Tz"/>
                         </constraints>
                     </view>
@@ -501,7 +513,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-k6-bWo">
-                                <rect key="frame" x="70" y="121" width="334" height="300"/>
+                                <rect key="frame" x="70" y="121" width="324" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -637,7 +649,7 @@
                             <constraint firstItem="Tdw-wd-4qr" firstAttribute="top" secondItem="M1o-VT-sVp" secondAttribute="bottom" constant="20" id="kNx-xt-DfA"/>
                             <constraint firstItem="0bE-z0-jF0" firstAttribute="leading" secondItem="gXZ-LO-2ck" secondAttribute="trailing" id="p1p-k1-2v1"/>
                             <constraint firstItem="Dzd-gh-Zou" firstAttribute="width" secondItem="Tdw-wd-4qr" secondAttribute="width" id="s0j-Pw-K1j"/>
-                            <constraint firstItem="cJW-xQ-Fuq" firstAttribute="trailing" secondItem="9hG-k6-bWo" secondAttribute="trailing" constant="10" id="u3U-W2-8B6"/>
+                            <constraint firstItem="cJW-xQ-Fuq" firstAttribute="trailing" secondItem="9hG-k6-bWo" secondAttribute="trailing" constant="20" id="u3U-W2-8B6"/>
                             <constraint firstItem="BKh-nD-UIK" firstAttribute="top" secondItem="M1o-VT-sVp" secondAttribute="bottom" constant="20" id="udd-Gl-wEp"/>
                         </constraints>
                     </view>
@@ -729,10 +741,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIC-1y-fdZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1436"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1446"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kag-g7-Opb">
-                                                        <rect key="frame" x="10" y="330" width="394" height="1096"/>
+                                                        <rect key="frame" x="20" y="330" width="374" height="1096"/>
                                                         <string key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.
 
 Requirements 
@@ -761,11 +773,11 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="kag-g7-Opb" firstAttribute="top" secondItem="qas-go-kjp" secondAttribute="bottom" constant="20" id="1an-57-H1O"/>
-                                                    <constraint firstAttribute="trailing" secondItem="kag-g7-Opb" secondAttribute="trailing" constant="10" id="8BD-Za-gMs"/>
-                                                    <constraint firstAttribute="bottom" secondItem="kag-g7-Opb" secondAttribute="bottom" constant="10" id="WWh-8q-G6a"/>
+                                                    <constraint firstAttribute="trailing" secondItem="kag-g7-Opb" secondAttribute="trailing" constant="20" id="8BD-Za-gMs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kag-g7-Opb" secondAttribute="bottom" constant="20" id="WWh-8q-G6a"/>
                                                     <constraint firstAttribute="trailing" secondItem="qas-go-kjp" secondAttribute="trailing" constant="10" id="lHw-bm-1eb"/>
                                                     <constraint firstItem="qas-go-kjp" firstAttribute="top" secondItem="sIC-1y-fdZ" secondAttribute="top" constant="10" id="mFm-cj-f2R"/>
-                                                    <constraint firstItem="kag-g7-Opb" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="10" id="qpS-1F-WBB"/>
+                                                    <constraint firstItem="kag-g7-Opb" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="20" id="qpS-1F-WBB"/>
                                                     <constraint firstItem="qas-go-kjp" firstAttribute="leading" secondItem="sIC-1y-fdZ" secondAttribute="leading" constant="10" id="rjr-1r-fiB"/>
                                                 </constraints>
                                             </view>
@@ -790,7 +802,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: Front Desk Volunteer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-ex-0ig">
-                                <rect key="frame" x="120" y="168" width="284" height="21"/>
+                                <rect key="frame" x="120" y="168" width="230" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -800,15 +812,15 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MDr-Jb-qHM" firstAttribute="leading" secondItem="twr-O9-iiq" secondAttribute="leading" constant="40" id="0i3-n9-rDz"/>
-                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="u29-OU-lPp" secondAttribute="trailing" constant="10" id="4Wg-H4-ngm"/>
+                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="u29-OU-lPp" secondAttribute="trailing" constant="20" id="4Wg-H4-ngm"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" secondItem="MDr-Jb-qHM" secondAttribute="trailing" constant="40" id="82j-DH-LgZ"/>
-                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="60g-8E-BuH" secondAttribute="trailing" constant="10" id="8KY-ic-vGo"/>
+                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="60g-8E-BuH" secondAttribute="trailing" constant="20" id="8KY-ic-vGo"/>
                             <constraint firstItem="u29-OU-lPp" firstAttribute="leading" secondItem="Pqu-oj-mHI" secondAttribute="trailing" constant="10" id="Dek-BD-8BY"/>
                             <constraint firstItem="Pqu-oj-mHI" firstAttribute="leading" secondItem="twr-O9-iiq" secondAttribute="leading" constant="10" id="GOw-zg-HPc"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" secondItem="kHG-y7-DlF" secondAttribute="trailing" id="H4P-Rm-nQ3"/>
                             <constraint firstItem="kHG-y7-DlF" firstAttribute="top" secondItem="Pqu-oj-mHI" secondAttribute="bottom" constant="20" id="IbQ-tc-Ce9"/>
                             <constraint firstItem="twr-O9-iiq" firstAttribute="bottom" secondItem="MDr-Jb-qHM" secondAttribute="bottom" constant="40" id="JBp-bo-bgA"/>
-                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" secondItem="HKv-ex-0ig" secondAttribute="trailing" constant="10" id="MUX-Uc-rQr"/>
+                            <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HKv-ex-0ig" secondAttribute="trailing" constant="20" id="MUX-Uc-rQr"/>
                             <constraint firstItem="60g-8E-BuH" firstAttribute="leading" secondItem="Pqu-oj-mHI" secondAttribute="trailing" constant="10" id="NTg-hl-Hee"/>
                             <constraint firstItem="MDr-Jb-qHM" firstAttribute="top" secondItem="kHG-y7-DlF" secondAttribute="bottom" constant="20" id="RMH-Rd-bQ8"/>
                             <constraint firstItem="u29-OU-lPp" firstAttribute="top" secondItem="twr-O9-iiq" secondAttribute="top" constant="20" id="Uhz-nI-kYx"/>
@@ -848,7 +860,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-ek-VCC" customClass="SDAnimatedImageView">
-                                <rect key="frame" x="10" y="108" width="100" height="100"/>
+                                <rect key="frame" x="20" y="108" width="100" height="100"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -860,25 +872,25 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5C-zn-7EF">
-                                <rect key="frame" x="120" y="108" width="94.5" height="24"/>
+                                <rect key="frame" x="130" y="108" width="94.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours volunteered: 5.0" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COH-x7-NdH">
-                                <rect key="frame" x="120" y="142" width="147" height="17"/>
+                                <rect key="frame" x="130" y="142" width="147" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount donated: $100.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeL-BN-WzO">
-                                <rect key="frame" x="120" y="161" width="168" height="17"/>
+                                <rect key="frame" x="130" y="161" width="168" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours shadowed: 10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29D-Mk-gev">
-                                <rect key="frame" x="120" y="180" width="143" height="17"/>
+                                <rect key="frame" x="130" y="180" width="143" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -895,45 +907,45 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-Qu-LNQ">
-                                                    <rect key="frame" x="10" y="20" width="80" height="80"/>
+                                                    <rect key="frame" x="20" y="20" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="cFE-PV-C4y"/>
                                                         <constraint firstAttribute="height" constant="80" id="uYV-OD-hPK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="General Hospital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcm-aQ-XGE">
-                                                    <rect key="frame" x="100" y="20" width="152.5" height="24"/>
+                                                    <rect key="frame" x="110" y="20" width="152.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date: 07/12/2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V4-8J-VLq">
-                                                    <rect key="frame" x="100" y="54" width="128" height="21"/>
+                                                    <rect key="frame" x="110" y="54" width="128" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours volunteered: 2.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2J3-N4-rd3">
-                                                    <rect key="frame" x="100" y="80" width="173" height="21"/>
+                                                    <rect key="frame" x="110" y="80" width="173" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jcm-aQ-XGE" secondAttribute="trailing" constant="10" id="0n0-Ki-kDf"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jcm-aQ-XGE" secondAttribute="trailing" constant="20" id="0n0-Ki-kDf"/>
                                                 <constraint firstItem="4V4-8J-VLq" firstAttribute="top" secondItem="jcm-aQ-XGE" secondAttribute="bottom" constant="10" id="3kq-0W-n0N"/>
                                                 <constraint firstItem="jcm-aQ-XGE" firstAttribute="top" secondItem="2uQ-lQ-PRY" secondAttribute="top" constant="20" id="Abb-wD-j7Z"/>
                                                 <constraint firstItem="jcm-aQ-XGE" firstAttribute="leading" secondItem="H0o-Qu-LNQ" secondAttribute="trailing" constant="10" id="Ahz-Mz-eeg"/>
                                                 <constraint firstItem="4V4-8J-VLq" firstAttribute="leading" secondItem="H0o-Qu-LNQ" secondAttribute="trailing" constant="10" id="CLw-5u-bh6"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4V4-8J-VLq" secondAttribute="trailing" constant="10" id="I53-rA-xvD"/>
-                                                <constraint firstItem="H0o-Qu-LNQ" firstAttribute="leading" secondItem="2uQ-lQ-PRY" secondAttribute="leading" constant="10" id="L4K-fK-Mdq"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4V4-8J-VLq" secondAttribute="trailing" constant="20" id="I53-rA-xvD"/>
+                                                <constraint firstItem="H0o-Qu-LNQ" firstAttribute="leading" secondItem="2uQ-lQ-PRY" secondAttribute="leading" constant="20" id="L4K-fK-Mdq"/>
                                                 <constraint firstItem="H0o-Qu-LNQ" firstAttribute="top" secondItem="2uQ-lQ-PRY" secondAttribute="top" constant="20" id="L8r-az-cVi"/>
                                                 <constraint firstItem="2J3-N4-rd3" firstAttribute="top" secondItem="4V4-8J-VLq" secondAttribute="bottom" constant="5" id="QyN-am-vc4"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="H0o-Qu-LNQ" secondAttribute="bottom" constant="10" id="X9B-wK-GfB"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2J3-N4-rd3" secondAttribute="bottom" constant="10" id="gKr-wk-0oE"/>
                                                 <constraint firstItem="2J3-N4-rd3" firstAttribute="leading" secondItem="H0o-Qu-LNQ" secondAttribute="trailing" constant="10" id="jOD-of-dva"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2J3-N4-rd3" secondAttribute="trailing" constant="10" id="vIt-Ey-1KT"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2J3-N4-rd3" secondAttribute="trailing" constant="20" id="vIt-Ey-1KT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -964,18 +976,18 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="FLi-hz-b9Z" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" id="IKN-c7-paQ"/>
                             <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="FLi-hz-b9Z" secondAttribute="bottom" id="IR6-Ya-J00"/>
                             <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="29D-Mk-gev" secondAttribute="bottom" constant="60" id="Og8-cj-kVW"/>
-                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="COH-x7-NdH" secondAttribute="trailing" constant="10" id="Vak-lq-lCB"/>
-                            <constraint firstItem="oeL-BN-WzO" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="120" id="ag6-nf-bBe"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="COH-x7-NdH" secondAttribute="trailing" constant="20" id="Vak-lq-lCB"/>
+                            <constraint firstItem="oeL-BN-WzO" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="ag6-nf-bBe"/>
                             <constraint firstAttribute="bottom" secondItem="GSp-g3-vh2" secondAttribute="bottom" id="cU1-WR-nXQ"/>
-                            <constraint firstItem="n5C-zn-7EF" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="120" id="cmq-eZ-Mru"/>
-                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n5C-zn-7EF" secondAttribute="trailing" constant="10" id="hOQ-Cu-76B"/>
-                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oeL-BN-WzO" secondAttribute="trailing" constant="10" id="hVK-K7-zeV"/>
-                            <constraint firstItem="6a0-ek-VCC" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="10" id="hX8-rH-KVG"/>
-                            <constraint firstItem="COH-x7-NdH" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="120" id="kAI-cb-4LQ"/>
+                            <constraint firstItem="n5C-zn-7EF" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="cmq-eZ-Mru"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n5C-zn-7EF" secondAttribute="trailing" constant="20" id="hOQ-Cu-76B"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oeL-BN-WzO" secondAttribute="trailing" constant="20" id="hVK-K7-zeV"/>
+                            <constraint firstItem="6a0-ek-VCC" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="20" id="hX8-rH-KVG"/>
+                            <constraint firstItem="COH-x7-NdH" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="kAI-cb-4LQ"/>
                             <constraint firstItem="COH-x7-NdH" firstAttribute="top" secondItem="n5C-zn-7EF" secondAttribute="bottom" constant="10" id="miX-iG-x6o"/>
-                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="29D-Mk-gev" secondAttribute="trailing" constant="10" id="myK-62-AnV"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="29D-Mk-gev" secondAttribute="trailing" constant="20" id="myK-62-AnV"/>
                             <constraint firstItem="FLi-hz-b9Z" firstAttribute="trailing" secondItem="p3P-FR-UWK" secondAttribute="trailing" id="s0c-zd-rYP"/>
-                            <constraint firstItem="29D-Mk-gev" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="120" id="tt0-pS-FI8"/>
+                            <constraint firstItem="29D-Mk-gev" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="tt0-pS-FI8"/>
                             <constraint firstItem="GSp-g3-vh2" firstAttribute="trailing" secondItem="p3P-FR-UWK" secondAttribute="trailing" id="xs0-e5-XtG"/>
                         </constraints>
                     </view>

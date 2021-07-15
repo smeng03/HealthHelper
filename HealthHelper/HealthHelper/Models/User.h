@@ -15,9 +15,7 @@
 @property (nonatomic, strong) NSDate *timeUpdatedAt;
 @property (nonatomic, strong) NSString *imageURL;
 @property (nonatomic, strong) NSNumber *amountDonated;
-@property (nonatomic, strong) NSArray *pastVolunteerOps;
-@property (nonatomic, strong) NSArray *pastDonations;
-@property (nonatomic, strong) NSArray *pastShadowingOps;
+@property (nonatomic, strong) NSArray *pastOpportunities;
 @property (nonatomic, strong) NSArray *reviews;
     
 @end
