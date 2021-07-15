@@ -125,17 +125,19 @@ CLLocationManager *locationManager;
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             
             // Retrieving latitude and longitude
+            NSLog(@"%@", dataDictionary[@"results"][0]);
             NSNumber *lat = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lat"];
             NSNumber *lng = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lng"];
-            
+            NSLog(@"%@", lat);
+            NSLog(@"%@", lng);
             // Setting marker on map
-            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([lat intValue], [lng intValue]);
+            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
             GMSMarker *marker = [GMSMarker markerWithPosition:position];
             marker.title = @"General Hospital";
             marker.map = self.mapView;
             
             // Re-centering map
-            self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[lat intValue] longitude:[lng intValue] zoom:10];
+            self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[lat doubleValue] longitude:[lng doubleValue] zoom:10];
             
             // Storing coordinates
             self.destinationLatValue = lat;
@@ -165,7 +167,7 @@ CLLocationManager *locationManager;
     locationManager = nil;
     
     // Get location from address
-    [self getLocationFromAddress:@"1600 Amphitheatre Parkway, Mountain View, CA"];
+    [self getLocationFromAddress:@"11048 Ice Skate Pl, San Diego, CA"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

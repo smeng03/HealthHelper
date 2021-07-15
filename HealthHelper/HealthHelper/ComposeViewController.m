@@ -17,6 +17,12 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (strong, nonatomic) FBShimmeringView *shimmeringView;
+@property (weak, nonatomic) IBOutlet UITextView *composeField;
+@property (weak, nonatomic) IBOutlet UIImageView *star1;
+@property (weak, nonatomic) IBOutlet UIImageView *star2;
+@property (weak, nonatomic) IBOutlet UIImageView *star3;
+@property (weak, nonatomic) IBOutlet UIImageView *star4;
+@property (weak, nonatomic) IBOutlet UIImageView *star5;
 
 @end
 
@@ -26,7 +32,12 @@
     [super viewDidLoad];
     
     // Round profile images
-    self.profileImageView.layer.cornerRadius = 50;
+    self.profileImageView.layer.cornerRadius = 25;
+    
+    // Round text view corners and border properties
+    self.composeField.layer.cornerRadius = 10;
+    self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
+    self.composeField.layer.borderWidth=1.0;
     
     // Placeholder shimmer while loading
     self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
