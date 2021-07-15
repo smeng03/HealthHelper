@@ -8,6 +8,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DetailsViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <SDWebImage/SDWebImage.h>
 @import GoogleMaps;
 @import GooglePlaces;
 @import GoogleMapsBase;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *positionLabel;
 @property (strong, nonatomic) GMSPlacesClient *placesClient;
 @property (strong, nonatomic) NSNumber *latValue;
 @property (strong, nonatomic) NSNumber *lngValue;
@@ -43,6 +45,9 @@ CLLocationManager *locationManager;
     
     // Rounded profile images
     self.profileImageView.layer.cornerRadius = 50;
+    
+    // Load basic information from self.opportunity variable
+    [self loadBasicProfile];
     
     // Get current location
     [self getCurrentLocation];
@@ -69,6 +74,20 @@ CLLocationManager *locationManager;
     else {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
+}
+
+- (void)loadBasicProfile {
+    // Set profile image
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.opportunity.author.imageURL]];
+    
+    // Set position label
+    self.positionLabel.text = [NSString stringWithFormat:@"Position: %@", self.opportunity.position];
+    
+    // Set description label
+    self.descriptionLabel.text = self.opportunity.text;
+    
+    // Set organization name label
+    self.organizationNameLabel.text = self.opportunity.author.username;
 }
 
 - (void)getDistanceFromCoords {
@@ -133,7 +152,7 @@ CLLocationManager *locationManager;
             // Setting marker on map
             CLLocationCoordinate2D position = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
             GMSMarker *marker = [GMSMarker markerWithPosition:position];
-            marker.title = @"General Hospital";
+            marker.title = self.opportunity.author.username;
             marker.map = self.mapView;
             
             // Re-centering map
@@ -167,7 +186,7 @@ CLLocationManager *locationManager;
     locationManager = nil;
     
     // Get location from address
-    [self getLocationFromAddress:@"11048 Ice Skate Pl, San Diego, CA"];
+    [self getLocationFromAddress:self.opportunity.author.address];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

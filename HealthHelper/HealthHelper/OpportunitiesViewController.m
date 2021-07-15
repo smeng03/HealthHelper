@@ -12,6 +12,7 @@
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "Opportunity.h"
+#import "DetailsViewController.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -42,6 +43,9 @@
     
     // Load opportunities
     [self loadOpportunities];
+    
+    // Search bar placeholder text
+    self.searchBar.placeholder = @"Search opportunities...";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,6 +91,7 @@
         if (opportunities != nil) {
             // Create and store array of Post objects from retrieved posts
             self.opportunities = [Opportunity createOpportunityArray:opportunities];
+            self.filteredOpportunities = self.opportunities;
             [self.tableView reloadData];
             //[self.refreshControl endRefreshing];
         } else {
@@ -99,14 +104,14 @@
     OpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OpportunityCell"];
     
     // Setting cell and style
-    [cell setCell:self.opportunities[indexPath.row]];
+    [cell setCell:self.filteredOpportunities[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.opportunities.count;
+    return self.filteredOpportunities.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -132,29 +137,45 @@
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
-/*
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (searchText.length != 0) {
+        // Searches for objects containing what the user types
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text CONTAINS[cd] %@)", searchText];
         
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject containsString:searchText];
-        }];
-        self.filteredData = [self.data filteredArrayUsingPredicate:predicate];
-        
-        NSLog(@"%@", self.filteredData);
-        
+        // Filters opportunities based on criteria
+        self.filteredOpportunities = [(NSArray *)[self.opportunities filteredArrayUsingPredicate:predicate] mutableCopy];
     }
     else {
-        self.filteredData = self.data;
+        self.filteredOpportunities = self.opportunities;
     }
     
+    // Refresh table view
     [self.tableView reloadData];
  
 }
-*/
+
+// Search bar cancel button shows
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+// Search bar and cancel button disappear when button clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Identify tapped cell and get associated opportunity
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
+    
+    // Send information
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    detailsViewController.opportunity = opportunity;
 }
 
 @end

@@ -26,8 +26,8 @@
             filePath = "HealthHelper/OpportunityCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "-setCell:"
             landmarkType = "7">
          </BreakpointContent>

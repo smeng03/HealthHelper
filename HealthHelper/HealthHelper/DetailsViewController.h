@@ -7,10 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Opportunity.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsViewController : UIViewController <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) Opportunity *opportunity;
 
 @end
 

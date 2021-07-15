@@ -32,6 +32,7 @@
 
 - (void)setCell:(Opportunity *)opportunity {
     // Profile image
+    self.profileImageView.image = nil;
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:opportunity.author.imageURL]];
     
     // Organization name label
