@@ -14,9 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @property (strong, nonatomic) Review *review;
+@property (weak, nonatomic) IBOutlet UIImageView *star1;
+@property (weak, nonatomic) IBOutlet UIImageView *star2;
+@property (weak, nonatomic) IBOutlet UIImageView *star3;
+@property (weak, nonatomic) IBOutlet UIImageView *star4;
+@property (weak, nonatomic) IBOutlet UIImageView *star5;
 
 - (void)setCell:(Review *)review;
 

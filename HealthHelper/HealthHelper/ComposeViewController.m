@@ -108,35 +108,44 @@
 }
 
 - (IBAction)didTapPost:(id)sender {
-    // Setting post attributes for storage in database
-    PFObject *review = [PFObject objectWithClassName:@"Review"];
-    review[@"comment"] = self.composeField.text;
-    review[@"author"] = PFUser.currentUser;
-    review[@"stars"] = self.rating;
-    review[@"forOrganizationWithId"] = self.opportunity.author.organizationId;
-    
-    // Progress HUD while post is saved
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        // Saving new post
-        [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (succeeded) {
-                // If successful, dismisses view controller and reloads posts
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self.delegate didPost];
-            } else {
-                // Otherwise, displays an alert
-                NSLog(@"Problem posting review: %@", error.localizedDescription);
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-                [alert addAction:okAction];
-                [self presentViewController:alert animated:YES completion:^{}];
-            }
-            
-            // Adding a slight delay so progress HUD doesn't just flash
-            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+    if ([self.rating intValue] == 0) {
+        // Present alert if user does not give a rating
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please provide a star rating before posting your review" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:^{
         }];
-    });
+    } else {
+        // Setting post attributes for storage in database
+        PFObject *review = [PFObject objectWithClassName:@"Review"];
+        review[@"comment"] = self.composeField.text;
+        review[@"author"] = PFUser.currentUser;
+        review[@"stars"] = self.rating;
+        review[@"forOrganizationWithId"] = self.opportunity.author.organizationId;
+        
+        // Progress HUD while post is saved
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            // Saving new post
+            [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                if (succeeded) {
+                    // If successful, dismisses view controller and reloads posts
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.delegate didPost];
+                } else {
+                    // Otherwise, displays an alert
+                    NSLog(@"Problem posting review: %@", error.localizedDescription);
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+                    [alert addAction:okAction];
+                    [self presentViewController:alert animated:YES completion:^{}];
+                }
+                
+                // Adding a slight delay so progress HUD doesn't just flash
+                [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+            }];
+        });
+    }
 }
 
 -(void)stopAnimation {
@@ -152,47 +161,47 @@
     } else {
         NSLog( @"why is my image object nil?");
     }
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
+    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star2 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     self.rating = [NSNumber numberWithInt:1];
 }
 
 - (IBAction)didTapStar2:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
+    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     self.rating = [NSNumber numberWithInt:2];
 }
 
 - (IBAction)didTapStar3:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
+    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     self.rating = [NSNumber numberWithInt:3];
 }
 
 - (IBAction)didTapStar4:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star.jpg"] forState:UIControlStateNormal];
+    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
     self.rating = [NSNumber numberWithInt:4];
 }
 
 - (IBAction)didTapStar5:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star-filled.jpg"] forState:UIControlStateNormal];
+    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [self.star5 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
     self.rating = [NSNumber numberWithInt:5];
 }
 

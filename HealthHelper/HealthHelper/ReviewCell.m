@@ -34,14 +34,49 @@
     // Username label
     self.usernameLabel.text = review.author[@"username"];
     
-    // Rating label
-    self.ratingLabel.text = [NSString stringWithFormat:@"Rating: %@/5", review.stars];
+    // Sets stars
+    [self setStars:review.stars];
     
     // Comment label
     self.commentLabel.text = review.comment;
     
     // Setting review
     self.review = review;
+}
+
+- (void)setStars:(NSNumber *)stars {
+    if ([stars intValue] == 1) {
+        self.star1.image = [UIImage imageNamed:@"star-filled"];
+        self.star2.image = [UIImage imageNamed:@"star"];
+        self.star3.image = [UIImage imageNamed:@"star"];
+        self.star4.image = [UIImage imageNamed:@"star"];
+        self.star5.image = [UIImage imageNamed:@"star"];
+    } else if ([stars intValue] == 2) {
+        self.star1.image = [UIImage imageNamed:@"star-filled"];
+        self.star2.image = [UIImage imageNamed:@"star-filled"];
+        self.star3.image = [UIImage imageNamed:@"star"];
+        self.star4.image = [UIImage imageNamed:@"star"];
+        self.star5.image = [UIImage imageNamed:@"star"];
+    } else if ([stars intValue] == 3) {
+        self.star1.image = [UIImage imageNamed:@"star-filled"];
+        self.star2.image = [UIImage imageNamed:@"star-filled"];
+        self.star3.image = [UIImage imageNamed:@"star-filled"];
+        self.star4.image = [UIImage imageNamed:@"star"];
+        self.star5.image = [UIImage imageNamed:@"star"];
+    } else if ([stars intValue] == 4) {
+        self.star1.image = [UIImage imageNamed:@"star-filled"];
+        self.star2.image = [UIImage imageNamed:@"star-filled"];
+        self.star3.image = [UIImage imageNamed:@"star-filled"];
+        self.star4.image = [UIImage imageNamed:@"star-filled"];
+        self.star5.image = [UIImage imageNamed:@"star"];
+    } else if ([stars intValue] == 5) {
+        self.star1.image = [UIImage imageNamed:@"star-filled"];
+        self.star2.image = [UIImage imageNamed:@"star-filled"];
+        self.star3.image = [UIImage imageNamed:@"star-filled"];
+        self.star4.image = [UIImage imageNamed:@"star-filled"];
+        self.star5.image = [UIImage imageNamed:@"star-filled"];
+    }
+    
 }
 
 
