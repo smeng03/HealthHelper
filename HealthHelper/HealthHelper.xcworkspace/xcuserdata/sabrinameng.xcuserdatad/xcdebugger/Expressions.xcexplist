@@ -14,6 +14,20 @@
          contextName = "-[PFObjectSubclassingController _rawRegisterSubclass:]:PFObjectSubclassingController.m">
       </ContextState>
       <ContextState
+         contextName = "-[ComposeViewController didTapPost:]:ComposeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.rating">
+            </PersistentString>
+            <PersistentString
+               value = "self.composeField.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.opportunity.author.objectId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
          <PersistentStrings>
             <PersistentString

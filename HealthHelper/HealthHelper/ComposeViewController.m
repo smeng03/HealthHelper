@@ -13,6 +13,7 @@
 #import "FBShimmeringLayer.h"
 #import <Parse/Parse.h>
 @import UITextView_Placeholder;
+#import "MBProgressHUD.h"
 
 @interface ComposeViewController ()
 
@@ -107,6 +108,42 @@
 }
 
 - (IBAction)didTapPost:(id)sender {
+    // Setting post attributes for storage in database
+    PFObject *review = [PFObject objectWithClassName:@"Review"];
+    review[@"comment"] = self.composeField.text;
+    review[@"author"] = PFUser.currentUser;
+    review[@"stars"] = self.rating;
+    review[@"forOrganizationWithId"] = self.opportunity.author.organizationId;
+    
+    // Progress HUD while post is saved
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Saving new post
+        [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (succeeded) {
+                // If successful, dismisses view controller and reloads posts
+                [self dismissViewControllerAnimated:YES completion:nil];
+                //[self.delegate didPost];
+            } else {
+                // Otherwise, displays an alert
+                NSLog(@"Problem posting review: %@", error.localizedDescription);
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:^{}];
+            }
+            
+            // Adding a slight delay so progress HUD doesn't just flash
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+        }];
+    });
+}
+
+-(void)stopAnimation {
+    // Stopping progress bar
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
 }
 
 - (IBAction)didTapStar1:(id)sender {
