@@ -12,6 +12,7 @@
 #import "FBShimmeringView.h"
 #import "FBShimmeringLayer.h"
 #import <Parse/Parse.h>
+@import UITextView_Placeholder;
 
 @interface ComposeViewController ()
 
@@ -49,9 +50,33 @@
     // Rating defaults to 0, which is invalid
     self.rating = [NSNumber numberWithInt:0];
     
+    // Text view placeholder text
+    self.composeField.placeholder = @"Write a review...";
+    self.composeField.placeholderColor = [UIColor lightGrayColor];
+    
     [self loadProfileImage];
     
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color and dark mode settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+    int navColor = [defaults integerForKey:@"nav_color"];
+    
+    // Set bar color
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [self colorWithHex:navColor];
+    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
+    
+    // Set dark mode or light mode
+    if (darkModeStatus) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    }
+    else {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
 }
 
 - (void)loadProfileImage {
@@ -134,6 +159,19 @@
     self.rating = [NSNumber numberWithInt:5];
 }
 
+- (IBAction)dismissKeyboard:(id)sender {
+    // Dismisses keyboard when screen is tapped
+    [self.view endEditing:YES];
+}
+
+// UIColor from hex color
+-(UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
+}
 
 /*
 #pragma mark - Navigation

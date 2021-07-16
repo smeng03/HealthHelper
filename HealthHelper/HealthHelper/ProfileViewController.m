@@ -55,58 +55,6 @@
     self.shimmeringView.contentView = self.profileImageView;
     [self.view addSubview:self.shimmeringView];
     self.shimmeringView.shimmering = YES;
-    
-    /*
-    CGRect newFrame = self.shimmeringView.frame;
-    newFrame.size.width = 100;
-    newFrame.size.height = 100;
-    [self.shimmeringView setFrame:newFrame];
-    
-    [self.shimmeringView addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.hoursShadowedLabel
-                                      attribute:NSLayoutAttributeLeading
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.shimmeringView
-                                      attribute:NSLayoutAttributeTrailing
-                                      multiplier: 1
-                                      constant:10]];
-    
-    [self.shimmeringView addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.hoursVolunteeredLabel
-                                      attribute:NSLayoutAttributeLeading
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.shimmeringView
-                                      attribute:NSLayoutAttributeTrailing
-                                      multiplier: 1
-                                      constant:10]];
-    
-    [self.shimmeringView addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.amountDonatedLabel
-                                      attribute:NSLayoutAttributeLeading
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.shimmeringView
-                                      attribute:NSLayoutAttributeTrailing
-                                      multiplier: 1
-                                      constant:10]];
-    
-    [self.shimmeringView addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.usernameLabel
-                                      attribute:NSLayoutAttributeLeading
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.shimmeringView
-                                      attribute:NSLayoutAttributeTrailing
-                                      multiplier: 1
-                                      constant:10]];
-    
-    [self.shimmeringView addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.tableView
-                                      attribute:NSLayoutAttributeTop
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.shimmeringView
-                                      attribute:NSLayoutAttributeBottom
-                                      multiplier: 1
-                                      constant:50]];
-    */
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,6 +84,9 @@
     // Querying for profile image
     PFQuery *query = [PFUser query];
     [query includeKey:@"image"];
+    [query includeKey:@"amountDonated"];
+    [query includeKey:@"hoursVolunteered"];
+    [query includeKey:@"hoursShadowed"];
     [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
     
     // Fetch posts asynchronously
@@ -148,6 +99,11 @@
             PFFileObject *image = user[@"image"];
             [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
             self.shimmeringView.shimmering = NO;
+            
+            // Set user sats
+            self.hoursVolunteeredLabel.text = [NSString stringWithFormat:@"Hours volunteered: %@", user[@"hoursVolunteered"]];
+            self.amountDonatedLabel.text = [NSString stringWithFormat:@"Amount donated: $%@", user[@"amountDonated"]];
+            self.hoursShadowedLabel.text = [NSString stringWithFormat:@"Hours shadowed: %@", user[@"hoursShadowed"]];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
