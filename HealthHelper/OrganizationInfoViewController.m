@@ -12,13 +12,14 @@
 #import "Review.h"
 #import "ReviewCell.h"
 
-@interface OrganizationInfoViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface OrganizationInfoViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *organizationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reviewButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *reviews;
+@property (weak, nonatomic) IBOutlet UILabel *reviewCountLabel;
 
 @end
 
@@ -88,9 +89,9 @@
         if (reviews != nil) {
             // Create and store array of Opportunity objects from retrieved posts
             self.reviews = [Review createReviewArray:reviews];
+            self.reviewCountLabel.text = [NSString stringWithFormat:@"Reviews (%lu)", (unsigned long)self.reviews.count];
             
             [self.tableView reloadData];
-            //[self.refreshControl endRefreshing];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -106,15 +107,6 @@
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqual:@"composeSegue"]) {
-        // Sending current opportunity to next view controller
-        ComposeViewController *composeViewController = [segue destinationViewController];
-        composeViewController.opportunity = self.opportunity;
-    }
-}
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ReviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewCell"];
     
@@ -127,6 +119,20 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.reviews.count;
+}
+
+- (void)didPost {
+    [self loadReviews];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqual:@"composeSegue"]) {
+        // Sending current opportunity to next view controller
+        ComposeViewController *composeViewController = [segue destinationViewController];
+        composeViewController.opportunity = self.opportunity;
+        composeViewController.delegate = self;
+    }
 }
 
 @end

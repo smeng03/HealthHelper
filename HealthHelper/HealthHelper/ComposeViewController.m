@@ -123,7 +123,7 @@
             if (succeeded) {
                 // If successful, dismisses view controller and reloads posts
                 [self dismissViewControllerAnimated:YES completion:nil];
-                //[self.delegate didPost];
+                [self.delegate didPost];
             } else {
                 // Otherwise, displays an alert
                 NSLog(@"Problem posting review: %@", error.localizedDescription);
