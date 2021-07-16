@@ -35,6 +35,7 @@
 		D970C548269FA9C2003DA544 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C547269FA9C2003DA544 /* Organization.m */; };
 		D970C54B269FAB1F003DA544 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54A269FAB1F003DA544 /* Opportunity.m */; };
 		D970C54E269FAC88003DA544 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54D269FAC88003DA544 /* Review.m */; };
+		D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ED852B26A1F68B00011F02 /* ReviewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		D970C54C269FAB2C003DA544 /* Opportunity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
 		D970C54D269FAC88003DA544 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		D970C54F269FAC92003DA544 /* Review.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		D9ED852A26A1F68B00011F02 /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ReviewCell.h; path = HealthHelper/ReviewCell.h; sourceTree = SOURCE_ROOT; };
+		D9ED852B26A1F68B00011F02 /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ReviewCell.m; path = HealthHelper/ReviewCell.m; sourceTree = SOURCE_ROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +271,8 @@
 		D970C4D8269CAFEE003DA544 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9ED852A26A1F68B00011F02 /* ReviewCell.h */,
+				D9ED852B26A1F68B00011F02 /* ReviewCell.m */,
 				D970C4EE269CE8F7003DA544 /* PastOpportunityCell.h */,
 				D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */,
 				D970C4EB269CE26A003DA544 /* OpportunityCell.h */,
@@ -564,6 +569,7 @@
 				D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */,
 				D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,
+				D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */,
 				D970C54B269FAB1F003DA544 /* Opportunity.m in Sources */,
 				D970C4EA269CDD3A003DA544 /* ProfileViewController.m in Sources */,
 				D970C543269F86F7003DA544 /* OrganizationInfoViewController.m in Sources */,

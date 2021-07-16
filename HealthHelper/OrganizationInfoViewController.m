@@ -9,12 +9,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/SDWebImage.h>
 #import "ComposeViewController.h"
+#import "Review.h"
+#import "ReviewCell.h"
 
-@interface OrganizationInfoViewController ()
+@interface OrganizationInfoViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *organizationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reviewButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *reviews;
 
 @end
 
@@ -22,6 +26,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Table view delegate and data source
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    // Load reviews for organization
+    [self loadReviews];
     
     // Nav bar title
     self.navigationItem.title = self.opportunity.author.username;
@@ -62,6 +73,30 @@
     }
 }
 
+- (void)loadReviews {
+    // Construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Review"];
+    [query includeKey:@"comment"];
+    [query includeKey:@"stars"];
+    [query includeKey:@"author"];
+    [query whereKey:@"forOrganizationWithId" equalTo:self.opportunity.author.organizationId];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    
+    // Fetch posts asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *reviews, NSError *error) {
+        if (reviews != nil) {
+            // Create and store array of Opportunity objects from retrieved posts
+            self.reviews = [Review createReviewArray:reviews];
+            
+            [self.tableView reloadData];
+            //[self.refreshControl endRefreshing];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 // UIColor from hex color
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
@@ -78,6 +113,20 @@
         ComposeViewController *composeViewController = [segue destinationViewController];
         composeViewController.opportunity = self.opportunity;
     }
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ReviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewCell"];
+    
+    // Setting cell and style
+    [cell setCell:self.reviews[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.reviews.count;
 }
 
 @end

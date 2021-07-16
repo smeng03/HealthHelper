@@ -8,13 +8,16 @@
 #import <Parse/Parse.h>
 #import "User.h"
 
-@interface Review
+@interface Review : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *reviewId;
 @property (nonatomic, strong) NSDate *timeCreatedAt;
 @property (nonatomic, strong) NSDate *timeUpdatedAt;
-@property (nonatomic, strong) User *author;
+@property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) NSNumber *stars;
+
+- (void)initReviewWithObject:(PFObject *)object;
++ (NSMutableArray *)createReviewArray:(NSArray *)objects;
     
 @end
