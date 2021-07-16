@@ -20,6 +20,10 @@
 @property (nonatomic, strong) NSString *opportunityType;
 @property (nonatomic, strong) NSString *position;
 @property (nonatomic, strong) Organization *author;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSNumber *hours;
+@property (nonatomic, strong) NSNumber *amount;
+
 
 - (void)initOpportunityWithObject:(PFObject *)object;
 + (NSMutableArray *)createOpportunityArray:(NSArray *)objects;

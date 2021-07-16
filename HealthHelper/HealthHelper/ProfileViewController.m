@@ -75,6 +75,9 @@
     else {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
+    
+    // Load stats again
+    [self loadBasicProfile];
 }
 
 - (void)loadBasicProfile {
@@ -89,7 +92,7 @@
     [query includeKey:@"hoursShadowed"];
     [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
     
-    // Fetch posts asynchronously
+    // Fetch user asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
         if (users != nil) {
             // Create and store array of Post objects from retrieved posts

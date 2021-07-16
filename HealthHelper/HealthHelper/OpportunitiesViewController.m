@@ -90,6 +90,9 @@
     [query includeKey:@"author.totalScore"];
     [query includeKey:@"author.numReviews"];
     [query includeKey:@"author.reviews"];
+    [query includeKey:@"donationAmount"];
+    [query includeKey:@"hours"];
+    [query includeKey:@"date"];
     [query includeKey:@"position"];
     query.limit = 20;
     [query orderByDescending:@"createdAt"];

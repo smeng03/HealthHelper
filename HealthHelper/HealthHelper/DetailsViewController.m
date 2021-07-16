@@ -202,6 +202,85 @@ CLLocationManager *locationManager;
 
 - (IBAction)didTapRegister:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.opportunity.signUpLink] options:@{} completionHandler:nil];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Thanks for checking out this opportunity and making a difference in the community! Did you sign up for this opportunity?" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self registerOpportunity];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:yesAction];
+    [alert addAction:noAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+}
+
+- (void)registerOpportunity {
+    PFQuery *query = [PFUser query];
+    [query includeKey:@"pastOpportunities"];
+    
+    if ([self.opportunity.opportunityType isEqualToString:@"Donation"]) {
+        [query includeKey:@"amountDonated"];
+    } else if ([self.opportunity.opportunityType isEqualToString:@"Shadowing"]) {
+        [query includeKey:@"hoursShadowed"];
+    } else if ([self.opportunity.opportunityType isEqualToString:@"Volunteering"]) {
+        [query includeKey:@"hoursVolunteered"];
+    }
+    
+    [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    
+    // Fetch user asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        if (users != nil) {
+            // Create and store array of Post objects from retrieved posts
+            PFUser *user = users[0];
+            
+            // Add opportunity id to user's list of opportunities
+            NSMutableArray *pastOpportunities = user[@"pastOpportunities"];
+            
+            if (![pastOpportunities containsObject:self.opportunity.opportunityId]) {
+                [pastOpportunities addObject:self.opportunity.opportunityId];
+                user[@"pastOpportunities"] = pastOpportunities;
+                
+                // Update hours or amount donated
+                if ([self.opportunity.opportunityType isEqual:@"Donation"]) {
+                    NSNumber *donationAmount = user[@"amountDonated"];
+                    int newAmount = [donationAmount intValue]+[self.opportunity.amount intValue];
+                    NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
+                    user[@"amountDonated"] = newDonation;
+                    
+                } else if ([self.opportunity.opportunityType isEqual:@"Shadowing"]) {
+                    NSNumber *hoursShadowed = user[@"hoursShadowed"];
+                    int newHours = [hoursShadowed intValue]+[self.opportunity.hours intValue];
+                    NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
+                    user[@"hoursShadowed"] = newHoursShadowed;
+                    
+                } else if ([self.opportunity.opportunityType isEqual:@"Volunteering"]) {
+                    NSNumber *hoursVolunteered = user[@"hoursVolunteered"];
+                    int newHours = [hoursVolunteered intValue]+[self.opportunity.hours intValue];
+                    NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
+                    user[@"hoursVolunteered"] = newHoursVolunteered;
+                    
+                }
+                
+                // Save data
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                    if (succeeded) {
+                    } else {
+                        NSLog(@"Error: %@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You've already signed up!" message:@"You've already signed up for this opportunity, thanks for your contribution!" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:^{
+                }];
+            }
+            
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 // UIColor from hex color

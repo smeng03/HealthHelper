@@ -20,6 +20,9 @@
 @dynamic signUpLink;
 @dynamic opportunityType;
 @dynamic position;
+@dynamic date;
+@dynamic hours;
+@dynamic amount;
 
 + (nonnull NSString *)parseClassName {
     return @"Opportunity";
@@ -35,6 +38,9 @@
     self.opportunityId = object.objectId;
     self.timeCreatedAt = object.createdAt;
     self.timeUpdatedAt = object.updatedAt;
+    self.date = object[@"date"];
+    self.hours = object[@"hours"];
+    self.amount = object[@"donationAmount"];
     self.author = [Organization initOrganizationWithObject:object[@"author"]];
 }
 
