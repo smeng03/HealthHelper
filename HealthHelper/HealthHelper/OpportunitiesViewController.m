@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *opportunities;
 @property (strong, nonatomic) NSMutableArray *filteredOpportunities;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -46,6 +47,13 @@
     
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search opportunities...";
+    
+    // Refresh Control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadOpportunities) forControlEvents:UIControlEventValueChanged];
+    
+    // Places refresher at correct location
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,11 +97,12 @@
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
         if (opportunities != nil) {
-            // Create and store array of Post objects from retrieved posts
+            // Create and store array of Opportunity objects from retrieved posts
             self.opportunities = [Opportunity createOpportunityArray:opportunities];
             self.filteredOpportunities = self.opportunities;
+            
             [self.tableView reloadData];
-            //[self.refreshControl endRefreshing];
+            [self.refreshControl endRefreshing];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }

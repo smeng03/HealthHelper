@@ -20,8 +20,6 @@
 @dynamic signUpLink;
 @dynamic opportunityType;
 @dynamic position;
-@dynamic imageURL;
-@dynamic username;
 
 + (nonnull NSString *)parseClassName {
     return @"Opportunity";

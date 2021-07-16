@@ -19,8 +19,6 @@
 @property (nonatomic, strong) NSString *signUpLink;
 @property (nonatomic, strong) NSString *opportunityType;
 @property (nonatomic, strong) NSString *position;
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *imageURL;
 @property (nonatomic, strong) Organization *author;
 
 - (void)initOpportunityWithObject:(PFObject *)object;
