@@ -17,8 +17,9 @@
 #import "FBShimmering.h"
 #import "FBShimmeringView.h"
 #import "FBShimmeringLayer.h"
+#import "Opportunity.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -29,6 +30,10 @@
 @property (strong, nonatomic) UIImage *updatedProfileImage;
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) FBShimmeringView *shimmeringView;
+@property (strong, nonatomic) NSMutableArray *opportunities;
+@property (strong, nonatomic) NSMutableArray *filteredOpportunities;
+@property (strong, nonatomic) NSArray *pastOpportunities;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -41,13 +46,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // Search bar delegate
+    self.searchBar.delegate = self;
+    
     // Loading basic profile information
     [self loadBasicProfile];
+    
+    // Loading past opportunities
+    [self loadPastOpportunityArray];
     
     // Round profile images
     self.profileImageView.layer.cornerRadius = 50;
     
-    [self.tableView reloadData];
+    // Search bar placeholder text
+    self.searchBar.placeholder = @"Search your opportunities...";
     
     // Placeholder shimmer while loading
     // self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
@@ -78,6 +90,62 @@
     
     // Load stats again
     [self loadBasicProfile];
+}
+
+- (void)loadPastOpportunityArray {
+    // Query for opportunities array
+    PFQuery *queryUser = [PFUser query];
+    [queryUser includeKey:@"pastOpportunities"];
+    [queryUser whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    
+    // Fetch user asynchronously
+    [queryUser findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        if (users != nil) {
+            // Create and store array of Post objects from retrieved posts
+            PFUser *user = users[0];
+            self.pastOpportunities = user[@"pastOpportunities"];
+            [self loadPastOpportunities];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)loadPastOpportunities {
+    // Construct query for opportunities
+    PFQuery *query = [PFQuery queryWithClassName:@"Opportunity"];
+    [query includeKey:@"description"];
+    [query includeKey:@"tags"];
+    [query includeKey:@"signUpLink"];
+    [query includeKey:@"opportunityType"];
+    [query includeKey:@"author"];
+    [query includeKey:@"author.image"];
+    [query includeKey:@"author.description"];
+    [query includeKey:@"author.address"];
+    [query includeKey:@"author.totalScore"];
+    [query includeKey:@"author.numReviews"];
+    [query includeKey:@"author.reviews"];
+    [query includeKey:@"donationAmount"];
+    [query includeKey:@"hours"];
+    [query includeKey:@"date"];
+    [query includeKey:@"position"];
+    query.limit = 20;
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"objectId" containedIn:self.pastOpportunities];
+    
+    // Fetch posts asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
+        if (opportunities != nil) {
+            // Create and store array of Opportunity objects from retrieved posts
+            self.opportunities = [Opportunity createOpportunityArray:opportunities];
+            self.filteredOpportunities = self.opportunities;
+            
+            [self.tableView reloadData];
+            //[self.refreshControl endRefreshing];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)loadBasicProfile {
@@ -131,12 +199,15 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PastOpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PastOpportunityCell"];
     
+    // Setting cell and style
+    [cell setCell:self.filteredOpportunities[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.filteredOpportunities.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -209,6 +280,36 @@
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
         }];
     });
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (searchText.length != 0) {
+        // Searches for objects containing what the user types
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(author.username CONTAINS[cd] %@)", searchText];
+        
+        // Filters opportunities based on criteria
+        self.filteredOpportunities = [(NSArray *)[self.opportunities filteredArrayUsingPredicate:predicate] mutableCopy];
+    }
+    else {
+        self.filteredOpportunities = self.opportunities;
+    }
+    
+    // Refresh table view
+    [self.tableView reloadData];
+ 
+}
+
+// Search bar cancel button shows
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+// Search bar and cancel button disappear when button clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)stopAnimation {

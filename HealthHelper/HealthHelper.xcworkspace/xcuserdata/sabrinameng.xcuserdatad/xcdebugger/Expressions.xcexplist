@@ -3,54 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Organization initOrganizationWithObject:]:Organization.m">
+         contextName = "__46-[ProfileViewController loadPastOpportunities]_block_invoke:ProfileViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "object[@&quot;author&quot;]">
+               value = "user">
+            </PersistentString>
+            <PersistentString
+               value = "self.pastOpportunities">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[PFObjectSubclassingController _rawRegisterSubclass:]:PFObjectSubclassingController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ComposeViewController didTapPost:]:ComposeViewController.m">
+         contextName = "-[OrganizationInfoViewController viewDidLoad]:OrganizationInfoViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.rating">
+               value = "self.opportunity.author.text">
             </PersistentString>
             <PersistentString
-               value = "self.composeField.text">
-            </PersistentString>
-            <PersistentString
-               value = "self.opportunity.author.objectId">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__44-[DetailsViewController registerOpportunity]_block_invoke:DetailsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.opportunity.amount">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "image.url">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "+[Opportunity createOpportunityArray:]:Opportunity.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[ComposeViewController viewDidLoad]:ComposeViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.opportunity">
+               value = "self.opportunity.author.imageURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -66,13 +36,90 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OrganizationInfoViewController viewDidLoad]:OrganizationInfoViewController.m">
+         contextName = "+[Opportunity createOpportunityArray:]:Opportunity.m">
+      </ContextState>
+      <ContextState
+         contextName = "__46-[ProfileViewController loadPastOpportunities]_block_invoke.131:ProfileViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.opportunity.author.text">
+               value = "opportunities">
             </PersistentString>
             <PersistentString
-               value = "self.opportunity.author.imageURL">
+               value = "self.pastOpportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PFObjectSubclassingController _rawRegisterSubclass:]:PFObjectSubclassingController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__44-[DetailsViewController registerOpportunity]_block_invoke:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.opportunity.amount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ProfileViewController tableView:numberOfRowsInSection:]:ProfileViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.filteredOpportunities">
+            </PersistentString>
+            <PersistentString
+               value = "opportunities">
+            </PersistentString>
+            <PersistentString
+               value = "self.filteredOpportunities.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.opportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ComposeViewController viewDidLoad]:ComposeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.opportunity">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__49-[ProfileViewController loadPastOpportunityArray]_block_invoke:ProfileViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.pastOpportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Organization initOrganizationWithObject:]:Organization.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "object[@&quot;author&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ComposeViewController didTapPost:]:ComposeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.rating">
+            </PersistentString>
+            <PersistentString
+               value = "self.composeField.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.opportunity.author.objectId">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
