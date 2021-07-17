@@ -46,6 +46,7 @@
     // Table view data source and delegate
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     
     // Search bar delegate
     self.searchBar.delegate = self;

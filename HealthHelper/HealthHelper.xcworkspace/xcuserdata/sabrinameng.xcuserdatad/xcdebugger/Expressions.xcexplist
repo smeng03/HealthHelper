@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[OpportunitiesViewController tableView:numberOfRowsInSection:]:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.filteredOpportunities.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__46-[ProfileViewController loadPastOpportunities]_block_invoke:ProfileViewController.m">
          <PersistentStrings>
             <PersistentString
