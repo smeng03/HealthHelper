@@ -34,6 +34,7 @@
 @property (strong, nonatomic) NSMutableArray *filteredOpportunities;
 @property (strong, nonatomic) NSArray *pastOpportunities;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -60,6 +61,13 @@
     
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search your opportunities...";
+    
+    // Refresh Control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPastOpportunityArray) forControlEvents:UIControlEventValueChanged];
+    
+    // Places refresher at correct location
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Placeholder shimmer while loading
     // self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
@@ -88,8 +96,9 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
     
-    // Load stats again
+    // Load info again
     [self loadBasicProfile];
+    [self loadPastOpportunityArray];
 }
 
 - (void)loadPastOpportunityArray {
@@ -141,7 +150,7 @@
             self.filteredOpportunities = self.opportunities;
             
             [self.tableView reloadData];
-            //[self.refreshControl endRefreshing];
+            [self.refreshControl endRefreshing];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
