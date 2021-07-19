@@ -18,6 +18,7 @@
 #import "FBShimmeringView.h"
 #import "FBShimmeringLayer.h"
 #import "Opportunity.h"
+#import "DetailsViewController.h"
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
@@ -239,10 +240,31 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    // Present image picker controller
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+    // If user has a camera, they can choose between camera roll or camera
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // Choose between picking a picture or using camera
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Open camera or camera roll?" message:@"Do you want to choose a photo from your camera roll or take a new picture?" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cameraRollAction = [UIAlertAction actionWithTitle:@"Open camera roll" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            // Present image picker controller
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        }];
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Take a photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+            // Present image picker controller
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        }];
+        [alert addAction:cameraRollAction];
+        [alert addAction:cameraAction];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+    } else {
+        // If user does not have camera, they can only chooe from camera roll
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        // Present image picker controller
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -338,14 +360,15 @@
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Identify tapped cell and get associated opportunity
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
+    
+    // Send information
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    detailsViewController.opportunity = opportunity;
 }
-*/
 
 @end
