@@ -28,27 +28,27 @@ This is an app that allows users to browse & sign up for volunteer opportunities
 
 **Required Must-have Stories**
 
-* A home screen that asks users to sign up or login (linked to a database to store user credentials)
-* Screen must have a logout button
-* Table view screen listing opporunities close to the user ("close" to be defined later)
-* A screen for each opportunity where users can view its details and sign up (either directly on platform or through external link). This screen should include a map that shows the location of the organization. 
-* A table view screen listing organizations that a user can make donations to
-* A screen for each donation where users can view its details and donate (probably through an external link)
-* A table view screen listing shadowing opportunities
-* A screen for each shadowing opportunity where users can view its details and sign up
-* A search bar so that users can search for specific organizations, tags, etc.
+-[X] A home screen that asks users to sign up or login (linked to a database to store user credentials)
+-[X] Screen must have a logout button
+-[X] Table view screen listing opporunities close to the user ("close" to be defined later)
+-[X] A screen for each opportunity where users can view its details and sign up (either directly on platform or through external link). This screen should include a map that shows the location of the organization. 
+-[X] A table view screen listing organizations that a user can make donations to
+-[X] A screen for each donation where users can view its details and donate (probably through an external link)
+-[X] A table view screen listing shadowing opportunities
+-[X] A screen for each shadowing opportunity where users can view its details and sign up
+-[X] A search bar so that users can search for specific organizations, tags, etc.
 * **Note:** All table views can also be replaced with collection views.
 
 **Optional Nice-to-have Stories**
 
-* A feature and page that tracks amount a user has donated and to where/places a user has volunteered and how long/etc. This just allows for more automatic tracking, so when a user looks back, they can easily see what they have done in the past.
+-[X] A feature and page that tracks amount a user has donated and to where/places a user has volunteered and how long/etc. This just allows for more automatic tracking, so when a user looks back, they can easily see what they have done in the past.
 * The above page could also contain a map pinning all locations that a user is currently signed up to volunteer for in the future (a more visual representation for what someone has signed up for).
 * An option for a user to choose to search opporunities within ___ miles of their location (I think this is technically optional but would really be the the most fundamental of the nice-to-have stories)
-* An option for users to leave reviews of their voluteering experience at a certain organization
-* A page that suggests new volunteering/donation/shadowing opporunities based on a user's past signups (this gives us an opportunity to implement a more complex matching algorithm based on tags, keywords, etc.)
+-[X] An option for users to leave reviews of their voluteering experience at a certain organization
+* A page that suggests new volunteering/donation/shadowing opportunities based on a user's past signups (this gives us an opportunity to implement a more complex matching algorithm based on tags, keywords, etc.)
 * Options to filter opporunties based on tags, location, hours of volunteering, etc.
-* Profile screen for each organization (profile picture, description of their mission, link to website, etc.)
-* Settings screen (for UI customization or other customization of the fundamental user experience)
+-[X] Profile screen for each organization (profile picture, description of their mission, link to website, etc.)
+-[X] Settings screen (for UI customization or other customization of the fundamental user experience)
 * Icons showing if each opportunity is volunteering, donating, or shadowing
 * Allow users to follow orgs, have page displaying orgs you've followed
 
