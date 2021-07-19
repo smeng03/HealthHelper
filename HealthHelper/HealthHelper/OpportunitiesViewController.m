@@ -123,6 +123,7 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%lu", self.filteredOpportunities.count);
     return self.filteredOpportunities.count;
 }
 
