@@ -21,6 +21,15 @@
 @property (strong, nonatomic) NSMutableArray *filteredOpportunities;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIButton *volunteerButton;
+@property (weak, nonatomic) IBOutlet UIButton *shadowButton;
+@property (weak, nonatomic) IBOutlet UIButton *donateButton;
+@property (weak, nonatomic) IBOutlet UIButton *distanceButton;
+@property (nonatomic, assign) BOOL volunteerFilterOn;
+@property (nonatomic, assign) BOOL shadowFilterOn;
+@property (nonatomic, assign) BOOL donateFilterOn;
+@property (nonatomic, assign) BOOL distanceFilterOn;
+@property (strong, nonatomic) NSMutableArray *filters;
 
 @end
 
@@ -54,6 +63,21 @@
     
     // Places refresher at correct location
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // Buttons have rounded corners
+    self.volunteerButton.layer.cornerRadius = 15;
+    self.shadowButton.layer.cornerRadius = 15;
+    self.donateButton.layer.cornerRadius = 15;
+    self.distanceButton.layer.cornerRadius = 15;
+    
+    // Initialize filter values
+    self.volunteerFilterOn = FALSE;
+    self.shadowFilterOn = FALSE;
+    self.donateFilterOn = FALSE;
+    self.distanceFilterOn = FALSE;
+    
+    // Initialize filters array
+    self.filters = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,7 +147,6 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%lu", self.filteredOpportunities.count);
     return self.filteredOpportunities.count;
 }
 
@@ -156,11 +179,15 @@
         // Searches for objects containing what the user types
         NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text CONTAINS[cd] %@)", searchText];
         
-        // Filters opportunities based on criteria
-        self.filteredOpportunities = [(NSArray *)[self.opportunities filteredArrayUsingPredicate:predicate] mutableCopy];
+        // Filters opportunities based on search criteria
+        NSArray *filteredData = [self.opportunities filteredArrayUsingPredicate:predicate];
+        
+        // Apply additional filters to the opportunities filtered from search
+        [self applyFilters:filteredData];
     }
     else {
-        self.filteredOpportunities = self.opportunities;
+        // Apply additional filters to full list of opportunities if no search criteria
+        [self applyFilters:self.opportunities];
     }
     
     // Refresh table view
@@ -176,9 +203,88 @@
 // Search bar and cancel button disappear when button clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;
-    self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
 }
+
+
+// FILTERING CODE
+-(void)applyFilters:(NSArray *)filteredData {
+    // Applies all selected filters to a given list of opportunities
+    for (NSString *filter in self.filters) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
+        filteredData = [filteredData filteredArrayUsingPredicate:predicate];
+    }
+    self.filteredOpportunities = [filteredData mutableCopy];
+}
+
+- (IBAction)didTapVolunteerFilter:(id)sender {
+    // Toggles button color
+    if (self.volunteerFilterOn) {
+        self.volunteerButton.backgroundColor = [UIColor systemGray3Color];
+        [self.filters removeObject:@"Volunteering"];
+    } else {
+        self.volunteerButton.backgroundColor = [UIColor systemGrayColor];
+        [self.filters addObject:@"Volunteering"];
+    }
+    
+    // Toggles filter on/off state
+    self.volunteerFilterOn = !self.volunteerFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapShadowFilter:(id)sender {
+    // Toggles button color
+    if (self.shadowFilterOn) {
+        self.shadowButton.backgroundColor = [UIColor systemGray3Color];
+        [self.filters removeObject:@"Shadowing"];
+    } else {
+        self.shadowButton.backgroundColor = [UIColor systemGrayColor];
+        [self.filters addObject:@"Shadowing"];
+    }
+    
+    // Toggles filter on/off state
+    self.shadowFilterOn = !self.shadowFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapDonateFilter:(id)sender {
+    // Toggles button color
+    if (self.donateFilterOn) {
+        self.donateButton.backgroundColor = [UIColor systemGray3Color];
+        [self.filters removeObject:@"Donation"];
+    } else {
+        self.donateButton.backgroundColor = [UIColor systemGrayColor];
+        [self.filters addObject:@"Donation"];
+    }
+    
+    // Toggles filter on/off state
+    self.donateFilterOn = !self.donateFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapDistanceFilter:(id)sender {
+    // Toggles button color
+    if (self.volunteerFilterOn) {
+        self.distanceButton.backgroundColor = [UIColor systemGray3Color];
+        //[self.filters removeObject:@"Volunteering"];
+    } else {
+        self.distanceButton.backgroundColor = [UIColor systemGrayColor];
+        //[self.filters addObject:@"Volunteering"];
+    }
+    
+    // Toggles filter on/off state
+    self.distanceFilterOn = !self.distanceFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Identify tapped cell and get associated opportunity
