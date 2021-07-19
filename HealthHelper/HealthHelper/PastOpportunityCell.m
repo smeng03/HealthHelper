@@ -44,9 +44,9 @@
     if ([opportunity.opportunityType isEqualToString:@"Donation"]) {
         self.metricsLabel.text = [NSString stringWithFormat:@"Amount donated: $%@", opportunity.amount];
     } else if ([opportunity.opportunityType isEqualToString:@"Volunteering"]) {
-        self.metricsLabel.text = [NSString stringWithFormat:@"Hours volunteered: $%@", opportunity.hours];
+        self.metricsLabel.text = [NSString stringWithFormat:@"Hours volunteered: %@", opportunity.hours];
     } else if ([opportunity.opportunityType isEqualToString:@"Shadowing"]) {
-        self.metricsLabel.text = [NSString stringWithFormat:@"Hours shadowed: $%@", opportunity.hours];
+        self.metricsLabel.text = [NSString stringWithFormat:@"Hours shadowed: %@", opportunity.hours];
     }
     
     // Setting opportunity
