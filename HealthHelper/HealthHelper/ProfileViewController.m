@@ -236,72 +236,82 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Getting opportunity user tapped on
-        Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
-        
-        // Constructing query to delete opportunity
-        PFQuery *query = [PFUser query];
-        [query includeKey:@"pastOpportunities"];
-        
-        if ([opportunity.opportunityType isEqualToString:@"Donation"]) {
-            [query includeKey:@"amountDonated"];
-        } else if ([opportunity.opportunityType isEqualToString:@"Shadowing"]) {
-            [query includeKey:@"hoursShadowed"];
-        } else if ([opportunity.opportunityType isEqualToString:@"Volunteering"]) {
-            [query includeKey:@"hoursVolunteered"];
-        }
-        
-        [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
-        
-        // Fetch user asynchronously
-        [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-            if (users != nil) {
-                // Create and store array of Post objects from retrieved posts
-                PFUser *user = users[0];
-                
-                // Add opportunity id to user's list of opportunities
-                NSMutableArray *pastOpportunities = user[@"pastOpportunities"];
-                
-                // Removing opportunity user deleted
-                [pastOpportunities removeObject:opportunity.opportunityId];
-                user[@"pastOpportunities"] = pastOpportunities;
-                    
-                // Update hours or amount donated
-                if ([opportunity.opportunityType isEqual:@"Donation"]) {
-                    NSNumber *donationAmount = user[@"amountDonated"];
-                    int newAmount = [donationAmount intValue]-[opportunity.amount intValue];
-                    NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
-                    user[@"amountDonated"] = newDonation;
-                    
-                } else if ([opportunity.opportunityType isEqual:@"Shadowing"]) {
-                    NSNumber *hoursShadowed = user[@"hoursShadowed"];
-                    int newHours = [hoursShadowed intValue]-[opportunity.hours intValue];
-                    NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
-                    user[@"hoursShadowed"] = newHoursShadowed;
-                    
-                } else if ([opportunity.opportunityType isEqual:@"Volunteering"]) {
-                    NSNumber *hoursVolunteered = user[@"hoursVolunteered"];
-                    int newHours = [hoursVolunteered intValue]-[opportunity.hours intValue];
-                    NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
-                    user[@"hoursVolunteered"] = newHoursVolunteered;
-                    
-                }
-                
-                // Save data
-                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-                    if (succeeded) {
-                    } else {
-                        NSLog(@"Error: %@", error.localizedDescription);
-                    }
-                }];
-                
-                // Reload user interface
-                [self.filteredOpportunities removeObjectAtIndex:indexPath.row];
-                [tableView reloadData];
-                [self loadBasicProfile];
-            } else {
-                NSLog(@"%@", error.localizedDescription);
+        // Making sure user does want to delete opportunity
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Deleting opportunity" message:@"Are you sure you want to delete this opportunity from your records? This action is permanent and cannot be undone." preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // Getting opportunity user tapped on
+            Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
+            
+            // Constructing query to delete opportunity
+            PFQuery *query = [PFUser query];
+            [query includeKey:@"pastOpportunities"];
+            
+            if ([opportunity.opportunityType isEqualToString:@"Donation"]) {
+                [query includeKey:@"amountDonated"];
+            } else if ([opportunity.opportunityType isEqualToString:@"Shadowing"]) {
+                [query includeKey:@"hoursShadowed"];
+            } else if ([opportunity.opportunityType isEqualToString:@"Volunteering"]) {
+                [query includeKey:@"hoursVolunteered"];
             }
+            
+            [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+            
+            // Fetch user asynchronously
+            [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+                if (users != nil) {
+                    // Create and store array of Post objects from retrieved posts
+                    PFUser *user = users[0];
+                    
+                    // Add opportunity id to user's list of opportunities
+                    NSMutableArray *pastOpportunities = user[@"pastOpportunities"];
+                    
+                    // Removing opportunity user deleted
+                    [pastOpportunities removeObject:opportunity.opportunityId];
+                    user[@"pastOpportunities"] = pastOpportunities;
+                        
+                    // Update hours or amount donated
+                    if ([opportunity.opportunityType isEqual:@"Donation"]) {
+                        NSNumber *donationAmount = user[@"amountDonated"];
+                        int newAmount = [donationAmount intValue]-[opportunity.amount intValue];
+                        NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
+                        user[@"amountDonated"] = newDonation;
+                        
+                    } else if ([opportunity.opportunityType isEqual:@"Shadowing"]) {
+                        NSNumber *hoursShadowed = user[@"hoursShadowed"];
+                        int newHours = [hoursShadowed intValue]-[opportunity.hours intValue];
+                        NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
+                        user[@"hoursShadowed"] = newHoursShadowed;
+                        
+                    } else if ([opportunity.opportunityType isEqual:@"Volunteering"]) {
+                        NSNumber *hoursVolunteered = user[@"hoursVolunteered"];
+                        int newHours = [hoursVolunteered intValue]-[opportunity.hours intValue];
+                        NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
+                        user[@"hoursVolunteered"] = newHoursVolunteered;
+                        
+                    }
+                    
+                    // Save data
+                    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                        if (succeeded) {
+                        } else {
+                            NSLog(@"Error: %@", error.localizedDescription);
+                        }
+                    }];
+                    
+                    // Reload user interface
+                    [self.filteredOpportunities removeObjectAtIndex:indexPath.row];
+                    [tableView reloadData];
+                    [self loadBasicProfile];
+                } else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+            }];
+        }];
+        UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:yesAction];
+        [alert addAction:noAction];
+        [self presentViewController:alert animated:YES completion:^{
         }];
     }
 }
