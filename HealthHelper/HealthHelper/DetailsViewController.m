@@ -50,6 +50,13 @@
     // Load basic information from self.opportunity variable
     [self loadBasicProfile];
     
+    // Button text
+    if ([self.opportunity.opportunityType isEqualToString: @"Donation"]) {
+        [self.registerButton setTitle:@"DONATE" forState:UIControlStateNormal];
+    } else {
+        [self.registerButton setTitle:@"REGISTER" forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
