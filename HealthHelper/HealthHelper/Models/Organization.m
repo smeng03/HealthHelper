@@ -69,12 +69,16 @@
             
             // Calculating distance
             NSString *distance = dataDictionary[@"rows"][0][@"elements"][0][@"distance"][@"text"];
-            //NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-            //f.numberStyle = NSNumberFormatterDecimalStyle;
-            //NSNumber *distanceValue = [f numberFromString:distance];
+            NSArray *splitDistance = [distance componentsSeparatedByString:@" "];
+            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            f.numberStyle = NSNumberFormatterDecimalStyle;
+            NSNumber *distanceValue = [f numberFromString:[splitDistance objectAtIndex:0]];
+            if ([[splitDistance objectAtIndex:1] isEqualToString:@"mi"]) {
+                organization.distanceValue = [NSNumber numberWithDouble:[distanceValue doubleValue]];
+            } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"ft"]) {
+                organization.distanceValue = [NSNumber numberWithDouble:[distanceValue doubleValue]/5280];
+            }
             organization.distance = distance;
-            
-            
         }
     }];
     

@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSNumber *destinationLatValue;
 @property (nonatomic, strong) NSNumber *destinationLngValue;
 @property (nonatomic, strong) NSString *distance;
+@property (nonatomic, assign) NSNumber *distanceValue;
 
 + (Organization *)initOrganizationWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng;
  

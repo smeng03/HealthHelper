@@ -242,8 +242,14 @@ CLLocationManager *opportunitiesLocationManager;
 // FILTERING CODE
 -(void)applyFilters:(NSArray *)filteredData {
     // Applies all selected filters to a given list of opportunities
+    NSNumber *maxDistance = [NSNumber numberWithInt:20];
     for (NSString *filter in self.filters) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
+        NSPredicate *predicate;
+        if ([filter isEqualToString:@"Distance"]) {
+            predicate = [NSPredicate predicateWithFormat: @"(author.distanceValue <= %@)", maxDistance];
+        } else {
+            predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
+        }
         filteredData = [filteredData filteredArrayUsingPredicate:predicate];
     }
     self.filteredOpportunities = [filteredData mutableCopy];
@@ -302,12 +308,12 @@ CLLocationManager *opportunitiesLocationManager;
 
 - (IBAction)didTapDistanceFilter:(id)sender {
     // Toggles button color
-    if (self.volunteerFilterOn) {
+    if (self.distanceFilterOn) {
         self.distanceButton.backgroundColor = [UIColor systemGray4Color];
-        //[self.filters removeObject:@"Volunteering"];
+        [self.filters removeObject:@"Distance"];
     } else {
         self.distanceButton.backgroundColor = [UIColor systemGrayColor];
-        //[self.filters addObject:@"Volunteering"];
+        [self.filters addObject:@"Distance"];
     }
     
     // Toggles filter on/off state

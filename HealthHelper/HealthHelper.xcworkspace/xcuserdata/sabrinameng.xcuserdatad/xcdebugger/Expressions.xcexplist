@@ -44,7 +44,16 @@
          contextName = "__63+[Organization getDistanceFromCoords:withLng:withOrganization:]_block_invoke:Organization.m">
          <PersistentStrings>
             <PersistentString
+               value = "organization.distanceValue">
+            </PersistentString>
+            <PersistentString
+               value = "splitDistance">
+            </PersistentString>
+            <PersistentString
                value = "userLat">
+            </PersistentString>
+            <PersistentString
+               value = "distanceValue">
             </PersistentString>
             <PersistentString
                value = "userLng">
