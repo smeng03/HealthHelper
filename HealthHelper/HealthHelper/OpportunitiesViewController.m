@@ -220,7 +220,7 @@
 - (IBAction)didTapVolunteerFilter:(id)sender {
     // Toggles button color
     if (self.volunteerFilterOn) {
-        self.volunteerButton.backgroundColor = [UIColor systemGray3Color];
+        self.volunteerButton.backgroundColor = [UIColor systemGray4Color];
         [self.filters removeObject:@"Volunteering"];
     } else {
         self.volunteerButton.backgroundColor = [UIColor systemGrayColor];
@@ -237,7 +237,7 @@
 - (IBAction)didTapShadowFilter:(id)sender {
     // Toggles button color
     if (self.shadowFilterOn) {
-        self.shadowButton.backgroundColor = [UIColor systemGray3Color];
+        self.shadowButton.backgroundColor = [UIColor systemGray4Color];
         [self.filters removeObject:@"Shadowing"];
     } else {
         self.shadowButton.backgroundColor = [UIColor systemGrayColor];
@@ -254,7 +254,7 @@
 - (IBAction)didTapDonateFilter:(id)sender {
     // Toggles button color
     if (self.donateFilterOn) {
-        self.donateButton.backgroundColor = [UIColor systemGray3Color];
+        self.donateButton.backgroundColor = [UIColor systemGray4Color];
         [self.filters removeObject:@"Donation"];
     } else {
         self.donateButton.backgroundColor = [UIColor systemGrayColor];
@@ -271,7 +271,7 @@
 - (IBAction)didTapDistanceFilter:(id)sender {
     // Toggles button color
     if (self.volunteerFilterOn) {
-        self.distanceButton.backgroundColor = [UIColor systemGray3Color];
+        self.distanceButton.backgroundColor = [UIColor systemGray4Color];
         //[self.filters removeObject:@"Volunteering"];
     } else {
         self.distanceButton.backgroundColor = [UIColor systemGrayColor];
