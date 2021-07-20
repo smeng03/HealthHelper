@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "Opportunity.h"
 #import "DetailsViewController.h"
+#import "MBProgressHUD.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
@@ -75,6 +76,12 @@ CLLocationManager *opportunitiesLocationManager;
     self.donateButton.layer.cornerRadius = 15;
     self.distanceButton.layer.cornerRadius = 15;
     
+    // Button colors
+    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
     // Initialize filter values
     self.volunteerFilterOn = FALSE;
     self.shadowFilterOn = FALSE;
@@ -129,16 +136,26 @@ CLLocationManager *opportunitiesLocationManager;
     [query orderByDescending:@"createdAt"];
     
     // Fetch posts asynchronously
-    [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
-        if (opportunities != nil) {
-            self.unprocessedOpportunities = opportunities;
-            
-            // Get user location
-            [self getCurrentLocation];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
+            if (opportunities != nil) {
+                self.unprocessedOpportunities = opportunities;
+                
+                // Get user location
+                [self getCurrentLocation];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    });
+}
+
+-(void)stopAnimation {
+    // Stopping progress bar
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -175,6 +192,9 @@ CLLocationManager *opportunitiesLocationManager;
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
+    
+    // Adding a slight delay so progress HUD doesn't just flash
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -258,10 +278,10 @@ CLLocationManager *opportunitiesLocationManager;
 - (IBAction)didTapVolunteerFilter:(id)sender {
     // Toggles button color
     if (self.volunteerFilterOn) {
-        self.volunteerButton.backgroundColor = [UIColor systemGray4Color];
+        self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:@"Volunteering"];
     } else {
-        self.volunteerButton.backgroundColor = [UIColor systemGrayColor];
+        self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:@"Volunteering"];
     }
     
@@ -275,10 +295,10 @@ CLLocationManager *opportunitiesLocationManager;
 - (IBAction)didTapShadowFilter:(id)sender {
     // Toggles button color
     if (self.shadowFilterOn) {
-        self.shadowButton.backgroundColor = [UIColor systemGray4Color];
+        self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:@"Shadowing"];
     } else {
-        self.shadowButton.backgroundColor = [UIColor systemGrayColor];
+        self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:@"Shadowing"];
     }
     
@@ -292,10 +312,10 @@ CLLocationManager *opportunitiesLocationManager;
 - (IBAction)didTapDonateFilter:(id)sender {
     // Toggles button color
     if (self.donateFilterOn) {
-        self.donateButton.backgroundColor = [UIColor systemGray4Color];
+        self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:@"Donation"];
     } else {
-        self.donateButton.backgroundColor = [UIColor systemGrayColor];
+        self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:@"Donation"];
     }
     
@@ -309,10 +329,10 @@ CLLocationManager *opportunitiesLocationManager;
 - (IBAction)didTapDistanceFilter:(id)sender {
     // Toggles button color
     if (self.distanceFilterOn) {
-        self.distanceButton.backgroundColor = [UIColor systemGray4Color];
+        self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:@"Distance"];
     } else {
-        self.distanceButton.backgroundColor = [UIColor systemGrayColor];
+        self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:@"Distance"];
     }
     

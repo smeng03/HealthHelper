@@ -39,6 +39,15 @@
 @property (strong, nonatomic) NSNumber *latValue;
 @property (strong, nonatomic) NSNumber *lngValue;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
+@property (weak, nonatomic) IBOutlet UIButton *volunteerButton;
+@property (weak, nonatomic) IBOutlet UIButton *donateButton;
+@property (weak, nonatomic) IBOutlet UIButton *shadowButton;
+@property (weak, nonatomic) IBOutlet UIButton *distanceButton;
+@property (nonatomic, assign) BOOL volunteerFilterOn;
+@property (nonatomic, assign) BOOL shadowFilterOn;
+@property (nonatomic, assign) BOOL donateFilterOn;
+@property (nonatomic, assign) BOOL distanceFilterOn;
+@property (strong, nonatomic) NSMutableArray *filters;
 
 @end
 
@@ -81,6 +90,27 @@ CLLocationManager *locationManager;
     self.shimmeringView.contentView = self.profileImageView;
     [self.view addSubview:self.shimmeringView];
     self.shimmeringView.shimmering = YES;
+    
+    // Buttons have rounded corners
+    self.volunteerButton.layer.cornerRadius = 15;
+    self.shadowButton.layer.cornerRadius = 15;
+    self.donateButton.layer.cornerRadius = 15;
+    self.distanceButton.layer.cornerRadius = 15;
+    
+    // Button colors
+    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    // Initialize filter values
+    self.volunteerFilterOn = FALSE;
+    self.shadowFilterOn = FALSE;
+    self.donateFilterOn = FALSE;
+    self.distanceFilterOn = FALSE;
+    
+    // Initialize filters array
+    self.filters = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -184,6 +214,91 @@ CLLocationManager *locationManager;
     
     [self.tableView reloadData];
 }
+
+// FILTERS
+-(void)applyFilters:(NSArray *)filteredData {
+    // Applies all selected filters to a given list of opportunities
+    NSNumber *maxDistance = [NSNumber numberWithInt:20];
+    for (NSString *filter in self.filters) {
+        NSPredicate *predicate;
+        if ([filter isEqualToString:@"Distance"]) {
+            predicate = [NSPredicate predicateWithFormat: @"(author.distanceValue <= %@)", maxDistance];
+        } else {
+            predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
+        }
+        filteredData = [filteredData filteredArrayUsingPredicate:predicate];
+    }
+    self.filteredOpportunities = [filteredData mutableCopy];
+}
+
+- (IBAction)didTapVolunteerFilter:(id)sender {
+    // Toggles button color
+    if (self.volunteerFilterOn) {
+        self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+        [self.filters removeObject:@"Volunteering"];
+    } else {
+        self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        [self.filters addObject:@"Volunteering"];
+    }
+    
+    // Toggles filter on/off state
+    self.volunteerFilterOn = !self.volunteerFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapShadowFilter:(id)sender {
+    // Toggles button color
+    if (self.shadowFilterOn) {
+        self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+        [self.filters removeObject:@"Shadowing"];
+    } else {
+        self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        [self.filters addObject:@"Shadowing"];
+    }
+    
+    // Toggles filter on/off state
+    self.shadowFilterOn = !self.shadowFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapDonateFilter:(id)sender {
+    // Toggles button color
+    if (self.donateFilterOn) {
+        self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+        [self.filters removeObject:@"Donation"];
+    } else {
+        self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        [self.filters addObject:@"Donation"];
+    }
+    
+    // Toggles filter on/off state
+    self.donateFilterOn = !self.donateFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
+- (IBAction)didTapDistanceFilter:(id)sender {
+    // Toggles button color
+    if (self.distanceFilterOn) {
+        self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+        [self.filters removeObject:@"Distance"];
+    } else {
+        self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        [self.filters addObject:@"Distance"];
+    }
+    
+    // Toggles filter on/off state
+    self.distanceFilterOn = !self.distanceFilterOn;
+    
+    // Manually trigger search and refilter using updated filters
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -431,13 +546,17 @@ CLLocationManager *locationManager;
     
     if (searchText.length != 0) {
         // Searches for objects containing what the user types
-        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(author.username CONTAINS[cd] %@)", searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text CONTAINS[cd] %@)", searchText];
         
-        // Filters opportunities based on criteria
-        self.filteredOpportunities = [(NSArray *)[self.opportunities filteredArrayUsingPredicate:predicate] mutableCopy];
+        // Filters opportunities based on search criteria
+        NSArray *filteredData = [self.opportunities filteredArrayUsingPredicate:predicate];
+        
+        // Apply additional filters to the opportunities filtered from search
+        [self applyFilters:filteredData];
     }
     else {
-        self.filteredOpportunities = self.opportunities;
+        // Apply additional filters to full list of opportunities if no search criteria
+        [self applyFilters:self.opportunities];
     }
     
     // Refresh table view
@@ -474,14 +593,16 @@ CLLocationManager *locationManager;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Identify tapped cell and get associated opportunity
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
-    
-    // Send information
-    DetailsViewController *detailsViewController = [segue destinationViewController];
-    detailsViewController.opportunity = opportunity;
+    if ([segue.identifier isEqualToString:@"toDetails"]) {
+        // Identify tapped cell and get associated opportunity
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
+        
+        // Send information
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.opportunity = opportunity;
+    }
 }
 
 @end
