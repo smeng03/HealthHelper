@@ -593,6 +593,7 @@ CLLocationManager *locationManager;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Segue for details view controller
     if ([segue.identifier isEqualToString:@"toDetails"]) {
         // Identify tapped cell and get associated opportunity
         UITableViewCell *tappedCell = sender;
