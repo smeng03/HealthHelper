@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DetailsViewController : UIViewController <CLLocationManagerDelegate>
+@interface DetailsViewController : UIViewController
 
 @property (nonatomic, strong) Opportunity *opportunity;
 

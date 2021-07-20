@@ -35,12 +35,8 @@
 
 @implementation DetailsViewController 
 
-CLLocationManager *locationManager;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    locationManager = [[CLLocationManager alloc] init];
     
     // Rounded button corners
     self.registerButton.layer.cornerRadius = 10;
@@ -48,14 +44,12 @@ CLLocationManager *locationManager;
     // Rounded profile images
     self.profileImageView.layer.cornerRadius = 50;
     
+    // Map setup
+    self.mapView.myLocationEnabled = true;
+    
     // Load basic information from self.opportunity variable
     [self loadBasicProfile];
     
-    // Get current location
-    [self getCurrentLocation];
-    
-    // Map setup
-    self.mapView.myLocationEnabled = true;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,110 +84,18 @@ CLLocationManager *locationManager;
     
     // Set organization name label
     self.organizationNameLabel.text = self.opportunity.author.username;
-}
-
-- (void)getDistanceFromCoords {
-    // Getting API Key
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
     
-    // Formatting request
-    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%@,%@&destinations=%@,%@&key=%@", self.latValue, self.lngValue, self.destinationLatValue, self.destinationLngValue, apiKey];
-    NSLog(@"%@", requestString);
+    // Setting marker on map
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake([self.opportunity.author.destinationLatValue doubleValue], [self.opportunity.author.destinationLngValue doubleValue]);
+    GMSMarker *marker = [GMSMarker markerWithPosition:position];
+    marker.title = self.opportunity.author.username;
+    marker.map = self.mapView;
     
-    // API request
-    NSURL *url = [NSURL URLWithString:requestString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
-            // Retrieving latitude and longitude
-            NSString *distance = dataDictionary[@"rows"][0][@"elements"][0][@"distance"][@"text"];
-            
-            // Setting distance label
-            self.distanceLabel.text = distance;
-        }
-    }];
+    // Re-centering map
+    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[self.opportunity.author.destinationLatValue doubleValue] longitude:[self.opportunity.author.destinationLngValue doubleValue] zoom:10];
     
-    [task resume];
-}
-
-- (void)getLocationFromAddress:(NSString *) address {
-    // Getting API Key
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
-    
-    // Getting formatted address string
-    NSString *formattedAddress = [address stringByReplacingOccurrencesOfString:@" " withString:@"+" ];
-    
-    // Formatting request
-    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=%@", formattedAddress, apiKey];
-    
-    // API request
-    NSURL *url = [NSURL URLWithString:requestString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
-            // Retrieving latitude and longitude
-            NSLog(@"%@", dataDictionary[@"results"][0]);
-            NSNumber *lat = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lat"];
-            NSNumber *lng = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lng"];
-            NSLog(@"%@", lat);
-            NSLog(@"%@", lng);
-            // Setting marker on map
-            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
-            GMSMarker *marker = [GMSMarker markerWithPosition:position];
-            marker.title = self.opportunity.author.username;
-            marker.map = self.mapView;
-            
-            // Re-centering map
-            self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[lat doubleValue] longitude:[lng doubleValue] zoom:10];
-            
-            // Storing coordinates
-            self.destinationLatValue = lat;
-            self.destinationLngValue = lng;
-            
-            // Get distance
-            [self getDistanceFromCoords];
-        }
-    }];
-    
-    [task resume];
-}
-
-
-- (void)getCurrentLocation {
-    // Get current user location
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation *location = [locations lastObject];
-    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
-    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
-    [locationManager stopUpdatingLocation];
-    locationManager = nil;
-    
-    // Get location from address
-    [self getLocationFromAddress:self.opportunity.author.address];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"didFailWithError: %@", error);
+    // Setting distance label
+    self.distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.opportunity.author.distance];
 }
 
 - (IBAction)didTapOrganizationProfile:(id)sender {

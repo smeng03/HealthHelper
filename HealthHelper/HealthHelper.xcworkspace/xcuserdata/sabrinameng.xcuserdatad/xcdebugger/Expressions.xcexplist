@@ -3,10 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[OpportunitiesViewController locationManager:didUpdateLocations:]:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.lngValue">
+            </PersistentString>
+            <PersistentString
+               value = "self.latValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OpportunitiesViewController tableView:numberOfRowsInSection:]:OpportunitiesViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "self.filteredOpportunities.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__48-[OpportunitiesViewController loadOpportunities]_block_invoke:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.unprocessedOpportunities">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,6 +41,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__63+[Organization getDistanceFromCoords:withLng:withOrganization:]_block_invoke:Organization.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "userLat">
+            </PersistentString>
+            <PersistentString
+               value = "userLng">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OrganizationInfoViewController viewDidLoad]:OrganizationInfoViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -29,6 +59,14 @@
             </PersistentString>
             <PersistentString
                value = "self.opportunity.author.imageURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[Opportunity createOpportunityArray:withLat:withLng:]:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "objects">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

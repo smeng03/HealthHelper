@@ -14,7 +14,7 @@
 #import "Opportunity.h"
 #import "DetailsViewController.h"
 
-@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *opportunities;
@@ -30,10 +30,15 @@
 @property (nonatomic, assign) BOOL donateFilterOn;
 @property (nonatomic, assign) BOOL distanceFilterOn;
 @property (strong, nonatomic) NSMutableArray *filters;
+@property (strong, nonatomic) NSNumber *latValue;
+@property (strong, nonatomic) NSNumber *lngValue;
+@property (strong, nonatomic) NSArray *unprocessedOpportunities;
 
 @end
 
 @implementation OpportunitiesViewController
+
+CLLocationManager *opportunitiesLocationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,6 +106,8 @@
 }
 
 - (void)loadOpportunities {
+    opportunitiesLocationManager = [[CLLocationManager alloc] init];
+    
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Opportunity"];
     [query includeKey:@"description"];
@@ -124,12 +131,10 @@
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
         if (opportunities != nil) {
-            // Create and store array of Opportunity objects from retrieved posts
-            self.opportunities = [Opportunity createOpportunityArray:opportunities];
-            self.filteredOpportunities = self.opportunities;
+            self.unprocessedOpportunities = opportunities;
             
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
+            // Get user location
+            [self getCurrentLocation];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -148,6 +153,33 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.filteredOpportunities.count;
+}
+
+- (void)getCurrentLocation {
+    // Get current user location
+    opportunitiesLocationManager.delegate = self;
+    opportunitiesLocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [opportunitiesLocationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
+    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
+    [opportunitiesLocationManager stopUpdatingLocation];
+    opportunitiesLocationManager = nil;
+    
+    // Create and store array of Opportunity objects from retrieved posts
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLat:self.latValue withLng:self.lngValue];
+    self.filteredOpportunities = self.opportunities;
+    
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
 }
 
 - (IBAction)didTapLogout:(id)sender {

@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSNumber *amount;
 
 
-- (void)initOpportunityWithObject:(PFObject *)object;
-+ (NSMutableArray *)createOpportunityArray:(NSArray *)objects;
+- (void)initOpportunityWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng;
++ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLat:userLat withLng:userLng;
     
 @end

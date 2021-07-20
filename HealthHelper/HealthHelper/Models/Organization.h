@@ -20,8 +20,11 @@
 @property (nonatomic, strong) NSNumber *totalScore;
 @property (nonatomic, strong) NSNumber *numReviews;
 @property (nonatomic, strong) NSArray *reviews;
+@property (nonatomic, strong) NSNumber *destinationLatValue;
+@property (nonatomic, strong) NSNumber *destinationLngValue;
+@property (nonatomic, strong) NSString *distance;
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object;
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng;
  
     
 @end

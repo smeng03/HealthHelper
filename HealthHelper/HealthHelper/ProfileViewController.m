@@ -20,7 +20,7 @@
 #import "Opportunity.h"
 #import "DetailsViewController.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -36,10 +36,15 @@
 @property (strong, nonatomic) NSArray *pastOpportunities;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSNumber *latValue;
+@property (strong, nonatomic) NSNumber *lngValue;
+@property (strong, nonatomic) NSArray *unprocessedOpportunities;
 
 @end
 
 @implementation ProfileViewController
+
+CLLocationManager *locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,6 +108,8 @@
 }
 
 - (void)loadPastOpportunityArray {
+    locationManager = [[CLLocationManager alloc] init];
+    
     // Query for opportunities array
     PFQuery *queryUser = [PFUser query];
     [queryUser includeKey:@"pastOpportunities"];
@@ -146,16 +153,41 @@
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
         if (opportunities != nil) {
-            // Create and store array of Opportunity objects from retrieved posts
-            self.opportunities = [Opportunity createOpportunityArray:opportunities];
-            self.filteredOpportunities = self.opportunities;
+            self.unprocessedOpportunities = opportunities;
             
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
+            // Get user location
+            [self getCurrentLocation];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+}
+
+- (void)getCurrentLocation {
+    // Get current user location
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
+    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    
+    // Create and store array of Opportunity objects from retrieved posts
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLat:self.latValue withLng:self.lngValue];
+    self.filteredOpportunities = self.opportunities;
+    [self.refreshControl endRefreshing];
+    
+    [self.tableView reloadData];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
 }
 
 - (void)loadBasicProfile {

@@ -20,12 +20,15 @@
 @dynamic totalScore;
 @dynamic numReviews;
 @dynamic reviews;
+@dynamic destinationLatValue;
+@dynamic destinationLngValue;
+@dynamic distance;
 
 + (nonnull NSString *)parseClassName {
     return @"Organization";
 }
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object {
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng {
     // Setting Organization object given PFObject
     Organization *organization = [Organization new];
     organization.text = object[@"description"];
@@ -40,7 +43,81 @@
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;
     
+    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization];
+    
     return organization;
 }
+
++ (void)getDistanceFromCoords:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
+    // Getting API Key
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
+    
+    // Formatting request
+    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%@,%@&destinations=%@,%@&key=%@", userLat, userLng, organization.destinationLatValue, organization.destinationLngValue, apiKey];
+    
+    // API request
+    NSURL *url = [NSURL URLWithString:requestString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            // Calculating distance
+            NSString *distance = dataDictionary[@"rows"][0][@"elements"][0][@"distance"][@"text"];
+            //NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            //f.numberStyle = NSNumberFormatterDecimalStyle;
+            //NSNumber *distanceValue = [f numberFromString:distance];
+            organization.distance = distance;
+            
+            
+        }
+    }];
+    
+    [task resume];
+}
+
++ (void)getLocationFromAddress:(NSString *) address withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
+    // Getting API Key
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
+    
+    // Getting formatted address string
+    NSString *formattedAddress = [address stringByReplacingOccurrencesOfString:@" " withString:@"+" ];
+    
+    // Formatting request
+    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=%@", formattedAddress, apiKey];
+    
+    // API request
+    NSURL *url = [NSURL URLWithString:requestString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            // Retrieving latitude and longitude
+            NSNumber *lat = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lat"];
+            NSNumber *lng = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lng"];
+            
+            // Storing coordinates
+            organization.destinationLatValue = lat;
+            organization.destinationLngValue = lng;
+            
+            // Get distance
+            [Organization getDistanceFromCoords:userLat withLng:userLng withOrganization:organization];
+        }
+    }];
+    
+    [task resume];
+}
+
     
 @end
