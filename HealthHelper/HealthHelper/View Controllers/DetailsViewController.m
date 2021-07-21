@@ -38,18 +38,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Rounded button corners
-    self.registerButton.layer.cornerRadius = 10;
-    
-    // Rounded profile images
-    self.profileImageView.layer.cornerRadius = 50;
-    
+
     // Map setup
     self.mapView.myLocationEnabled = true;
     
     // Load basic information from self.opportunity variable
     [self loadBasicProfile];
+    
+    [self styleElements];
+}
+
+- (void)styleElements {
+    // Rounded button corners
+    self.registerButton.layer.cornerRadius = 10;
+    
+    // Rounded profile images
+    self.profileImageView.layer.cornerRadius = 50;
     
     // Button text
     if ([self.opportunity.opportunityType isEqualToString: @"Donation"]) {

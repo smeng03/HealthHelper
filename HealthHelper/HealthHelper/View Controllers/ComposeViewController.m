@@ -35,14 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Round profile images
-    self.profileImageView.layer.cornerRadius = 25;
-    
-    // Round text view corners and border properties
-    self.composeField.layer.cornerRadius = 10;
-    self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
-    self.composeField.layer.borderWidth=1.0;
-    
     // Placeholder shimmer while loading
     self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
     self.shimmeringView.contentView = self.profileImageView;
@@ -52,13 +44,22 @@
     // Rating defaults to 0, which is invalid
     self.rating = [NSNumber numberWithInt:0];
     
+    [self styleElements];
+    [self loadProfileImage];
+}
+
+- (void)styleElements {
+    // Round profile images
+    self.profileImageView.layer.cornerRadius = 25;
+    
+    // Round text view corners and border properties
+    self.composeField.layer.cornerRadius = 10;
+    self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
+    self.composeField.layer.borderWidth=1.0;
+    
     // Text view placeholder text
     self.composeField.placeholder = @"Write a review...";
     self.composeField.placeholderColor = [UIColor lightGrayColor];
-    
-    [self loadProfileImage];
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -29,13 +29,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Table view delegate and data source
+    // Delegates and data sources
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     // Load reviews for organization
     [self loadReviews];
     
+    [self styleElements];
+    [self setData];
+}
+
+- (void)styleElements {
     // Nav bar title
     self.navigationItem.title = self.opportunity.author.username;
     
@@ -44,7 +49,9 @@
     
     // Rounded corners on button
     self.reviewButton.layer.cornerRadius = 5;
-    
+}
+
+- (void)setData {
     // Set organization name
     self.organizationNameLabel.text = self.opportunity.author.username;
     

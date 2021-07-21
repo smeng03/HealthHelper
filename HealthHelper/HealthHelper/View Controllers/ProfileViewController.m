@@ -59,11 +59,9 @@ CLLocationManager *locationManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Table view data source and delegate
+    // Delegates and data sources
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    // Search bar delegate
     self.searchBar.delegate = self;
     
     // Loading basic profile information
@@ -72,17 +70,9 @@ CLLocationManager *locationManager;
     // Loading past opportunities
     [self loadPastOpportunityArray];
     
-    // Round profile images
-    self.profileImageView.layer.cornerRadius = 50;
-    
-    // Search bar placeholder text
-    self.searchBar.placeholder = @"Search your opportunities...";
-    
     // Refresh Control
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadPastOpportunityArray) forControlEvents:UIControlEventValueChanged];
-    
-    // Places refresher at correct location
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Placeholder shimmer while loading
@@ -91,6 +81,17 @@ CLLocationManager *locationManager;
     self.shimmeringView.contentView = self.profileImageView;
     [self.view addSubview:self.shimmeringView];
     self.shimmeringView.shimmering = YES;
+    
+    [self styleElements];
+    [self filterSetup];
+}
+
+- (void)styleElements {
+    // Round profile images
+    self.profileImageView.layer.cornerRadius = 50;
+    
+    // Search bar placeholder text
+    self.searchBar.placeholder = @"Search your opportunities...";
     
     // Buttons have rounded corners
     self.volunteerButton.layer.cornerRadius = 15;
@@ -103,7 +104,9 @@ CLLocationManager *locationManager;
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    
+}
+
+- (void)filterSetup {
     // Initialize filter values
     self.volunteerFilterOn = FALSE;
     self.shadowFilterOn = FALSE;

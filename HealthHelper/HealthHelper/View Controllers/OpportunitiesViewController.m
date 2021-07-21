@@ -45,11 +45,9 @@ CLLocationManager *opportunitiesLocationManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Table view delegate and data source
+    // Delegates and data sources
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    // Search bar delegate and data source
     self.searchBar.delegate = self;
     
     // Setting initial theme to light mode
@@ -67,10 +65,13 @@ CLLocationManager *opportunitiesLocationManager;
     // Refresh Control
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadOpportunities) forControlEvents:UIControlEventValueChanged];
-    
-    // Places refresher at correct location
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
+    [self styleButton];
+    [self filterSetup];
+}
+
+- (void)styleButton {
     // Buttons have rounded corners
     self.volunteerButton.layer.cornerRadius = 15;
     self.shadowButton.layer.cornerRadius = 15;
@@ -82,7 +83,9 @@ CLLocationManager *opportunitiesLocationManager;
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    
+}
+
+- (void)filterSetup {
     // Initialize filter values
     self.volunteerFilterOn = FALSE;
     self.shadowFilterOn = FALSE;
