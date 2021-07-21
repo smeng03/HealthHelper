@@ -151,52 +151,197 @@
 #pragma mark - Detect star taps
 
 - (IBAction)didTapStar1:(id)sender {
-    UIImage *imageToSet = [UIImage imageNamed: @"star"];
-    if(imageToSet){
-    } else {
-        NSLog( @"why is my image object nil?");
-    }
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [UIView transitionWithView:self.star1
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star2
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star2 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star3
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star4
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star5
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
     self.rating = [NSNumber numberWithInt:1];
 }
 
 - (IBAction)didTapStar2:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [UIView transitionWithView:self.star1
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star2
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star3
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star3 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star4
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star5
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
     self.rating = [NSNumber numberWithInt:2];
 }
 
 - (IBAction)didTapStar3:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [UIView transitionWithView:self.star1
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star2
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star3
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star4
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star4 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star5
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
     self.rating = [NSNumber numberWithInt:3];
 }
 
 - (IBAction)didTapStar4:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+    [UIView transitionWithView:self.star1
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star2
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star3
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star4
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star5
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star5 setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        }
+        completion:nil];
     self.rating = [NSNumber numberWithInt:4];
 }
 
 - (IBAction)didTapStar5:(id)sender {
-    [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
-    [self.star5 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+    [UIView transitionWithView:self.star1
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star1 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star2
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star2 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star3
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star3 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star4
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star4 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
+    [UIView transitionWithView:self.star5
+        duration:0.3f
+        options:UIViewAnimationOptionTransitionCrossDissolve
+        animations:^{
+        [self.star5 setImage:[UIImage imageNamed:@"star-filled"] forState:UIControlStateNormal];
+        }
+        completion:nil];
     self.rating = [NSNumber numberWithInt:5];
 }
 
