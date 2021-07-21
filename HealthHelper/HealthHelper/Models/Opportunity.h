@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "Organization.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface Opportunity : PFObject<PFSubclassing>
 
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) NSNumber *amount;
 
 
-- (void)initOpportunityWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng;
-+ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLat:userLat withLng:userLng;
+- (void)initOpportunityWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation;
++ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation;
     
 @end

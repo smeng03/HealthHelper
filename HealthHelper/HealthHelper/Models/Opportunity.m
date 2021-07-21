@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "Opportunity.h"
 #import "Organization.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation Opportunity
 
@@ -28,7 +29,7 @@
     return @"Opportunity";
 }
 
-- (void)initOpportunityWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng {
+- (void)initOpportunityWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation {
     // Setting Opportunity object given PFObject
     self.text = object[@"description"];
     self.tags = object[@"tags"];
@@ -41,15 +42,15 @@
     self.date = object[@"date"];
     self.hours = object[@"hours"];
     self.amount = object[@"donationAmount"];
-    self.author = [Organization initOrganizationWithObject:object[@"author"] withLat:userLat withLng:userLng];
+    self.author = [Organization initOrganizationWithObject:object[@"author"] withLocation:userLocation];
 }
 
-+ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLat:userLat withLng:userLng {
++ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation {
     // Returns array of Opportunity objects given array of PFObjects
     NSMutableArray *newOpportunities = [[NSMutableArray alloc] init];
     for (PFObject *opportunity in objects) {
         Opportunity *newOpportunity = [Opportunity new];
-        [newOpportunity initOpportunityWithObject:opportunity withLat:userLat withLng:userLng];
+        [newOpportunity initOpportunityWithObject:opportunity withLocation:userLocation];
         [newOpportunities addObject:newOpportunity];
     }
     return newOpportunities;

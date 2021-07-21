@@ -23,12 +23,17 @@
 @dynamic destinationLatValue;
 @dynamic destinationLngValue;
 @dynamic distance;
+@dynamic distanceValue;
 
 + (nonnull NSString *)parseClassName {
     return @"Organization";
 }
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng {
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation {
+    // Parsing location
+    NSNumber *userLat = [NSNumber numberWithDouble:userLocation.coordinate.latitude];
+    NSNumber *userLng = [NSNumber numberWithDouble:userLocation.coordinate.longitude];
+    
     // Setting Organization object given PFObject
     Organization *organization = [Organization new];
     organization.text = object[@"description"];

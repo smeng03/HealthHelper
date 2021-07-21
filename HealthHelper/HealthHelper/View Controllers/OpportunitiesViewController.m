@@ -33,8 +33,7 @@
 @property (nonatomic, assign) BOOL donateFilterOn;
 @property (nonatomic, assign) BOOL distanceFilterOn;
 @property (strong, nonatomic) NSMutableArray *filters;
-@property (strong, nonatomic) NSNumber *latValue;
-@property (strong, nonatomic) NSNumber *lngValue;
+@property (strong, nonatomic) CLLocation *userLocation;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
 
 @end
@@ -183,13 +182,12 @@ CLLocationManager *opportunitiesLocationManager;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
-    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
-    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
+    self.userLocation = location;
     [opportunitiesLocationManager stopUpdatingLocation];
     opportunitiesLocationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLat:self.latValue withLng:self.lngValue];
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation];
     self.filteredOpportunities = self.opportunities;
     
     [self.tableView reloadData];

@@ -38,8 +38,7 @@
 @property (strong, nonatomic) NSArray *pastOpportunities;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) NSNumber *latValue;
-@property (strong, nonatomic) NSNumber *lngValue;
+@property (strong, nonatomic) CLLocation *userLocation;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
 @property (weak, nonatomic) IBOutlet UIButton *volunteerButton;
 @property (weak, nonatomic) IBOutlet UIButton *donateButton;
@@ -204,17 +203,16 @@ CLLocationManager *locationManager;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
-    self.latValue = [NSNumber numberWithDouble:location.coordinate.latitude];
-    self.lngValue = [NSNumber numberWithDouble:location.coordinate.longitude];
+    self.userLocation = location;
     [locationManager stopUpdatingLocation];
     locationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLat:self.latValue withLng:self.lngValue];
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation];
     self.filteredOpportunities = self.opportunities;
-    [self.refreshControl endRefreshing];
     
     [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 // FILTERS

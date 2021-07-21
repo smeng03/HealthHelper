@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface Organization : PFObject<PFSubclassing>
 
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) NSString *distance;
 @property (nonatomic, assign) NSNumber *distanceValue;
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng;
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation;
  
     
 @end
