@@ -35,6 +35,8 @@
 		D970C548269FA9C2003DA544 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C547269FA9C2003DA544 /* Organization.m */; };
 		D970C54B269FAB1F003DA544 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54A269FAB1F003DA544 /* Opportunity.m */; };
 		D970C54E269FAC88003DA544 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54D269FAC88003DA544 /* Review.m */; };
+		D9B1F8B526A8765E00CADBDA /* QueryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B426A8765E00CADBDA /* QueryConstants.m */; };
+		D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B726A8859C00CADBDA /* FilterConstants.m */; };
 		D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ED852B26A1F68B00011F02 /* ReviewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +113,10 @@
 		D970C54C269FAB2C003DA544 /* Opportunity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
 		D970C54D269FAC88003DA544 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		D970C54F269FAC92003DA544 /* Review.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		D9B1F8B326A8764800CADBDA /* QueryConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueryConstants.h; sourceTree = "<group>"; };
+		D9B1F8B426A8765E00CADBDA /* QueryConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QueryConstants.m; sourceTree = "<group>"; };
+		D9B1F8B626A8858B00CADBDA /* FilterConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterConstants.h; sourceTree = "<group>"; };
+		D9B1F8B726A8859C00CADBDA /* FilterConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterConstants.m; sourceTree = "<group>"; };
 		D9ED852A26A1F68B00011F02 /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ReviewCell.h; path = HealthHelper/Views/ReviewCell.h; sourceTree = SOURCE_ROOT; };
 		D9ED852B26A1F68B00011F02 /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ReviewCell.m; path = HealthHelper/Views/ReviewCell.m; sourceTree = SOURCE_ROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -256,6 +262,10 @@
 		D970C4D7269CAFE8003DA544 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D9B1F8B626A8858B00CADBDA /* FilterConstants.h */,
+				D9B1F8B726A8859C00CADBDA /* FilterConstants.m */,
+				D9B1F8B326A8764800CADBDA /* QueryConstants.h */,
+				D9B1F8B426A8765E00CADBDA /* QueryConstants.m */,
 				D970C4DC269CB235003DA544 /* User.m */,
 				D970C4DE269CB23F003DA544 /* User.h */,
 				D970C547269FA9C2003DA544 /* Organization.m */,
@@ -570,6 +580,7 @@
 				D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,
 				D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */,
+				D9B1F8B526A8765E00CADBDA /* QueryConstants.m in Sources */,
 				D970C54B269FAB1F003DA544 /* Opportunity.m in Sources */,
 				D970C4EA269CDD3A003DA544 /* ProfileViewController.m in Sources */,
 				D970C543269F86F7003DA544 /* OrganizationInfoViewController.m in Sources */,
@@ -582,6 +593,7 @@
 				D970C546269F8FD6003DA544 /* ComposeViewController.m in Sources */,
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
 				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
+				D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

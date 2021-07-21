@@ -19,6 +19,8 @@
 #import "FBShimmeringLayer.h"
 #import "Opportunity.h"
 #import "DetailsViewController.h"
+#import "QueryConstants.h"
+#import "FilterConstants.h"
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
@@ -142,15 +144,15 @@ CLLocationManager *locationManager;
     
     // Query for opportunities array
     PFQuery *queryUser = [PFUser query];
-    [queryUser includeKey:@"pastOpportunities"];
-    [queryUser whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    [queryUser includeKey:pastOpportunitiesQuery];
+    [queryUser whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch user asynchronously
     [queryUser findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
         if (users != nil) {
             // Create and store array of Post objects from retrieved posts
             PFUser *user = users[0];
-            self.pastOpportunities = user[@"pastOpportunities"];
+            self.pastOpportunities = user[pastOpportunitiesQuery];
             [self loadPastOpportunities];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -160,25 +162,25 @@ CLLocationManager *locationManager;
 
 - (void)loadPastOpportunities {
     // Construct query for opportunities
-    PFQuery *query = [PFQuery queryWithClassName:@"Opportunity"];
-    [query includeKey:@"description"];
-    [query includeKey:@"tags"];
-    [query includeKey:@"signUpLink"];
-    [query includeKey:@"opportunityType"];
-    [query includeKey:@"author"];
-    [query includeKey:@"author.image"];
-    [query includeKey:@"author.description"];
-    [query includeKey:@"author.address"];
-    [query includeKey:@"author.totalScore"];
-    [query includeKey:@"author.numReviews"];
-    [query includeKey:@"author.reviews"];
-    [query includeKey:@"donationAmount"];
-    [query includeKey:@"hours"];
-    [query includeKey:@"date"];
-    [query includeKey:@"position"];
+    PFQuery *query = [PFQuery queryWithClassName:opportunityClassName];
+    [query includeKey:descriptionQuery];
+    [query includeKey:tagsQuery];
+    [query includeKey:signUpLinkQuery];
+    [query includeKey:opportunityTypeQuery];
+    [query includeKey:authorQuery];
+    [query includeKey:authorImageQuery];
+    [query includeKey:authorDescriptionQuery];
+    [query includeKey:authorAddressQuery];
+    [query includeKey:authorTotalScoreQuery];
+    [query includeKey:authorNumReviewsQuery];
+    [query includeKey:authorReviewsQuery];
+    [query includeKey:opportunityDonationAmountQuery];
+    [query includeKey:opportunityHoursQuery];
+    [query includeKey:dateQuery];
+    [query includeKey:positionQuery];
     query.limit = 20;
-    [query orderByDescending:@"createdAt"];
-    [query whereKey:@"objectId" containedIn:self.pastOpportunities];
+    [query orderByDescending:createdAtQuery];
+    [query whereKey:objectIdKey containedIn:self.pastOpportunities];
     
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
@@ -221,7 +223,7 @@ CLLocationManager *locationManager;
     NSNumber *maxDistance = [NSNumber numberWithInt:20];
     for (NSString *filter in self.filters) {
         NSPredicate *predicate;
-        if ([filter isEqualToString:@"Distance"]) {
+        if ([filter isEqualToString:distanceFilter]) {
             predicate = [NSPredicate predicateWithFormat: @"(author.distanceValue <= %@)", maxDistance];
         } else {
             predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
@@ -235,10 +237,10 @@ CLLocationManager *locationManager;
     // Toggles button color
     if (self.volunteerFilterOn) {
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Volunteering"];
+        [self.filters removeObject:volunteeringFilter];
     } else {
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Volunteering"];
+        [self.filters addObject:volunteeringFilter];
     }
     
     // Toggles filter on/off state
@@ -252,10 +254,10 @@ CLLocationManager *locationManager;
     // Toggles button color
     if (self.shadowFilterOn) {
         self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Shadowing"];
+        [self.filters removeObject:shadowingFilter];
     } else {
         self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Shadowing"];
+        [self.filters addObject:shadowingFilter];
     }
     
     // Toggles filter on/off state
@@ -269,10 +271,10 @@ CLLocationManager *locationManager;
     // Toggles button color
     if (self.donateFilterOn) {
         self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Donation"];
+        [self.filters removeObject:donationFilter];
     } else {
         self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Donation"];
+        [self.filters addObject:donationFilter];
     }
     
     // Toggles filter on/off state
@@ -286,10 +288,10 @@ CLLocationManager *locationManager;
     // Toggles button color
     if (self.distanceFilterOn) {
         self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Distance"];
+        [self.filters removeObject:distanceFilter];
     } else {
         self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Distance"];
+        [self.filters addObject:distanceFilter];
     }
     
     // Toggles filter on/off state
@@ -311,11 +313,11 @@ CLLocationManager *locationManager;
     
     // Querying for profile image
     PFQuery *query = [PFUser query];
-    [query includeKey:@"image"];
-    [query includeKey:@"amountDonated"];
-    [query includeKey:@"hoursVolunteered"];
-    [query includeKey:@"hoursShadowed"];
-    [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    [query includeKey:imageQuery];
+    [query includeKey:amountDonatedQuery];
+    [query includeKey:hoursVolunteeredQuery];
+    [query includeKey:hoursShadowedQuery];
+    [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch user asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
@@ -324,14 +326,14 @@ CLLocationManager *locationManager;
             PFUser *user = users[0];
             
             // Set profile image
-            PFFileObject *image = user[@"image"];
+            PFFileObject *image = user[imageQuery];
             [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
             self.shimmeringView.shimmering = NO;
             
             // Set user sats
-            self.hoursVolunteeredLabel.text = [NSString stringWithFormat:@"Hours volunteered: %@", user[@"hoursVolunteered"]];
-            self.amountDonatedLabel.text = [NSString stringWithFormat:@"Amount donated: $%@", user[@"amountDonated"]];
-            self.hoursShadowedLabel.text = [NSString stringWithFormat:@"Hours shadowed: %@", user[@"hoursShadowed"]];
+            self.hoursVolunteeredLabel.text = [NSString stringWithFormat:@"Hours volunteered: %@", user[hoursVolunteeredQuery]];
+            self.amountDonatedLabel.text = [NSString stringWithFormat:@"Amount donated: $%@", user[amountDonatedQuery]];
+            self.hoursShadowedLabel.text = [NSString stringWithFormat:@"Hours shadowed: %@", user[hoursShadowedQuery]];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -391,17 +393,17 @@ CLLocationManager *locationManager;
             
             // Constructing query to delete opportunity
             PFQuery *query = [PFUser query];
-            [query includeKey:@"pastOpportunities"];
+            [query includeKey:pastOpportunitiesQuery];
             
-            if ([opportunity.opportunityType isEqualToString:@"Donation"]) {
-                [query includeKey:@"amountDonated"];
-            } else if ([opportunity.opportunityType isEqualToString:@"Shadowing"]) {
-                [query includeKey:@"hoursShadowed"];
-            } else if ([opportunity.opportunityType isEqualToString:@"Volunteering"]) {
-                [query includeKey:@"hoursVolunteered"];
+            if ([opportunity.opportunityType isEqualToString:donationOpportunityType]) {
+                [query includeKey:amountDonatedQuery];
+            } else if ([opportunity.opportunityType isEqualToString:shadowingOpportunityType]) {
+                [query includeKey:hoursShadowedQuery];
+            } else if ([opportunity.opportunityType isEqualToString:volunteeringOpportunityType]) {
+                [query includeKey:hoursVolunteeredQuery];
             }
             
-            [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+            [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
             
             // Fetch user asynchronously
             [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
@@ -410,30 +412,30 @@ CLLocationManager *locationManager;
                     PFUser *user = users[0];
                     
                     // Add opportunity id to user's list of opportunities
-                    NSMutableArray *pastOpportunities = user[@"pastOpportunities"];
+                    NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];
                     
                     // Removing opportunity user deleted
                     [pastOpportunities removeObject:opportunity.opportunityId];
-                    user[@"pastOpportunities"] = pastOpportunities;
+                    user[pastOpportunitiesQuery] = pastOpportunities;
                         
                     // Update hours or amount donated
-                    if ([opportunity.opportunityType isEqual:@"Donation"]) {
-                        NSNumber *donationAmount = user[@"amountDonated"];
+                    if ([opportunity.opportunityType isEqual:donationOpportunityType]) {
+                        NSNumber *donationAmount = user[amountDonatedQuery];
                         int newAmount = [donationAmount intValue]-[opportunity.amount intValue];
                         NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
-                        user[@"amountDonated"] = newDonation;
+                        user[amountDonatedQuery] = newDonation;
                         
-                    } else if ([opportunity.opportunityType isEqual:@"Shadowing"]) {
-                        NSNumber *hoursShadowed = user[@"hoursShadowed"];
+                    } else if ([opportunity.opportunityType isEqual:shadowingOpportunityType]) {
+                        NSNumber *hoursShadowed = user[hoursShadowedQuery];
                         int newHours = [hoursShadowed intValue]-[opportunity.hours intValue];
                         NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
-                        user[@"hoursShadowed"] = newHoursShadowed;
+                        user[hoursShadowedQuery] = newHoursShadowed;
                         
-                    } else if ([opportunity.opportunityType isEqual:@"Volunteering"]) {
-                        NSNumber *hoursVolunteered = user[@"hoursVolunteered"];
+                    } else if ([opportunity.opportunityType isEqual:volunteeringOpportunityType]) {
+                        NSNumber *hoursVolunteered = user[hoursVolunteeredQuery];
                         int newHours = [hoursVolunteered intValue]-[opportunity.hours intValue];
                         NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
-                        user[@"hoursVolunteered"] = newHoursVolunteered;
+                        user[hoursVolunteeredQuery] = newHoursVolunteered;
                         
                     }
                     
@@ -517,7 +519,7 @@ CLLocationManager *locationManager;
     // Save image to current user object
     PFUser *user = PFUser.currentUser;
     NSData *imageData = UIImagePNGRepresentation(self.updatedProfileImage);
-    user[@"image"] = [PFFileObject fileObjectWithName:@"image.png" data:imageData contentType:@"image/png"];
+    user[imageQuery] = [PFFileObject fileObjectWithName:@"image.png" data:imageData contentType:@"image/png"];
     
     // Progress HUD while post is saved
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

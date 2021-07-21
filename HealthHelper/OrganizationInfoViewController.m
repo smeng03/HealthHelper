@@ -11,6 +11,7 @@
 #import "ComposeViewController.h"
 #import "Review.h"
 #import "ReviewCell.h"
+#import "QueryConstants.h"
 
 @interface OrganizationInfoViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -76,13 +77,13 @@
 
 - (void)loadReviews {
     // Construct query
-    PFQuery *query = [PFQuery queryWithClassName:@"Review"];
-    [query includeKey:@"comment"];
-    [query includeKey:@"stars"];
-    [query includeKey:@"author"];
-    [query whereKey:@"forOrganizationWithId" equalTo:self.opportunity.author.organizationId];
+    PFQuery *query = [PFQuery queryWithClassName:reviewClassName];
+    [query includeKey:commentQuery];
+    [query includeKey:starsQuery];
+    [query includeKey:authorQuery];
+    [query whereKey:forOrganizationWithIdQuery equalTo:self.opportunity.author.organizationId];
     query.limit = 20;
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:createdAtQuery];
     
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *reviews, NSError *error) {

@@ -14,6 +14,7 @@
 @import GooglePlaces;
 @import GoogleMapsBase;
 @import GoogleMapsCore;
+#import "QueryConstants.h"
 
 @interface DetailsViewController () <CLLocationManagerDelegate>
 
@@ -125,17 +126,17 @@
 
 - (void)registerOpportunity {
     PFQuery *query = [PFUser query];
-    [query includeKey:@"pastOpportunities"];
+    [query includeKey:pastOpportunitiesQuery];
     
     if ([self.opportunity.opportunityType isEqualToString:@"Donation"]) {
-        [query includeKey:@"amountDonated"];
+        [query includeKey:amountDonatedQuery];
     } else if ([self.opportunity.opportunityType isEqualToString:@"Shadowing"]) {
-        [query includeKey:@"hoursShadowed"];
+        [query includeKey:hoursShadowedQuery];
     } else if ([self.opportunity.opportunityType isEqualToString:@"Volunteering"]) {
-        [query includeKey:@"hoursVolunteered"];
+        [query includeKey:hoursVolunteeredQuery];
     }
     
-    [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch user asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
@@ -144,30 +145,30 @@
             PFUser *user = users[0];
             
             // Add opportunity id to user's list of opportunities
-            NSMutableArray *pastOpportunities = user[@"pastOpportunities"];
+            NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];
             
             if (![pastOpportunities containsObject:self.opportunity.opportunityId]) {
                 [pastOpportunities addObject:self.opportunity.opportunityId];
-                user[@"pastOpportunities"] = pastOpportunities;
+                user[pastOpportunitiesQuery] = pastOpportunities;
                 
                 // Update hours or amount donated
                 if ([self.opportunity.opportunityType isEqual:@"Donation"]) {
-                    NSNumber *donationAmount = user[@"amountDonated"];
+                    NSNumber *donationAmount = user[amountDonatedQuery];
                     int newAmount = [donationAmount intValue]+[self.opportunity.amount intValue];
                     NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
-                    user[@"amountDonated"] = newDonation;
+                    user[amountDonatedQuery] = newDonation;
                     
                 } else if ([self.opportunity.opportunityType isEqual:@"Shadowing"]) {
-                    NSNumber *hoursShadowed = user[@"hoursShadowed"];
+                    NSNumber *hoursShadowed = user[hoursShadowedQuery];
                     int newHours = [hoursShadowed intValue]+[self.opportunity.hours intValue];
                     NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
-                    user[@"hoursShadowed"] = newHoursShadowed;
+                    user[hoursShadowedQuery] = newHoursShadowed;
                     
                 } else if ([self.opportunity.opportunityType isEqual:@"Volunteering"]) {
-                    NSNumber *hoursVolunteered = user[@"hoursVolunteered"];
+                    NSNumber *hoursVolunteered = user[hoursVolunteeredQuery];
                     int newHours = [hoursVolunteered intValue]+[self.opportunity.hours intValue];
                     NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
-                    user[@"hoursVolunteered"] = newHoursVolunteered;
+                    user[hoursVolunteeredQuery] = newHoursVolunteered;
                     
                 }
                 

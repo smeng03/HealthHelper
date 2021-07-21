@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 @import UITextView_Placeholder;
 #import "MBProgressHUD.h"
+#import "QueryConstants.h"
 
 @interface ComposeViewController ()
 
@@ -83,8 +84,8 @@
 - (void)loadProfileImage {
     // Querying for profile image
     PFQuery *query = [PFUser query];
-    [query includeKey:@"image"];
-    [query whereKey:@"objectId" equalTo:PFUser.currentUser.objectId];
+    [query includeKey:imageQuery];
+    [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
@@ -93,7 +94,7 @@
             PFUser *user = users[0];
             
             // Set profile image
-            PFFileObject *image = user[@"image"];
+            PFFileObject *image = user[imageQuery];
             [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
             self.shimmeringView.shimmering = NO;
         } else {
@@ -117,11 +118,11 @@
         }];
     } else {
         // Setting post attributes for storage in database
-        PFObject *review = [PFObject objectWithClassName:@"Review"];
-        review[@"comment"] = self.composeField.text;
-        review[@"author"] = PFUser.currentUser;
-        review[@"stars"] = self.rating;
-        review[@"forOrganizationWithId"] = self.opportunity.author.organizationId;
+        PFObject *review = [PFObject objectWithClassName:reviewClassName];
+        review[commentQuery] = self.composeField.text;
+        review[authorQuery] = PFUser.currentUser;
+        review[starsQuery] = self.rating;
+        review[forOrganizationWithIdQuery] = self.opportunity.author.organizationId;
         
         // Progress HUD while post is saved
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];

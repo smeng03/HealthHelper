@@ -14,6 +14,8 @@
 #import "Opportunity.h"
 #import "DetailsViewController.h"
 #import "MBProgressHUD.h"
+#import "QueryConstants.h"
+#import "FilterConstants.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
@@ -116,24 +118,24 @@ CLLocationManager *opportunitiesLocationManager;
     opportunitiesLocationManager = [[CLLocationManager alloc] init];
     
     // Construct query
-    PFQuery *query = [PFQuery queryWithClassName:@"Opportunity"];
-    [query includeKey:@"description"];
-    [query includeKey:@"tags"];
-    [query includeKey:@"signUpLink"];
-    [query includeKey:@"opportunityType"];
-    [query includeKey:@"author"];
-    [query includeKey:@"author.image"];
-    [query includeKey:@"author.description"];
-    [query includeKey:@"author.address"];
-    [query includeKey:@"author.totalScore"];
-    [query includeKey:@"author.numReviews"];
-    [query includeKey:@"author.reviews"];
-    [query includeKey:@"donationAmount"];
-    [query includeKey:@"hours"];
-    [query includeKey:@"date"];
-    [query includeKey:@"position"];
+    PFQuery *query = [PFQuery queryWithClassName:opportunityClassName];
+    [query includeKey:descriptionQuery];
+    [query includeKey:tagsQuery];
+    [query includeKey:signUpLinkQuery];
+    [query includeKey:opportunityTypeQuery];
+    [query includeKey:authorQuery];
+    [query includeKey:authorImageQuery];
+    [query includeKey:authorDescriptionQuery];
+    [query includeKey:authorAddressQuery];
+    [query includeKey:authorTotalScoreQuery];
+    [query includeKey:authorNumReviewsQuery];
+    [query includeKey:authorReviewsQuery];
+    [query includeKey:opportunityDonationAmountQuery];
+    [query includeKey:opportunityHoursQuery];
+    [query includeKey:dateQuery];
+    [query includeKey:positionQuery];
     query.limit = 20;
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:createdAtQuery];
     
     // Fetch posts asynchronously
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -265,7 +267,7 @@ CLLocationManager *opportunitiesLocationManager;
     NSNumber *maxDistance = [NSNumber numberWithInt:20];
     for (NSString *filter in self.filters) {
         NSPredicate *predicate;
-        if ([filter isEqualToString:@"Distance"]) {
+        if ([filter isEqualToString:distanceFilter]) {
             predicate = [NSPredicate predicateWithFormat: @"(author.distanceValue <= %@)", maxDistance];
         } else {
             predicate = [NSPredicate predicateWithFormat: @"(opportunityType CONTAINS[cd] %@)", filter];
@@ -279,10 +281,10 @@ CLLocationManager *opportunitiesLocationManager;
     // Toggles button color
     if (self.volunteerFilterOn) {
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Volunteering"];
+        [self.filters removeObject:volunteeringFilter];
     } else {
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Volunteering"];
+        [self.filters addObject:volunteeringFilter];
     }
     
     // Toggles filter on/off state
@@ -296,10 +298,10 @@ CLLocationManager *opportunitiesLocationManager;
     // Toggles button color
     if (self.shadowFilterOn) {
         self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Shadowing"];
+        [self.filters removeObject:shadowingFilter];
     } else {
         self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Shadowing"];
+        [self.filters addObject:shadowingFilter];
     }
     
     // Toggles filter on/off state
@@ -313,10 +315,10 @@ CLLocationManager *opportunitiesLocationManager;
     // Toggles button color
     if (self.donateFilterOn) {
         self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Donation"];
+        [self.filters removeObject:donationFilter];
     } else {
         self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Donation"];
+        [self.filters addObject:donationFilter];
     }
     
     // Toggles filter on/off state
@@ -330,10 +332,10 @@ CLLocationManager *opportunitiesLocationManager;
     // Toggles button color
     if (self.distanceFilterOn) {
         self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-        [self.filters removeObject:@"Distance"];
+        [self.filters removeObject:distanceFilter];
     } else {
         self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
-        [self.filters addObject:@"Distance"];
+        [self.filters addObject:distanceFilter];
     }
     
     // Toggles filter on/off state
