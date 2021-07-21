@@ -29,6 +29,9 @@
     return @"Organization";
 }
 
+
+#pragma mark - Initialize Organization object
+
 + (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation {
     // Parsing location
     NSNumber *userLat = [NSNumber numberWithDouble:userLocation.coordinate.latitude];
@@ -52,6 +55,9 @@
     
     return organization;
 }
+
+
+#pragma mark - Get distance from user location
 
 + (void)getDistanceFromCoords:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
     // Getting API Key
@@ -89,6 +95,9 @@
     
     [task resume];
 }
+
+
+#pragma mark - Get organization location from address
 
 + (void)getLocationFromAddress:(NSString *) address withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
     // Getting API Key

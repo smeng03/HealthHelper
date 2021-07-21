@@ -15,12 +15,17 @@
 
 @implementation SettingsViewController
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Dark mode switch initialized to off (since default is light mode)
     [self.darkModeSwitch setOn:NO animated:YES];
 }
+
+
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated{
     // Loads in user-picked color and dark mode settings
@@ -42,6 +47,9 @@
     }
 }
 
+
+#pragma mark - Dark Mode
+
 - (IBAction)didToggleDarkMode:(id)sender {
     // Checks existing status
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -60,6 +68,9 @@
     // Reload the view
     [self viewWillAppear:true];
 }
+
+
+#pragma mark - Nav Bar Colors
 
 - (IBAction)setColor1:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -109,7 +120,9 @@
     [self viewWillAppear:true];
 }
 
-// UIColor from hex color
+
+#pragma mark - UIColor from hex
+
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
     b = col & 0xFF;

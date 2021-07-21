@@ -56,6 +56,8 @@
 
 CLLocationManager *locationManager;
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -86,36 +88,8 @@ CLLocationManager *locationManager;
     [self filterSetup];
 }
 
-- (void)styleElements {
-    // Round profile images
-    self.profileImageView.layer.cornerRadius = 50;
-    
-    // Search bar placeholder text
-    self.searchBar.placeholder = @"Search your opportunities...";
-    
-    // Buttons have rounded corners
-    self.volunteerButton.layer.cornerRadius = 15;
-    self.shadowButton.layer.cornerRadius = 15;
-    self.donateButton.layer.cornerRadius = 15;
-    self.distanceButton.layer.cornerRadius = 15;
-    
-    // Button colors
-    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-}
 
-- (void)filterSetup {
-    // Initialize filter values
-    self.volunteerFilterOn = FALSE;
-    self.shadowFilterOn = FALSE;
-    self.donateFilterOn = FALSE;
-    self.distanceFilterOn = FALSE;
-    
-    // Initialize filters array
-    self.filters = [NSMutableArray new];
-}
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -140,6 +114,9 @@ CLLocationManager *locationManager;
     [self loadBasicProfile];
     [self loadPastOpportunityArray];
 }
+
+
+#pragma mark - Load user's past opportunities
 
 - (void)loadPastOpportunityArray {
     locationManager = [[CLLocationManager alloc] init];
@@ -197,6 +174,9 @@ CLLocationManager *locationManager;
     }];
 }
 
+
+#pragma mark - Get user location
+
 - (void)getCurrentLocation {
     // Get current user location
     locationManager.delegate = self;
@@ -218,7 +198,9 @@ CLLocationManager *locationManager;
     [self.refreshControl endRefreshing];
 }
 
-// FILTERS
+
+#pragma mark - Apply filters
+
 -(void)applyFilters:(NSArray *)filteredData {
     // Applies all selected filters to a given list of opportunities
     NSNumber *maxDistance = [NSNumber numberWithInt:20];
@@ -233,6 +215,9 @@ CLLocationManager *locationManager;
     }
     self.filteredOpportunities = [filteredData mutableCopy];
 }
+
+
+#pragma mark - Filter controls
 
 - (IBAction)didTapVolunteerFilter:(id)sender {
     // Toggles button color
@@ -308,6 +293,9 @@ CLLocationManager *locationManager;
     NSLog(@"didFailWithError: %@", error);
 }
 
+
+#pragma mark - Load basic profile information
+
 - (void)loadBasicProfile {
     // Setting username
     self.usernameLabel.text = PFUser.currentUser.username;
@@ -341,20 +329,8 @@ CLLocationManager *locationManager;
     }];
 }
 
-- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
-    // Resizes an image to a specified size
-    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+
+#pragma mark - Table View
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PastOpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PastOpportunityCell"];
@@ -370,6 +346,9 @@ CLLocationManager *locationManager;
     return self.filteredOpportunities.count;
 }
 
+
+#pragma mark - Logout
+
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
@@ -383,6 +362,9 @@ CLLocationManager *locationManager;
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     myDelegate.window.rootViewController = loginViewController;
 }
+
+
+#pragma mark - Delete an opportunity
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -418,7 +400,7 @@ CLLocationManager *locationManager;
                     // Removing opportunity user deleted
                     [pastOpportunities removeObject:opportunity.opportunityId];
                     user[pastOpportunitiesQuery] = pastOpportunities;
-                        
+                    
                     // Update hours or amount donated
                     if ([opportunity.opportunityType isEqual:donationOpportunityType]) {
                         NSNumber *donationAmount = user[amountDonatedQuery];
@@ -466,6 +448,9 @@ CLLocationManager *locationManager;
     }
 }
 
+
+#pragma mark - Pick and save new profile image
+
 - (IBAction)didTapProfilePicture:(id)sender {
     // Setting up image picker controller
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -508,7 +493,7 @@ CLLocationManager *locationManager;
     self.updatedProfileImage = resizedImage;
     
     [self saveImage];
-
+    
     // Do something with the images (based on your use case)
     
     
@@ -545,6 +530,9 @@ CLLocationManager *locationManager;
     });
 }
 
+
+#pragma mark - Search Bar
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (searchText.length != 0) {
@@ -564,7 +552,7 @@ CLLocationManager *locationManager;
     
     // Refresh table view
     [self.tableView reloadData];
- 
+    
 }
 
 // Search bar cancel button shows
@@ -579,6 +567,43 @@ CLLocationManager *locationManager;
     [self.searchBar resignFirstResponder];
 }
 
+
+#pragma mark - Setup styling
+
+- (void)styleElements {
+    // Round profile images
+    self.profileImageView.layer.cornerRadius = 50;
+    
+    // Search bar placeholder text
+    self.searchBar.placeholder = @"Search your opportunities...";
+    
+    // Buttons have rounded corners
+    self.volunteerButton.layer.cornerRadius = 15;
+    self.shadowButton.layer.cornerRadius = 15;
+    self.donateButton.layer.cornerRadius = 15;
+    self.distanceButton.layer.cornerRadius = 15;
+    
+    // Button colors
+    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+}
+
+- (void)filterSetup {
+    // Initialize filter values
+    self.volunteerFilterOn = FALSE;
+    self.shadowFilterOn = FALSE;
+    self.donateFilterOn = FALSE;
+    self.distanceFilterOn = FALSE;
+    
+    // Initialize filters array
+    self.filters = [NSMutableArray new];
+}
+
+
+#pragma mark - Other functions
+
 - (void)stopAnimation {
     // Stopping progress HUD
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -586,7 +611,27 @@ CLLocationManager *locationManager;
     });
 }
 
-// UIColor from hex color
+
+#pragma mark - Resize image
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    // Resizes an image to a specified size
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+
+#pragma mark - UIColor with hex
+
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
     b = col & 0xFF;
@@ -594,6 +639,9 @@ CLLocationManager *locationManager;
     r = (col >> 16) & 0xFF;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
+
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Segue for details view controller

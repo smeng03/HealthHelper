@@ -20,6 +20,8 @@
 
 @implementation SignUpViewController
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,6 +32,9 @@
     self.passwordField.secureTextEntry = YES;
     self.confirmPasswordField.secureTextEntry = YES;
 }
+
+
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -44,6 +49,9 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+
+#pragma mark - Manage signup
 
 - (IBAction)didTapSignUp:(id)sender {
     // Initialize a user object
@@ -83,10 +91,8 @@
     }
 }
 
-- (IBAction)dismissKeyboard:(id)sender {
-    // Dismisses keyboard when screen is tapped
-    [self.view endEditing:YES];
-}
+
+#pragma mark - Set default profile image
 
 - (void)setProfileImage {
     // Save default profile image to current user object
@@ -107,6 +113,14 @@
             [self presentViewController:alert animated:YES completion:^{}];
         }
     }];
+}
+
+
+#pragma mark - Dismiss keyboard
+
+- (IBAction)dismissKeyboard:(id)sender {
+    // Dismisses keyboard when screen is tapped
+    [self.view endEditing:YES];
 }
 
 /*

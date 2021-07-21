@@ -32,6 +32,8 @@
 
 @implementation ComposeViewController
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,19 +50,8 @@
     [self loadProfileImage];
 }
 
-- (void)styleElements {
-    // Round profile images
-    self.profileImageView.layer.cornerRadius = 25;
-    
-    // Round text view corners and border properties
-    self.composeField.layer.cornerRadius = 10;
-    self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
-    self.composeField.layer.borderWidth=1.0;
-    
-    // Text view placeholder text
-    self.composeField.placeholder = @"Write a review...";
-    self.composeField.placeholderColor = [UIColor lightGrayColor];
-}
+
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -81,6 +72,9 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+
+#pragma mark - Load profile image
 
 - (void)loadProfileImage {
     // Querying for profile image
@@ -103,6 +97,9 @@
         }
     }];
 }
+
+
+#pragma mark - Compose actions
 
 - (IBAction)didTapCancel:(id)sender {
     // Dismisses ComposeViewController
@@ -150,12 +147,8 @@
     }
 }
 
--(void)stopAnimation {
-    // Stopping progress bar
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    });
-}
+
+#pragma mark - Detect star taps
 
 - (IBAction)didTapStar1:(id)sender {
     UIImage *imageToSet = [UIImage imageNamed: @"star"];
@@ -207,12 +200,41 @@
     self.rating = [NSNumber numberWithInt:5];
 }
 
+
+#pragma mark - Setup styling
+
+- (void)styleElements {
+    // Round profile images
+    self.profileImageView.layer.cornerRadius = 25;
+    
+    // Round text view corners and border properties
+    self.composeField.layer.cornerRadius = 10;
+    self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
+    self.composeField.layer.borderWidth=1.0;
+    
+    // Text view placeholder text
+    self.composeField.placeholder = @"Write a review...";
+    self.composeField.placeholderColor = [UIColor lightGrayColor];
+}
+
+
+#pragma mark - Other functions
+
+-(void)stopAnimation {
+    // Stopping progress bar
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
+}
+
 - (IBAction)dismissKeyboard:(id)sender {
     // Dismisses keyboard when screen is tapped
     [self.view endEditing:YES];
 }
 
-// UIColor from hex color
+
+#pragma mark - UIColor from hex color
+
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
     b = col & 0xFF;
@@ -221,14 +243,15 @@
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

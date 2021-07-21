@@ -26,6 +26,8 @@
 
 @implementation OrganizationInfoViewController
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -40,27 +42,7 @@
     [self setData];
 }
 
-- (void)styleElements {
-    // Nav bar title
-    self.navigationItem.title = self.opportunity.author.username;
-    
-    // Rounded profile images
-    self.profileImageView.layer.cornerRadius = 50;
-    
-    // Rounded corners on button
-    self.reviewButton.layer.cornerRadius = 5;
-}
-
-- (void)setData {
-    // Set organization name
-    self.organizationNameLabel.text = self.opportunity.author.username;
-    
-    // Set organization decription
-    self.descriptionLabel.text = self.opportunity.author.text;
-    
-    // Set organization profile picture
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.opportunity.author.imageURL]];
-}
+#pragma mark - viewWillApear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -81,6 +63,9 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+
+#pragma mark - Load reviews from database
 
 - (void)loadReviews {
     // Construct query
@@ -106,14 +91,8 @@
     }];
 }
 
-// UIColor from hex color
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
-}
+
+#pragma mark - Table View
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ReviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewCell"];
@@ -129,10 +108,51 @@
     return self.reviews.count;
 }
 
+
+#pragma mark - didPost() delegate method
+
 - (void)didPost {
     [self loadReviews];
 }
 
+
+#pragma mark - Setup styling
+
+- (void)styleElements {
+    // Nav bar title
+    self.navigationItem.title = self.opportunity.author.username;
+    
+    // Rounded profile images
+    self.profileImageView.layer.cornerRadius = 50;
+    
+    // Rounded corners on button
+    self.reviewButton.layer.cornerRadius = 5;
+}
+
+- (void)setData {
+    // Set organization name
+    self.organizationNameLabel.text = self.opportunity.author.username;
+    
+    // Set organization decription
+    self.descriptionLabel.text = self.opportunity.author.text;
+    
+    // Set organization profile picture
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.opportunity.author.imageURL]];
+}
+
+
+#pragma mark - UI Color from hex
+
+-(UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
+}
+
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:@"composeSegue"]) {

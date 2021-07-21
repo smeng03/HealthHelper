@@ -34,7 +34,9 @@
 
 @end
 
-@implementation DetailsViewController 
+@implementation DetailsViewController
+
+#pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,21 +50,8 @@
     [self styleElements];
 }
 
-- (void)styleElements {
-    // Rounded button corners
-    self.registerButton.layer.cornerRadius = 10;
-    
-    // Rounded profile images
-    self.profileImageView.layer.cornerRadius = 50;
-    
-    // Button text
-    if ([self.opportunity.opportunityType isEqualToString: @"Donation"]) {
-        [self.registerButton setTitle:@"DONATE" forState:UIControlStateNormal];
-    } else {
-        [self.registerButton setTitle:@"REGISTER" forState:UIControlStateNormal];
-    }
-    
-}
+
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -83,6 +72,8 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+#pragma mark - Load basic profile information
 
 - (void)loadBasicProfile {
     // Set profile image
@@ -113,6 +104,9 @@
 - (IBAction)didTapOrganizationProfile:(id)sender {
     [self performSegueWithIdentifier:@"toOrganizationDetails" sender:nil];
 }
+
+
+#pragma mark - Register for an opportunity
 
 - (IBAction)didTapRegister:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.opportunity.signUpLink] options:@{} completionHandler:nil];
@@ -197,7 +191,28 @@
     }];
 }
 
-// UIColor from hex color
+
+#pragma mark - Setup styling
+
+- (void)styleElements {
+    // Rounded button corners
+    self.registerButton.layer.cornerRadius = 10;
+    
+    // Rounded profile images
+    self.profileImageView.layer.cornerRadius = 50;
+    
+    // Button text
+    if ([self.opportunity.opportunityType isEqualToString: @"Donation"]) {
+        [self.registerButton setTitle:@"DONATE" forState:UIControlStateNormal];
+    } else {
+        [self.registerButton setTitle:@"REGISTER" forState:UIControlStateNormal];
+    }
+    
+}
+
+
+#pragma mark - UIColor from hex
+
 -(UIColor *)colorWithHex:(UInt32)col {
     unsigned char r, g, b;
     b = col & 0xFF;
@@ -205,6 +220,9 @@
     r = (col >> 16) & 0xFF;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
+
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:@"toOrganizationDetails"]) {

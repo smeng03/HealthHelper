@@ -42,6 +42,8 @@
 
 CLLocationManager *opportunitiesLocationManager;
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -71,30 +73,8 @@ CLLocationManager *opportunitiesLocationManager;
     [self filterSetup];
 }
 
-- (void)styleButton {
-    // Buttons have rounded corners
-    self.volunteerButton.layer.cornerRadius = 15;
-    self.shadowButton.layer.cornerRadius = 15;
-    self.donateButton.layer.cornerRadius = 15;
-    self.distanceButton.layer.cornerRadius = 15;
-    
-    // Button colors
-    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-}
 
-- (void)filterSetup {
-    // Initialize filter values
-    self.volunteerFilterOn = FALSE;
-    self.shadowFilterOn = FALSE;
-    self.donateFilterOn = FALSE;
-    self.distanceFilterOn = FALSE;
-    
-    // Initialize filters array
-    self.filters = [NSMutableArray new];
-}
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -115,6 +95,9 @@ CLLocationManager *opportunitiesLocationManager;
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+
+#pragma mark - Load opportunities array
 
 - (void)loadOpportunities {
     opportunitiesLocationManager = [[CLLocationManager alloc] init];
@@ -155,12 +138,8 @@ CLLocationManager *opportunitiesLocationManager;
     });
 }
 
--(void)stopAnimation {
-    // Stopping progress bar
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    });
-}
+
+#pragma mark - Table View
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     OpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OpportunityCell"];
@@ -175,6 +154,9 @@ CLLocationManager *opportunitiesLocationManager;
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.filteredOpportunities.count;
 }
+
+
+#pragma mark - Get user location
 
 - (void)getCurrentLocation {
     // Get current user location
@@ -205,6 +187,9 @@ CLLocationManager *opportunitiesLocationManager;
     NSLog(@"didFailWithError: %@", error);
 }
 
+
+#pragma mark - Logout
+
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
@@ -219,14 +204,8 @@ CLLocationManager *opportunitiesLocationManager;
     myDelegate.window.rootViewController = loginViewController;
 }
 
-// UIColor from hex color
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
-}
+
+#pragma mark - Search Bar
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
@@ -262,7 +241,8 @@ CLLocationManager *opportunitiesLocationManager;
 }
 
 
-// FILTERING CODE
+#pragma mark - Apply filters
+
 -(void)applyFilters:(NSArray *)filteredData {
     // Applies all selected filters to a given list of opportunities
     NSNumber *maxDistance = [NSNumber numberWithInt:20];
@@ -277,6 +257,9 @@ CLLocationManager *opportunitiesLocationManager;
     }
     self.filteredOpportunities = [filteredData mutableCopy];
 }
+
+
+#pragma mark - Filter controls
 
 - (IBAction)didTapVolunteerFilter:(id)sender {
     // Toggles button color
@@ -346,6 +329,57 @@ CLLocationManager *opportunitiesLocationManager;
     [self searchBar:self.searchBar textDidChange: self.searchBar.text];
 }
 
+
+#pragma mark - Setup styling
+
+- (void)styleButton {
+    // Buttons have rounded corners
+    self.volunteerButton.layer.cornerRadius = 15;
+    self.shadowButton.layer.cornerRadius = 15;
+    self.donateButton.layer.cornerRadius = 15;
+    self.distanceButton.layer.cornerRadius = 15;
+    
+    // Button colors
+    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+}
+
+- (void)filterSetup {
+    // Initialize filter values
+    self.volunteerFilterOn = FALSE;
+    self.shadowFilterOn = FALSE;
+    self.donateFilterOn = FALSE;
+    self.distanceFilterOn = FALSE;
+    
+    // Initialize filters array
+    self.filters = [NSMutableArray new];
+}
+
+
+#pragma mark - UIColor from hex
+
+-(UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
+}
+
+
+#pragma mark - Other functions
+
+-(void)stopAnimation {
+    // Stopping progress bar
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
+}
+
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Identify tapped cell and get associated opportunity

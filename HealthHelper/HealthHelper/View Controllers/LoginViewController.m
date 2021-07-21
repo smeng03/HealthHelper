@@ -19,6 +19,8 @@
 
 @implementation LoginViewController
 
+#pragma mark - viewDidLoad()
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -28,6 +30,9 @@
     // Obscures password
     self.passwordField.secureTextEntry = YES;
 }
+
+
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
     // Loads in user-picked color and dark mode settings
@@ -42,6 +47,9 @@
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
 }
+
+
+#pragma mark - Manage login
 
 - (IBAction)didTapLogin:(id)sender {
     // Retrieving user-entered credentials
@@ -64,6 +72,9 @@
         }
     }];
 }
+
+
+#pragma mark - Dismiss keyboard
 
 - (IBAction)dismissKeyboard:(id)sender {
     // Dismisses keyboard when screen is tapped
