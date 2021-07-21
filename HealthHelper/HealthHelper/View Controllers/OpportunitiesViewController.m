@@ -16,8 +16,9 @@
 #import "MBProgressHUD.h"
 #import "QueryConstants.h"
 #import "FilterConstants.h"
+#import "FilterSettingsViewController.h"
 
-@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
+@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *opportunities;
@@ -68,6 +69,10 @@ CLLocationManager *opportunitiesLocationManager;
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadOpportunities) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // Set default distance filter
+    [defaults setDouble:10.0 forKey:@"maxDistance"];
+    [defaults synchronize];
     
     [self styleButton];
     [self filterSetup];
@@ -245,7 +250,8 @@ CLLocationManager *opportunitiesLocationManager;
 
 -(void)applyFilters:(NSArray *)filteredData {
     // Applies all selected filters to a given list of opportunities
-    NSNumber *maxDistance = [NSNumber numberWithInt:20];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *maxDistance = [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]];
     for (NSString *filter in self.filters) {
         NSPredicate *predicate;
         if ([filter isEqualToString:distanceFilter]) {
@@ -339,6 +345,10 @@ CLLocationManager *opportunitiesLocationManager;
     self.donateButton.layer.cornerRadius = 15;
     self.distanceButton.layer.cornerRadius = 15;
     
+    // Distance button text
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    
     // Button colors
     self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
@@ -355,6 +365,18 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Initialize filters array
     self.filters = [NSMutableArray new];
+}
+
+
+#pragma mark - Distance settings delegate method
+
+- (void)didUpdateDistance {
+    // Distance button text update
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    
+    // Manually trigger search and refilter using updated distance filter
+    [self searchBar:self.searchBar textDidChange: self.searchBar.text];
 }
 
 
@@ -382,14 +404,19 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Identify tapped cell and get associated opportunity
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
-    
-    // Send information
-    DetailsViewController *detailsViewController = [segue destinationViewController];
-    detailsViewController.opportunity = opportunity;
+    if ([segue.identifier isEqualToString:@"opportunitiesToDetails"]) {
+        // Identify tapped cell and get associated opportunity
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Opportunity *opportunity = self.filteredOpportunities[indexPath.row];
+        
+        // Send information
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.opportunity = opportunity;
+    } else if ([segue.identifier isEqualToString:@"toFilterSettings"]) {
+        FilterSettingsViewController *filterSettingsViewController = [segue destinationViewController];
+        filterSettingsViewController.delegate = self;
+    }
 }
 
 @end

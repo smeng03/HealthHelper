@@ -113,6 +113,9 @@ CLLocationManager *locationManager;
     // Load info again
     [self loadBasicProfile];
     [self loadPastOpportunityArray];
+    
+    // Distance button text update
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
 }
 
 
@@ -203,7 +206,8 @@ CLLocationManager *locationManager;
 
 -(void)applyFilters:(NSArray *)filteredData {
     // Applies all selected filters to a given list of opportunities
-    NSNumber *maxDistance = [NSNumber numberWithInt:20];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *maxDistance = [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]];
     for (NSString *filter in self.filters) {
         NSPredicate *predicate;
         if ([filter isEqualToString:distanceFilter]) {
@@ -588,6 +592,10 @@ CLLocationManager *locationManager;
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    // Distance button text
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"%@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
 }
 
 - (void)filterSetup {

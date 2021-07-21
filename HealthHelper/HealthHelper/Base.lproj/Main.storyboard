@@ -269,6 +269,92 @@
             </objects>
             <point key="canvasLocation" x="-113" y="1533"/>
         </scene>
+        <!--Filter Settings View Controller-->
+        <scene sceneID="RVC-Ji-Mho">
+            <objects>
+                <viewController id="G9e-QS-agc" customClass="FilterSettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qHh-Es-3sy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Soh-99-fRZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Filter Settings" id="S83-QA-9Kb">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="jbm-RO-bdF">
+                                            <connections>
+                                                <action selector="didTapCancel:" destination="G9e-QS-agc" id="RAx-su-MNh"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="4v5-vx-D8n">
+                                            <connections>
+                                                <action selector="didSave:" destination="G9e-QS-agc" id="4K7-xM-ghc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9m-QE-QfO">
+                                <rect key="frame" x="20" y="96" width="169.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l32-WU-bky">
+                                <rect key="frame" x="302" y="86" width="60" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="fSb-ph-jeP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPy-kl-9rg">
+                                <rect key="frame" x="372" y="96" width="22" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a number. Integers and decimals are accepted." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-0N-qTA">
+                                <rect key="frame" x="20" y="140" width="374" height="33.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BuN-Ur-0OX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="wPy-kl-9rg" secondAttribute="trailing" constant="20" id="BE8-Zd-guZ"/>
+                            <constraint firstItem="wPy-kl-9rg" firstAttribute="leading" secondItem="l32-WU-bky" secondAttribute="trailing" constant="10" id="Ne4-kg-d8G"/>
+                            <constraint firstItem="Ryk-0N-qTA" firstAttribute="top" secondItem="o9m-QE-QfO" secondAttribute="bottom" constant="20" id="OUB-hP-wZP"/>
+                            <constraint firstItem="Soh-99-fRZ" firstAttribute="trailing" secondItem="BuN-Ur-0OX" secondAttribute="trailing" id="Qe8-7K-tjm"/>
+                            <constraint firstItem="Ryk-0N-qTA" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="ZyN-42-YUF"/>
+                            <constraint firstItem="wPy-kl-9rg" firstAttribute="bottom" secondItem="l32-WU-bky" secondAttribute="bottom" id="bsO-ce-Lnz"/>
+                            <constraint firstItem="l32-WU-bky" firstAttribute="bottom" secondItem="o9m-QE-QfO" secondAttribute="bottom" id="gxq-Zb-pwu"/>
+                            <constraint firstItem="o9m-QE-QfO" firstAttribute="top" secondItem="Soh-99-fRZ" secondAttribute="bottom" constant="40" id="ioZ-E3-B1H"/>
+                            <constraint firstItem="Soh-99-fRZ" firstAttribute="top" secondItem="BuN-Ur-0OX" secondAttribute="top" id="nno-om-jRG"/>
+                            <constraint firstItem="Soh-99-fRZ" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" id="qnB-bb-MnX"/>
+                            <constraint firstItem="o9m-QE-QfO" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="rpL-fb-h2z"/>
+                            <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="Ryk-0N-qTA" secondAttribute="trailing" constant="20" id="wEe-Uk-Xw5"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jNh-vx-9wc" appends="YES" id="aoz-9i-Hei"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="distanceField" destination="l32-WU-bky" id="K2x-Fe-IjN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3iM-bj-t2I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jNh-vx-9wc">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="G9e-QS-agc" id="fAJ-ky-M7I"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1730.4347826086957" y="2231.9196428571427"/>
+        </scene>
         <!--Opportunities-->
         <scene sceneID="UaP-Su-dc5">
             <objects>
@@ -471,7 +557,7 @@
                                             <outlet property="positionLabel" destination="g2s-uW-ytz" id="wxs-77-R0R"/>
                                             <outlet property="profileImageView" destination="KEI-qN-E5N" id="erB-wC-xKV"/>
                                             <outlet property="typeLabel" destination="vfX-VP-eYw" id="2s6-jY-xYa"/>
-                                            <segue destination="Gsj-xL-0bm" kind="show" id="Ejj-hJ-n4y"/>
+                                            <segue destination="Gsj-xL-0bm" kind="show" identifier="opportunitiesToDetails" id="Ejj-hJ-n4y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -491,6 +577,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="vvt-Vo-iJa">
                             <connections>
                                 <action selector="didTapLogout:" destination="Gqx-Wa-L6v" id="d3x-2J-fRo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="VYM-mw-mLO">
+                            <connections>
+                                <segue destination="G9e-QS-agc" kind="presentation" identifier="toFilterSettings" id="8kE-Eu-cx7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1448,14 +1539,14 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-Jj-Gg6">
-                                <rect key="frame" x="20" y="128" width="96.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="128" width="98.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNj-EV-Q65">
-                                <rect key="frame" x="20" y="192" width="110.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="192" width="114.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1469,8 +1560,8 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 <rect key="frame" x="345" y="188.5" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigation Bar Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqC-VF-afH">
-                                <rect key="frame" x="20" y="256" width="180" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="256" width="184.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1629,13 +1720,14 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4hB-W5-b5j"/>
+        <segue reference="Ejj-hJ-n4y"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="give" width="25" height="25"/>
         <image name="hh_long" width="415" height="90"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="star" width="48" height="48"/>
         <image name="user" width="25" height="25"/>
         <image name="user2" width="512" height="512"/>
