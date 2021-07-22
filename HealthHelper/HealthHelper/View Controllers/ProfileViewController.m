@@ -636,7 +636,10 @@ CLLocationManager *locationManager;
     
     // Distance button text
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.distanceButton setTitle:[NSString stringWithFormat:@"%@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    
+    // Map corner radius
+    self.mapView.layer.cornerRadius = 10;
 }
 
 - (void)filterSetup {

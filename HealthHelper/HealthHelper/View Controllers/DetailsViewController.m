@@ -214,6 +214,9 @@
         [self.registerButton setTitle:@"REGISTER" forState:UIControlStateNormal];
     }
     
+    // Map corner radius
+    self.mapView.layer.cornerRadius = 10;
+    
 }
 
 

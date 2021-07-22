@@ -108,6 +108,13 @@ CLLocationManager *opportunitiesLocationManager;
 }
 
 
+#pragma mark - Load user filters
+
+- (void)loadUserFilters {
+    
+}
+
+
 #pragma mark - Load opportunities array
 
 - (void)loadOpportunities {
