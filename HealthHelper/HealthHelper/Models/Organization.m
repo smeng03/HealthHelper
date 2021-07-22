@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Organization.h"
+#import "ProfileViewController.h"
 
 @implementation Organization
 
@@ -32,7 +33,7 @@
 
 #pragma mark - Initialize Organization object
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation {
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller {
     // Parsing location
     NSNumber *userLat = [NSNumber numberWithDouble:userLocation.coordinate.latitude];
     NSNumber *userLng = [NSNumber numberWithDouble:userLocation.coordinate.longitude];
@@ -51,29 +52,15 @@
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;
     
-    [Organization getLocationData:userLat withLng:userLng withOrganization:organization];
+    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization withController:controller];
     
     return organization;
-}
-
-+ (void)getLocationData:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
-    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization];
-    
-    // TODO: Fix asynchronous call
-    bool flag = TRUE;
-    while (flag) {
-        if (organization.destinationLatValue != nil) {
-            flag = FALSE;
-        } else {
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
-        }
-    }
 }
 
 
 #pragma mark - Get distance from user location
 
-+ (void)getDistanceFromCoords:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
++ (void)getDistanceFromCoords:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization withController:controller {
     // Getting API Key
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
@@ -104,6 +91,11 @@
                 organization.distanceValue = [NSNumber numberWithDouble:[distanceValue doubleValue]/5280];
             }
             organization.distance = distance;
+            
+            // Call placeMarkers method if caller is ProfileViewController
+            if ([controller isKindOfClass:[ProfileViewController class]]) {
+                [controller placeMarkers];
+            }
         }
     }];
     
@@ -113,7 +105,7 @@
 
 #pragma mark - Get organization location from address
 
-+ (void)getLocationFromAddress:(NSString *) address withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
++ (void)getLocationFromAddress:(NSString *) address withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization withController:controller {
     // Getting API Key
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
@@ -144,7 +136,7 @@
             organization.destinationLngValue = lng;
             
             // Get distance
-            [Organization getDistanceFromCoords:userLat withLng:userLng withOrganization:organization];
+            [Organization getDistanceFromCoords:userLat withLng:userLng withOrganization:organization withController:controller];
         }
     }];
     

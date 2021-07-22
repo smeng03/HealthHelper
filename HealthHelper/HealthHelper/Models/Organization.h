@@ -9,6 +9,12 @@
 #import <Parse/Parse.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol OrganizationDelegate
+
+- (void)placeMarkers;
+
+@end
+
 @interface Organization : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *organizationId;
@@ -25,8 +31,9 @@
 @property (nonatomic, strong) NSNumber *destinationLngValue;
 @property (nonatomic, strong) NSString *distance;
 @property (nonatomic, assign) NSNumber *distanceValue;
+@property (nonatomic, weak) id<OrganizationDelegate> delegate;
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation;
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller;
  
     
 @end

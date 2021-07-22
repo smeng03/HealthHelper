@@ -183,7 +183,7 @@ CLLocationManager *opportunitiesLocationManager;
     opportunitiesLocationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation];
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
     self.filteredOpportunities = self.opportunities;
     
     [self.tableView reloadData];

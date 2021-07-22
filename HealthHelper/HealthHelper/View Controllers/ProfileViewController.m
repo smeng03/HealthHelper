@@ -21,12 +21,13 @@
 #import "DetailsViewController.h"
 #import "QueryConstants.h"
 #import "FilterConstants.h"
+#import "Organization.h"
 @import GoogleMaps;
 @import GooglePlaces;
 @import GoogleMapsBase;
 @import GoogleMapsCore;
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate, OrganizationDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -205,7 +206,7 @@ CLLocationManager *locationManager;
     locationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation];
+    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
     self.filteredOpportunities = self.opportunities;
     
     [self.tableView reloadData];
@@ -217,17 +218,28 @@ CLLocationManager *locationManager;
 
 #pragma mark - Set map view markers
 
-- (void)placeMarkers {
+- (BOOL)canPlaceMarkers {
     for (Opportunity *opportunity in self.opportunities) {
-        CLLocationCoordinate2D position = CLLocationCoordinate2DMake([opportunity.author.destinationLatValue doubleValue], [opportunity.author.destinationLngValue doubleValue]);
-        GMSMarker *marker = [GMSMarker markerWithPosition:position];
-        marker.title = opportunity.author.username;
-        marker.map = self.mapView;
+        if (opportunity.author.destinationLngValue == nil) {
+            return FALSE;
+        }
     }
-    
-    // Re-centering map
-    Opportunity *firstOpportunity = self.opportunities[0];
-    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[firstOpportunity.author.destinationLatValue doubleValue] longitude:[firstOpportunity.author.destinationLngValue doubleValue] zoom:10];
+    return TRUE;
+}
+
+- (void)placeMarkers {
+    if ([self canPlaceMarkers]) {
+        for (Opportunity *opportunity in self.opportunities) {
+            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([opportunity.author.destinationLatValue doubleValue], [opportunity.author.destinationLngValue doubleValue]);
+            GMSMarker *marker = [GMSMarker markerWithPosition:position];
+            marker.title = opportunity.author.username;
+            marker.map = self.mapView;
+        }
+        
+        // Re-centering map
+        Opportunity *firstOpportunity = self.opportunities[0];
+        self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[firstOpportunity.author.destinationLatValue doubleValue] longitude:[firstOpportunity.author.destinationLngValue doubleValue] zoom:10];
+    }
 }
 
 

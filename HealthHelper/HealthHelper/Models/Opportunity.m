@@ -29,7 +29,7 @@
     return @"Opportunity";
 }
 
-- (void)initOpportunityWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation {
+- (void)initOpportunityWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller {
     // Setting Opportunity object given PFObject
     self.text = object[@"description"];
     self.tags = object[@"tags"];
@@ -42,15 +42,15 @@
     self.date = object[@"date"];
     self.hours = object[@"hours"];
     self.amount = object[@"donationAmount"];
-    self.author = [Organization initOrganizationWithObject:object[@"author"] withLocation:userLocation];
+    self.author = [Organization initOrganizationWithObject:object[@"author"] withLocation:userLocation withController:controller];
 }
 
-+ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation {
++ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation withController:controller {
     // Returns array of Opportunity objects given array of PFObjects
     NSMutableArray *newOpportunities = [[NSMutableArray alloc] init];
     for (PFObject *opportunity in objects) {
         Opportunity *newOpportunity = [Opportunity new];
-        [newOpportunity initOpportunityWithObject:opportunity withLocation:userLocation];
+        [newOpportunity initOpportunityWithObject:opportunity withLocation:userLocation withController:controller];
         [newOpportunities addObject:newOpportunity];
     }
     return newOpportunities;
