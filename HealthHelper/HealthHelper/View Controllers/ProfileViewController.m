@@ -21,6 +21,10 @@
 #import "DetailsViewController.h"
 #import "QueryConstants.h"
 #import "FilterConstants.h"
+@import GoogleMaps;
+@import GooglePlaces;
+@import GoogleMapsBase;
+@import GoogleMapsCore;
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
@@ -49,6 +53,7 @@
 @property (nonatomic, assign) BOOL donateFilterOn;
 @property (nonatomic, assign) BOOL distanceFilterOn;
 @property (strong, nonatomic) NSMutableArray *filters;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 @end
 
@@ -199,6 +204,24 @@ CLLocationManager *locationManager;
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
+    
+    [self placeMarkers];
+}
+
+
+#pragma mark - Set map view markers
+
+- (void)placeMarkers {
+    for (Opportunity *opportunity in self.opportunities) {
+        CLLocationCoordinate2D position = CLLocationCoordinate2DMake([opportunity.author.destinationLatValue doubleValue], [opportunity.author.destinationLngValue doubleValue]);
+        GMSMarker *marker = [GMSMarker markerWithPosition:position];
+        marker.title = opportunity.author.username;
+        marker.map = self.mapView;
+    }
+    
+    // Re-centering map
+    Opportunity *firstOpportunity = self.opportunities[0];
+    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[firstOpportunity.author.destinationLatValue doubleValue] longitude:[firstOpportunity.author.destinationLngValue doubleValue] zoom:10];
 }
 
 

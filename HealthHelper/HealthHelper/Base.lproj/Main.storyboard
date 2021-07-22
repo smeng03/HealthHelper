@@ -1271,7 +1271,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GSp-g3-vh2">
-                                <rect key="frame" x="0.0" y="257" width="414" height="639"/>
+                                <rect key="frame" x="0.0" y="439" width="414" height="457"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ysK-3B-tre">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
@@ -1459,12 +1459,19 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </prototypes>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-hz-b9Z">
-                                <rect key="frame" x="0.0" y="255" width="414" height="2"/>
-                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <rect key="frame" x="0.0" y="438" width="414" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="LLs-12-YeA"/>
+                                    <constraint firstAttribute="height" constant="1" id="LLs-12-YeA"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzD-Yk-omb" customClass="GMSMapView">
+                                <rect key="frame" x="10" y="223" width="394" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1wS-iU-FB8"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="p3P-FR-UWK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1473,11 +1480,14 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="n5C-zn-7EF" firstAttribute="top" secondItem="p3P-FR-UWK" secondAttribute="top" constant="20" id="3iy-lA-x9i"/>
                             <constraint firstItem="6a0-ek-VCC" firstAttribute="top" secondItem="p3P-FR-UWK" secondAttribute="top" constant="20" id="5Ok-eb-RDH"/>
                             <constraint firstItem="oeL-BN-WzO" firstAttribute="top" secondItem="COH-x7-NdH" secondAttribute="bottom" constant="2" id="6ZB-6h-Mp2"/>
+                            <constraint firstItem="nzD-Yk-omb" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="10" id="9oB-8E-2lb"/>
                             <constraint firstItem="GSp-g3-vh2" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" id="A6e-Yf-fhs"/>
                             <constraint firstItem="FLi-hz-b9Z" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" id="IKN-c7-paQ"/>
-                            <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="FLi-hz-b9Z" secondAttribute="bottom" id="IR6-Ya-J00"/>
-                            <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="29D-Mk-gev" secondAttribute="bottom" constant="60" id="Og8-cj-kVW"/>
+                            <constraint firstItem="FLi-hz-b9Z" firstAttribute="top" secondItem="nzD-Yk-omb" secondAttribute="bottom" constant="15" id="T4Y-Jc-MTC"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" secondItem="nzD-Yk-omb" secondAttribute="trailing" constant="10" id="UFy-aR-ZjA"/>
                             <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="COH-x7-NdH" secondAttribute="trailing" constant="20" id="Vak-lq-lCB"/>
+                            <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="FLi-hz-b9Z" secondAttribute="bottom" id="YpV-WJ-4GJ"/>
+                            <constraint firstItem="nzD-Yk-omb" firstAttribute="top" secondItem="29D-Mk-gev" secondAttribute="bottom" constant="26" id="aDr-yS-Wd4"/>
                             <constraint firstItem="oeL-BN-WzO" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="ag6-nf-bBe"/>
                             <constraint firstAttribute="bottom" secondItem="GSp-g3-vh2" secondAttribute="bottom" id="cU1-WR-nXQ"/>
                             <constraint firstItem="n5C-zn-7EF" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="cmq-eZ-Mru"/>
@@ -1513,6 +1523,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <outlet property="donateButton" destination="ztz-Qs-kGM" id="ejG-DP-baT"/>
                         <outlet property="hoursShadowedLabel" destination="29D-Mk-gev" id="Wys-oc-hIq"/>
                         <outlet property="hoursVolunteeredLabel" destination="COH-x7-NdH" id="A02-mu-9JY"/>
+                        <outlet property="mapView" destination="nzD-Yk-omb" id="3NN-q2-g2O"/>
                         <outlet property="profileImageView" destination="6a0-ek-VCC" id="2yR-Nw-c3o"/>
                         <outlet property="searchBar" destination="rjJ-Zf-9KF" id="cV9-ek-aIA"/>
                         <outlet property="shadowButton" destination="kvZ-FI-JWb" id="9VQ-1g-xvL"/>
@@ -1720,7 +1731,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ejj-hJ-n4y"/>
+        <segue reference="4hB-W5-b5j"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1739,6 +1750,9 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

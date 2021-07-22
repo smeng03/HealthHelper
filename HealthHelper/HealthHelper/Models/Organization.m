@@ -51,9 +51,23 @@
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;
     
-    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization];
+    [Organization getLocationData:userLat withLng:userLng withOrganization:organization];
     
     return organization;
+}
+
++ (void)getLocationData:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization {
+    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization];
+    
+    // TODO: Fix asynchronous call
+    bool flag = TRUE;
+    while (flag) {
+        if (organization.destinationLatValue != nil) {
+            flag = FALSE;
+        } else {
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+        }
+    }
 }
 
 
