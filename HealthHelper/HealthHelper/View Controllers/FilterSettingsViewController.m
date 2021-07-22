@@ -24,6 +24,18 @@
     self.distanceField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]];
 }
 
+
+#pragma mark - viewWillAppear()
+
+- (void)viewWillAppear:(BOOL)animated {
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    // self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+}
+
+
+#pragma mark - Save settings
+
 - (IBAction)didSave:(id)sender {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
@@ -38,11 +50,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - Dismiss view controller
+
 - (IBAction)didTapCancel:(id)sender {
     // Dismisses ComposeViewController
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - Dismiss keyboard
 
 - (IBAction)dismissKeyboard:(id)sender {
     // Dismisses keyboard when screen is tapped

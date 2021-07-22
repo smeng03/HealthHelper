@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="hh" translatesAutoresizingMaskIntoConstraints="NO" id="Tdk-Kg-XwR">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="hh_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Tdk-Kg-XwR">
                                 <rect key="frame" x="30" y="271" width="354" height="354"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tdk-Kg-XwR" secondAttribute="height" multiplier="1:1" id="Wfn-4T-oc1"/>
@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="hh" width="500" height="500"/>
+        <image name="hh_logo" width="500" height="500"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

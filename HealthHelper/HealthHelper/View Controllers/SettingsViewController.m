@@ -9,8 +9,6 @@
 
 @interface SettingsViewController ()
 
-@property (weak, nonatomic) IBOutlet UISwitch *darkModeSwitch;
-
 @end
 
 @implementation SettingsViewController
@@ -19,15 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Dark mode switch initialized to off (since default is light mode)
-    [self.darkModeSwitch setOn:NO animated:YES];
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated{
+    /*
     // Loads in user-picked color and dark mode settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
@@ -45,28 +41,11 @@
     else {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
-}
-
-
-#pragma mark - Dark Mode
-
-- (IBAction)didToggleDarkMode:(id)sender {
-    // Checks existing status
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
+     */
     
-    // Toggles status if switch is toggled
-    if (darkModeStatus) {
-        darkModeStatus = false;
-    }
-    else {
-        darkModeStatus = true;
-    }
-    [defaults setBool:darkModeStatus forKey:@"dark_mode_on"];
-    [defaults synchronize];
-    
-    // Reload the view
-    [self viewWillAppear:true];
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
 }
 
 

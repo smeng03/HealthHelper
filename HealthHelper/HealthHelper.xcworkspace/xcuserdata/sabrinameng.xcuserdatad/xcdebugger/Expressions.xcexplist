@@ -208,6 +208,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[OpportunitiesViewController viewWillAppear:]:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "navigationBar.barTintColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__44-[DetailsViewController registerOpportunity]_block_invoke:DetailsViewController.m">
          <PersistentStrings>
             <PersistentString

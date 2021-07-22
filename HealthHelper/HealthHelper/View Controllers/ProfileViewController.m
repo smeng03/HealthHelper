@@ -97,6 +97,7 @@ CLLocationManager *locationManager;
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    /*
     // Loads in user-picked color and dark mode settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
@@ -121,6 +122,11 @@ CLLocationManager *locationManager;
     
     // Distance button text update
     [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    */
+    
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
 }
 
 

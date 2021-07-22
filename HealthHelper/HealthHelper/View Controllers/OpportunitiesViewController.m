@@ -82,6 +82,7 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    /*
     // Loads in user-picked color and dark mode settings
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
@@ -99,6 +100,11 @@ CLLocationManager *opportunitiesLocationManager;
     else {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
+     */
+    
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
 }
 
 

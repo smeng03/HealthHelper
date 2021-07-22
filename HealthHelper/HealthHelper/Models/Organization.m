@@ -65,7 +65,7 @@
         if (organization.destinationLatValue != nil) {
             flag = FALSE;
         } else {
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
         }
     }
 }
