@@ -38,5 +38,6 @@ extern NSString *organizationClassName;
 extern NSString *donationOpportunityType;
 extern NSString *shadowingOpportunityType;
 extern NSString *volunteeringOpportunityType;
+extern NSString *userTagsQuery;
     
 @end

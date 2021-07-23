@@ -25,6 +25,7 @@
 @dynamic destinationLngValue;
 @dynamic distance;
 @dynamic distanceValue;
+@dynamic delegate;
 
 + (nonnull NSString *)parseClassName {
     return @"Organization";
@@ -33,10 +34,7 @@
 
 #pragma mark - Initialize Organization object
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller {
-    // Parsing location
-    NSNumber *userLat = [NSNumber numberWithDouble:userLocation.coordinate.latitude];
-    NSNumber *userLng = [NSNumber numberWithDouble:userLocation.coordinate.longitude];
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocationArray:(NSArray *)locationArray withController:controller {
     
     // Setting Organization object given PFObject
     Organization *organization = [Organization new];
@@ -51,97 +49,17 @@
     organization.organizationId = object.objectId;
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;
+    organization.destinationLatValue = locationArray[0];
+    organization.destinationLngValue = locationArray[1];
+    organization.distance = locationArray[2];
+    organization.distanceValue = locationArray[3];
     
-    [Organization getLocationFromAddress:organization.address withLat:userLat withLng:userLng withOrganization:organization withController:controller];
+    // Call placeMarkers method if caller is ProfileViewController
+    if ([controller isKindOfClass:[ProfileViewController class]]) {
+        [controller placeMarker:organization];
+    }
     
     return organization;
 }
 
-
-#pragma mark - Get distance from user location
-
-+ (void)getDistanceFromCoords:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization withController:controller {
-    // Getting API Key
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
-    
-    // Formatting request
-    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%@,%@&destinations=%@,%@&key=%@", userLat, userLng, organization.destinationLatValue, organization.destinationLngValue, apiKey];
-    
-    // API request
-    NSURL *url = [NSURL URLWithString:requestString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
-            // Calculating distance
-            NSString *distance = dataDictionary[@"rows"][0][@"elements"][0][@"distance"][@"text"];
-            NSArray *splitDistance = [distance componentsSeparatedByString:@" "];
-            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-            f.numberStyle = NSNumberFormatterDecimalStyle;
-            NSNumber *distanceValue = [f numberFromString:[splitDistance objectAtIndex:0]];
-            if ([[splitDistance objectAtIndex:1] isEqualToString:@"mi"]) {
-                organization.distanceValue = [NSNumber numberWithDouble:[distanceValue doubleValue]];
-            } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"ft"]) {
-                organization.distanceValue = [NSNumber numberWithDouble:[distanceValue doubleValue]/5280];
-            }
-            organization.distance = distance;
-            
-            // Call placeMarkers method if caller is ProfileViewController
-            if ([controller isKindOfClass:[ProfileViewController class]]) {
-                [controller placeMarkers];
-            }
-        }
-    }];
-    
-    [task resume];
-}
-
-
-#pragma mark - Get organization location from address
-
-+ (void)getLocationFromAddress:(NSString *) address withLat:(NSNumber *)userLat withLng:(NSNumber *)userLng withOrganization:(Organization *)organization withController:controller {
-    // Getting API Key
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-    NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
-    
-    // Getting formatted address string
-    NSString *formattedAddress = [address stringByReplacingOccurrencesOfString:@" " withString:@"+" ];
-    
-    // Formatting request
-    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=%@", formattedAddress, apiKey];
-    
-    // API request
-    NSURL *url = [NSURL URLWithString:requestString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            
-            // Retrieving latitude and longitude
-            NSNumber *lat = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lat"];
-            NSNumber *lng = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lng"];
-            
-            // Storing coordinates
-            organization.destinationLatValue = lat;
-            organization.destinationLngValue = lng;
-            
-            // Get distance
-            [Organization getDistanceFromCoords:userLat withLng:userLng withOrganization:organization withController:controller];
-        }
-    }];
-    
-    [task resume];
-}
-
-    
 @end

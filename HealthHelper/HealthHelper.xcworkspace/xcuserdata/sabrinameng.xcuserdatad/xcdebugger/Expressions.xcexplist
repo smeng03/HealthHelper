@@ -25,6 +25,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__78+[Opportunity getDistanceFromCoords:withObjects:withLocations:withController:]_block_invoke:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newOpportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Opportunity initOpportunityWithObject:]:Opportunity.m">
          <PersistentStrings>
             <PersistentString
@@ -111,6 +119,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__85+[Opportunity getLocationsFromAddress:withLocations:withUserLocation:withController:]_block_invoke:Opportunity.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "locationsList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "+[Opportunity createOpportunityArray:withLat:withLng:]:Opportunity.m">
          <PersistentStrings>
             <PersistentString
@@ -179,6 +195,14 @@
             </PersistentString>
             <PersistentString
                value = "self.pastOpportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[Organization initOrganizationWithObject:withLocationArray:withController:]:Organization.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "organization.image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

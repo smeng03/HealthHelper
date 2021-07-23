@@ -18,7 +18,7 @@
 #import "FilterConstants.h"
 #import "FilterSettingsViewController.h"
 
-@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate>
+@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate, OpportunityDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *opportunities;
@@ -36,6 +36,7 @@
 @property (strong, nonatomic) NSMutableArray *filters;
 @property (strong, nonatomic) CLLocation *userLocation;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
+@property (strong, nonatomic) NSArray *userTags;
 
 @end
 
@@ -111,7 +112,23 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - Load user filters
 
 - (void)loadUserFilters {
+    // Querying for profile image
+    PFQuery *query = [PFUser query];
+    [query includeKey:userTagsQuery];
+    [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
+    // Fetch user asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        if (users != nil) {
+            // Create and store array of Post objects from retrieved posts
+            PFUser *user = users[0];
+            
+            self.userTags = user[userTagsQuery];
+            
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 
@@ -188,9 +205,12 @@ CLLocationManager *opportunitiesLocationManager;
     self.userLocation = location;
     [opportunitiesLocationManager stopUpdatingLocation];
     opportunitiesLocationManager = nil;
-    
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
+    [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
+}
+
+- (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
+    self.opportunities = opportunities;
     self.filteredOpportunities = self.opportunities;
     
     [self.tableView reloadData];

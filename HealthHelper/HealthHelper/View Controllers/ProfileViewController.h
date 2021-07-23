@@ -7,12 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Organization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController <CLLocationManagerDelegate>
 
-- (void)placeMarkers;
+- (void)placeMarker:(Organization *)organization;
 
 @end
 

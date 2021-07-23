@@ -10,6 +10,12 @@
 #import "Organization.h"
 #import <CoreLocation/CoreLocation.h>
 
+@protocol OpportunityDelegate
+
+- (void)finishOpportunitySetup:(NSMutableArray *)opportunities;
+
+@end
+
 @interface Opportunity : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *opportunityId;
@@ -24,9 +30,10 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSNumber *hours;
 @property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, weak) id<OpportunityDelegate> delegate;
 
 
-- (void)initOpportunityWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller;
-+ (NSMutableArray *)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation withController:controller;
+- (void)initOpportunityWithObject:(PFObject *)object withLocationArray:(NSArray *)locationsList withController:controller;
++ (void)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation withController:controller;
     
 @end

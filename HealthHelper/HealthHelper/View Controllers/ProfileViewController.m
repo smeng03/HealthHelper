@@ -27,7 +27,7 @@
 @import GoogleMapsBase;
 @import GoogleMapsCore;
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate, OrganizationDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate, OrganizationDelegate, OpportunityDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -135,6 +135,7 @@ CLLocationManager *locationManager;
 
 - (void)loadPastOpportunityArray {
     locationManager = [[CLLocationManager alloc] init];
+    [self.mapView clear];
     
     // Query for opportunities array
     PFQuery *queryUser = [PFUser query];
@@ -206,40 +207,32 @@ CLLocationManager *locationManager;
     locationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
-    self.opportunities = [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
+    [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
     self.filteredOpportunities = self.opportunities;
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
+}
+
+- (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
+    self.opportunities = opportunities;
+    self.filteredOpportunities = self.opportunities;
     
-    [self placeMarkers];
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 
 #pragma mark - Set map view markers
 
-- (BOOL)canPlaceMarkers {
-    for (Opportunity *opportunity in self.opportunities) {
-        if (opportunity.author.destinationLngValue == nil) {
-            return FALSE;
-        }
-    }
-    return TRUE;
-}
-
-- (void)placeMarkers {
-    if ([self canPlaceMarkers]) {
-        for (Opportunity *opportunity in self.opportunities) {
-            CLLocationCoordinate2D position = CLLocationCoordinate2DMake([opportunity.author.destinationLatValue doubleValue], [opportunity.author.destinationLngValue doubleValue]);
-            GMSMarker *marker = [GMSMarker markerWithPosition:position];
-            marker.title = opportunity.author.username;
-            marker.map = self.mapView;
-        }
-        
-        // Re-centering map
-        Opportunity *firstOpportunity = self.opportunities[0];
-        self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[firstOpportunity.author.destinationLatValue doubleValue] longitude:[firstOpportunity.author.destinationLngValue doubleValue] zoom:10];
-    }
+- (void)placeMarker:(Organization *)organization {
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake([organization.destinationLatValue doubleValue], [organization.destinationLngValue doubleValue]);
+    GMSMarker *marker = [GMSMarker markerWithPosition:position];
+    marker.title = organization.username;
+    marker.map = self.mapView;
+    
+    // Re-centering map
+    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[organization.destinationLatValue doubleValue] longitude:[organization.destinationLngValue doubleValue] zoom:10];
 }
 
 
@@ -478,7 +471,7 @@ CLLocationManager *locationManager;
                     // Reload user interface
                     [self.filteredOpportunities removeObjectAtIndex:indexPath.row];
                     [tableView reloadData];
-                    [self loadBasicProfile];
+                    [self loadPastOpportunityArray];
                 } else {
                     NSLog(@"%@", error.localizedDescription);
                 }
@@ -640,6 +633,9 @@ CLLocationManager *locationManager;
     
     // Map corner radius
     self.mapView.layer.cornerRadius = 10;
+    
+    // Map user location enabled
+    self.mapView.myLocationEnabled = true;
 }
 
 - (void)filterSetup {

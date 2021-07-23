@@ -33,7 +33,7 @@
 @property (nonatomic, assign) NSNumber *distanceValue;
 @property (nonatomic, weak) id<OrganizationDelegate> delegate;
 
-+ (Organization *)initOrganizationWithObject:(PFObject *)object withLocation:(CLLocation *)userLocation withController:controller;
++ (Organization *)initOrganizationWithObject:(PFObject *)object withLocationArray:(NSArray *)locationArray withController:controller;
  
     
 @end

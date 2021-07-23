@@ -41,6 +41,7 @@ NSString *organizationClassName = @"Organization";
 NSString *donationOpportunityType = @"Donation";
 NSString *shadowingOpportunityType = @"Shadowing";
 NSString *volunteeringOpportunityType = @"Volunteering";
+NSString *userTagsQuery = @"tags";
 
 @end
 
