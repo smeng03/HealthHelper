@@ -38,6 +38,7 @@
 		D9B1F8B526A8765E00CADBDA /* QueryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B426A8765E00CADBDA /* QueryConstants.m */; };
 		D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B726A8859C00CADBDA /* FilterConstants.m */; };
 		D9B1F8BB26A8B8E700CADBDA /* FilterSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */; };
+		D9B1F8BE26AB775B00CADBDA /* ProfilePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8BD26AB775B00CADBDA /* ProfilePictureViewController.m */; };
 		D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ED852B26A1F68B00011F02 /* ReviewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,8 @@
 		D9B1F8B726A8859C00CADBDA /* FilterConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterConstants.m; sourceTree = "<group>"; };
 		D9B1F8B926A8B8E700CADBDA /* FilterSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterSettingsViewController.h; sourceTree = "<group>"; };
 		D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterSettingsViewController.m; sourceTree = "<group>"; };
+		D9B1F8BC26AB775B00CADBDA /* ProfilePictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilePictureViewController.h; sourceTree = "<group>"; };
+		D9B1F8BD26AB775B00CADBDA /* ProfilePictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilePictureViewController.m; sourceTree = "<group>"; };
 		D9ED852A26A1F68B00011F02 /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ReviewCell.h; path = HealthHelper/Views/ReviewCell.h; sourceTree = SOURCE_ROOT; };
 		D9ED852B26A1F68B00011F02 /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ReviewCell.m; path = HealthHelper/Views/ReviewCell.m; sourceTree = SOURCE_ROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 		D970C4D6269CAFE1003DA544 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D9B1F8BC26AB775B00CADBDA /* ProfilePictureViewController.h */,
+				D9B1F8BD26AB775B00CADBDA /* ProfilePictureViewController.m */,
 				D9B1F8B926A8B8E700CADBDA /* FilterSettingsViewController.h */,
 				D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */,
 				D970C544269F8FD6003DA544 /* ComposeViewController.h */,
@@ -600,6 +605,7 @@
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
 				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
 				D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */,
+				D9B1F8BE26AB775B00CADBDA /* ProfilePictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

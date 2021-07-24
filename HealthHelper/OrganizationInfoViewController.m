@@ -12,6 +12,7 @@
 #import "Review.h"
 #import "ReviewCell.h"
 #import "QueryConstants.h"
+#import "ProfilePictureViewController.h"
 
 @interface OrganizationInfoViewController () <UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -115,6 +116,14 @@
 }
 
 
+#pragma mark - Open full profile picture
+
+- (IBAction)didTapProfilePicture:(id)sender {
+    [self performSegueWithIdentifier:@"toFullProfileView" sender:nil];
+}
+
+
+
 #pragma mark - didPost() delegate method
 
 - (void)didPost {
@@ -166,6 +175,9 @@
         ComposeViewController *composeViewController = [segue destinationViewController];
         composeViewController.opportunity = self.opportunity;
         composeViewController.delegate = self;
+    } else if ([segue.identifier isEqual:@"toFullProfileView"]) {
+        ProfilePictureViewController *profilePictureViewController = [segue destinationViewController];
+        profilePictureViewController.opportunity = self.opportunity;
     }
 }
 

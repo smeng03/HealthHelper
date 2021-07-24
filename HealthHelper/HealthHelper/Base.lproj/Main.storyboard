@@ -595,6 +595,64 @@
             </objects>
             <point key="canvasLocation" x="-955.07246376811599" y="2231.9196428571427"/>
         </scene>
+        <!--Profile Picture View Controller-->
+        <scene sceneID="XNO-MM-qOA">
+            <objects>
+                <viewController id="l93-rw-hHg" customClass="ProfilePictureViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Cf-65-3c6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJ1-ah-er6">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PTn-ws-FbY">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="752"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="PTn-ws-FbY" firstAttribute="top" secondItem="kJ1-ah-er6" secondAttribute="top" id="3t4-LR-twr"/>
+                                    <constraint firstAttribute="bottom" secondItem="PTn-ws-FbY" secondAttribute="bottom" id="Osm-jR-wd6"/>
+                                    <constraint firstItem="PTn-ws-FbY" firstAttribute="leading" secondItem="kJ1-ah-er6" secondAttribute="leading" id="fS3-Tv-Dho"/>
+                                    <constraint firstAttribute="trailing" secondItem="PTn-ws-FbY" secondAttribute="trailing" id="fk6-y4-8Yb"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDT-ke-a0p">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem id="FeW-dE-puj">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="VWL-Fm-zqH">
+                                            <connections>
+                                                <action selector="didTapExit:" destination="l93-rw-hHg" id="e1f-jl-vU5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Qb-qC-zOU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cDT-ke-a0p" firstAttribute="leading" secondItem="1Qb-qC-zOU" secondAttribute="leading" id="JlV-tg-atL"/>
+                            <constraint firstItem="kJ1-ah-er6" firstAttribute="leading" secondItem="1Qb-qC-zOU" secondAttribute="leading" id="aFX-Zk-IdO"/>
+                            <constraint firstItem="1Qb-qC-zOU" firstAttribute="bottom" secondItem="kJ1-ah-er6" secondAttribute="bottom" id="dgZ-Ba-BJy"/>
+                            <constraint firstItem="cDT-ke-a0p" firstAttribute="trailing" secondItem="1Qb-qC-zOU" secondAttribute="trailing" id="eml-7O-bli"/>
+                            <constraint firstItem="1Qb-qC-zOU" firstAttribute="trailing" secondItem="kJ1-ah-er6" secondAttribute="trailing" id="gnA-vc-gMt"/>
+                            <constraint firstItem="kJ1-ah-er6" firstAttribute="top" secondItem="cDT-ke-a0p" secondAttribute="bottom" id="h4o-Pn-niC"/>
+                            <constraint firstItem="cDT-ke-a0p" firstAttribute="top" secondItem="1Qb-qC-zOU" secondAttribute="top" id="hcO-LP-2YT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navigationItem" destination="FeW-dE-puj" id="gFQ-Tz-LmU"/>
+                        <outlet property="profileImageView" destination="PTn-ws-FbY" id="SaK-9V-OJa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wew-Se-vsk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2488.4057971014495" y="2904.9107142857142"/>
+        </scene>
         <!--Organization Info View Controller-->
         <scene sceneID="nwD-tb-qHC">
             <objects>
@@ -603,12 +661,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="Zar-3q-aIr">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="Zar-3q-aIr">
                                 <rect key="frame" x="10" y="108" width="100" height="100"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="bQY-Ll-jGp"/>
                                     <constraint firstAttribute="height" constant="100" id="bXL-lp-X4L"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Xdp-KV-0gF" appends="YES" id="X2Z-Do-z4n"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnX-QH-LgV">
                                 <rect key="frame" x="120" y="108" width="176" height="24"/>
@@ -862,11 +924,17 @@
                         <outlet property="reviewButton" destination="7hu-TS-5ny" id="TEu-bo-nOR"/>
                         <outlet property="reviewCountLabel" destination="igv-EP-9rp" id="VIc-wb-Tgo"/>
                         <outlet property="tableView" destination="TRL-ad-xuC" id="3bG-nc-hRe"/>
+                        <segue destination="l93-rw-hHg" kind="presentation" identifier="toFullProfileView" id="aza-IM-XqP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="24k-DM-IdO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Xdp-KV-0gF">
+                    <connections>
+                        <action selector="didTapProfilePicture:" destination="pqk-1r-4y9" id="Ysh-j6-7d2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1730.4347826086957" y="2904.9107142857142"/>
+            <point key="canvasLocation" x="-1730" y="2905"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="azH-bU-OX2">
@@ -1720,6 +1788,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         <image name="star" width="48" height="48"/>
         <image name="user" width="25" height="25"/>
         <image name="user2" width="512" height="512"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="backgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
