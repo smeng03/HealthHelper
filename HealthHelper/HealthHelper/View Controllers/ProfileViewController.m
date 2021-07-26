@@ -143,16 +143,19 @@ CLLocationManager *locationManager;
     [queryUser whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch user asynchronously
-    [queryUser findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-        if (users != nil) {
-            // Create and store array of Post objects from retrieved posts
-            PFUser *user = users[0];
-            self.pastOpportunities = user[pastOpportunitiesQuery];
-            [self loadPastOpportunities];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [queryUser findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+            if (users != nil) {
+                // Create and store array of Post objects from retrieved posts
+                PFUser *user = users[0];
+                self.pastOpportunities = user[pastOpportunitiesQuery];
+                [self loadPastOpportunities];
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }];
+    });
 }
 
 - (void)loadPastOpportunities {
@@ -210,8 +213,8 @@ CLLocationManager *locationManager;
     [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
     self.filteredOpportunities = self.opportunities;
     
-    [self.tableView reloadData];
-    [self.refreshControl endRefreshing];
+    //[self.tableView reloadData];
+    //[self.refreshControl endRefreshing];
 }
 
 - (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
@@ -220,6 +223,7 @@ CLLocationManager *locationManager;
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
 }
 
 
@@ -384,6 +388,12 @@ CLLocationManager *locationManager;
     return self.filteredOpportunities.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    // remove bottom extra 20px space.
+    return CGFLOAT_MIN;
+} 
+
 
 #pragma mark - Logout
 
@@ -463,15 +473,15 @@ CLLocationManager *locationManager;
                     // Save data
                     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                         if (succeeded) {
+                            // Reload user interface
+                            [self.filteredOpportunities removeObjectAtIndex:indexPath.row];
+                            [tableView reloadData];
+                            [self loadPastOpportunityArray];
                         } else {
                             NSLog(@"Error: %@", error.localizedDescription);
                         }
                     }];
-                    
-                    // Reload user interface
-                    [self.filteredOpportunities removeObjectAtIndex:indexPath.row];
-                    [tableView reloadData];
-                    [self loadPastOpportunityArray];
+
                 } else {
                     NSLog(@"%@", error.localizedDescription);
                 }
@@ -636,6 +646,10 @@ CLLocationManager *locationManager;
     
     // Map user location enabled
     self.mapView.myLocationEnabled = true;
+    
+    // Search bar styling
+    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
+    self.searchBar.layer.borderWidth = 1;
 }
 
 - (void)filterSetup {

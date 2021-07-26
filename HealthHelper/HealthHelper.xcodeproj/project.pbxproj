@@ -39,6 +39,8 @@
 		D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B726A8859C00CADBDA /* FilterConstants.m */; };
 		D9B1F8BB26A8B8E700CADBDA /* FilterSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */; };
 		D9B1F8BE26AB775B00CADBDA /* ProfilePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8BD26AB775B00CADBDA /* ProfilePictureViewController.m */; };
+		D9B1F8C726AF531E00CADBDA /* GMYConfettiView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8C626AF531E00CADBDA /* GMYConfettiView.m */; };
+		D9B1F8C926AF59C200CADBDA /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D9B1F8C826AF59C200CADBDA /* Resources.bundle */; };
 		D9ED852C26A1F68B00011F02 /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ED852B26A1F68B00011F02 /* ReviewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,9 @@
 		D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterSettingsViewController.m; sourceTree = "<group>"; };
 		D9B1F8BC26AB775B00CADBDA /* ProfilePictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilePictureViewController.h; sourceTree = "<group>"; };
 		D9B1F8BD26AB775B00CADBDA /* ProfilePictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilePictureViewController.m; sourceTree = "<group>"; };
+		D9B1F8C526AF530600CADBDA /* GMYConfettiView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMYConfettiView.h; sourceTree = "<group>"; };
+		D9B1F8C626AF531E00CADBDA /* GMYConfettiView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GMYConfettiView.m; sourceTree = "<group>"; };
+		D9B1F8C826AF59C200CADBDA /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		D9ED852A26A1F68B00011F02 /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ReviewCell.h; path = HealthHelper/Views/ReviewCell.h; sourceTree = SOURCE_ROOT; };
 		D9ED852B26A1F68B00011F02 /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ReviewCell.m; path = HealthHelper/Views/ReviewCell.m; sourceTree = SOURCE_ROOT; };
 		F26215CFD9D2FAA8C48F6F15 /* Pods-HealthHelperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelperTests.release.xcconfig"; path = "Target Support Files/Pods-HealthHelperTests/Pods-HealthHelperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,12 +296,15 @@
 		D970C4D8269CAFEE003DA544 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9B1F8C526AF530600CADBDA /* GMYConfettiView.h */,
+				D9B1F8C626AF531E00CADBDA /* GMYConfettiView.m */,
 				D9ED852A26A1F68B00011F02 /* ReviewCell.h */,
 				D9ED852B26A1F68B00011F02 /* ReviewCell.m */,
 				D970C4EE269CE8F7003DA544 /* PastOpportunityCell.h */,
 				D970C4EF269CE8F7003DA544 /* PastOpportunityCell.m */,
 				D970C4EB269CE26A003DA544 /* OpportunityCell.h */,
 				D970C4EC269CE26A003DA544 /* OpportunityCell.m */,
+				D9B1F8C826AF59C200CADBDA /* Resources.bundle */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -419,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D970C4F8269CFD51003DA544 /* Keys.plist in Resources */,
+				D9B1F8C926AF59C200CADBDA /* Resources.bundle in Resources */,
 				D970C540269F4760003DA544 /* loading_square.gif in Resources */,
 				D9198453269CAF1A009ADD0D /* LaunchScreen.storyboard in Resources */,
 				D9198450269CAF1A009ADD0D /* Assets.xcassets in Resources */,
@@ -605,6 +614,7 @@
 				D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */,
 				D970C4E1269CB2AD003DA544 /* LoginViewController.m in Sources */,
 				D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */,
+				D9B1F8C726AF531E00CADBDA /* GMYConfettiView.m in Sources */,
 				D9B1F8BE26AB775B00CADBDA /* ProfilePictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

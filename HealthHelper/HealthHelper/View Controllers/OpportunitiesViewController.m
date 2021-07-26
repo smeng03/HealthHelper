@@ -75,6 +75,10 @@ CLLocationManager *opportunitiesLocationManager;
     [defaults setDouble:10.0 forKey:@"maxDistance"];
     [defaults synchronize];
     
+    // Search bar styling
+    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
+    self.searchBar.layer.borderWidth = 1;
+    
     [self styleButton];
     [self filterSetup];
 }
@@ -194,6 +198,12 @@ CLLocationManager *opportunitiesLocationManager;
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.filteredOpportunities.count;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+
+    // remove bottom extra 20px space.
+    return CGFLOAT_MIN;
+} 
 
 
 #pragma mark - Get user location

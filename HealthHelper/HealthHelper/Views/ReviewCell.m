@@ -10,6 +10,7 @@
 #import <SDWebImage/SDWebImage.h>
 #import "UIImageView+AFNetworking.h"
 #import "Review.h"
+#import "DateTools.h"
 
 @implementation ReviewCell
 
@@ -42,6 +43,9 @@
     
     // Setting review
     self.review = review;
+    
+    // Setting date label
+    self.dateLabel.text = review.timeCreatedAt.shortTimeAgoSinceNow;
 }
 
 - (void)setStars:(NSNumber *)stars {

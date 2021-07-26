@@ -15,6 +15,7 @@
 @import GoogleMapsBase;
 @import GoogleMapsCore;
 #import "QueryConstants.h"
+#import "GMYConfettiView.h"
 
 @interface DetailsViewController () <CLLocationManagerDelegate>
 
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) NSNumber *destinationLatValue;
 @property (strong, nonatomic) NSNumber *destinationLngValue;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) GMYConfettiView *confettiView;
 
 @end
 
@@ -218,6 +220,15 @@
         }
     }];
 }
+
+
+#pragma mark - Stop confetti
+/*
+- (void)stopConfetti {
+    [self.confettiView stopConfetti];
+    self.confettiView = nil;
+}
+ */
 
 
 #pragma mark - Setup styling
