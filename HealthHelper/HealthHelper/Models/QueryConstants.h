@@ -39,5 +39,7 @@ extern NSString *donationOpportunityType;
 extern NSString *shadowingOpportunityType;
 extern NSString *volunteeringOpportunityType;
 extern NSString *userTagsQuery;
+extern NSString *totalScoreQuery;
+extern NSString *numReviewsQuery;
     
 @end

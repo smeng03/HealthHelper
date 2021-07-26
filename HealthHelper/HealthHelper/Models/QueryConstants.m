@@ -42,6 +42,8 @@ NSString *donationOpportunityType = @"Donation";
 NSString *shadowingOpportunityType = @"Shadowing";
 NSString *volunteeringOpportunityType = @"Volunteering";
 NSString *userTagsQuery = @"tags";
+NSString *totalScoreQuery = @"totalScore";
+NSString *numReviewsQuery = @"numReviews";
 
 @end
 

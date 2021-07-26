@@ -679,7 +679,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nf-ki-u7H">
-                                <rect key="frame" x="0.0" y="228" width="414" height="565"/>
+                                <rect key="frame" x="0.0" y="235" width="414" height="558"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0El-Qa-ziq">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="914"/>
@@ -895,7 +895,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="cM3-hL-NXr"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hu-TS-5ny">
-                                <rect key="frame" x="120" y="152" width="160" height="35"/>
+                                <rect key="frame" x="120" y="180" width="160" height="35"/>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="1bD-9G-svF"/>
@@ -909,21 +909,30 @@
                                     <segue destination="IT4-SX-FOz" kind="presentation" identifier="composeSegue" modalPresentationStyle="automatic" id="BQr-hg-192"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxH-K7-7mO">
+                                <rect key="frame" x="120" y="142" width="37.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MN9-Pq-nQi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7hu-TS-5ny" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="3il-om-Jiv"/>
+                            <constraint firstItem="RxH-K7-7mO" firstAttribute="top" secondItem="BnX-QH-LgV" secondAttribute="bottom" constant="10" id="3mw-7X-4Fo"/>
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="4ot-we-lGf"/>
-                            <constraint firstItem="7hu-TS-5ny" firstAttribute="top" secondItem="BnX-QH-LgV" secondAttribute="bottom" constant="20" id="79I-4x-GXG"/>
+                            <constraint firstItem="6nf-ki-u7H" firstAttribute="top" secondItem="7hu-TS-5ny" secondAttribute="bottom" constant="20" id="5Rb-IV-0li"/>
+                            <constraint firstItem="7hu-TS-5ny" firstAttribute="top" secondItem="RxH-K7-7mO" secondAttribute="bottom" constant="20" id="79I-4x-GXG"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" id="BKN-yw-sur"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="FmM-AN-Esh"/>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RxH-K7-7mO" secondAttribute="trailing" constant="20" id="O86-F5-6WM"/>
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="10" id="Y9f-VZ-JkN"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="bottom" secondItem="6nf-ki-u7H" secondAttribute="bottom" constant="20" id="aRV-sz-Wcp"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="trailing" secondItem="MN9-Pq-nQi" secondAttribute="trailing" id="alS-0M-st1"/>
-                            <constraint firstItem="6nf-ki-u7H" firstAttribute="top" secondItem="Zar-3q-aIr" secondAttribute="bottom" constant="20" id="iYO-KN-AOb"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BnX-QH-LgV" secondAttribute="trailing" constant="20" id="jgt-ky-deZ"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="oCK-Ky-2Tz"/>
+                            <constraint firstItem="RxH-K7-7mO" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="qfh-J9-Rbm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pFP-1D-rzf"/>
@@ -931,6 +940,7 @@
                         <outlet property="descriptionLabel" destination="Uv8-9d-i7p" id="qgk-DB-KPW"/>
                         <outlet property="organizationNameLabel" destination="BnX-QH-LgV" id="d3y-1A-FKs"/>
                         <outlet property="profileImageView" destination="Zar-3q-aIr" id="ovJ-ed-tbI"/>
+                        <outlet property="ratingLabel" destination="RxH-K7-7mO" id="Uqd-W6-bEe"/>
                         <outlet property="reviewButton" destination="7hu-TS-5ny" id="TEu-bo-nOR"/>
                         <outlet property="reviewCountLabel" destination="igv-EP-9rp" id="VIc-wb-Tgo"/>
                         <outlet property="tableView" destination="TRL-ad-xuC" id="3bG-nc-hRe"/>
@@ -944,7 +954,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1730" y="2905"/>
+            <point key="canvasLocation" x="-1730.4347826086957" y="2904.9107142857142"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="azH-bU-OX2">

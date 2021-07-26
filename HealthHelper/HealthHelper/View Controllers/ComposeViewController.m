@@ -157,9 +157,7 @@
             // Saving new post
             [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 if (succeeded) {
-                    // If successful, dismisses view controller and reloads posts
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.delegate didPost];
+                    [self updateOrganizationStats];
                 } else {
                     // Otherwise, displays an alert
                     NSLog(@"Problem posting review: %@", error.localizedDescription);
@@ -168,12 +166,50 @@
                     [alert addAction:okAction];
                     [self presentViewController:alert animated:YES completion:^{}];
                 }
-                
-                // Adding a slight delay so progress HUD doesn't just flash
-                [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
             }];
         });
     }
+}
+
+
+#pragma mark - Update organization stats
+
+- (void)updateOrganizationStats {
+    PFQuery *query = [PFQuery queryWithClassName:organizationClassName];
+    [query includeKey:totalScoreQuery];
+    [query includeKey:numReviewsQuery];
+    [query whereKey:objectIdKey equalTo:self.opportunity.author.organizationId];
+    
+    // Fetch asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *organizations, NSError *error) {
+        if (organizations != nil) {
+            PFObject *organization = organizations[0];
+            
+            // Update organization rating
+            organization[totalScoreQuery] = [NSNumber numberWithInt:[organization[totalScoreQuery] intValue]+[self.rating intValue]];
+            organization[numReviewsQuery] = [NSNumber numberWithInt:[organization[numReviewsQuery] intValue]+1];
+            
+            // Update stored organization rating
+            self.opportunity.author.totalScore = [NSNumber numberWithInt:[self.opportunity.author.totalScore intValue]+[self.rating intValue]];
+            self.opportunity.author.numReviews = [NSNumber numberWithInt:[self.opportunity.author.numReviews intValue]+1];
+            
+            // Update organization object
+            [organization saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                if (succeeded) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.delegate didPost];
+                    
+                    // Adding a slight delay so progress HUD doesn't just flash
+                    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+                } else {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                }
+            }];
+            
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 
