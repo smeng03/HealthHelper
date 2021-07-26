@@ -501,30 +501,30 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="General Hospital" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJ8-cp-Hvc">
-                                                    <rect key="frame" x="110" y="20" width="153" height="24"/>
+                                                    <rect key="frame" x="110" y="20" width="152.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2s-uW-ytz">
-                                                    <rect key="frame" x="110" y="52" width="284" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="110" y="52" width="284" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfX-VP-eYw">
-                                                    <rect key="frame" x="110" y="77" width="284" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="110" y="74" width="284" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7f-S7-1bS">
-                                                    <rect key="frame" x="20" y="113" width="374" height="150"/>
+                                                    <rect key="frame" x="20" y="107" width="374" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="Nag-XB-98Z"/>
                                                     </constraints>
                                                     <string key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.</string>
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -682,10 +682,10 @@
                                 <rect key="frame" x="0.0" y="228" width="414" height="565"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0El-Qa-ziq">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="888"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="914"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uv8-9d-i7p">
-                                                <rect key="frame" x="20" y="20" width="374" height="609"/>
+                                                <rect key="frame" x="20" y="20" width="374" height="535"/>
                                                 <string key="text">At St. Michael’s Hospital we recognize the value of every person and are guided by our commitment to excellence and leadership. We demonstrate this by: 
 
 * Providing exemplary physical, emotional and spiritual care for each of our patients and their families 
@@ -695,15 +695,15 @@
 * Fostering a culture of discovery in all of our activities and supporting exemplary health sciences research 
 * Strengthening our relationships with universities, colleges, other hospitals, agencies and our community 
 * Demonstrating social responsibility through the just use of our resources. The commitment of our staff, physicians, volunteers, students, community partners and friends to our mission permits us to maintain a quality of presence and tradition of caring, which are the hallmarks of St. Michael’s Hospital.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRL-ad-xuC">
-                                                <rect key="frame" x="0.0" y="688" width="414" height="200"/>
+                                                <rect key="frame" x="0.0" y="614" width="414" height="300"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="WzI-2X-Rg3"/>
+                                                    <constraint firstAttribute="height" constant="300" id="WzI-2X-Rg3"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReviewCell" rowHeight="130" id="JnU-3A-mQ5" customClass="ReviewCell">
@@ -853,7 +853,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igv-EP-9rp">
-                                                <rect key="frame" x="20" y="659" width="50" height="24"/>
+                                                <rect key="frame" x="20" y="585" width="50" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -988,7 +988,7 @@
                                     <constraint firstAttribute="height" constant="300" id="9KD-hg-m27"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tdw-wd-4qr">
@@ -1153,9 +1153,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance: -- mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60g-8E-BuH">
-                                <rect key="frame" x="130" y="142" width="113.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="130" y="142" width="102.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-Jb-qHM">
@@ -1179,10 +1179,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIC-1y-fdZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1446"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kag-g7-Opb">
-                                                        <rect key="frame" x="20" y="330" width="374" height="1096"/>
+                                                        <rect key="frame" x="20" y="330" width="374" height="993"/>
                                                         <string key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.
 
 Requirements 
@@ -1196,7 +1196,7 @@ Working Conditions: Working conditions may involve an occasional exposure to dus
 Physical Demands: Duties may require exerting up to ten pounds of force occasionally and/or small amounts of force frequently. Any sedentary work typically involving sitting most of the time, however as tasks vary per department/role, the volunteer may be subjected to brief and/or extended walking or standing, pushing, pulling, lifting, bending, and stooping.
 
 Other: Community Volunteers work at least four hours each volunteer session and commit to a minimum of 100 service hours per year. Annually, all volunteers must update their PPD and Flu shots with Occupational Health, and successfully complete NRH mandatories including but not limited to: HIPPA, Fire and Safety, Hazardous Materials, Infection Control, Injury Prevention and Workplace Violence. The duties stated are intended to describe the general nature and level of work being performed. They are not intended to be construed as an exhaustive list of all responsibilities, duties and skills required of volunteers. Other related duties may be assigned within scope of ability.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1240,9 +1240,9 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKv-ex-0ig">
-                                <rect key="frame" x="130" y="168" width="70" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="130" y="165" width="63" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1485,14 +1485,14 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V4-8J-VLq">
-                                                    <rect key="frame" x="110" y="54" width="45" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="110" y="54" width="40.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours volunteered: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2J3-N4-rd3">
-                                                    <rect key="frame" x="110" y="80" width="150" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="110" y="77" width="134.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

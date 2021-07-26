@@ -137,6 +137,11 @@ CLLocationManager *opportunitiesLocationManager;
 - (void)loadOpportunities {
     opportunitiesLocationManager = [[CLLocationManager alloc] init];
     
+    CLAuthorizationStatus status = CLLocationManager.authorizationStatus;
+    if (status != kCLAuthorizationStatusAuthorizedWhenInUse || status != kCLAuthorizationStatusAuthorizedAlways) {
+        [opportunitiesLocationManager requestWhenInUseAuthorization];
+    }
+    
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:opportunityClassName];
     [query includeKey:descriptionQuery];

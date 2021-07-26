@@ -96,7 +96,30 @@
             
             // Set profile image
             PFFileObject *image = user[imageQuery];
-            [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url]];
+            self.profileImageView.alpha = 0;
+            [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                if (image) {
+                    BOOL animated = NO;
+
+                    if (cacheType == SDImageCacheTypeDisk || cacheType == SDImageCacheTypeNone) {
+                        animated = YES;
+                    }
+
+                    self.profileImageView.image = image;
+
+                    if (animated) {
+                        [UIView animateWithDuration:1 animations:^{
+                            self.profileImageView.alpha = 1.0;
+                        }];
+
+                    } else {
+                        self.profileImageView.alpha = 1.0;
+                    }
+                }
+
+            }];
+            
             self.shimmeringView.shimmering = NO;
         } else {
             NSLog(@"%@", error.localizedDescription);
