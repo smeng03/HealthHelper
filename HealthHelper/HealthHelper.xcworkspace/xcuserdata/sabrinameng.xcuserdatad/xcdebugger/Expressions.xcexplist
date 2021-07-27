@@ -74,6 +74,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[OpportunitiesViewController finishOpportunitySetup:]:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.unprocessedOpportunities.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.unsortedOpportunities.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Organization initOrganizationWithObject:]:Organization.m">
          <PersistentStrings>
             <PersistentString
@@ -111,6 +122,9 @@
          contextName = "__85+[Opportunity getLocationsFromAddress:withLocations:withUserLocation:withController:]_block_invoke:Opportunity.m">
          <PersistentStrings>
             <PersistentString
+               value = "j">
+            </PersistentString>
+            <PersistentString
                value = "locationsList">
             </PersistentString>
          </PersistentStrings>
@@ -139,6 +153,20 @@
          <PersistentStrings>
             <PersistentString
                value = "self.pastOpportunities">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OpportunitiesViewController sortOpportunities:]:OpportunitiesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "opportunity.author.address">
+            </PersistentString>
+            <PersistentString
+               value = "opportunity.author.distance">
+            </PersistentString>
+            <PersistentString
+               value = "opportunity.author.username">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

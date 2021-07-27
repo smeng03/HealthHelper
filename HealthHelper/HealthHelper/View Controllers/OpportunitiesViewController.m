@@ -60,8 +60,8 @@ CLLocationManager *opportunitiesLocationManager;
     [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
     [defaults synchronize];
     
-    // Load opportunities
-    [self loadOpportunities];
+    // Load user filters and opportunities
+    [self loadUserFilters];
     
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search opportunities...";
@@ -124,10 +124,11 @@ CLLocationManager *opportunitiesLocationManager;
     // Fetch user asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
         if (users != nil) {
-            // Create and store array of Post objects from retrieved posts
             PFUser *user = users[0];
             
             self.userTags = user[userTagsQuery];
+            
+            [self loadOpportunities];
             
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -183,6 +184,40 @@ CLLocationManager *opportunitiesLocationManager;
 }
 
 
+#pragma mark - Sort opportunities
+
+- (void)sortOpportunities:(NSMutableArray *)opportunities {
+    NSMutableArray *opportunitiesWithScores = [NSMutableArray new];
+    NSMutableArray *sortedOpportunityArray = [NSMutableArray new];
+    
+    // Calculate similarity scores
+    for (Opportunity *opportunity in opportunities) {
+        int similarityScore = 0;
+        for (NSString *opportunityTag in opportunity.tags) {
+            for (NSString *userTag in self.userTags) {
+                if ([opportunityTag isEqualToString:userTag]) {
+                    similarityScore += 1;
+                }
+            }
+        }
+    
+    [opportunitiesWithScores addObject:@{@"opportunity": opportunity, @"score":[NSNumber numberWithInt:similarityScore]}];
+    }
+    
+    // Sorting opportunities
+    NSArray *sortedOpportunities = [opportunitiesWithScores sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"score" ascending:NO]]];
+    
+    // Storing sorted opportunities
+    for (Opportunity *sortedOpportunityDict in sortedOpportunities) {
+        Opportunity *sortedOpportunity = sortedOpportunityDict[@"opportunity"];
+        [sortedOpportunityArray addObject:sortedOpportunity];
+    }
+    
+    self.opportunities = sortedOpportunityArray;
+    self.filteredOpportunities = self.opportunities;
+}
+
+
 #pragma mark - Table View
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -225,8 +260,7 @@ CLLocationManager *opportunitiesLocationManager;
 }
 
 - (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
-    self.opportunities = opportunities;
-    self.filteredOpportunities = self.opportunities;
+    [self sortOpportunities:opportunities];
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];

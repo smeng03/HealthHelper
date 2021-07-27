@@ -49,13 +49,19 @@ NSMutableArray *newOpportunities = nil;
 }
 
 + (void)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation withController:controller {
-    // Returns array of Opportunity objects given array of PFObjects
+    // New array to store locations and default value
     NSMutableArray *locationsList = [NSMutableArray new];
+    for (int i=0; i < objects.count; i++) {
+        [locationsList addObject:@[[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
+    }
     [Opportunity getLocationsFromAddress:objects withLocations:locationsList withUserLocation:userLocation withController:controller];
 }
 
 + (void)getLocationsFromAddress:(NSArray *)objects withLocations:(NSMutableArray *)locationsList withUserLocation:(CLLocation *)userLocation withController:controller {
-    for (PFObject *object in objects) {
+    __block int numCompletedRequests = 0;
+    for (int j=0; j<objects.count; j++) {
+        PFObject *object = objects[j];
+        
         // Getting API Key
         NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
@@ -73,8 +79,10 @@ NSMutableArray *newOpportunities = nil;
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error != nil) {
+                // Logging request as completed
+                numCompletedRequests++;
+                
                 NSLog(@"Error: %@", error);
-                [locationsList addObject:@[[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
             } else {
                 NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 
@@ -83,10 +91,13 @@ NSMutableArray *newOpportunities = nil;
                 NSNumber *lng = dataDictionary[@"results"][0][@"geometry"][@"location"][@"lng"];
                 
                 // Storing coordinates
-                [locationsList addObject:@[lat, lng]];
+                [locationsList replaceObjectAtIndex:j withObject:@[lat, lng]];
+                
+                // Logging request as completed
+                numCompletedRequests++;
                 
                 // Get distance
-                if (locationsList.count == objects.count) {
+                if (numCompletedRequests == objects.count) {
                     [Opportunity getDistanceFromCoords:userLocation withObjects:objects withLocations:locationsList withController:controller];
                 }
             }
@@ -127,11 +138,19 @@ NSMutableArray *newOpportunities = nil;
             NSLog(@"Error: %@", error);
         } else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@", dataDictionary);
             
             // Calculating distances, initializing Organization objects
             int i;
             for (i=0; i<objects.count; i++) {
-                NSString *distance = dataDictionary[@"rows"][0][@"elements"][i][@"distance"][@"text"];
+                // Finding correct address and location
+                NSArray *addresses = dataDictionary[@"destination_addresses"];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(SELF CONTAINS[cd] %@)", objects[i][@"author"][@"address"]];
+                NSArray *filteredAddresses = [addresses filteredArrayUsingPredicate:predicate];
+                NSUInteger index = [addresses indexOfObject:filteredAddresses[0]];
+                
+                // Finding distance
+                NSString *distance = dataDictionary[@"rows"][0][@"elements"][index][@"distance"][@"text"];
                 NSArray *splitDistance = [distance componentsSeparatedByString:@" "];
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
