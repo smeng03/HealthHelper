@@ -233,6 +233,7 @@ CLLocationManager *locationManager;
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake([organization.destinationLatValue doubleValue], [organization.destinationLngValue doubleValue]);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     marker.title = organization.username;
+    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorNamed:@"themeColor"]];
     marker.map = self.mapView;
     
     // Re-centering map

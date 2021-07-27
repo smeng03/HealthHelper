@@ -1199,10 +1199,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="485"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIC-1y-fdZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1343"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1243"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kag-g7-Opb">
-                                                        <rect key="frame" x="20" y="330" width="374" height="993"/>
+                                                        <rect key="frame" x="20" y="230" width="374" height="993"/>
                                                         <string key="text">Join our team as a hospital front desk volunteer! You will assist visitors with finding patient rooms and navigating their way around the hospital. Must be at least 14 years old, be able to easily walk and stand for long periods of time, and be proficient in English.
 
 Requirements 
@@ -1221,10 +1221,10 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qas-go-kjp" customClass="GMSMapView">
-                                                        <rect key="frame" x="20" y="10" width="374" height="300"/>
+                                                        <rect key="frame" x="20" y="10" width="374" height="200"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="300" id="Thq-DD-fwS"/>
+                                                            <constraint firstAttribute="height" constant="200" id="Thq-DD-fwS"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>

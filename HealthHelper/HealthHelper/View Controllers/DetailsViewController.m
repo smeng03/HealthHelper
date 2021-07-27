@@ -122,6 +122,7 @@
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake([self.opportunity.author.destinationLatValue doubleValue], [self.opportunity.author.destinationLngValue doubleValue]);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     marker.title = self.opportunity.author.username;
+    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorNamed:@"themeColor"]];
     marker.map = self.mapView;
     
     // Re-centering map
