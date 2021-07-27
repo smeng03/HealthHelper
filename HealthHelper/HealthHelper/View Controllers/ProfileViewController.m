@@ -425,6 +425,7 @@ CLLocationManager *locationManager;
             // Constructing query to delete opportunity
             PFQuery *query = [PFUser query];
             [query includeKey:pastOpportunitiesQuery];
+            [query includeKey:tagsQuery];
             
             if ([opportunity.opportunityType isEqualToString:donationOpportunityType]) {
                 [query includeKey:amountDonatedQuery];
@@ -444,6 +445,14 @@ CLLocationManager *locationManager;
                     
                     // Add opportunity id to user's list of opportunities
                     NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];
+                    
+                    // Remove associated tags
+                    NSMutableArray *userTags = user[tagsQuery];
+                    for (NSString *tag in opportunity.tags) {
+                        NSUInteger index = [userTags indexOfObject:tag];
+                        [userTags removeObjectAtIndex:index];
+                    }
+                    user[tagsQuery] = userTags;
                     
                     // Removing opportunity user deleted
                     [pastOpportunities removeObject:opportunity.opportunityId];

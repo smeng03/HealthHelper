@@ -37,6 +37,7 @@
 @property (strong, nonatomic) CLLocation *userLocation;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
 @property (strong, nonatomic) NSArray *userTags;
+@property (strong, nonatomic) NSArray *userPastOpportunities;
 
 @end
 
@@ -119,6 +120,7 @@ CLLocationManager *opportunitiesLocationManager;
     // Querying for profile image
     PFQuery *query = [PFUser query];
     [query includeKey:userTagsQuery];
+    [query includeKey:pastOpportunitiesQuery];
     [query whereKey:objectIdKey equalTo:PFUser.currentUser.objectId];
     
     // Fetch user asynchronously
@@ -127,6 +129,7 @@ CLLocationManager *opportunitiesLocationManager;
             PFUser *user = users[0];
             
             self.userTags = user[userTagsQuery];
+            self.userPastOpportunities = user[pastOpportunitiesQuery];
             
             [self loadOpportunities];
             
@@ -192,13 +195,19 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Calculate similarity scores
     for (Opportunity *opportunity in opportunities) {
-        int similarityScore = 0;
-        for (NSString *opportunityTag in opportunity.tags) {
-            for (NSString *userTag in self.userTags) {
-                if ([opportunityTag isEqualToString:userTag]) {
-                    similarityScore += 1;
+        int similarityScore;
+        
+        if (![self.userPastOpportunities containsObject:opportunity.opportunityId]) {
+            similarityScore = 0;
+            for (NSString *opportunityTag in opportunity.tags) {
+                for (NSString *userTag in self.userTags) {
+                    if ([opportunityTag isEqualToString:userTag]) {
+                        similarityScore += 1;
+                    }
                 }
             }
+        } else {  // Put signed up opportunities at the bottom of the list
+            similarityScore = -1;
         }
     
     [opportunitiesWithScores addObject:@{@"opportunity": opportunity, @"score":[NSNumber numberWithInt:similarityScore]}];

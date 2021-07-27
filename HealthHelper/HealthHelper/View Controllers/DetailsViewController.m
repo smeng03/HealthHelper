@@ -155,6 +155,7 @@
 - (void)registerOpportunity {
     PFQuery *query = [PFUser query];
     [query includeKey:pastOpportunitiesQuery];
+    [query includeKey:tagsQuery];
     
     if ([self.opportunity.opportunityType isEqualToString:@"Donation"]) {
         [query includeKey:amountDonatedQuery];
@@ -171,6 +172,11 @@
         if (users != nil) {
             // Create and store array of Post objects from retrieved posts
             PFUser *user = users[0];
+            
+            // Add opportunity tags to user
+            NSMutableArray *userTags = user[tagsQuery];
+            [userTags addObjectsFromArray:self.opportunity.tags];
+            user[tagsQuery] = userTags;
             
             // Add opportunity id to user's list of opportunities
             NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];

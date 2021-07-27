@@ -160,13 +160,16 @@
          contextName = "-[OpportunitiesViewController sortOpportunities:]:OpportunitiesViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "opportunity.author.address">
-            </PersistentString>
-            <PersistentString
                value = "opportunity.author.distance">
             </PersistentString>
             <PersistentString
+               value = "opportunity.opportunityId">
+            </PersistentString>
+            <PersistentString
                value = "opportunity.author.username">
+            </PersistentString>
+            <PersistentString
+               value = "opportunity.author.address">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -278,6 +281,12 @@
       <ContextState
          contextName = "__44-[DetailsViewController registerOpportunity]_block_invoke:DetailsViewController.m">
          <PersistentStrings>
+            <PersistentString
+               value = "self.opportunity.tags">
+            </PersistentString>
+            <PersistentString
+               value = "user[tagsQuery]">
+            </PersistentString>
             <PersistentString
                value = "self.opportunity.amount">
             </PersistentString>
