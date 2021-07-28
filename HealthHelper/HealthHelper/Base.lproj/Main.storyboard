@@ -559,13 +559,34 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRz-9A-llZ">
+                                <rect key="frame" x="20" y="753" width="374" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gad-k4-kMk">
+                                        <rect key="frame" x="10" y="11" width="354" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6mS-lL-WGj"/>
+                                    <constraint firstItem="Gad-k4-kMk" firstAttribute="leading" secondItem="GRz-9A-llZ" secondAttribute="leading" constant="10" id="JT5-Hx-eek"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gad-k4-kMk" secondAttribute="trailing" constant="10" id="RCE-1g-Kbr"/>
+                                    <constraint firstItem="Gad-k4-kMk" firstAttribute="centerY" secondItem="GRz-9A-llZ" secondAttribute="centerY" id="Ycf-Ki-e1V"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FdR-FW-d7k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="kLs-BB-Px5" secondAttribute="bottom" id="4qf-Bv-7eo"/>
+                            <constraint firstItem="FdR-FW-d7k" firstAttribute="trailing" secondItem="GRz-9A-llZ" secondAttribute="trailing" constant="20" id="Bhp-uv-dNo"/>
                             <constraint firstItem="kLs-BB-Px5" firstAttribute="leading" secondItem="FdR-FW-d7k" secondAttribute="leading" id="U7X-aH-EwD"/>
+                            <constraint firstItem="FdR-FW-d7k" firstAttribute="bottom" secondItem="GRz-9A-llZ" secondAttribute="bottom" constant="20" id="XDU-8d-aUx"/>
                             <constraint firstItem="kLs-BB-Px5" firstAttribute="top" secondItem="X5l-Nr-wqu" secondAttribute="top" id="eK4-l7-K33"/>
+                            <constraint firstItem="GRz-9A-llZ" firstAttribute="leading" secondItem="FdR-FW-d7k" secondAttribute="leading" constant="20" id="fdW-WH-VvZ"/>
                             <constraint firstItem="kLs-BB-Px5" firstAttribute="trailing" secondItem="FdR-FW-d7k" secondAttribute="trailing" id="kco-f3-cht"/>
                         </constraints>
                     </view>
@@ -585,6 +606,8 @@
                     <connections>
                         <outlet property="distanceButton" destination="cA9-e4-aXj" id="dqd-cs-m8v"/>
                         <outlet property="donateButton" destination="okT-VQ-evH" id="007-zG-Sij"/>
+                        <outlet property="notificationLabel" destination="Gad-k4-kMk" id="d8t-BF-BNz"/>
+                        <outlet property="notificationView" destination="GRz-9A-llZ" id="3Un-q0-Cuw"/>
                         <outlet property="searchBar" destination="52n-p2-nhP" id="gCo-mH-KtO"/>
                         <outlet property="shadowButton" destination="3Eg-My-UYJ" id="qfI-dM-cn1"/>
                         <outlet property="tableView" destination="kLs-BB-Px5" id="Hfy-Jd-LW3"/>
@@ -909,6 +932,24 @@
                                     <segue destination="IT4-SX-FOz" kind="presentation" identifier="composeSegue" modalPresentationStyle="automatic" id="BQr-hg-192"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeG-1X-qWN">
+                                <rect key="frame" x="20" y="753" width="374" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSK-De-HH9">
+                                        <rect key="frame" x="10" y="11" width="354" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jSK-De-HH9" secondAttribute="trailing" constant="10" id="AYm-hv-mn4"/>
+                                    <constraint firstAttribute="height" constant="40" id="YB6-MM-s7n"/>
+                                    <constraint firstItem="jSK-De-HH9" firstAttribute="centerY" secondItem="KeG-1X-qWN" secondAttribute="centerY" id="q01-BB-7Ma"/>
+                                    <constraint firstItem="jSK-De-HH9" firstAttribute="leading" secondItem="KeG-1X-qWN" secondAttribute="leading" constant="10" id="uSy-6v-P0K"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxH-K7-7mO">
                                 <rect key="frame" x="120" y="142" width="37.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -924,12 +965,15 @@
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="4ot-we-lGf"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="top" secondItem="7hu-TS-5ny" secondAttribute="bottom" constant="20" id="5Rb-IV-0li"/>
                             <constraint firstItem="7hu-TS-5ny" firstAttribute="top" secondItem="RxH-K7-7mO" secondAttribute="bottom" constant="20" id="79I-4x-GXG"/>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="bottom" secondItem="KeG-1X-qWN" secondAttribute="bottom" constant="20" id="8up-1N-2BP"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" id="BKN-yw-sur"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="FmM-AN-Esh"/>
+                            <constraint firstItem="KeG-1X-qWN" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="20" id="Iap-6V-Qgf"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RxH-K7-7mO" secondAttribute="trailing" constant="20" id="O86-F5-6WM"/>
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="10" id="Y9f-VZ-JkN"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="bottom" secondItem="6nf-ki-u7H" secondAttribute="bottom" constant="20" id="aRV-sz-Wcp"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="trailing" secondItem="MN9-Pq-nQi" secondAttribute="trailing" id="alS-0M-st1"/>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" secondItem="KeG-1X-qWN" secondAttribute="trailing" constant="20" id="fHj-Uk-fBv"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BnX-QH-LgV" secondAttribute="trailing" constant="20" id="jgt-ky-deZ"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="oCK-Ky-2Tz"/>
                             <constraint firstItem="RxH-K7-7mO" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="qfh-J9-Rbm"/>
@@ -938,6 +982,8 @@
                     <navigationItem key="navigationItem" id="pFP-1D-rzf"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="Uv8-9d-i7p" id="qgk-DB-KPW"/>
+                        <outlet property="notificationLabel" destination="jSK-De-HH9" id="oNF-GO-rTB"/>
+                        <outlet property="notificationView" destination="KeG-1X-qWN" id="G94-I1-SBe"/>
                         <outlet property="organizationNameLabel" destination="BnX-QH-LgV" id="d3y-1A-FKs"/>
                         <outlet property="profileImageView" destination="Zar-3q-aIr" id="ovJ-ed-tbI"/>
                         <outlet property="ratingLabel" destination="RxH-K7-7mO" id="Uqd-W6-bEe"/>
@@ -1265,6 +1311,24 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyk-sM-ka1">
+                                <rect key="frame" x="20" y="753" width="374" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yq5-cB-tGk">
+                                        <rect key="frame" x="10" y="11" width="354" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6aT-hy-9Jt"/>
+                                    <constraint firstAttribute="trailing" secondItem="yq5-cB-tGk" secondAttribute="trailing" constant="10" id="Wjk-KE-aTO"/>
+                                    <constraint firstItem="yq5-cB-tGk" firstAttribute="centerY" secondItem="hyk-sM-ka1" secondAttribute="centerY" id="YcN-VN-mHf"/>
+                                    <constraint firstItem="yq5-cB-tGk" firstAttribute="leading" secondItem="hyk-sM-ka1" secondAttribute="leading" constant="10" id="b2S-WP-1iX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="twr-O9-iiq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1281,8 +1345,11 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="twr-O9-iiq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HKv-ex-0ig" secondAttribute="trailing" constant="20" id="MUX-Uc-rQr"/>
                             <constraint firstItem="60g-8E-BuH" firstAttribute="leading" secondItem="Pqu-oj-mHI" secondAttribute="trailing" constant="10" id="NTg-hl-Hee"/>
                             <constraint firstItem="MDr-Jb-qHM" firstAttribute="top" secondItem="kHG-y7-DlF" secondAttribute="bottom" constant="20" id="RMH-Rd-bQ8"/>
+                            <constraint firstItem="hyk-sM-ka1" firstAttribute="leading" secondItem="twr-O9-iiq" secondAttribute="leading" constant="20" id="T8e-4n-KTT"/>
                             <constraint firstItem="u29-OU-lPp" firstAttribute="top" secondItem="twr-O9-iiq" secondAttribute="top" constant="20" id="Uhz-nI-kYx"/>
+                            <constraint firstAttribute="trailing" secondItem="hyk-sM-ka1" secondAttribute="trailing" constant="20" id="VNG-tH-AYt"/>
                             <constraint firstItem="HKv-ex-0ig" firstAttribute="leading" secondItem="Pqu-oj-mHI" secondAttribute="trailing" constant="10" id="VUk-eB-tVG"/>
+                            <constraint firstItem="twr-O9-iiq" firstAttribute="bottom" secondItem="hyk-sM-ka1" secondAttribute="bottom" constant="20" id="Va4-tX-6Rn"/>
                             <constraint firstItem="Pqu-oj-mHI" firstAttribute="top" secondItem="twr-O9-iiq" secondAttribute="top" constant="20" id="WID-Fe-Rw9"/>
                             <constraint firstItem="60g-8E-BuH" firstAttribute="top" secondItem="u29-OU-lPp" secondAttribute="bottom" constant="10" id="YFq-8Q-OAb"/>
                             <constraint firstItem="HKv-ex-0ig" firstAttribute="top" secondItem="60g-8E-BuH" secondAttribute="bottom" constant="5" id="p96-Zy-h7m"/>
@@ -1294,6 +1361,8 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <outlet property="descriptionLabel" destination="kag-g7-Opb" id="CLy-Jp-G58"/>
                         <outlet property="distanceLabel" destination="60g-8E-BuH" id="XJF-bH-gkl"/>
                         <outlet property="mapView" destination="qas-go-kjp" id="VT5-uB-noA"/>
+                        <outlet property="notificationLabel" destination="yq5-cB-tGk" id="zPc-12-9yn"/>
+                        <outlet property="notificationView" destination="hyk-sM-ka1" id="wMx-g0-HA9"/>
                         <outlet property="organizationNameLabel" destination="u29-OU-lPp" id="RbV-PH-UeA"/>
                         <outlet property="positionLabel" destination="HKv-ex-0ig" id="D5U-Fi-6sy"/>
                         <outlet property="profileImageView" destination="Pqu-oj-mHI" id="gcA-Ra-POi"/>
@@ -1551,6 +1620,24 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                     <constraint firstAttribute="height" constant="200" id="1wS-iU-FB8"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytr-eQ-MzE">
+                                <rect key="frame" x="20" y="753" width="374" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSc-we-V6P">
+                                        <rect key="frame" x="10" y="11" width="354" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kSc-we-V6P" secondAttribute="trailing" constant="10" id="HEm-RZ-D9s"/>
+                                    <constraint firstAttribute="height" constant="40" id="JWZ-9W-fwy"/>
+                                    <constraint firstItem="kSc-we-V6P" firstAttribute="leading" secondItem="ytr-eQ-MzE" secondAttribute="leading" constant="10" id="ouQ-7w-cUM"/>
+                                    <constraint firstItem="kSc-we-V6P" firstAttribute="centerY" secondItem="ytr-eQ-MzE" secondAttribute="centerY" id="pHE-w1-YOq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="p3P-FR-UWK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1564,10 +1651,13 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="GSp-g3-vh2" firstAttribute="top" secondItem="nzD-Yk-omb" secondAttribute="bottom" constant="20" id="G7W-VF-lhQ"/>
                             <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" secondItem="nzD-Yk-omb" secondAttribute="trailing" constant="10" id="UFy-aR-ZjA"/>
                             <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="COH-x7-NdH" secondAttribute="trailing" constant="20" id="Vak-lq-lCB"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" secondItem="ytr-eQ-MzE" secondAttribute="trailing" constant="20" id="Wdd-ab-YQH"/>
                             <constraint firstItem="nzD-Yk-omb" firstAttribute="top" secondItem="29D-Mk-gev" secondAttribute="bottom" constant="26" id="aDr-yS-Wd4"/>
                             <constraint firstItem="oeL-BN-WzO" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="ag6-nf-bBe"/>
                             <constraint firstAttribute="bottom" secondItem="GSp-g3-vh2" secondAttribute="bottom" id="cU1-WR-nXQ"/>
                             <constraint firstItem="n5C-zn-7EF" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="130" id="cmq-eZ-Mru"/>
+                            <constraint firstItem="p3P-FR-UWK" firstAttribute="bottom" secondItem="ytr-eQ-MzE" secondAttribute="bottom" constant="20" id="gW4-dJ-ZFT"/>
+                            <constraint firstItem="ytr-eQ-MzE" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="20" id="gjk-2i-ODu"/>
                             <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n5C-zn-7EF" secondAttribute="trailing" constant="20" id="hOQ-Cu-76B"/>
                             <constraint firstItem="p3P-FR-UWK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oeL-BN-WzO" secondAttribute="trailing" constant="20" id="hVK-K7-zeV"/>
                             <constraint firstItem="6a0-ek-VCC" firstAttribute="leading" secondItem="p3P-FR-UWK" secondAttribute="leading" constant="20" id="hX8-rH-KVG"/>
@@ -1600,6 +1690,8 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <outlet property="hoursShadowedLabel" destination="29D-Mk-gev" id="Wys-oc-hIq"/>
                         <outlet property="hoursVolunteeredLabel" destination="COH-x7-NdH" id="A02-mu-9JY"/>
                         <outlet property="mapView" destination="nzD-Yk-omb" id="3NN-q2-g2O"/>
+                        <outlet property="notificationLabel" destination="kSc-we-V6P" id="DrB-Hr-FKb"/>
+                        <outlet property="notificationView" destination="ytr-eQ-MzE" id="OpV-Un-41u"/>
                         <outlet property="profileImageView" destination="6a0-ek-VCC" id="2yR-Nw-c3o"/>
                         <outlet property="searchBar" destination="rjJ-Zf-9KF" id="cV9-ek-aIA"/>
                         <outlet property="shadowButton" destination="kvZ-FI-JWb" id="9VQ-1g-xvL"/>
@@ -1787,7 +1879,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4hB-W5-b5j"/>
+        <segue reference="Ejj-hJ-n4y"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>

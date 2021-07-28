@@ -13,7 +13,6 @@
 #import "FBShimmeringLayer.h"
 #import <Parse/Parse.h>
 @import UITextView_Placeholder;
-#import "MBProgressHUD.h"
 #import "QueryConstants.h"
 
 @interface ComposeViewController ()
@@ -144,6 +143,9 @@
         [self presentViewController:alert animated:YES completion:^{
         }];
     } else {
+        // Return back to previous view controller
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
         // Setting post attributes for storage in database
         PFObject *review = [PFObject objectWithClassName:reviewClassName];
         review[commentQuery] = self.composeField.text;
@@ -151,20 +153,16 @@
         review[starsQuery] = self.rating;
         review[forOrganizationWithIdQuery] = self.opportunity.author.organizationId;
         
-        // Progress HUD while post is saved
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Save review in background
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             // Saving new post
             [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 if (succeeded) {
                     [self updateOrganizationStats];
                 } else {
-                    // Otherwise, displays an alert
-                    NSLog(@"Problem posting review: %@", error.localizedDescription);
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-                    [alert addAction:okAction];
-                    [self presentViewController:alert animated:YES completion:^{}];
+                    
+                    // Broadcast that review saving has failed
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewFailed" object:nil userInfo:nil];
                 }
             }];
         });
@@ -196,12 +194,17 @@
             // Update organization object
             [organization saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 if (succeeded) {
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.delegate didPost];
                     
-                    // Adding a slight delay so progress HUD doesn't just flash
-                    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+                    // Broadcast that review saving is complete
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewPosted" object:nil userInfo:nil];
+                    
+                    [self.delegate didPost];
+            
                 } else {
+                    
+                    // Broadcast that review saving has failed
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewFailed" object:nil userInfo:nil];
+                    
                     NSLog(@"Error: %@", error.localizedDescription);
                 }
             }];
@@ -429,13 +432,6 @@
 
 
 #pragma mark - Other functions
-
--(void)stopAnimation {
-    // Stopping progress bar
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    });
-}
 
 - (IBAction)dismissKeyboard:(id)sender {
     // Dismisses keyboard when screen is tapped

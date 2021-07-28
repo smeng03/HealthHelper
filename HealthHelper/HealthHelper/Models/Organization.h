@@ -9,9 +9,11 @@
 #import <Parse/Parse.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class Organization;
+
 @protocol OrganizationDelegate
 
-- (void)placeMarkers;
+- (void)placeMarker:(Organization *)organization;
 
 @end
 

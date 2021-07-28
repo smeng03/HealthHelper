@@ -33,6 +33,8 @@
 @property (strong, nonatomic) NSNumber *destinationLngValue;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) GMYConfettiView *confettiView;
+@property (weak, nonatomic) IBOutlet UIView *notificationView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end
 
@@ -48,8 +50,8 @@
     
     // Load basic information from self.opportunity variable
     [self loadBasicProfile];
-    
     [self styleElements];
+    [self notificationSetup];
 }
 
 
@@ -225,6 +227,62 @@
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
+    }];
+}
+
+
+#pragma mark - Notification setup
+
+- (void)notificationSetup {
+    
+    // Hide notification view
+    [self.notificationView setHidden:YES];
+    
+    // Listen for notifications
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [self.notificationView setHidden:NO];
+        self.notificationView.backgroundColor = [UIColor colorNamed:@"successColor"];
+        self.notificationView.layer.cornerRadius = 10;
+        self.notificationLabel.textColor = [UIColor whiteColor];
+        self.notificationLabel.text = @"Your review was successfully posted!";
+        
+        self.notificationView.alpha = 0;
+        [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
+           self.notificationView.alpha = 1;
+        } completion: nil];
+        
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [self.notificationView setHidden:NO];
+        self.notificationView.backgroundColor = [UIColor colorNamed:@"failColor"];
+        self.notificationView.layer.cornerRadius = 10;
+        self.notificationLabel.textColor = [UIColor whiteColor];
+        self.notificationLabel.text = @"Error! Your review failed to post.";
+        
+        self.notificationView.alpha = 0;
+        [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
+           self.notificationView.alpha = 1;
+        } completion: nil];
+        
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+}
+
+
+#pragma mark - Hide notification
+
+- (void)hideNotification {
+    self.notificationView.alpha = 1;
+    [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
+       self.notificationView.alpha = 0;
+    } completion: ^(BOOL finished){
+        self.notificationView.hidden = YES;
     }];
 }
 
