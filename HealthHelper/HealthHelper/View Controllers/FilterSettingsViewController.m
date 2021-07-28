@@ -6,10 +6,13 @@
 //
 
 #import "FilterSettingsViewController.h"
+#import "Notification.h"
 
 @interface FilterSettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *distanceField;
+@property (weak, nonatomic) IBOutlet UIView *notificationView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end
 
@@ -22,6 +25,9 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.distanceField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]];
+    
+    // Allows notifications to be posted
+    [self notificationSetup];
 }
 
 
@@ -48,6 +54,42 @@
     [self.delegate didUpdateDistance];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Notification setup
+
+- (void)notificationSetup {
+    
+    // Hide notification view
+    [self.notificationView setHidden:YES];
+    
+    // Success notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+    
+    
+    // Failure notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+}
+
+
+#pragma mark - Hide notification
+
+- (void)hideNotification {
+    
+    [Notification hideNotificationAction:self.notificationView];
 }
 
 

@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 @import UITextView_Placeholder;
 #import "QueryConstants.h"
+#import "Notification.h"
 
 @interface ComposeViewController ()
 
@@ -26,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *star3;
 @property (weak, nonatomic) IBOutlet UIButton *star4;
 @property (weak, nonatomic) IBOutlet UIButton *star5;
+@property (weak, nonatomic) IBOutlet UIView *notificationView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end
 
@@ -47,6 +50,7 @@
     
     [self styleElements];
     [self loadProfileImage];
+    [self notificationSetup];
 }
 
 
@@ -411,6 +415,42 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:5];
+}
+
+
+#pragma mark - Notification setup
+
+- (void)notificationSetup {
+    
+    // Hide notification view
+    [self.notificationView setHidden:YES];
+    
+    // Success notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+    
+    
+    // Failure notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+}
+
+
+#pragma mark - Hide notification
+
+- (void)hideNotification {
+    
+    [Notification hideNotificationAction:self.notificationView];
 }
 
 

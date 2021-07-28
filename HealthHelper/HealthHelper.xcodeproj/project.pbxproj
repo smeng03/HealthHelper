@@ -35,6 +35,7 @@
 		D970C548269FA9C2003DA544 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C547269FA9C2003DA544 /* Organization.m */; };
 		D970C54B269FAB1F003DA544 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54A269FAB1F003DA544 /* Opportunity.m */; };
 		D970C54E269FAC88003DA544 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = D970C54D269FAC88003DA544 /* Review.m */; };
+		D99E8F6D26B1AC3600D8E6EC /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = D99E8F6C26B1AC3600D8E6EC /* Notification.m */; };
 		D9B1F8B526A8765E00CADBDA /* QueryConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B426A8765E00CADBDA /* QueryConstants.m */; };
 		D9B1F8B826A8859C00CADBDA /* FilterConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8B726A8859C00CADBDA /* FilterConstants.m */; };
 		D9B1F8BB26A8B8E700CADBDA /* FilterSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B1F8BA26A8B8E700CADBDA /* FilterSettingsViewController.m */; };
@@ -117,6 +118,8 @@
 		D970C54C269FAB2C003DA544 /* Opportunity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
 		D970C54D269FAC88003DA544 /* Review.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
 		D970C54F269FAC92003DA544 /* Review.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
+		D99E8F6B26B1AC2900D8E6EC /* Notification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
+		D99E8F6C26B1AC3600D8E6EC /* Notification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		D9B1F8B326A8764800CADBDA /* QueryConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueryConstants.h; sourceTree = "<group>"; };
 		D9B1F8B426A8765E00CADBDA /* QueryConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QueryConstants.m; sourceTree = "<group>"; };
 		D9B1F8B626A8858B00CADBDA /* FilterConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterConstants.h; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 		D970C4D7269CAFE8003DA544 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D99E8F6B26B1AC2900D8E6EC /* Notification.h */,
+				D99E8F6C26B1AC3600D8E6EC /* Notification.m */,
 				D9B1F8B626A8858B00CADBDA /* FilterConstants.h */,
 				D9B1F8B726A8859C00CADBDA /* FilterConstants.m */,
 				D9B1F8B326A8764800CADBDA /* QueryConstants.h */,
@@ -593,6 +598,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D99E8F6D26B1AC3600D8E6EC /* Notification.m in Sources */,
 				D970C4ED269CE26A003DA544 /* OpportunityCell.m in Sources */,
 				D970C4DD269CB235003DA544 /* User.m in Sources */,
 				D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */,

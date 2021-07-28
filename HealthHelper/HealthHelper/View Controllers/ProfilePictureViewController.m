@@ -8,12 +8,15 @@
 #import "ProfilePictureViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <SDWebImage/SDWebImage.h>
+#import "Notification.h"
 
 @interface ProfilePictureViewController () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (nonatomic, assign) CGFloat lastScale;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
+@property (weak, nonatomic) IBOutlet UIView *notificationView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end
 
@@ -41,6 +44,9 @@
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setMaximumNumberOfTouches:1];
     [self.profileImageView addGestureRecognizer:panRecognizer];
+    
+    // Allows notifications to be posted
+    [self notificationSetup];
 }
 
 
@@ -84,6 +90,43 @@
     self.profileImageView.center = [gestureRecognizer locationInView:self.profileImageView.superview];
      */
 }
+
+
+#pragma mark - Notification setup
+
+- (void)notificationSetup {
+    
+    // Hide notification view
+    [self.notificationView setHidden:YES];
+    
+    // Success notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+    
+    
+    // Failure notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+}
+
+
+#pragma mark - Hide notification
+
+- (void)hideNotification {
+    
+    [Notification hideNotificationAction:self.notificationView];
+}
+
 
 #pragma mark - Dismiss view controller
 

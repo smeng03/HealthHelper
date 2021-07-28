@@ -17,6 +17,7 @@
 #import "QueryConstants.h"
 #import "FilterConstants.h"
 #import "FilterSettingsViewController.h"
+#import "Notification.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate, OpportunityDelegate>
 
@@ -481,38 +482,22 @@ CLLocationManager *opportunitiesLocationManager;
     // Hide notification view
     [self.notificationView setHidden:YES];
     
-    // Listen for notifications
+    // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
         
-        [self.notificationView setHidden:NO];
-        self.notificationView.backgroundColor = [UIColor colorNamed:@"successColor"];
-        self.notificationView.layer.cornerRadius = 10;
-        self.notificationLabel.textColor = [UIColor whiteColor];
-        self.notificationLabel.text = @"Your review was successfully posted!";
+        [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
         
-        self.notificationView.alpha = 0;
-        [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
-           self.notificationView.alpha = 1;
-        } completion: nil];
-        
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
         
     }];
     
+    
+    // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
         
-        [self.notificationView setHidden:NO];
-        self.notificationView.backgroundColor = [UIColor colorNamed:@"failColor"];
-        self.notificationView.layer.cornerRadius = 10;
-        self.notificationLabel.textColor = [UIColor whiteColor];
-        self.notificationLabel.text = @"Error! Your review failed to post.";
+        [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
         
-        self.notificationView.alpha = 0;
-        [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
-           self.notificationView.alpha = 1;
-        } completion: nil];
-        
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
         
     }];
 }
@@ -521,12 +506,8 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - Hide notification
 
 - (void)hideNotification {
-    self.notificationView.alpha = 1;
-    [UIView animateWithDuration:1 delay:0 options: 0 animations:^{
-       self.notificationView.alpha = 0;
-    } completion: ^(BOOL finished){
-        self.notificationView.hidden = YES;
-    }];
+    
+    [Notification hideNotificationAction:self.notificationView];
 }
 
 

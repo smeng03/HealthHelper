@@ -6,8 +6,12 @@
 //
 
 #import "SettingsViewController.h"
+#import "Notification.h"
 
 @interface SettingsViewController ()
+
+@property (weak, nonatomic) IBOutlet UIView *notificationView;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end
 
@@ -17,6 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Allows notifications to be posted
+    [self notificationSetup];
 }
 
 
@@ -46,6 +53,42 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+}
+
+
+#pragma mark - Notification setup
+
+- (void)notificationSetup {
+    
+    // Hide notification view
+    [self.notificationView setHidden:YES];
+    
+    // Success notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+    
+    
+    // Failure notification
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
+        
+        [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
+        
+    }];
+}
+
+
+#pragma mark - Hide notification
+
+- (void)hideNotification {
+    
+    [Notification hideNotificationAction:self.notificationView];
 }
 
 
