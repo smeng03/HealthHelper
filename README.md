@@ -42,10 +42,10 @@ This is an app that allows users to browse & sign up for volunteer opportunities
 **Optional Nice-to-have Stories**
 
 - [X] A feature and page that tracks amount a user has donated and to where/places a user has volunteered and how long/etc. This just allows for more automatic tracking, so when a user looks back, they can easily see what they have done in the past.
-- [ ] The above page could also contain a map pinning all locations that a user is currently signed up to volunteer for in the future (a more visual representation for what someone has signed up for).
-- [ ] An option for a user to choose to search opporunities within ___ miles of their location (I think this is technically optional but would really be the the most fundamental of the nice-to-have stories)
+- [X] The above page could also contain a map pinning all locations that a user is currently signed up to volunteer for in the future (a more visual representation for what someone has signed up for).
+- [X] An option for a user to choose to search opporunities within ___ miles of their location (I think this is technically optional but would really be the the most fundamental of the nice-to-have stories)
 - [X] An option for users to leave reviews of their voluteering experience at a certain organization
-- [ ] A page that suggests new volunteering/donation/shadowing opportunities based on a user's past signups (this gives us an opportunity to implement a more complex matching algorithm based on tags, keywords, etc.)
+- [X] A page that suggests new volunteering/donation/shadowing opportunities based on a user's past signups (this gives us an opportunity to implement a more complex matching algorithm based on tags, keywords, etc.)
 - [X] Options to filter opporunties based on tags, location, hours of volunteering, etc.
 - [X] Profile screen for each organization (profile picture, description of their mission, link to website, etc.)
 - [X] Settings screen (for UI customization or other customization of the fundamental user experience)
