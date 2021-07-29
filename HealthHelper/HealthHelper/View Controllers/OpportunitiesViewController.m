@@ -18,6 +18,7 @@
 #import "FilterConstants.h"
 #import "FilterSettingsViewController.h"
 #import "Notification.h"
+#import "OpportunityArray.h"
 
 @interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate, OpportunityDelegate>
 
@@ -41,6 +42,8 @@
 @property (strong, nonatomic) NSArray *userPastOpportunities;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) NSCache *opportunitiesCache;
+@property (assign, nonatomic) BOOL isFirstLoad;
 
 @end
 
@@ -53,19 +56,26 @@ CLLocationManager *opportunitiesLocationManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isFirstLoad = TRUE;
+    
     // Delegates and data sources
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
+    // Setting cache
+    self.opportunitiesCache = [[NSCache alloc] init];
+    
+    // Load opportunities
+    [self checkCache];
+    
+    /*
     // Setting initial theme to light mode
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:false forKey:@"dark_mode_on"];
     [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
     [defaults synchronize];
-    
-    // Load user filters and opportunities
-    [self loadUserFilters];
+     */
     
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search opportunities...";
@@ -76,12 +86,19 @@ CLLocationManager *opportunitiesLocationManager;
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Set default distance filter
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setDouble:10.0 forKey:@"maxDistance"];
     [defaults synchronize];
     
     // Search bar styling
     self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
     self.searchBar.layer.borderWidth = 1;
+    
+    // Refresh when app comes to foreground
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCache) name:@"EnteredForeground" object:nil];
+    
+    // Autorefresh feed
+    [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(loadUserFilters) userInfo:nil repeats:NO];
     
     [self styleButton];
     [self filterSetup];
@@ -115,6 +132,28 @@ CLLocationManager *opportunitiesLocationManager;
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    
+    // Reload opportunities
+    if (!self.isFirstLoad) {
+        [self checkCache];
+    }
+    
+    self.isFirstLoad = FALSE;
+}
+
+
+#pragma mark - Check cache
+
+- (void)checkCache {
+    OpportunityArray *cachedOpportunities = [self.opportunitiesCache objectForKey:@"opportunities"];
+    
+    if (!cachedOpportunities) {
+        // Load user filters and opportunities
+        [self loadUserFilters];
+    } else {
+        self.opportunities = cachedOpportunities.opportunities;
+        self.filteredOpportunities = self.opportunities;
+    }
 }
 
 
@@ -176,6 +215,7 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Fetch posts asynchronously
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
             if (opportunities != nil) {
@@ -228,6 +268,11 @@ CLLocationManager *opportunitiesLocationManager;
     
     self.opportunities = sortedOpportunityArray;
     self.filteredOpportunities = self.opportunities;
+    
+    // Save to cache
+    OpportunityArray *array = [OpportunityArray new];
+    [array setOpportunityArray:self.opportunities];
+    [self.opportunitiesCache setObject:array forKey:@"opportunities"];
 }
 
 

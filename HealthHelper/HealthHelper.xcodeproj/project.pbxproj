@@ -10,6 +10,7 @@
 		126237028BECCD0B252D187F /* Pods_HealthHelperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5214698713E43AC6A69292C9 /* Pods_HealthHelperTests.framework */; };
 		499F864764F28DD807151F99 /* Pods_HealthHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */; };
 		8E3535F9A9E0E72943C87CB5 /* Pods_HealthHelper_HealthHelperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */; };
+		D913FE2C26B21DD6000E0F71 /* OpportunityArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D913FE2B26B21DD6000E0F71 /* OpportunityArray.m */; };
 		D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9198444269CAF19009ADD0D /* AppDelegate.m */; };
 		D9198448269CAF19009ADD0D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9198447269CAF19009ADD0D /* SceneDelegate.m */; };
 		D919844E269CAF19009ADD0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D919844C269CAF19009ADD0D /* Main.storyboard */; };
@@ -71,6 +72,8 @@
 		C6D0C49354B4AA0BC84C56B7 /* Pods-HealthHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthHelper.debug.xcconfig"; path = "Target Support Files/Pods-HealthHelper/Pods-HealthHelper.debug.xcconfig"; sourceTree = "<group>"; };
 		CC2943CDD4E2E2565CC732D3 /* Pods_HealthHelper_HealthHelperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthHelper_HealthHelperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8388C4D926E441E3913E61E /* Pods_HealthHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HealthHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D913FE2A26B21DC9000E0F71 /* OpportunityArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpportunityArray.h; sourceTree = "<group>"; };
+		D913FE2B26B21DD6000E0F71 /* OpportunityArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpportunityArray.m; sourceTree = "<group>"; };
 		D9198440269CAF19009ADD0D /* HealthHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9198443269CAF19009ADD0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9198444269CAF19009ADD0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 		D970C4D7269CAFE8003DA544 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D913FE2A26B21DC9000E0F71 /* OpportunityArray.h */,
+				D913FE2B26B21DD6000E0F71 /* OpportunityArray.m */,
 				D99E8F6B26B1AC2900D8E6EC /* Notification.h */,
 				D99E8F6C26B1AC3600D8E6EC /* Notification.m */,
 				D9B1F8B626A8858B00CADBDA /* FilterConstants.h */,
@@ -601,6 +606,7 @@
 				D99E8F6D26B1AC3600D8E6EC /* Notification.m in Sources */,
 				D970C4ED269CE26A003DA544 /* OpportunityCell.m in Sources */,
 				D970C4DD269CB235003DA544 /* User.m in Sources */,
+				D913FE2C26B21DD6000E0F71 /* OpportunityArray.m in Sources */,
 				D970C4F3269CEBC1003DA544 /* DetailsViewController.m in Sources */,
 				D970C4F6269CF8A4003DA544 /* SettingsViewController.m in Sources */,
 				D9198445269CAF19009ADD0D /* AppDelegate.m in Sources */,

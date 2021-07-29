@@ -10,7 +10,11 @@
 #import "Organization.h"
 #import <CoreLocation/CoreLocation.h>
 
-@implementation Opportunity
+@interface Opportunity() <NSDiscardableContent>
+
+@end
+
+@implementation Opportunity 
 
 NSMutableArray *newOpportunities = nil;
 
@@ -138,7 +142,6 @@ NSMutableArray *newOpportunities = nil;
             NSLog(@"Error: %@", error);
         } else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"%@", dataDictionary);
             
             // Calculating distances, initializing Organization objects
             int i;
@@ -176,6 +179,20 @@ NSMutableArray *newOpportunities = nil;
 }
 
     
+- (BOOL)beginContentAccess {
+    return TRUE;
+}
+
+- (BOOL)isContentDiscarded {
+    return FALSE;
+}
+
+- (void)discardContentIfPossible {
+}
+
+- (void)endContentAccess {
+}
+
 @end
 
 

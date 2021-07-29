@@ -9,6 +9,10 @@
 #import "Organization.h"
 #import "ProfileViewController.h"
 
+@interface Organization() <NSDiscardableContent>
+
+@end
+
 @implementation Organization
 
 @dynamic organizationId;
@@ -60,6 +64,20 @@
     }
     
     return organization;
+}
+
+- (BOOL)beginContentAccess {
+    return TRUE;
+}
+
+- (void)discardContentIfPossible {
+}
+
+- (void)endContentAccess {
+}
+
+- (BOOL)isContentDiscarded {
+    return FALSE;
 }
 
 @end

@@ -16,7 +16,7 @@
 
 @end
 
-@interface Opportunity : PFObject<PFSubclassing>
+@interface Opportunity : PFObject<PFSubclassing> 
 
 @property (nonatomic, strong) NSString *opportunityId;
 @property (nonatomic, strong) NSDate *timeCreatedAt;
