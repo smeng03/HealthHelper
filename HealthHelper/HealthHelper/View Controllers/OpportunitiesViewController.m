@@ -98,7 +98,7 @@ CLLocationManager *opportunitiesLocationManager;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCache) name:@"EnteredForeground" object:nil];
     
     // Autorefresh feed
-    [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(loadUserFilters) userInfo:nil repeats:NO];
+    // [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(loadUserFilters) userInfo:nil repeats:NO];
     
     [self styleButton];
     [self filterSetup];

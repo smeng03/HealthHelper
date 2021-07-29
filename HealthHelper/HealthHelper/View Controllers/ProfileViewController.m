@@ -187,10 +187,35 @@ CLLocationManager *locationManager;
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *opportunities, NSError *error) {
         if (opportunities != nil) {
-            self.unprocessedOpportunities = opportunities;
-            
-            // Get user location
-            [self getCurrentLocation];
+            if (opportunities.count > 0) {
+                self.unprocessedOpportunities = opportunities;
+                
+                // Get user location
+                [self getCurrentLocation];
+                
+                // Table view clear message
+                self.tableView.backgroundView = nil;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+                
+            } else {
+                
+                // No signed up opportunities to display
+                self.opportunities = [NSMutableArray new];
+                self.filteredOpportunities = self.opportunities;
+                
+                
+                // Table view empty message
+                UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+                noDataLabel.text = @"No opportunities to display";
+                noDataLabel.textColor = [UIColor grayColor];
+                noDataLabel.textAlignment = NSTextAlignmentCenter;
+                self.tableView.backgroundView = noDataLabel;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+                
+                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+                [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+            }
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
