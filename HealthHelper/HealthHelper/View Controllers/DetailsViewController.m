@@ -213,6 +213,14 @@
                 // Save data
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                     if (succeeded) {
+                        // Initializing a confetti view to display confetti
+                        self.confettiView = [[GMYConfettiView alloc] initWithFrame:self.view.bounds];
+                        [self.view addSubview:self.confettiView];
+                        [self.confettiView startConfetti];
+                        
+                        // Play confetti for 3 seconds
+                        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(stopConfetti) userInfo:nil repeats:NO];
+                        
                     } else {
                         NSLog(@"Error: %@", error.localizedDescription);
                     }
@@ -269,12 +277,11 @@
 
 
 #pragma mark - Stop confetti
-/*
+
 - (void)stopConfetti {
     [self.confettiView stopConfetti];
     self.confettiView = nil;
 }
- */
 
 
 #pragma mark - Setup styling

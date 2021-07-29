@@ -36,30 +36,8 @@
     return self;
 }
 
-#pragma mark -
-- (UIImage *)imageForSpriteType{
-    NSString *fileName = @"";
-    
-    switch (self.spriteType) {
-        case Confetti:
-            fileName = @"confetti";
-            break;
-        case Star:
-            fileName = @"star";
-            break;
-        case Diamond:
-            fileName = @"diamond";
-            break;
-        case Triangle:
-            fileName = @"triangle";
-            break;
-    }
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Resources" ofType:@"bundle"];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@.png",path,fileName];
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:filePath];
-    return image;
-}
+
+#pragma mark - Configuring confetti cells
 
 - (CAEmitterCell *)configConfettiWithColor:(UIColor *)color{
     CAEmitterCell *cell = [CAEmitterCell emitterCell];
@@ -67,15 +45,16 @@
     cell.lifetime = 14.0 * self.intensity;
     cell.lifetimeRange = 0;
     cell.color = color.CGColor;
-    cell.velocity = 350.0 * self.intensity;
+    cell.velocity = 1000.0 * self.intensity;
     cell.velocityRange = 80.0 * self.intensity;
     cell.emissionLongitude = M_PI;
     cell.emissionRange = M_PI_4;
     cell.spin = 3.5 * self.intensity;
     cell.spinRange = 4.0 * self.intensity;
-    cell.scaleRange = self.intensity;
+    cell.scale = 0.3;
+    cell.scaleRange = 0.15;
     cell.scaleSpeed = -0.1 * self.intensity;
-    cell.contents = (__bridge id)([self imageForSpriteType].CGImage);
+    cell.contents = (__bridge id)([UIImage imageNamed:@"confetti"].CGImage);
     return cell;
 }
 
