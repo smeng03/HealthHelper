@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *distanceUnitsControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeOfTravelControl;
 
 @end
 
@@ -24,6 +26,10 @@
     
     // Allows notifications to be posted
     [self notificationSetup];
+    
+    // Default highlighted segments
+    self.distanceUnitsControl.selectedSegmentIndex = 0;
+    self.modeOfTravelControl.selectedSegmentIndex = 0;
 }
 
 
@@ -38,6 +44,26 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:navColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
+}
+
+
+#pragma mark - Changed units
+
+- (IBAction)didChangeUnits:(id)sender {
+    NSArray *units = @[@"imperial", @"metric"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:units[self.distanceUnitsControl.selectedSegmentIndex] forKey:@"units"];
+    [defaults synchronize];
+}
+
+
+#pragma mark - Changed mode of travel
+
+- (IBAction)didChangeModeofTravel:(id)sender {
+    NSArray *modes = @[@"driving", @"walking", @"bicycling"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:modes[self.modeOfTravelControl.selectedSegmentIndex] forKey:@"mode"];
+    [defaults synchronize];
 }
 
 

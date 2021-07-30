@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 
 @end
 
@@ -41,6 +42,16 @@
     
     // Set bar color
     self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    
+    // Set distance label
+    NSString *units;
+    if ([self.units isEqualToString:@"imperial"]) {
+        units = @"mi";
+    } else {
+        units = @"km";
+    }
+    self.distanceLabel.text = units;
+    
 }
 
 

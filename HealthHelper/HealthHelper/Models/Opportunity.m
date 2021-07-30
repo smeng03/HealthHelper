@@ -83,11 +83,14 @@ NSMutableArray *newOpportunities = nil;
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (error != nil) {
+                
                 // Logging request as completed
                 numCompletedRequests++;
                 
                 NSLog(@"Error: %@", error);
+                
             } else {
+                
                 NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 
                 // Retrieving latitude and longitude
@@ -112,7 +115,13 @@ NSMutableArray *newOpportunities = nil;
 }
 
 + (void)getDistanceFromCoords:(CLLocation *)userLocation withObjects:(NSArray *)objects withLocations:(NSMutableArray *)locationsList withController:controller {
+    
     newOpportunities = [NSMutableArray new];
+    
+    // Getting user travel preferences
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *units = [defaults objectForKey:@"units"];
+    NSString *mode = [defaults objectForKey:@"mode"];
     
     // Parsing location
     NSNumber *userLat = [NSNumber numberWithDouble:userLocation.coordinate.latitude];
@@ -124,7 +133,7 @@ NSMutableArray *newOpportunities = nil;
     NSString *apiKey = [dict objectForKey: @"mapsAPIKey"];
     
     // Formatting request
-    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=%@,%@&destinations=%@%%2C%@", userLat, userLng, locationsList[0][0], locationsList[0][1]];
+    NSString *requestString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?mode=%@&units=%@&origins=%@,%@&destinations=%@%%2C%@", mode, units, userLat, userLng, locationsList[0][0], locationsList[0][1]];
     
     int i;
     for (i=1; i<locationsList.count; i++) {
@@ -138,14 +147,19 @@ NSMutableArray *newOpportunities = nil;
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
         if (error != nil) {
+            
             NSLog(@"Error: %@", error);
+            
         } else {
+            
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             
             // Calculating distances, initializing Organization objects
             int i;
             for (i=0; i<objects.count; i++) {
+                
                 // Finding correct address and location
                 NSArray *addresses = dataDictionary[@"destination_addresses"];
                 NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(SELF CONTAINS[cd] %@)", objects[i][@"author"][@"address"]];
@@ -159,16 +173,29 @@ NSMutableArray *newOpportunities = nil;
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
                 NSNumber *distanceValue = [f numberFromString:[splitDistance objectAtIndex:0]];
+                
+                // Normalizing distance and creating new Opportunity
+                Opportunity *newOpportunity = [Opportunity new];
+                
                 if ([[splitDistance objectAtIndex:1] isEqualToString:@"mi"]) {
-                    Opportunity *newOpportunity = [Opportunity new];
+    
                     [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]], duration] withController:controller];
-                    [newOpportunities addObject:newOpportunity];
                     
                 } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"ft"]) {
-                    Opportunity *newOpportunity = [Opportunity new];
+                    
                     [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]/5280], duration] withController:controller];
-                    [newOpportunities addObject:newOpportunity];
+                    
+                } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"km"]) {
+                    
+                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]], duration] withController:controller];
+                    
+                } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"m"]) {
+                    
+                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]/1000], duration] withController:controller];
+                    
                 }
+                
+                [newOpportunities addObject:newOpportunity];
             }
             
             // Pass opportunities back to view controller

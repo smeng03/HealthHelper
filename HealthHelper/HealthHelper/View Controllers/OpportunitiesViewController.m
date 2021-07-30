@@ -44,6 +44,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (strong, nonatomic) NSCache *opportunitiesCache;
 @property (assign, nonatomic) BOOL isFirstLoad;
+@property (nonatomic, strong) NSString *units;
+@property (nonatomic, strong) NSString *mode;
+
 
 @end
 
@@ -82,9 +85,13 @@ CLLocationManager *opportunitiesLocationManager;
     [self.refreshControl addTarget:self action:@selector(loadUserFilters) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
-    // Set default distance filter
+    // Set default distance filter, units, and method of travel
     [defaults setDouble:10.0 forKey:@"maxDistance"];
+    [defaults setObject:@"imperial" forKey:@"units"];
+    [defaults setObject:@"driving" forKey:@"mode"];
     [defaults synchronize];
+    self.units = @"imperial";
+    self.mode = @"driving";
     
     // Refresh when app comes to foreground
     [[NSNotificationCenter defaultCenter] addObserverForName:@"EnteredForeground" object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -116,11 +123,19 @@ CLLocationManager *opportunitiesLocationManager;
     self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
     self.searchBar.layer.borderWidth = 1;
     
-    // Reload opportunities
-    if (!self.isFirstLoad) {
-        [self checkCache];
+    // Reload opportunities when needed
+    NSString *units = [defaults objectForKey:@"units"];
+    NSString *mode = [defaults objectForKey:@"mode"];
+    if ([self.units isEqualToString:units] && [self.mode isEqualToString:mode]) {
+        if (!self.isFirstLoad) {
+            [self checkCache];
+        }
+    } else {
+        [self loadUserFilters];
+        self.units = units;
+        self.mode = mode;
     }
-    
+    [self styleButton];
     self.isFirstLoad = FALSE;
     
     // Refresh view
@@ -465,24 +480,25 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - Setup styling
 
 - (void)styleButton {
+    
     // Buttons have rounded corners
     self.volunteerButton.layer.cornerRadius = 15;
     self.shadowButton.layer.cornerRadius = 15;
     self.donateButton.layer.cornerRadius = 15;
     self.distanceButton.layer.cornerRadius = 15;
     
-    // Distance button text
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
-    
     // Button colors
     self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    [self updateDistanceButtonText];
+    
 }
 
 - (void)filterSetup {
+    
     // Initialize filter values
     self.volunteerFilterOn = FALSE;
     self.shadowFilterOn = FALSE;
@@ -491,18 +507,34 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Initialize filters array
     self.filters = [NSMutableArray new];
+    
 }
 
 
 #pragma mark - Distance settings delegate method
 
 - (void)didUpdateDistance {
-    // Distance button text update
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    
+    [self updateDistanceButtonText];
     
     // Manually trigger search and refilter using updated distance filter
     [self searchBar:self.searchBar textDidChange: self.searchBar.text];
+    
+}
+
+
+#pragma mark - Update distance button text
+
+- (void)updateDistanceButtonText {
+    // Distance button text
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *units;
+    if ([self.units isEqualToString:@"imperial"]) {
+        units = @"mi";
+    } else {
+        units = @"km";
+    }
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ %@", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]], units] forState:UIControlStateNormal];
 }
 
 
@@ -582,6 +614,7 @@ CLLocationManager *opportunitiesLocationManager;
         
         FilterSettingsViewController *filterSettingsViewController = [segue destinationViewController];
         filterSettingsViewController.delegate = self;
+        filterSettingsViewController.units = self.units;
         
     }
 }

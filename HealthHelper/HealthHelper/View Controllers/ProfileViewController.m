@@ -59,6 +59,8 @@
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (strong, nonatomic) GMSCoordinateBounds *bounds;
+@property (nonatomic, strong) NSString *units;
+@property (nonatomic, strong) NSString *mode;
 
 @end
 
@@ -87,6 +89,8 @@ CLLocationManager *locationManager;
         [self viewWillAppear:TRUE];
     }];
     
+    self.units = @"imperial";
+    self.mode = @"driving";
     [self styleElements];
     [self filterSetup];
     [self notificationSetup];
@@ -108,6 +112,18 @@ CLLocationManager *locationManager;
     // Search bar styling
     self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
     self.searchBar.layer.borderWidth = 1;
+    
+    // Reload opportunities when needed
+    NSString *units = [defaults objectForKey:@"units"];
+    NSString *mode = [defaults objectForKey:@"mode"];
+    if ([self.units isEqualToString:units] && [self.mode isEqualToString:mode]) {
+    } else {
+        [self loadPastOpportunityArray];
+        self.units = units;
+        self.mode = mode;
+    }
+    [self styleButton];
+    
 }
 
 
@@ -644,21 +660,7 @@ CLLocationManager *locationManager;
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search your opportunities...";
     
-    // Buttons have rounded corners
-    self.volunteerButton.layer.cornerRadius = 15;
-    self.shadowButton.layer.cornerRadius = 15;
-    self.donateButton.layer.cornerRadius = 15;
-    self.distanceButton.layer.cornerRadius = 15;
-    
-    // Button colors
-    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
-    
-    // Distance button text
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
+    [self styleButton];
     
     // Map corner radius
     self.mapView.layer.cornerRadius = 10;
@@ -688,6 +690,32 @@ CLLocationManager *locationManager;
     
     // Initialize filters array
     self.filters = [NSMutableArray new];
+}
+
+- (void)styleButton {
+    
+    // Buttons have rounded corners
+    self.volunteerButton.layer.cornerRadius = 15;
+    self.shadowButton.layer.cornerRadius = 15;
+    self.donateButton.layer.cornerRadius = 15;
+    self.distanceButton.layer.cornerRadius = 15;
+    
+    // Button colors
+    self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    // Distance button text
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *units;
+    if ([self.units isEqualToString:@"imperial"]) {
+        units = @"mi";
+    } else {
+        units = @"km";
+    }
+    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ %@", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]], units] forState:UIControlStateNormal];
+    
 }
 
 

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FilterSettingsViewController : UIViewController
 
 @property (nonatomic, weak) id<FilterSettingsControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *units;
 
 @end
 

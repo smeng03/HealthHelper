@@ -366,6 +366,7 @@
                     </view>
                     <connections>
                         <outlet property="distanceField" destination="l32-WU-bky" id="K2x-Fe-IjN"/>
+                        <outlet property="distanceLabel" destination="wPy-kl-9rg" id="I1i-5o-BHc"/>
                         <outlet property="navigationBar" destination="Soh-99-fRZ" id="v8O-JU-sU3"/>
                         <outlet property="notificationLabel" destination="ucZ-cN-eNQ" id="ZuN-eX-G8x"/>
                         <outlet property="notificationView" destination="VSf-Xc-Zwf" id="KMu-0W-Fep"/>
@@ -560,8 +561,8 @@
                                                         <constraint firstAttribute="height" constant="20" id="x56-qV-vcP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lgo-cb-pTI">
-                                                    <rect key="frame" x="20" y="322.5" width="20" height="17.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lgo-cb-pTI">
+                                                    <rect key="frame" x="20" y="322" width="20" height="19"/>
                                                     <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="S68-wb-E4e"/>
@@ -1962,11 +1963,45 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                     <constraint firstItem="CLL-EW-5sc" firstAttribute="centerY" secondItem="h0r-GU-adG" secondAttribute="centerY" id="fPi-pO-Zxi"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eh-zB-RfJ">
+                                <rect key="frame" x="20" y="401" width="131" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UFb-MY-b96">
+                                <rect key="frame" x="257" y="397.5" width="137" height="32"/>
+                                <segments>
+                                    <segment title="Imperial"/>
+                                    <segment title="Metric"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeUnits:" destination="hNz-0G-Mik" eventType="valueChanged" id="ZuN-CI-dD7"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode of Travel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FH-16-A1d">
+                                <rect key="frame" x="20" y="465" width="132.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lDh-5F-3mR">
+                                <rect key="frame" x="20" y="509" width="374" height="32"/>
+                                <segments>
+                                    <segment title="Driving"/>
+                                    <segment title="Walking"/>
+                                    <segment title="Biking"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeModeofTravel:" destination="hNz-0G-Mik" eventType="valueChanged" id="KmZ-Kp-lVt"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="l6a-V3-Uk2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="b75-p9-fzi" firstAttribute="top" secondItem="aiL-MK-cJj" secondAttribute="top" id="0Ju-ow-McU"/>
+                            <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="lDh-5F-3mR" secondAttribute="trailing" constant="20" id="2Va-A9-d52"/>
                             <constraint firstItem="Jov-kd-Uxj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CNj-EV-Q65" secondAttribute="trailing" constant="20" id="5ah-7Z-IMw"/>
                             <constraint firstItem="b75-p9-fzi" firstAttribute="leading" secondItem="H3A-tQ-G3v" secondAttribute="trailing" id="6Iu-o5-TgC"/>
                             <constraint firstItem="2bt-gP-iYJ" firstAttribute="top" secondItem="8eQ-5t-jtI" secondAttribute="top" id="7s5-PF-QLC"/>
@@ -1976,20 +2011,29 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             <constraint firstItem="8eQ-5t-jtI" firstAttribute="leading" secondItem="bU7-WY-4I7" secondAttribute="trailing" id="AiX-an-FpG"/>
                             <constraint firstItem="bU7-WY-4I7" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="Bzb-6S-Emz"/>
                             <constraint firstItem="h0r-GU-adG" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="CZt-oX-A76"/>
+                            <constraint firstItem="7FH-16-A1d" firstAttribute="top" secondItem="0eh-zB-RfJ" secondAttribute="bottom" constant="40" id="DAu-9V-mO8"/>
                             <constraint firstItem="bU7-WY-4I7" firstAttribute="leading" secondItem="hF1-fy-jGd" secondAttribute="trailing" id="FeU-Zc-rFk"/>
                             <constraint firstItem="U8m-Cs-4w8" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="GKf-cE-UfW"/>
                             <constraint firstItem="8eQ-5t-jtI" firstAttribute="top" secondItem="hF1-fy-jGd" secondAttribute="top" id="H9Y-PH-SHH"/>
                             <constraint firstItem="hF1-fy-jGd" firstAttribute="centerX" secondItem="sNN-Q5-k6X" secondAttribute="centerX" id="HUW-Gf-1Ol"/>
                             <constraint firstItem="BZz-uu-0Ev" firstAttribute="top" secondItem="H3A-tQ-G3v" secondAttribute="top" id="Inx-DT-iR9"/>
+                            <constraint firstItem="0eh-zB-RfJ" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="MO6-uA-r5e"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="h0r-GU-adG" secondAttribute="trailing" constant="20" id="QBV-AT-nVx"/>
+                            <constraint firstItem="7FH-16-A1d" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="SBz-f3-K7c"/>
+                            <constraint firstItem="UFb-MY-b96" firstAttribute="centerY" secondItem="0eh-zB-RfJ" secondAttribute="centerY" id="V0W-Lf-yyR"/>
                             <constraint firstItem="CNj-EV-Q65" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="W2H-Pm-yRl"/>
+                            <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="UFb-MY-b96" secondAttribute="trailing" constant="20" id="XNb-D1-WhR"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AqC-VF-afH" secondAttribute="trailing" constant="20" id="Zi0-OK-6fC"/>
                             <constraint firstItem="CNj-EV-Q65" firstAttribute="top" secondItem="l6a-V3-Uk2" secondAttribute="top" constant="40" id="bmM-Se-vmF"/>
+                            <constraint firstItem="UFb-MY-b96" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0eh-zB-RfJ" secondAttribute="trailing" constant="20" id="dWF-Z9-FQV"/>
                             <constraint firstItem="U8m-Cs-4w8" firstAttribute="width" secondItem="H3A-tQ-G3v" secondAttribute="width" id="en0-WC-6mq"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="bottom" secondItem="h0r-GU-adG" secondAttribute="bottom" constant="20" id="esl-4i-60n"/>
                             <constraint firstItem="AqC-VF-afH" firstAttribute="top" secondItem="CNj-EV-Q65" secondAttribute="bottom" constant="40" id="fEc-QZ-fiw"/>
+                            <constraint firstItem="lDh-5F-3mR" firstAttribute="top" secondItem="7FH-16-A1d" secondAttribute="bottom" constant="20" id="gMk-No-0Jh"/>
                             <constraint firstItem="BZz-uu-0Ev" firstAttribute="width" secondItem="H3A-tQ-G3v" secondAttribute="width" id="k8a-Br-90L"/>
+                            <constraint firstItem="0eh-zB-RfJ" firstAttribute="top" secondItem="Sez-4N-axM" secondAttribute="bottom" constant="50" id="l5V-P3-K7U"/>
                             <constraint firstItem="aiL-MK-cJj" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="mLk-Du-yMz"/>
+                            <constraint firstItem="lDh-5F-3mR" firstAttribute="leading" secondItem="l6a-V3-Uk2" secondAttribute="leading" constant="20" id="og3-Na-4gF"/>
                             <constraint firstItem="2bt-gP-iYJ" firstAttribute="leading" secondItem="U8m-Cs-4w8" secondAttribute="trailing" id="psx-Fo-23f"/>
                             <constraint firstItem="l6a-V3-Uk2" firstAttribute="trailing" secondItem="Jov-kd-Uxj" secondAttribute="trailing" constant="20" id="qBa-Pg-lL6"/>
                             <constraint firstItem="hF1-fy-jGd" firstAttribute="leading" secondItem="BZz-uu-0Ev" secondAttribute="trailing" id="qWu-Kl-P2c"/>
@@ -2006,6 +2050,8 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="os5-mi-Ef0"/>
                     <connections>
+                        <outlet property="distanceUnitsControl" destination="UFb-MY-b96" id="QAj-Rf-Ltz"/>
+                        <outlet property="modeOfTravelControl" destination="lDh-5F-3mR" id="def-FC-mtm"/>
                         <outlet property="notificationLabel" destination="CLL-EW-5sc" id="d7A-Vs-GRj"/>
                         <outlet property="notificationView" destination="h0r-GU-adG" id="08c-84-Wyw"/>
                     </connections>
@@ -2021,13 +2067,13 @@ Other: Community Volunteers work at least four hours each volunteer session and 
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
-        <image name="car.fill" catalog="system" width="128" height="93"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="give" width="25" height="25"/>
         <image name="hh_full" width="1073" height="232"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="star" width="48" height="48"/>
+        <image name="timer" catalog="system" width="128" height="121"/>
         <image name="user" width="25" height="25"/>
         <image name="user2" width="512" height="512"/>
         <image name="xmark" catalog="system" width="128" height="113"/>

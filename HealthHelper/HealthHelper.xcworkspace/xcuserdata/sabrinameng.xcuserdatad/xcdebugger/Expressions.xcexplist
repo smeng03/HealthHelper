@@ -9,10 +9,10 @@
                value = "self.volunteerFilterOn">
             </PersistentString>
             <PersistentString
-               value = "self.searchBar.text">
+               value = "self.filters">
             </PersistentString>
             <PersistentString
-               value = "self.filters">
+               value = "self.searchBar.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,6 +30,9 @@
             <PersistentString
                value = "newOpportunities">
             </PersistentString>
+            <PersistentString
+               value = "dataDictionary">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -41,13 +44,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OpportunityCell setCell:]:OpportunityCell.m">
+         contextName = "-[OpportunitiesViewController checkCache]:OpportunitiesViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "opportunity.text">
-            </PersistentString>
-            <PersistentString
-               value = "opportunity.author.imageURL">
+               value = "self.opportunitiesCache">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -85,10 +85,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OpportunitiesViewController checkCache]:OpportunitiesViewController.m">
+         contextName = "-[OpportunityCell setCell:]:OpportunityCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.opportunitiesCache">
+               value = "opportunity.text">
+            </PersistentString>
+            <PersistentString
+               value = "opportunity.author.imageURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -141,10 +144,10 @@
          contextName = "-[OpportunitiesViewController locationManager:didUpdateLocations:]:OpportunitiesViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.latValue">
+               value = "self.lngValue">
             </PersistentString>
             <PersistentString
-               value = "self.lngValue">
+               value = "self.latValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -185,7 +188,7 @@
          contextName = "__63+[Organization getDistanceFromCoords:withLng:withOrganization:]_block_invoke:Organization.m">
          <PersistentStrings>
             <PersistentString
-               value = "userLng">
+               value = "organization.distanceValue">
             </PersistentString>
             <PersistentString
                value = "splitDistance">
@@ -197,7 +200,7 @@
                value = "distanceValue">
             </PersistentString>
             <PersistentString
-               value = "organization.distanceValue">
+               value = "userLng">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -238,10 +241,10 @@
          contextName = "__46-[ProfileViewController loadPastOpportunities]_block_invoke.131:ProfileViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "opportunities">
+               value = "self.pastOpportunities">
             </PersistentString>
             <PersistentString
-               value = "self.pastOpportunities">
+               value = "opportunities">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -290,13 +293,13 @@
          contextName = "__44-[DetailsViewController registerOpportunity]_block_invoke:DetailsViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "user[tagsQuery]">
-            </PersistentString>
-            <PersistentString
                value = "self.opportunity.amount">
             </PersistentString>
             <PersistentString
                value = "self.opportunity.tags">
+            </PersistentString>
+            <PersistentString
+               value = "user[tagsQuery]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
