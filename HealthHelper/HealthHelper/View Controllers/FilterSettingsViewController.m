@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *distanceField;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -34,9 +35,12 @@
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    // self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    // Loads in user-picked color
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
+    
+    // Set bar color
+    self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
 }
 
 

@@ -48,32 +48,17 @@
     [self notificationSetup];
 }
 
-#pragma mark - viewWillApear()
+#pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
+    // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
-    int navColor = [defaults integerForKey:@"nav_color"];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [self colorWithHex:navColor];
-    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
-    
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
 }
 
 

@@ -69,13 +69,10 @@ CLLocationManager *opportunitiesLocationManager;
     // Load opportunities
     [self checkCache];
     
-    /*
-    // Setting initial theme to light mode
+    // Setting default nav color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:false forKey:@"dark_mode_on"];
-    [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
+    [defaults setObject:@"navColor" forKey:@"nav_color"];
     [defaults synchronize];
-     */
     
     // Search bar placeholder text
     self.searchBar.placeholder = @"Search opportunities...";
@@ -86,16 +83,13 @@ CLLocationManager *opportunitiesLocationManager;
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Set default distance filter
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setDouble:10.0 forKey:@"maxDistance"];
     [defaults synchronize];
     
-    // Search bar styling
-    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
-    self.searchBar.layer.borderWidth = 1;
-    
     // Refresh when app comes to foreground
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCache) name:@"EnteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"EnteredForeground" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self viewWillAppear:TRUE];
+    }];
     
     // Autorefresh feed
     // [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(loadUserFilters) userInfo:nil repeats:NO];
@@ -109,29 +103,18 @@ CLLocationManager *opportunitiesLocationManager;
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
+    // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
-    int navColor = [defaults integerForKey:@"nav_color"];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [self colorWithHex:navColor];
-    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
+    navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
     
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    // Search bar styling
+    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
+    self.searchBar.layer.borderWidth = 1;
     
     // Reload opportunities
     if (!self.isFirstLoad) {
@@ -139,6 +122,9 @@ CLLocationManager *opportunitiesLocationManager;
     }
     
     self.isFirstLoad = FALSE;
+    
+    // Refresh view
+    [self.view setNeedsDisplay];
 }
 
 

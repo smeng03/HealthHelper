@@ -81,17 +81,10 @@ CLLocationManager *locationManager;
     // Loading past opportunities
     [self loadPastOpportunityArray];
     
-    // Refresh Control
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(loadPastOpportunityArray) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
-    // Placeholder shimmer while loading
-    // self.profileImageView.image = [SDAnimatedImage imageNamed:@"loading_square.gif"];
-    self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
-    self.shimmeringView.contentView = self.profileImageView;
-    [self.view addSubview:self.shimmeringView];
-    self.shimmeringView.shimmering = YES;
+    // Refresh when app comes to foreground
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"EnteredForeground" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self viewWillAppear:TRUE];
+    }];
     
     [self styleElements];
     [self filterSetup];
@@ -102,36 +95,18 @@ CLLocationManager *locationManager;
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
+    // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
-    int navColor = [defaults integerForKey:@"nav_color"];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [self colorWithHex:navColor];
-    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
+    navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
     
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-    
-    // Load info again
-    [self loadBasicProfile];
-    [self loadPastOpportunityArray];
-    
-    // Distance button text update
-    [self.distanceButton setTitle:[NSString stringWithFormat:@"≤ %@ mi", [NSNumber numberWithDouble:[defaults doubleForKey:@"maxDistance"]]] forState:UIControlStateNormal];
-    */
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    // Search bar styling
+    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
+    self.searchBar.layer.borderWidth = 1;
 }
 
 
@@ -686,9 +661,17 @@ CLLocationManager *locationManager;
     // Map user location enabled
     self.mapView.myLocationEnabled = true;
     
-    // Search bar styling
-    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
-    self.searchBar.layer.borderWidth = 1;
+    // Refresh Control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPastOpportunityArray) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    // Placeholder shimmer while loading
+    self.shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.profileImageView.frame];
+    self.shimmeringView.contentView = self.profileImageView;
+    [self.view addSubview:self.shimmeringView];
+    self.shimmeringView.shimmering = YES;
+
 }
 
 - (void)filterSetup {

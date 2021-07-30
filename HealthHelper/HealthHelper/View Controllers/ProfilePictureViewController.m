@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -47,6 +48,18 @@
     
     // Allows notifications to be posted
     [self notificationSetup];
+}
+
+
+#pragma mark - viewWillAppear()
+
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
+    
+    // Set bar color
+    self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
 }
 
 

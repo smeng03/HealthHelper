@@ -29,30 +29,15 @@
 
 #pragma mark - viewWillAppear()
 
-- (void)viewWillAppear:(BOOL)animated{
-    /*
-    // Loads in user-picked color and dark mode settings
+- (void)viewWillAppear:(BOOL)animated {
+    // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
-    int navColor = [defaults integerForKey:@"nav_color"];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [self colorWithHex:navColor];
-    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
-    
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
 }
 
 
@@ -96,7 +81,7 @@
 
 - (IBAction)setColor1:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0x273599 forKey:@"nav_color"];
+    [defaults setObject:@"color1" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
@@ -104,7 +89,7 @@
 
 - (IBAction)setColor2:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0xFFE07A forKey:@"nav_color"];
+    [defaults setObject:@"color2" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
@@ -112,7 +97,7 @@
 
 - (IBAction)setColor3:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0xBBEA93 forKey:@"nav_color"];
+    [defaults setObject:@"color3" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
@@ -120,7 +105,7 @@
 
 - (IBAction)setColor4:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0xFFE0E5 forKey:@"nav_color"];
+    [defaults setObject:@"color4" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
@@ -128,7 +113,7 @@
 
 - (IBAction)setColor5:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0x333333 forKey:@"nav_color"];
+    [defaults setObject:@"color5" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
@@ -136,7 +121,7 @@
 
 - (IBAction)resetColor:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:0xf7f7f7 forKey:@"nav_color"];
+    [defaults setObject:@"navColor" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];

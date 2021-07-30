@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *star5;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -57,29 +58,12 @@
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
+    // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
-    int navColor = [defaults integerForKey:@"nav_color"];
+    NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [self colorWithHex:navColor];
-    self.tabBarController.tabBar.barTintColor = [self colorWithHex:navColor];
-    
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    navigationBar.barTintColor = [UIColor colorNamed:@"navColor"];
-    // self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:@"navColor"];
+    self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
 }
 
 
