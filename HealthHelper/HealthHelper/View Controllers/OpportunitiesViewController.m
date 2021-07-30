@@ -82,7 +82,7 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Refresh Control
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(loadOpportunities) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(loadUserFilters) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     // Set default distance filter

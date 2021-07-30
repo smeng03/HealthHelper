@@ -8,17 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, SpriteType) {
-    Confetti = 0,
-    Star,
-    Diamond,
-    Triangle
-};
-
 @interface GMYConfettiView : UIView
-@property (nonatomic, assign) SpriteType spriteType;
-@property (nonatomic, assign) CGFloat intensity;
 
+@property (nonatomic, assign) CGFloat intensity;
 
 - (void)startConfetti;
 - (void)stopConfetti;

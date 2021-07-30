@@ -28,8 +28,7 @@
                     [UIColor colorWithRed:.3 green:.76 blue:.85 alpha:1.],
                     [UIColor colorWithRed:.58 green:.39 blue:.55 alpha:1.]];
         
-        _intensity = .5f;
-        _spriteType = Confetti;
+        _intensity = 1.0f;
         
         self.backgroundColor = [UIColor clearColor];
     }
@@ -45,7 +44,7 @@
     cell.lifetime = 14.0 * self.intensity;
     cell.lifetimeRange = 0;
     cell.color = color.CGColor;
-    cell.velocity = 1000.0 * self.intensity;
+    cell.velocity = 600.0 * self.intensity;
     cell.velocityRange = 80.0 * self.intensity;
     cell.emissionLongitude = M_PI;
     cell.emissionRange = M_PI_4;
