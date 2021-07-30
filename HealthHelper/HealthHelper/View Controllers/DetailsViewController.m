@@ -36,6 +36,7 @@
 @property (nonatomic, strong) GMYConfettiView *confettiView;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) GMSCoordinateBounds *bounds;
 
 @end
 
@@ -48,6 +49,7 @@
 
     // Map setup
     self.mapView.myLocationEnabled = true;
+    self.bounds = [[GMSCoordinateBounds alloc] init];
     
     // Load basic information from self.opportunity variable
     [self loadBasicProfile];
@@ -115,7 +117,10 @@
     marker.map = self.mapView;
     
     // Re-centering map
-    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[self.opportunity.author.destinationLatValue doubleValue] longitude:[self.opportunity.author.destinationLngValue doubleValue] zoom:10];
+    self.bounds = [self.bounds includingCoordinate:marker.position];
+    self.bounds = [self.bounds includingCoordinate:self.userLocation.coordinate];
+    GMSCameraUpdate *updateCamera = [GMSCameraUpdate fitBounds:self.bounds withPadding:30];
+    [self.mapView moveCamera:updateCamera];
     
     // Setting distance label
     self.distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.opportunity.author.distance];

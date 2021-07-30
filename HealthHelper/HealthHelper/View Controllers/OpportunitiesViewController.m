@@ -567,6 +567,7 @@ CLLocationManager *opportunitiesLocationManager;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"opportunitiesToDetails"]) {
+        
         // Identify tapped cell and get associated opportunity
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
@@ -575,9 +576,13 @@ CLLocationManager *opportunitiesLocationManager;
         // Send information
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.opportunity = opportunity;
+        detailsViewController.userLocation = self.userLocation;
+        
     } else if ([segue.identifier isEqualToString:@"toFilterSettings"]) {
+        
         FilterSettingsViewController *filterSettingsViewController = [segue destinationViewController];
         filterSettingsViewController.delegate = self;
+        
     }
 }
 

@@ -58,6 +58,7 @@
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) GMSCoordinateBounds *bounds;
 
 @end
 
@@ -114,6 +115,7 @@ CLLocationManager *locationManager;
 
 - (void)loadPastOpportunityArray {
     locationManager = [[CLLocationManager alloc] init];
+    self.bounds = [[GMSCoordinateBounds alloc] init];
     [self.mapView clear];
     
     // Query for opportunities array
@@ -210,15 +212,14 @@ CLLocationManager *locationManager;
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
     self.userLocation = location;
+    self.bounds = [self.bounds includingCoordinate:location.coordinate];
     [locationManager stopUpdatingLocation];
     locationManager = nil;
     
     // Create and store array of Opportunity objects from retrieved posts
     [Opportunity createOpportunityArray:self.unprocessedOpportunities withLocation:self.userLocation withController:self];
     self.filteredOpportunities = self.opportunities;
-    
-    //[self.tableView reloadData];
-    //[self.refreshControl endRefreshing];
+
 }
 
 - (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
@@ -240,8 +241,12 @@ CLLocationManager *locationManager;
     marker.icon = [GMSMarker markerImageWithColor:[UIColor colorNamed:@"themeColor"]];
     marker.map = self.mapView;
     
+    self.bounds = [self.bounds includingCoordinate:marker.position];
+    
     // Re-centering map
-    self.mapView.camera = [GMSCameraPosition cameraWithLatitude:[organization.destinationLatValue doubleValue] longitude:[organization.destinationLngValue doubleValue] zoom:10];
+    GMSCameraUpdate *updateCamera = [GMSCameraUpdate fitBounds:self.bounds withPadding:30];
+    [self.mapView moveCamera:updateCamera];
+    
 }
 
 
@@ -766,6 +771,7 @@ CLLocationManager *locationManager;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Segue for details view controller
     if ([segue.identifier isEqualToString:@"toDetails"]) {
+        
         // Identify tapped cell and get associated opportunity
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
@@ -774,6 +780,8 @@ CLLocationManager *locationManager;
         // Send information
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.opportunity = opportunity;
+        detailsViewController.userLocation = self.userLocation;
+        
     }
 }
 
