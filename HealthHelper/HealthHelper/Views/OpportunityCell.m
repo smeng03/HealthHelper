@@ -71,6 +71,12 @@
     // Type label
     self.typeLabel.text = [NSString stringWithFormat:@"Type: %@", opportunity.opportunityType];
     
+    // Distance label
+    self.distanceLabel.text = opportunity.author.distance;
+    
+    // Duration label
+    self.timeLabel.text = opportunity.author.duration;
+    
     // Setting opportunity
     self.opportunity = opportunity;
 }

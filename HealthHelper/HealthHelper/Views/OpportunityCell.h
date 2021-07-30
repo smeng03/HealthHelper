@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (strong, nonatomic) Opportunity *opportunity;
 @property (strong, nonatomic) FBShimmeringView *shimmeringView;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 - (void)setCell:(Opportunity *)opportunity;
 

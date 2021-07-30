@@ -154,18 +154,19 @@ NSMutableArray *newOpportunities = nil;
                 
                 // Finding distance
                 NSString *distance = dataDictionary[@"rows"][0][@"elements"][index][@"distance"][@"text"];
+                NSString *duration = dataDictionary[@"rows"][0][@"elements"][index][@"duration"][@"text"];
                 NSArray *splitDistance = [distance componentsSeparatedByString:@" "];
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
                 NSNumber *distanceValue = [f numberFromString:[splitDistance objectAtIndex:0]];
                 if ([[splitDistance objectAtIndex:1] isEqualToString:@"mi"]) {
                     Opportunity *newOpportunity = [Opportunity new];
-                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]]] withController:controller];
+                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]], duration] withController:controller];
                     [newOpportunities addObject:newOpportunity];
                     
                 } else if ([[splitDistance objectAtIndex:1] isEqualToString:@"ft"]) {
                     Opportunity *newOpportunity = [Opportunity new];
-                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]/5280]] withController:controller];
+                    [newOpportunity initOpportunityWithObject:objects[i] withLocationArray:@[locationsList[i][0], locationsList[i][1], distance, [NSNumber numberWithDouble:[distanceValue doubleValue]/5280], duration] withController:controller];
                     [newOpportunities addObject:newOpportunity];
                 }
             }

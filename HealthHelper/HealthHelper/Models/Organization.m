@@ -30,6 +30,7 @@
 @dynamic distance;
 @dynamic distanceValue;
 @dynamic delegate;
+@dynamic duration;
 
 + (nonnull NSString *)parseClassName {
     return @"Organization";
@@ -57,6 +58,7 @@
     organization.destinationLngValue = locationArray[1];
     organization.distance = locationArray[2];
     organization.distanceValue = locationArray[3];
+    organization.duration = locationArray[4];
     
     // Call placeMarkers method if caller is ProfileViewController
     if ([controller isKindOfClass:[ProfileViewController class]]) {
