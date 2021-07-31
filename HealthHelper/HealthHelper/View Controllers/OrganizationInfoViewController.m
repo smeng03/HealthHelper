@@ -34,6 +34,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Delegates and data sources
@@ -46,11 +47,13 @@
     [self styleElements];
     [self setData];
     [self notificationSetup];
+    
 }
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
@@ -59,12 +62,14 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:navColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
+    
 }
 
 
 #pragma mark - Load reviews from database
 
 - (void)loadReviews {
+    
     // Construct query
     PFQuery *query = [PFQuery queryWithClassName:reviewClassName];
     [query includeKey:commentQuery];
@@ -77,13 +82,17 @@
     // Fetch posts asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *reviews, NSError *error) {
         if (reviews != nil) {
+            
             // Create and store array of Opportunity objects from retrieved posts
             self.reviews = [Review createReviewArray:reviews];
             self.reviewCountLabel.text = [NSString stringWithFormat:@"Reviews (%lu)", (unsigned long)self.reviews.count];
             
             [self.tableView reloadData];
+            
         } else {
+            
             NSLog(@"%@", error.localizedDescription);
+            
         }
     }];
 }
@@ -92,6 +101,7 @@
 #pragma mark - Table View
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
     ReviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewCell"];
     
     // Setting cell and style
@@ -99,17 +109,22 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+    
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return self.reviews.count;
+    
 }
 
 
 #pragma mark - Open full profile picture
 
 - (IBAction)didTapProfilePicture:(id)sender {
+    
     [self performSegueWithIdentifier:@"toFullProfileView" sender:nil];
+    
 }
 
 
@@ -117,6 +132,7 @@
 #pragma mark - didPost() delegate method
 
 - (void)didPost {
+    
     [self loadReviews];
     
     // Resetting rating label
@@ -125,11 +141,13 @@
     } else {
         self.ratingLabel.text = [NSString stringWithFormat:@"Average rating: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
     }
+    
 }
 
 
 #pragma mark - Setup styling
 - (void)styleElements {
+    
     // Nav bar title
     self.navigationItem.title = self.opportunity.author.username;
     
@@ -138,9 +156,11 @@
     
     // Rounded corners on button
     self.reviewButton.layer.cornerRadius = 5;
+    
 }
 
 - (void)setData {
+    
     // Set organization name
     self.organizationNameLabel.text = self.opportunity.author.username;
     
@@ -150,7 +170,6 @@
     // Set organization profile picture
     self.profileImageView.alpha = 0;
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.opportunity.author.imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
         if (image) {
             BOOL animated = NO;
 
@@ -169,7 +188,6 @@
                 self.profileImageView.alpha = 1.0;
             }
         }
-
     }];
     
     // Setting rating label
@@ -178,6 +196,7 @@
     } else {
         self.ratingLabel.text = [NSString stringWithFormat:@"Average rating: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
     }
+    
 }
 
 
@@ -190,21 +209,15 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
 }
 
@@ -217,29 +230,24 @@
 }
 
 
-#pragma mark - UI Color from hex
-
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
-}
-
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqual:@"composeSegue"]) {
+        
         // Sending current opportunity to next view controller
         ComposeViewController *composeViewController = [segue destinationViewController];
         composeViewController.opportunity = self.opportunity;
         composeViewController.delegate = self;
+        
     } else if ([segue.identifier isEqual:@"toFullProfileView"]) {
+        
         ProfilePictureViewController *profilePictureViewController = [segue destinationViewController];
         profilePictureViewController.opportunity = self.opportunity;
+        
     }
+    
 }
 
 @end

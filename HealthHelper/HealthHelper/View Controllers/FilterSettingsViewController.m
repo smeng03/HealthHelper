@@ -23,6 +23,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -30,12 +31,14 @@
     
     // Allows notifications to be posted
     [self notificationSetup];
+    
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
@@ -58,6 +61,7 @@
 #pragma mark - Save settings
 
 - (IBAction)didSave:(id)sender {
+    
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     NSNumber *maxDistance = [f numberFromString:self.distanceField.text];
@@ -67,8 +71,8 @@
     [defaults synchronize];
     
     [self.delegate didUpdateDistance];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 
@@ -81,22 +85,17 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
+    
 }
 
 
@@ -111,7 +110,7 @@
 #pragma mark - Dismiss view controller
 
 - (IBAction)didTapCancel:(id)sender {
-    // Dismisses ComposeViewController
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -119,7 +118,7 @@
 #pragma mark - Dismiss keyboard
 
 - (IBAction)dismissKeyboard:(id)sender {
-    // Dismisses keyboard when screen is tapped
+    
     [self.view endEditing:YES];
 }
 

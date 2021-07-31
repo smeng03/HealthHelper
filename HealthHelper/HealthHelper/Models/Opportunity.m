@@ -37,6 +37,7 @@ NSMutableArray *newOpportunities = nil;
 }
 
 - (void)initOpportunityWithObject:(PFObject *)object withLocationArray:(NSArray *)locationsList withController:controller {
+    
     // Setting Opportunity object given PFObject
     self.text = object[@"description"];
     self.tags = object[@"tags"];
@@ -50,19 +51,24 @@ NSMutableArray *newOpportunities = nil;
     self.hours = object[@"hours"];
     self.amount = object[@"donationAmount"];
     self.author = [Organization initOrganizationWithObject:object[@"author"] withLocationArray:locationsList withController:controller];
+    
 }
 
 + (void)createOpportunityArray:(NSArray *)objects withLocation:(CLLocation *)userLocation withController:controller {
+    
     // New array to store locations and default value
     NSMutableArray *locationsList = [NSMutableArray new];
     for (int i=0; i < objects.count; i++) {
         [locationsList addObject:@[[NSNumber numberWithInt:0], [NSNumber numberWithInt:0]]];
     }
     [Opportunity getLocationsFromAddress:objects withLocations:locationsList withUserLocation:userLocation withController:controller];
+    
 }
 
 + (void)getLocationsFromAddress:(NSArray *)objects withLocations:(NSMutableArray *)locationsList withUserLocation:(CLLocation *)userLocation withController:controller {
+    
     __block int numCompletedRequests = 0;
+    
     for (int j=0; j<objects.count; j++) {
         PFObject *object = objects[j];
         
@@ -82,11 +88,11 @@ NSMutableArray *newOpportunities = nil;
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
             if (error != nil) {
                 
                 // Logging request as completed
                 numCompletedRequests++;
-                
                 NSLog(@"Error: %@", error);
                 
             } else {
@@ -139,7 +145,6 @@ NSMutableArray *newOpportunities = nil;
     for (i=1; i<locationsList.count; i++) {
         requestString = [NSString stringWithFormat:@"%@%%7C%@%%2C%@", requestString, locationsList[i][0], locationsList[i][1]];
     }
-    
     requestString = [NSString stringWithFormat:@"%@&key=%@", requestString, apiKey];
     
     // API request
@@ -208,17 +213,23 @@ NSMutableArray *newOpportunities = nil;
 
     
 - (BOOL)beginContentAccess {
+    
     return TRUE;
+    
 }
 
 - (BOOL)isContentDiscarded {
+    
     return FALSE;
+    
 }
 
 - (void)discardContentIfPossible {
+    
 }
 
 - (void)endContentAccess {
+    
 }
 
 @end

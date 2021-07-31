@@ -45,6 +45,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 
     // Map setup
@@ -55,12 +56,14 @@
     [self loadBasicProfile];
     [self styleElements];
     [self notificationSetup];
+    
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
@@ -69,16 +72,17 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:navColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
+    
 }
 
 
 #pragma mark - Load basic profile information
 
 - (void)loadBasicProfile {
+    
     // Set profile image
     self.profileImageView.alpha = 0;
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.opportunity.author.imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
         if (image) {
             BOOL animated = NO;
 
@@ -97,7 +101,6 @@
                 self.profileImageView.alpha = 1.0;
             }
         }
-
     }];
     
     // Set position label
@@ -124,16 +127,20 @@
     
     // Setting distance label
     self.distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.opportunity.author.distance];
+    
 }
 
 - (IBAction)didTapOrganizationProfile:(id)sender {
+    
     [self performSegueWithIdentifier:@"toOrganizationDetails" sender:nil];
+    
 }
 
 
 #pragma mark - Register for an opportunity
 
 - (IBAction)didTapRegister:(id)sender {
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.opportunity.signUpLink] options:@{} completionHandler:nil];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thank you!" message:@"Thanks for checking out this opportunity and making a difference in the community! Did you sign up for this opportunity?" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -145,9 +152,11 @@
     [alert addAction:noAction];
     [self presentViewController:alert animated:YES completion:^{
     }];
+    
 }
 
 - (void)registerOpportunity {
+    
     PFQuery *query = [PFUser query];
     [query includeKey:pastOpportunitiesQuery];
     [query includeKey:tagsQuery];
@@ -165,6 +174,7 @@
     // Fetch user asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
         if (users != nil) {
+            
             // Create and store array of Post objects from retrieved posts
             PFUser *user = users[0];
             
@@ -177,23 +187,27 @@
             NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];
             
             if (![pastOpportunities containsObject:self.opportunity.opportunityId]) {
+                
                 [pastOpportunities addObject:self.opportunity.opportunityId];
                 user[pastOpportunitiesQuery] = pastOpportunities;
                 
                 // Update hours or amount donated
                 if ([self.opportunity.opportunityType isEqual:@"Donation"]) {
+                    
                     NSNumber *donationAmount = user[amountDonatedQuery];
                     int newAmount = [donationAmount intValue]+[self.opportunity.amount intValue];
                     NSNumber *newDonation = [NSNumber numberWithInt:newAmount];
                     user[amountDonatedQuery] = newDonation;
                     
                 } else if ([self.opportunity.opportunityType isEqual:@"Shadowing"]) {
+                    
                     NSNumber *hoursShadowed = user[hoursShadowedQuery];
                     int newHours = [hoursShadowed intValue]+[self.opportunity.hours intValue];
                     NSNumber *newHoursShadowed = [NSNumber numberWithInt:newHours];
                     user[hoursShadowedQuery] = newHoursShadowed;
                     
                 } else if ([self.opportunity.opportunityType isEqual:@"Volunteering"]) {
+                    
                     NSNumber *hoursVolunteered = user[hoursVolunteeredQuery];
                     int newHours = [hoursVolunteered intValue]+[self.opportunity.hours intValue];
                     NSNumber *newHoursVolunteered = [NSNumber numberWithInt:newHours];
@@ -204,6 +218,7 @@
                 // Save data
                 [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                     if (succeeded) {
+                        
                         // Initializing a confetti view to display confetti
                         self.confettiView = [[GMYConfettiView alloc] initWithFrame:self.view.bounds];
                         [self.view addSubview:self.confettiView];
@@ -213,19 +228,25 @@
                         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(stopConfetti) userInfo:nil repeats:NO];
                         
                     } else {
+                        
                         NSLog(@"Error: %@", error.localizedDescription);
+                        
                     }
                 }];
+                
             } else {
+                
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You've already signed up!" message:@"You've already signed up for this opportunity, thanks for your contribution!" preferredStyle:(UIAlertControllerStyleAlert)];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:okAction];
-                [self presentViewController:alert animated:YES completion:^{
-                }];
+                [self presentViewController:alert animated:YES completion:^{}];
+                
             }
             
         } else {
+            
             NSLog(@"%@", error.localizedDescription);
+            
         }
     }];
 }
@@ -240,22 +261,17 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
+    
 }
 
 
@@ -270,14 +286,17 @@
 #pragma mark - Stop confetti
 
 - (void)stopConfetti {
+    
     [self.confettiView stopConfetti];
     self.confettiView = nil;
+    
 }
 
 
 #pragma mark - Setup styling
 
 - (void)styleElements {
+    
     // Rounded button corners
     self.registerButton.layer.cornerRadius = 10;
     
@@ -297,25 +316,18 @@
 }
 
 
-#pragma mark - UIColor from hex
-
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
-}
-
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqual:@"toOrganizationDetails"]) {
+        
         // Sending current opportunity to next view controller
         OrganizationInfoViewController *organizationInfoViewController = [segue destinationViewController];
         organizationInfoViewController.opportunity = self.opportunity;
+        
     }
+    
 }
 
 @end

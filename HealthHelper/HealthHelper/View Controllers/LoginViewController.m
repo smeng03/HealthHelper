@@ -22,6 +22,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Rounded corners
@@ -29,48 +30,35 @@
     
     // Obscures password
     self.passwordField.secureTextEntry = YES;
-}
-
-
-#pragma mark - viewWillAppear()
-
-- (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
     
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
 }
 
 
 #pragma mark - Manage login
 
 - (IBAction)didTapLogin:(id)sender {
+    
     // Retrieving user-entered credentials
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
     // Attempt login
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+        
         if (error != nil) {
+            
             // Present alert if error
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[NSString stringWithFormat:@"User log in failed: %@", error.localizedDescription] preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:^{
-            }];
+            [self presentViewController:alert animated:YES completion:^{}];
+            
         } else {
+            
             // Performs segue to main Instagram app
             NSLog(@"User logged in successfully");
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            
         }
     }];
 }
@@ -79,9 +67,10 @@
 #pragma mark - Dismiss keyboard
 
 - (IBAction)dismissKeyboard:(id)sender {
-    // Dismisses keyboard when screen is tapped
+    
     [self.view endEditing:YES];
 }
+
 
 /*
 #pragma mark - Navigation

@@ -38,6 +38,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Placeholder shimmer while loading
@@ -52,24 +53,28 @@
     [self styleElements];
     [self loadProfileImage];
     [self notificationSetup];
+    
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    
 }
 
 
 #pragma mark - Load profile image
 
 - (void)loadProfileImage {
+    
     // Querying for profile image
     PFQuery *query = [PFUser query];
     [query includeKey:imageQuery];
@@ -85,7 +90,6 @@
             PFFileObject *image = user[imageQuery];
             self.profileImageView.alpha = 0;
             [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:image.url] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
                 if (image) {
                     BOOL animated = NO;
 
@@ -104,7 +108,6 @@
                         self.profileImageView.alpha = 1.0;
                     }
                 }
-
             }];
             
             self.shimmeringView.shimmering = NO;
@@ -112,25 +115,30 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    
 }
 
 
 #pragma mark - Compose actions
 
 - (IBAction)didTapCancel:(id)sender {
-    // Dismisses ComposeViewController
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)didTapPost:(id)sender {
+    
     if ([self.rating intValue] == 0) {
+        
         // Present alert if user does not give a rating
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please provide a star rating before posting your review" preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:^{
         }];
+        
     } else {
+        
         // Return back to previous view controller
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -146,11 +154,14 @@
             // Saving new post
             [review saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
                 if (succeeded) {
+                    
                     [self updateOrganizationStats];
+                    
                 } else {
                     
                     // Broadcast that review saving has failed
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewFailed" object:nil userInfo:nil];
+                    
                 }
             }];
         });
@@ -161,6 +172,7 @@
 #pragma mark - Update organization stats
 
 - (void)updateOrganizationStats {
+    
     PFQuery *query = [PFQuery queryWithClassName:organizationClassName];
     [query includeKey:totalScoreQuery];
     [query includeKey:numReviewsQuery];
@@ -185,20 +197,20 @@
                     
                     // Broadcast that review saving is complete
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewPosted" object:nil userInfo:nil];
-                    
                     [self.delegate didPost];
             
                 } else {
                     
                     // Broadcast that review saving has failed
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReviewFailed" object:nil userInfo:nil];
-                    
                     NSLog(@"Error: %@", error.localizedDescription);
                 }
             }];
             
         } else {
+            
             NSLog(@"%@", error.localizedDescription);
+            
         }
     }];
 }
@@ -207,6 +219,7 @@
 #pragma mark - Detect star taps
 
 - (IBAction)didTapStar1:(id)sender {
+    
     [UIView transitionWithView:self.star1
         duration:0.3f
         options:UIViewAnimationOptionTransitionCrossDissolve
@@ -243,9 +256,11 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:1];
+    
 }
 
 - (IBAction)didTapStar2:(id)sender {
+    
     [UIView transitionWithView:self.star1
         duration:0.3f
         options:UIViewAnimationOptionTransitionCrossDissolve
@@ -282,9 +297,11 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:2];
+    
 }
 
 - (IBAction)didTapStar3:(id)sender {
+    
     [UIView transitionWithView:self.star1
         duration:0.3f
         options:UIViewAnimationOptionTransitionCrossDissolve
@@ -321,9 +338,11 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:3];
+    
 }
 
 - (IBAction)didTapStar4:(id)sender {
+    
     [UIView transitionWithView:self.star1
         duration:0.3f
         options:UIViewAnimationOptionTransitionCrossDissolve
@@ -360,9 +379,11 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:4];
+    
 }
 
 - (IBAction)didTapStar5:(id)sender {
+    
     [UIView transitionWithView:self.star1
         duration:0.3f
         options:UIViewAnimationOptionTransitionCrossDissolve
@@ -399,6 +420,7 @@
         }
         completion:nil];
     self.rating = [NSNumber numberWithInt:5];
+    
 }
 
 
@@ -411,21 +433,15 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
 }
 
@@ -441,6 +457,7 @@
 #pragma mark - Setup styling
 
 - (void)styleElements {
+    
     // Round profile images
     self.profileImageView.layer.cornerRadius = 25;
     
@@ -452,25 +469,15 @@
     // Text view placeholder text
     self.composeField.placeholder = @"Write a review...";
     self.composeField.placeholderColor = [UIColor lightGrayColor];
+    
 }
 
 
 #pragma mark - Other functions
 
 - (IBAction)dismissKeyboard:(id)sender {
-    // Dismisses keyboard when screen is tapped
+    
     [self.view endEditing:YES];
-}
-
-
-#pragma mark - UIColor from hex color
-
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
 }
 
 

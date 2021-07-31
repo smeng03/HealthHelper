@@ -23,6 +23,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Rounded button corners
@@ -31,31 +32,14 @@
     // Obscures password
     self.passwordField.secureTextEntry = YES;
     self.confirmPasswordField.secureTextEntry = YES;
-}
-
-
-#pragma mark - viewWillAppear()
-
-- (void)viewWillAppear:(BOOL)animated {
-    /*
-    // Loads in user-picked color and dark mode settings
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool darkModeStatus = [defaults boolForKey:@"dark_mode_on"];
     
-    // Set dark mode or light mode
-    if (darkModeStatus) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    }
-    else {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-     */
 }
 
 
 #pragma mark - Manage signup
 
 - (IBAction)didTapSignUp:(id)sender {
+    
     // Initialize a user object
     PFUser *newUser = [PFUser user];
     
@@ -64,16 +48,20 @@
     newUser.password = self.passwordField.text;
     
     if ([self.passwordField.text isEqualToString:self.confirmPasswordField.text]) {
+        
         // Call sign up function on the object
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            
             if (error != nil) {
+                
                 // Display alert of registration failed
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[NSString stringWithFormat:@"Error: %@", error.localizedDescription] preferredStyle:(UIAlertControllerStyleAlert)];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:okAction];
-                [self presentViewController:alert animated:YES completion:^{
-                }];
+                [self presentViewController:alert animated:YES completion:^{}];
+                
             } else {
+                
                 NSLog(@"User registered successfully");
                 
                 // Set default profile image
@@ -81,15 +69,18 @@
 
                 // Manually segue to logged in view
                 [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
+                
             }
         }];
+        
     } else {
+        
         // Passwords do not match, need to re-enter
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Passwords do not match, please try again" preferredStyle:(UIAlertControllerStyleAlert)];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:^{
-        }];
+        [self presentViewController:alert animated:YES completion:^{}];
+        
     }
 }
 
@@ -97,6 +88,7 @@
 #pragma mark - Set default profile image
 
 - (void)setProfileImage {
+    
     // Save default profile image to current user object
     NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"user2"]);
     PFUser *user = PFUser.currentUser;
@@ -104,15 +96,20 @@
     
     // Save to database
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        
         if (succeeded) {
+            
             NSLog(@"Success!");
+            
         } else {
+            
             // Otherwise, displays an alert
             NSLog(@"Problem creating profile: %@", error.localizedDescription);
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:^{}];
+            
         }
     }];
 }
@@ -121,9 +118,10 @@
 #pragma mark - Dismiss keyboard
 
 - (IBAction)dismissKeyboard:(id)sender {
-    // Dismisses keyboard when screen is tapped
+
     [self.view endEditing:YES];
 }
+
 
 /*
 #pragma mark - Navigation

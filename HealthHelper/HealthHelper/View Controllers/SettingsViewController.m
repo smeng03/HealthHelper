@@ -22,6 +22,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Allows notifications to be posted
@@ -30,12 +31,14 @@
     // Default highlighted segments
     self.distanceUnitsControl.selectedSegmentIndex = 0;
     self.modeOfTravelControl.selectedSegmentIndex = 0;
+    
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
@@ -44,26 +47,31 @@
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     navigationBar.barTintColor = [UIColor colorNamed:navColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
+    
 }
 
 
 #pragma mark - Changed units
 
 - (IBAction)didChangeUnits:(id)sender {
+    
     NSArray *units = @[@"imperial", @"metric"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:units[self.distanceUnitsControl.selectedSegmentIndex] forKey:@"units"];
     [defaults synchronize];
+    
 }
 
 
 #pragma mark - Changed mode of travel
 
 - (IBAction)didChangeModeofTravel:(id)sender {
+    
     NSArray *modes = @[@"driving", @"walking", @"bicycling"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:modes[self.modeOfTravelControl.selectedSegmentIndex] forKey:@"mode"];
     [defaults synchronize];
+    
 }
 
 
@@ -76,22 +84,17 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
+    
 }
 
 
@@ -106,63 +109,65 @@
 #pragma mark - Nav Bar Colors
 
 - (IBAction)setColor1:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"color1" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
 - (IBAction)setColor2:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"color2" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
 - (IBAction)setColor3:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"color3" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
 - (IBAction)setColor4:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"color4" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
 - (IBAction)setColor5:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"color5" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
 - (IBAction)resetColor:(id)sender {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"navColor" forKey:@"nav_color"];
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
 }
 
-
-#pragma mark - UIColor from hex
-
--(UIColor *)colorWithHex:(UInt32)col {
-    unsigned char r, g, b;
-    b = col & 0xFF;
-    g = (col >> 8) & 0xFF;
-    r = (col >> 16) & 0xFF;
-    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
-}
 
 /*
 #pragma mark - Navigation

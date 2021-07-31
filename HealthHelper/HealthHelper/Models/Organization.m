@@ -66,20 +66,27 @@
     }
     
     return organization;
+    
 }
 
 - (BOOL)beginContentAccess {
+    
     return TRUE;
+    
 }
 
 - (void)discardContentIfPossible {
+    
 }
 
 - (void)endContentAccess {
+    
 }
 
 - (BOOL)isContentDiscarded {
+    
     return FALSE;
+    
 }
 
 @end

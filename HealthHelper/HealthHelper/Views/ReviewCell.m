@@ -15,17 +15,19 @@
 @implementation ReviewCell
 
 - (void)awakeFromNib {
+    
     [super awakeFromNib];
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 - (void)setCell:(Review *)review {
+    
     // Profile image
     PFFileObject *image = review[@"author"][@"image"];
     self.profileImageView.image = nil;
@@ -46,39 +48,51 @@
     
     // Setting date label
     self.dateLabel.text = review.timeCreatedAt.shortTimeAgoSinceNow;
+    
 }
 
 - (void)setStars:(NSNumber *)stars {
+    
     if ([stars intValue] == 1) {
+        
         self.star1.image = [UIImage imageNamed:@"star-filled"];
         self.star2.image = [UIImage imageNamed:@"star"];
         self.star3.image = [UIImage imageNamed:@"star"];
         self.star4.image = [UIImage imageNamed:@"star"];
         self.star5.image = [UIImage imageNamed:@"star"];
+        
     } else if ([stars intValue] == 2) {
+        
         self.star1.image = [UIImage imageNamed:@"star-filled"];
         self.star2.image = [UIImage imageNamed:@"star-filled"];
         self.star3.image = [UIImage imageNamed:@"star"];
         self.star4.image = [UIImage imageNamed:@"star"];
         self.star5.image = [UIImage imageNamed:@"star"];
+        
     } else if ([stars intValue] == 3) {
+        
         self.star1.image = [UIImage imageNamed:@"star-filled"];
         self.star2.image = [UIImage imageNamed:@"star-filled"];
         self.star3.image = [UIImage imageNamed:@"star-filled"];
         self.star4.image = [UIImage imageNamed:@"star"];
         self.star5.image = [UIImage imageNamed:@"star"];
+        
     } else if ([stars intValue] == 4) {
+        
         self.star1.image = [UIImage imageNamed:@"star-filled"];
         self.star2.image = [UIImage imageNamed:@"star-filled"];
         self.star3.image = [UIImage imageNamed:@"star-filled"];
         self.star4.image = [UIImage imageNamed:@"star-filled"];
         self.star5.image = [UIImage imageNamed:@"star"];
+        
     } else if ([stars intValue] == 5) {
+        
         self.star1.image = [UIImage imageNamed:@"star-filled"];
         self.star2.image = [UIImage imageNamed:@"star-filled"];
         self.star3.image = [UIImage imageNamed:@"star-filled"];
         self.star4.image = [UIImage imageNamed:@"star-filled"];
         self.star5.image = [UIImage imageNamed:@"star-filled"];
+        
     }
     
 }

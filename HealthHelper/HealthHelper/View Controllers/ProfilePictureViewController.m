@@ -26,6 +26,7 @@
 #pragma mark - viewDidLoad()
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     // Nav bar title
@@ -48,18 +49,21 @@
     
     // Allows notifications to be posted
     [self notificationSetup];
+    
 }
 
 
 #pragma mark - viewWillAppear()
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     // Loads in user-picked color
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *navColor = [defaults objectForKey:@"nav_color"];
     
     // Set bar color
     self.navigationBar.barTintColor = [UIColor colorNamed:navColor];
+    
 }
 
 
@@ -68,40 +72,39 @@
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)gestureRecognizer {
     
      if([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-     // Reset the last scale
-     self.lastScale = [gestureRecognizer scale];
+         // Reset the last scale
+         self.lastScale = [gestureRecognizer scale];
      }
 
-     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
-     [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan ||
+    [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+        CGFloat currentScale = [[[gestureRecognizer view].layer valueForKeyPath:@"transform.scale"] floatValue];
 
-      CGFloat currentScale = [[[gestureRecognizer view].layer valueForKeyPath:@"transform.scale"] floatValue];
+        // Constants to adjust the max/min values of zoom
+        const CGFloat kMaxScale = 5.0;
+        const CGFloat kMinScale = 1.0;
 
-     // Constants to adjust the max/min values of zoom
-     const CGFloat kMaxScale = 5.0;
-     const CGFloat kMinScale = 1.0;
+        CGFloat newScale = 1 -  (self.lastScale - [gestureRecognizer scale]);
+        newScale = MIN(newScale, kMaxScale / currentScale);
+        newScale = MAX(newScale, kMinScale / currentScale);
+        CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
+        [gestureRecognizer view].transform = transform;
 
-      CGFloat newScale = 1 -  (self.lastScale - [gestureRecognizer scale]);
-      newScale = MIN(newScale, kMaxScale / currentScale);
-      newScale = MAX(newScale, kMinScale / currentScale);
-      CGAffineTransform transform = CGAffineTransformScale([[gestureRecognizer view] transform], newScale, newScale);
-      [gestureRecognizer view].transform = transform;
-
-      self.lastScale = [gestureRecognizer scale];
-      }
+        self.lastScale = [gestureRecognizer scale];
+    }
+    
 }
 
 
 #pragma mark - Pan image
 
 - (void)pan:(UIPanGestureRecognizer *)gestureRecognizer {
+    
     CGPoint translation = [gestureRecognizer translationInView:self.profileImageView];
     //CGPoint centerPoint = [gestureRecognizer locationInView:self.view];
     self.profileImageView.center = CGPointMake(self.profileImageView.center.x + translation.x, self.profileImageView.center.y + translation.y);
     [gestureRecognizer setTranslation:CGPointZero inView:self.profileImageView];
-    /*
-    self.profileImageView.center = [gestureRecognizer locationInView:self.profileImageView.superview];
-     */
+    
 }
 
 
@@ -114,29 +117,24 @@
     
     // Success notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewPosted" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification successNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
     
     
     // Failure notification
     [[NSNotificationCenter defaultCenter] addObserverForName:@"ReviewFailed" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        
         [Notification failureNotificationAction:self.notificationView withLabel:self.notificationLabel];
-        
         [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideNotification) userInfo:nil repeats:NO];
-        
     }];
+    
 }
 
 
 #pragma mark - Hide notification
 
 - (void)hideNotification {
-    
+
     [Notification hideNotificationAction:self.notificationView];
 }
 
@@ -144,7 +142,9 @@
 #pragma mark - Dismiss view controller
 
 - (IBAction)didTapExit:(id)sender {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 
