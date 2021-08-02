@@ -317,6 +317,16 @@ CLLocationManager *opportunitiesLocationManager;
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (self.filteredOpportunities.count == 0) {
+        
+        [self setEmptyMessage];
+        
+    } else {
+        
+        [self clearEmptyMessage];
+        
+    }
+    
     return self.filteredOpportunities.count;
     
 }
@@ -326,7 +336,27 @@ CLLocationManager *opportunitiesLocationManager;
     // remove bottom extra 20px space.
     return CGFLOAT_MIN;
     
-} 
+}
+
+- (void)setEmptyMessage {
+    
+    // Table view empty message
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+    noDataLabel.text = @"No opportunities to display";
+    noDataLabel.textColor = [UIColor grayColor];
+    noDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.tableView.backgroundView = noDataLabel;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+}
+
+- (void)clearEmptyMessage {
+    
+    // Table view clear message
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+}
 
 
 #pragma mark - Get user location

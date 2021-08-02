@@ -659,7 +659,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Opportunities" id="P1c-N7-mkZ"/>
                     <navigationItem key="navigationItem" title="Opportunities" id="YY0-SV-yFE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" image="arrowshape.turn.up.backward" catalog="system" id="vvt-Vo-iJa">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="vvt-Vo-iJa">
                             <connections>
                                 <action selector="didTapLogout:" destination="Gqx-Wa-L6v" id="d3x-2J-fRo"/>
                             </connections>
@@ -1785,7 +1785,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <color key="badgeColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Your Profile" id="tp8-FH-K7r">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" image="arrowshape.turn.up.backward" catalog="system" id="Sqe-fg-Kax">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Sqe-fg-Kax">
                             <connections>
                                 <action selector="didTapLogout:" destination="3kE-eC-XsR" id="7HD-fn-xbf"/>
                             </connections>
@@ -2058,12 +2058,11 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ejj-hJ-n4y"/>
-        <segue reference="poZ-lN-O9J"/>
+        <segue reference="4hB-W5-b5j"/>
+        <segue reference="0B5-au-30U"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="give" width="25" height="25"/>
         <image name="hh_full" width="1073" height="232"/>

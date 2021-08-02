@@ -80,9 +80,6 @@ CLLocationManager *locationManager;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
-    // Loading basic profile information
-    [self loadBasicProfile];
-    
     // Loading past opportunities
     [self loadPastOpportunityArray];
     
@@ -139,6 +136,10 @@ CLLocationManager *locationManager;
 
 - (void)loadPastOpportunityArray {
     
+    // Loading basic profile information
+    [self loadBasicProfile];
+    
+    // Initialize map and location services
     locationManager = [[CLLocationManager alloc] init];
     self.bounds = [[GMSCoordinateBounds alloc] init];
     [self.mapView clear];
@@ -200,27 +201,13 @@ CLLocationManager *locationManager;
                 
                 self.unprocessedOpportunities = opportunities;
                 
-                // Get user location
                 [self getCurrentLocation];
-                
-                // Table view clear message
-                self.tableView.backgroundView = nil;
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
                 
             } else {
                 
                 // No signed up opportunities to display
                 self.opportunities = [NSMutableArray new];
                 self.filteredOpportunities = self.opportunities;
-                
-                
-                // Table view empty message
-                UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
-                noDataLabel.text = @"No opportunities to display";
-                noDataLabel.textColor = [UIColor grayColor];
-                noDataLabel.textAlignment = NSTextAlignmentCenter;
-                self.tableView.backgroundView = noDataLabel;
-                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
                 
                 [self.tableView reloadData];
                 [self.refreshControl endRefreshing];
@@ -477,6 +464,16 @@ CLLocationManager *locationManager;
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (self.filteredOpportunities.count == 0) {
+        
+        [self setEmptyMessage];
+        
+    } else {
+        
+        [self clearEmptyMessage];
+        
+    }
+    
     return self.filteredOpportunities.count;
     
 }
@@ -485,7 +482,27 @@ CLLocationManager *locationManager;
 
     // remove bottom extra 20px space
     return CGFLOAT_MIN;
-} 
+}
+
+- (void)setEmptyMessage {
+    
+    // Table view empty message
+    UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+    noDataLabel.text = @"No opportunities to display";
+    noDataLabel.textColor = [UIColor grayColor];
+    noDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.tableView.backgroundView = noDataLabel;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+}
+
+- (void)clearEmptyMessage {
+    
+    // Table view clear message
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+}
 
 
 #pragma mark - Logout
