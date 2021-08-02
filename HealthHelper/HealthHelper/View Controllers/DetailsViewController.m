@@ -179,8 +179,19 @@
             PFUser *user = users[0];
             
             // Add opportunity tags to user
-            NSMutableArray *userTags = user[tagsQuery];
-            [userTags addObjectsFromArray:self.opportunity.tags];
+            // NSMutableArray *userTags = user[tagsQuery];
+            // [userTags addObjectsFromArray:self.opportunity.tags];
+            // user[tagsQuery] = userTags;
+            
+            NSMutableDictionary *userTags = user[tagsQuery];
+            for (NSString *tag in self.opportunity.tags) {
+                if ([userTags objectForKey:tag]) {
+                    NSNumber *tagValue = userTags[tag];
+                    userTags[tag] = [NSNumber numberWithInt:[tagValue intValue] + 1];
+                } else {
+                    userTags[tag] = [NSNumber numberWithInt:1];
+                }
+            }
             user[tagsQuery] = userTags;
             
             // Add opportunity id to user's list of opportunities

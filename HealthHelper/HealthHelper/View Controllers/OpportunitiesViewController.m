@@ -39,7 +39,7 @@
 @property (strong, nonatomic) NSMutableArray *filters;
 @property (strong, nonatomic) CLLocation *userLocation;
 @property (strong, nonatomic) NSArray *unprocessedOpportunities;
-@property (strong, nonatomic) NSArray *userTags;
+@property (strong, nonatomic) NSMutableDictionary *userTags;
 @property (strong, nonatomic) NSArray *userPastOpportunities;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
@@ -265,7 +265,7 @@ CLLocationManager *opportunitiesLocationManager;
                 for (NSString *userTag in self.userTags) {
                     
                     if ([opportunityTag isEqualToString:userTag]) {
-                        similarityScore += 1;
+                        similarityScore += [self.userTags[userTag] intValue];
                     }
                     
                 }

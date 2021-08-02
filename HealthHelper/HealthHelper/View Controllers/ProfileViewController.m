@@ -553,10 +553,14 @@ CLLocationManager *locationManager;
                     NSMutableArray *pastOpportunities = user[pastOpportunitiesQuery];
                     
                     // Remove associated tags
-                    NSMutableArray *userTags = user[tagsQuery];
+                    NSMutableDictionary *userTags = user[tagsQuery];
                     for (NSString *tag in opportunity.tags) {
-                        NSUInteger index = [userTags indexOfObject:tag];
-                        [userTags removeObjectAtIndex:index];
+                        NSNumber *tagValue = userTags[tag];
+                        if ([tagValue intValue] == 1) {
+                            [userTags removeObjectForKey:tag];
+                        } else {
+                            userTags[tag] = [NSNumber numberWithInt:[tagValue intValue] - 1];
+                        }
                     }
                     user[tagsQuery] = userTags;
                     

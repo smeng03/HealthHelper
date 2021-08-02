@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Opportunity *opportunity;
 @property (nonatomic, weak) id<PastOpportunityCellDelegate> delegate;
 
-
 - (void)setCell:(Opportunity *)opportunity withDelegate:controller;
 
 @end
