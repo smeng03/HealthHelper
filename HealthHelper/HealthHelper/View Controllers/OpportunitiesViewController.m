@@ -19,8 +19,9 @@
 #import "FilterSettingsViewController.h"
 #import "Notification.h"
 #import "OpportunityArray.h"
+#import "OrganizationInfoViewController.h"
 
-@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate, OpportunityDelegate>
+@interface OpportunitiesViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, FilterSettingsControllerDelegate, OpportunityDelegate, OpportunityCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *opportunities;
@@ -307,7 +308,7 @@ CLLocationManager *opportunitiesLocationManager;
     OpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"OpportunityCell"];
     
     // Setting cell and style
-    [cell setCell:self.filteredOpportunities[indexPath.row]];
+    [cell setCell:self.filteredOpportunities[indexPath.row] withDelegate:self];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -677,6 +678,15 @@ CLLocationManager *opportunitiesLocationManager;
 }
 
 
+#pragma mark - Segue to organization details
+
+- (void)didTapOrganizationProfile:(Opportunity *)opportunity {
+    
+    [self performSegueWithIdentifier:@"toOrganizationDetails2" sender:opportunity];
+    
+}
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -698,6 +708,11 @@ CLLocationManager *opportunitiesLocationManager;
         FilterSettingsViewController *filterSettingsViewController = [segue destinationViewController];
         filterSettingsViewController.delegate = self;
         filterSettingsViewController.units = self.units;
+        
+    } else if ([segue.identifier isEqualToString:@"toOrganizationDetails2"]) {
+        
+        OrganizationInfoViewController *organizationInfoViewController = [segue destinationViewController];
+        organizationInfoViewController.opportunity = sender;
         
     }
     

@@ -10,6 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PastOpportunityCellDelegate
+
+- (void)didTapOrganizationProfile:(Opportunity *)opportunity;
+
+@end
+
 @interface PastOpportunityCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -17,8 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metricsLabel;
 @property (strong, nonatomic) Opportunity *opportunity;
+@property (nonatomic, weak) id<PastOpportunityCellDelegate> delegate;
 
-- (void)setCell:(Opportunity *)opportunity;
+
+- (void)setCell:(Opportunity *)opportunity withDelegate:controller;
 
 @end
 

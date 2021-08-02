@@ -517,9 +517,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="361"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-qN-E5N" customClass="SDAnimatedImageView">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KEI-qN-E5N" customClass="SDAnimatedImageView">
                                                     <rect key="frame" x="20" y="20" width="80" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="LtL-ZL-Qf5"/>
                                                         <constraint firstAttribute="width" constant="80" id="aOg-fi-As1"/>
@@ -611,6 +612,7 @@
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KEI-qN-E5N" secondAttribute="bottom" constant="10" id="w9G-O9-5KS"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="l7f-S7-1bS" id="gJq-HI-WEi"/>
                                             <outlet property="distanceLabel" destination="MJa-h7-FCM" id="4hU-fS-zEK"/>
@@ -677,6 +679,7 @@
                         <outlet property="shadowButton" destination="3Eg-My-UYJ" id="qfI-dM-cn1"/>
                         <outlet property="tableView" destination="kLs-BB-Px5" id="Hfy-Jd-LW3"/>
                         <outlet property="volunteerButton" destination="em0-Je-JWN" id="INz-Ol-7yP"/>
+                        <segue destination="pqk-1r-4y9" kind="show" identifier="toOrganizationDetails2" id="poZ-lN-O9J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ju-Di-7aO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1509,9 +1512,6 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                     <constraint firstAttribute="height" constant="100" id="Lsa-az-hun"/>
                                     <constraint firstAttribute="width" constant="100" id="jK7-sc-FYS"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="LX6-2N-SyH" appends="YES" id="vXw-fV-0ub"/>
-                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5C-zn-7EF">
                                 <rect key="frame" x="130" y="108" width="94.5" height="24"/>
@@ -1673,7 +1673,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-Qu-LNQ">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-Qu-LNQ">
                                                     <rect key="frame" x="20" y="20" width="80" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="cFE-PV-C4y"/>
@@ -1811,14 +1811,10 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                         <outlet property="tableView" destination="GSp-g3-vh2" id="UiH-fm-x0Z"/>
                         <outlet property="usernameLabel" destination="n5C-zn-7EF" id="eZJ-LD-psW"/>
                         <outlet property="volunteerButton" destination="gjb-Pq-I0x" id="V37-zG-Cwq"/>
+                        <segue destination="pqk-1r-4y9" kind="show" identifier="toOrganizationDetails3" id="0B5-au-30U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPn-s8-OZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="LX6-2N-SyH">
-                    <connections>
-                        <action selector="didTapProfilePicture:" destination="3kE-eC-XsR" id="idi-F3-BXs"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-113.04347826086958" y="2231.9196428571427"/>
         </scene>
@@ -2063,6 +2059,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Ejj-hJ-n4y"/>
+        <segue reference="poZ-lN-O9J"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <resources>

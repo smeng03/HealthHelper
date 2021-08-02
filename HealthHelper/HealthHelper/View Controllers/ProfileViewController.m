@@ -23,12 +23,13 @@
 #import "FilterConstants.h"
 #import "Organization.h"
 #import "Notification.h"
+#import "OrganizationInfoViewController.h"
 @import GoogleMaps;
 @import GooglePlaces;
 @import GoogleMapsBase;
 @import GoogleMapsCore;
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate, OrganizationDelegate, OpportunityDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, CLLocationManagerDelegate, OrganizationDelegate, OpportunityDelegate, PastOpportunityCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -467,7 +468,7 @@ CLLocationManager *locationManager;
     PastOpportunityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PastOpportunityCell"];
     
     // Setting cell and style
-    [cell setCell:self.filteredOpportunities[indexPath.row]];
+    [cell setCell:self.filteredOpportunities[indexPath.row] withDelegate:self];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -889,6 +890,15 @@ CLLocationManager *locationManager;
 }
 
 
+#pragma mark - Segue to organization details
+
+- (void)didTapOrganizationProfile:(Opportunity *)opportunity {
+    
+    [self performSegueWithIdentifier:@"toOrganizationDetails3" sender:opportunity];
+    
+}
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -905,6 +915,11 @@ CLLocationManager *locationManager;
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.opportunity = opportunity;
         detailsViewController.userLocation = self.userLocation;
+        
+    } else if ([segue.identifier isEqualToString:@"toOrganizationDetails3"]) {
+        
+        OrganizationInfoViewController *organizationInfoViewController = [segue destinationViewController];
+        organizationInfoViewController.opportunity = sender;
         
     }
 }

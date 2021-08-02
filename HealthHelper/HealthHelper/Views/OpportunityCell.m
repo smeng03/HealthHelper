@@ -32,7 +32,7 @@
 
 }
 
-- (void)setCell:(Opportunity *)opportunity {
+- (void)setCell:(Opportunity *)opportunity withDelegate:controller {
     
     // Profile image
     self.profileImageView.image = nil;
@@ -80,6 +80,15 @@
     // Setting opportunity
     self.opportunity = opportunity;
     
+    // Setting tap gesture recognizer
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOrganizationProfile)];
+    [self.profileImageView addGestureRecognizer:tapGestureRecognizer];
+    self.delegate = controller;
+    
+}
+
+- (void)didTapOrganizationProfile {
+    [self.delegate didTapOrganizationProfile:self.opportunity];
 }
 
 @end
