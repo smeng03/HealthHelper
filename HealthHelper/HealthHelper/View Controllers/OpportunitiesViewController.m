@@ -133,7 +133,7 @@ CLLocationManager *opportunitiesLocationManager;
         
     }
     
-    [self styleButton];
+    [self updateDistanceButtonText];
     self.isFirstLoad = FALSE;
     
     // Refresh view

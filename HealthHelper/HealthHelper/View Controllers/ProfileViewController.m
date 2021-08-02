@@ -127,7 +127,7 @@ CLLocationManager *locationManager;
         
     }
     
-    [self styleButton];
+    [self updateDistanceButtonText];
     
 }
 
@@ -834,6 +834,12 @@ CLLocationManager *locationManager;
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    [self updateDistanceButtonText];
+    
+}
+
+- (void)updateDistanceButtonText {
     
     // Distance button text
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
