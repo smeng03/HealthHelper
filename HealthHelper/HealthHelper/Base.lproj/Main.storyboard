@@ -222,6 +222,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="tWa-cG-6Oq" kind="relationship" relationship="viewControllers" id="ysI-9v-g6g"/>
@@ -283,11 +288,13 @@
                                 <items>
                                     <navigationItem title="Filter Settings" id="S83-QA-9Kb">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="jbm-RO-bdF">
+                                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="didTapCancel:" destination="G9e-QS-agc" id="RAx-su-MNh"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Save" id="4v5-vx-D8n">
+                                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="didSave:" destination="G9e-QS-agc" id="4K7-xM-ghc"/>
                                             </connections>
@@ -657,14 +664,23 @@
                             <constraint firstItem="kLs-BB-Px5" firstAttribute="trailing" secondItem="FdR-FW-d7k" secondAttribute="trailing" id="kco-f3-cht"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Opportunities" id="P1c-N7-mkZ"/>
+                    <tabBarItem key="tabBarItem" title="Opportunities" id="P1c-N7-mkZ">
+                        <color key="badgeColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" title="Opportunities" id="YY0-SV-yFE">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="vvt-Vo-iJa">
+                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="didTapLogout:" destination="Gqx-Wa-L6v" id="d3x-2J-fRo"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="VYM-mw-mLO">
+                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="G9e-QS-agc" kind="presentation" identifier="toFilterSettings" id="8kE-Eu-cx7"/>
                             </connections>
@@ -1783,14 +1799,21 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="8iu-Ob-IDi">
                         <color key="badgeColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Your Profile" id="tp8-FH-K7r">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Sqe-fg-Kax">
+                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="didTapLogout:" destination="3kE-eC-XsR" id="7HD-fn-xbf"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape" catalog="system" id="tXR-9a-rHN">
+                            <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="hNz-0G-Mik" kind="show" identifier="toSettings" id="iXu-KX-bhA"/>
                             </connections>
@@ -2062,6 +2085,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         <segue reference="0B5-au-30U"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="give" width="25" height="25"/>
