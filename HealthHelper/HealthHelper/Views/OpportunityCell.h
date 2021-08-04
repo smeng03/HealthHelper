@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) id<OpportunityCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 - (void)setCell:(Opportunity *)opportunity withDelegate:controller;
 

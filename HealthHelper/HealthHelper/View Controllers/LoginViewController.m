@@ -31,6 +31,11 @@
     // Obscures password
     self.passwordField.secureTextEntry = YES;
     
+    // Login button shadow
+    self.loginButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.loginButton.layer.shadowRadius = 5;
+    self.loginButton.layer.shadowOpacity = 0.25;
+    
 }
 
 

@@ -461,10 +461,13 @@
     // Round profile images
     self.profileImageView.layer.cornerRadius = 25;
     
-    // Round text view corners and border properties
+    // Round text view corners, border properties, and shadow
     self.composeField.layer.cornerRadius = 10;
     self.composeField.layer.borderColor = [[UIColor systemGray3Color] CGColor];
-    self.composeField.layer.borderWidth=1.0;
+    self.composeField.layer.borderWidth= 1.0;
+    self.composeField.layer.shadowOffset = CGSizeMake(0, 0);
+    self.composeField.layer.shadowRadius = 5;
+    self.composeField.layer.shadowOpacity = 0.25;
     
     // Text view placeholder text
     self.composeField.placeholder = @"Write a review...";

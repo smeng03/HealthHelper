@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (strong, nonatomic) GMSCoordinateBounds *bounds;
+@property (weak, nonatomic) IBOutlet UIView *mapContainerView;
 
 @end
 
@@ -308,8 +309,11 @@
 
 - (void)styleElements {
     
-    // Rounded button corners
+    // Rounded button corners and shadow
     self.registerButton.layer.cornerRadius = 10;
+    self.registerButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.registerButton.layer.shadowRadius = 3;
+    self.registerButton.layer.shadowOpacity = 0.25;
     
     // Rounded profile images
     self.profileImageView.layer.cornerRadius = 50;
@@ -321,8 +325,12 @@
         [self.registerButton setTitle:@"REGISTER" forState:UIControlStateNormal];
     }
     
-    // Map corner radius
+    // Map view styling
     self.mapView.layer.cornerRadius = 10;
+    self.mapContainerView.layer.cornerRadius = 10;
+    self.mapContainerView.layer.shadowOffset = CGSizeMake(0, 0);
+    self.mapContainerView.layer.shadowRadius = 3;
+    self.mapContainerView.layer.shadowOpacity = 0.25;
     
 }
 

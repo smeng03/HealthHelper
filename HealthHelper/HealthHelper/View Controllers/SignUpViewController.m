@@ -33,6 +33,12 @@
     self.passwordField.secureTextEntry = YES;
     self.confirmPasswordField.secureTextEntry = YES;
     
+    // Signup button shadow
+    // Login button shadow
+    self.signUpButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.signUpButton.layer.shadowRadius = 5;
+    self.signUpButton.layer.shadowOpacity = 0.25;
+    
 }
 
 
@@ -105,7 +111,7 @@
             
             // Otherwise, displays an alert
             NSLog(@"Problem creating profile: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error posting image." preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Error saving image." preferredStyle:(UIAlertControllerStyleAlert)];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:^{}];

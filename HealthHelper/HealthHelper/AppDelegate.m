@@ -30,6 +30,9 @@
       [GMSPlacesClient provideAPIKey:[dict objectForKey: @"mapsAPIKey"]];
     }];
     [Parse initializeWithConfiguration:configuration];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0]} forState:UIControlStateNormal];
+    
     return YES;
 }
 

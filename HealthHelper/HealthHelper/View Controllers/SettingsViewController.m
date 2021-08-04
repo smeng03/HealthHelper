@@ -7,6 +7,7 @@
 
 #import "SettingsViewController.h"
 #import "Notification.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SettingsViewController ()
 
@@ -14,6 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *distanceUnitsControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeOfTravelControl;
+@property (weak, nonatomic) IBOutlet UIButton *color1Button;
+@property (weak, nonatomic) IBOutlet UIButton *color2Button;
+@property (weak, nonatomic) IBOutlet UIButton *color3Button;
+@property (weak, nonatomic) IBOutlet UIButton *color4Button;
+@property (weak, nonatomic) IBOutlet UIButton *color5Button;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
 
 @end
 
@@ -31,6 +38,8 @@
     // Default highlighted segments
     self.distanceUnitsControl.selectedSegmentIndex = 0;
     self.modeOfTravelControl.selectedSegmentIndex = 0;
+    
+    [self styleButtons];
     
 }
 
@@ -165,6 +174,20 @@
     [defaults synchronize];
     
     [self viewWillAppear:true];
+    
+}
+
+
+#pragma mark - Style buttons
+
+- (void)styleButtons {
+    
+    self.color1Button.layer.cornerRadius = 10;
+    self.color2Button.layer.cornerRadius = 10;
+    self.color3Button.layer.cornerRadius = 10;
+    self.color4Button.layer.cornerRadius = 10;
+    self.color5Button.layer.cornerRadius = 10;
+    self.resetButton.layer.cornerRadius = 10;
     
 }
 

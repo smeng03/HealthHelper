@@ -16,14 +16,17 @@
 
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    
     // Get current user
     PFUser *user = [PFUser currentUser];
-        if (user != nil) {
-            NSLog(@"Welcome back %@ 😀", user.username);
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-            self.window.rootViewController = tabBarController;
-        }
+    
+    if (user != nil) {
+        NSLog(@"Welcome back %@ 😀", user.username);
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+        self.window.rootViewController = tabBarController;
+    }
+    
 }
 
 
@@ -38,6 +41,7 @@
 - (void)sceneDidBecomeActive:(UIScene *)scene {
     // Called when the scene has moved from an inactive state to an active state.
     // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"EnteredForeground" object:nil userInfo:nil];
 }
 
 
@@ -51,7 +55,7 @@
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"EnteredForeground" object:nil userInfo:nil];
+    // [[NSNotificationCenter defaultCenter] postNotificationName:@"EnteredForeground" object:nil userInfo:nil];
     
 }
 

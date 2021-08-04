@@ -22,7 +22,7 @@
     [super awakeFromNib];
     
     // Round profile images
-    self.profileImageView.layer.cornerRadius = 40;
+    self.profileImageView.layer.cornerRadius = 30;
     
 }
 
@@ -84,6 +84,14 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOrganizationProfile)];
     [self.profileImageView addGestureRecognizer:tapGestureRecognizer];
     self.delegate = controller;
+    
+    // Container view
+    self.containerView.layer.cornerRadius = 25;
+    self.containerView.backgroundColor = [UIColor colorNamed:@"cellColor"];
+    self.containerView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.containerView.layer.shadowRadius = 5;
+    self.containerView.layer.shadowOpacity = 0.2;
+    self.backgroundColor = [UIColor colorNamed:@"backgroundColor"];
     
 }
 

@@ -154,8 +154,11 @@
     // Rounded profile images
     self.profileImageView.layer.cornerRadius = 50;
     
-    // Rounded corners on button
+    // Rounded corners on button and shadow
     self.reviewButton.layer.cornerRadius = 5;
+    self.reviewButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.reviewButton.layer.shadowRadius = 3;
+    self.reviewButton.layer.shadowOpacity = 0.25;
     
 }
 

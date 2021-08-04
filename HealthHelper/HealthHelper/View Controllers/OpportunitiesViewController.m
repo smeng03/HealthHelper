@@ -47,6 +47,7 @@
 @property (assign, nonatomic) BOOL isFirstLoad;
 @property (nonatomic, strong) NSString *units;
 @property (nonatomic, strong) NSString *mode;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 
 @end
@@ -95,6 +96,7 @@ CLLocationManager *opportunitiesLocationManager;
     [self styleButton];
     [self filterSetup];
     [self notificationSetup];
+    [self.searchBar setBackgroundImage:[UIImage new]];
     
 }
 
@@ -112,11 +114,17 @@ CLLocationManager *opportunitiesLocationManager;
     navigationBar.barTintColor = [UIColor colorNamed:navColor];
     self.tabBarController.tabBar.barTintColor = [UIColor colorNamed:navColor];
     
-    // Search bar styling
-    self.searchBar.layer.borderColor = [[UIColor colorNamed:@"borderColor"] CGColor];
-    self.searchBar.layer.borderWidth = 1;
+    [self reloadOpportunities];
+    
+}
+
+
+#pragma mark - Reload opportunities
+
+- (void)reloadOpportunities {
     
     // Reload opportunities when needed
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *units = [defaults objectForKey:@"units"];
     NSString *mode = [defaults objectForKey:@"mode"];
     if ([self.units isEqualToString:units] && [self.mode isEqualToString:mode]) {
@@ -137,7 +145,7 @@ CLLocationManager *opportunitiesLocationManager;
     self.isFirstLoad = FALSE;
     
     // Refresh view
-    [self.view setNeedsDisplay];
+    [self.headerView setNeedsDisplay];
     
 }
 
@@ -157,6 +165,7 @@ CLLocationManager *opportunitiesLocationManager;
         
         self.opportunities = cachedOpportunities.opportunities;
         self.filteredOpportunities = self.opportunities;
+        [self.tableView reloadData];
         
     }
     
@@ -346,7 +355,6 @@ CLLocationManager *opportunitiesLocationManager;
     noDataLabel.textColor = [UIColor grayColor];
     noDataLabel.textAlignment = NSTextAlignmentCenter;
     self.tableView.backgroundView = noDataLabel;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
 
@@ -354,7 +362,6 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Table view clear message
     self.tableView.backgroundView = nil;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
 }
 
@@ -387,9 +394,7 @@ CLLocationManager *opportunitiesLocationManager;
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
-    
-    // Adding a slight delay so progress HUD doesn't just flash
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopAnimation) userInfo:nil repeats:NO];
+    [self stopAnimation];
     
 }
 
@@ -500,11 +505,13 @@ CLLocationManager *opportunitiesLocationManager;
         
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:volunteeringFilter];
+        self.volunteerButton.layer.shadowOpacity = 0.25;
         
     } else {
         
         self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:volunteeringFilter];
+        self.volunteerButton.layer.shadowOpacity = 0;
         
     }
     
@@ -523,11 +530,13 @@ CLLocationManager *opportunitiesLocationManager;
         
         self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:shadowingFilter];
+        self.shadowButton.layer.shadowOpacity = 0.25;
         
     } else {
         
         self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:shadowingFilter];
+        self.shadowButton.layer.shadowOpacity = 0;
         
     }
     
@@ -546,11 +555,13 @@ CLLocationManager *opportunitiesLocationManager;
         
         self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:donationFilter];
+        self.donateButton.layer.shadowOpacity = 0.25;
         
     } else {
         
         self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:donationFilter];
+        self.donateButton.layer.shadowOpacity = 0;
         
     }
     
@@ -569,11 +580,13 @@ CLLocationManager *opportunitiesLocationManager;
         
         self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         [self.filters removeObject:distanceFilter];
+        self.distanceButton.layer.shadowOpacity = 0.25;
         
     } else {
         
         self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
         [self.filters addObject:distanceFilter];
+        self.distanceButton.layer.shadowOpacity = 0;
         
     }
     
@@ -591,16 +604,33 @@ CLLocationManager *opportunitiesLocationManager;
 - (void)styleButton {
     
     // Buttons have rounded corners
-    self.volunteerButton.layer.cornerRadius = 15;
-    self.shadowButton.layer.cornerRadius = 15;
-    self.donateButton.layer.cornerRadius = 15;
-    self.distanceButton.layer.cornerRadius = 15;
+    self.volunteerButton.layer.cornerRadius = 20;
+    self.shadowButton.layer.cornerRadius = 20;
+    self.donateButton.layer.cornerRadius = 20;
+    self.distanceButton.layer.cornerRadius = 20;
     
     // Button colors
     self.volunteerButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.shadowButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.donateButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
     self.distanceButton.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    
+    // Button shadows
+    self.volunteerButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.volunteerButton.layer.shadowRadius = 3;
+    self.volunteerButton.layer.shadowOpacity = 0.25;
+    
+    self.shadowButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.shadowButton.layer.shadowRadius = 3;
+    self.shadowButton.layer.shadowOpacity = 0.25;
+    
+    self.donateButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.donateButton.layer.shadowRadius = 3;
+    self.donateButton.layer.shadowOpacity = 0.25;
+    
+    self.distanceButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.distanceButton.layer.shadowRadius = 3;
+    self.distanceButton.layer.shadowOpacity = 0.25;
     
     [self updateDistanceButtonText];
     

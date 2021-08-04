@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *metricsLabel;
 @property (strong, nonatomic) Opportunity *opportunity;
 @property (nonatomic, weak) id<PastOpportunityCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 - (void)setCell:(Opportunity *)opportunity withDelegate:controller;
 
