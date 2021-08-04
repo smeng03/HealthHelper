@@ -26,6 +26,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet UIView *notificationView;
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
+@property (strong, nonatomic) NSMutableArray *filteredReviews;
+@property (weak, nonatomic) IBOutlet UIButton *starButton1;
+@property (weak, nonatomic) IBOutlet UIButton *starButton2;
+@property (weak, nonatomic) IBOutlet UIButton *starButton3;
+@property (weak, nonatomic) IBOutlet UIButton *starButton4;
+@property (weak, nonatomic) IBOutlet UIButton *starButton5;
+@property (nonatomic, assign) BOOL star1On;
+@property (nonatomic, assign) BOOL star2On;
+@property (nonatomic, assign) BOOL star3On;
+@property (nonatomic, assign) BOOL star4On;
+@property (nonatomic, assign) BOOL star5On;
 
 @end
 
@@ -85,7 +96,8 @@
             
             // Create and store array of Opportunity objects from retrieved posts
             self.reviews = [Review createReviewArray:reviews];
-            self.reviewCountLabel.text = [NSString stringWithFormat:@"Reviews (%lu)", (unsigned long)self.reviews.count];
+            self.filteredReviews = self.reviews;
+            self.reviewCountLabel.text = [NSString stringWithFormat:@"Reviews (%lu)", (unsigned long)self.filteredReviews.count];
             
             [self.tableView reloadData];
             
@@ -105,7 +117,7 @@
     ReviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ReviewCell"];
     
     // Setting cell and style
-    [cell setCell:self.reviews[indexPath.row]];
+    [cell setCell:self.filteredReviews[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -114,7 +126,153 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.reviews.count;
+    return self.filteredReviews.count;
+    
+}
+
+
+#pragma mark - Star filtering
+
+- (void)filterStars:(NSNumber *)starCount {
+    
+    if ([starCount intValue] == 0) {
+        
+        self.filteredReviews = self.reviews;
+        
+    } else {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(stars == %@)", starCount];
+        
+        NSArray *filteredData = [self.reviews filteredArrayUsingPredicate:predicate];
+        
+        self.filteredReviews = [filteredData mutableCopy];
+        
+    }
+    
+    self.reviewCountLabel.text = [NSString stringWithFormat:@"Reviews (%lu)", (unsigned long)self.filteredReviews.count];
+    [self.tableView reloadData];
+    
+}
+
+- (IBAction)didTapStar1:(id)sender {
+    
+    if (self.star1On) {
+        
+        self.star1On = !self.star1On;
+        [self filterStars:@0];
+        [self toggleOff:self.starButton1];
+        
+    } else {
+        
+        [self clearButtons];
+        self.star1On = !self.star1On;
+        [self filterStars:@1];
+        [self toggleOn:self.starButton1];
+        
+    }
+    
+}
+
+- (IBAction)didTapStar2:(id)sender {
+    
+    if (self.star2On) {
+        
+        self.star2On = !self.star2On;
+        [self filterStars:@0];
+        [self toggleOff:self.starButton2];
+        
+    } else {
+        
+        [self clearButtons];
+        self.star2On = !self.star2On;
+        [self filterStars:@2];
+        [self toggleOn:self.starButton2];
+        
+    }
+    
+}
+
+- (IBAction)didTapStar3:(id)sender {
+    
+    if (self.star3On) {
+        
+        self.star3On = !self.star3On;
+        [self filterStars:@0];
+        [self toggleOff:self.starButton3];
+        
+    } else {
+        
+        [self clearButtons];
+        self.star3On = !self.star3On;
+        [self filterStars:@3];
+        [self toggleOn:self.starButton3];
+        
+    }
+    
+}
+
+- (IBAction)didTapStar4:(id)sender {
+    
+    if (self.star4On) {
+        
+        self.star4On = !self.star4On;
+        [self filterStars:@0];
+        [self toggleOff:self.starButton4];
+        
+    } else {
+        
+        [self clearButtons];
+        self.star4On = !self.star4On;
+        [self filterStars:@4];
+        [self toggleOn:self.starButton4];
+        
+    }
+    
+}
+
+- (IBAction)didTapStar5:(id)sender {
+    
+    if (self.star5On) {
+        
+        self.star5On = !self.star5On;
+        [self filterStars:@0];
+        [self toggleOff:self.starButton5];
+        
+    } else {
+        
+        [self clearButtons];
+        self.star5On = !self.star5On;
+        [self filterStars:@5];
+        [self toggleOn:self.starButton5];
+        
+    }
+    
+}
+
+- (void)clearButtons {
+    
+    NSArray *buttons = @[self.starButton1, self.starButton2, self.starButton3, self.starButton4, self.starButton5];
+    
+    for (UIButton *button in buttons) {
+        
+        self.star1On = self.star2On = self.star3On = self.star4On = self.star5On = FALSE;
+        [self toggleOff:button];
+        
+    }
+    
+}
+
+- (void)toggleOff:(UIButton *)button {
+    
+    button.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+    button.layer.shadowOpacity = 0.25;
+    
+}
+
+- (void)toggleOn:(UIButton *)button {
+    
+    button.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+    button.layer.shadowOpacity = 0;
     
 }
 
@@ -159,6 +317,22 @@
     self.reviewButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.reviewButton.layer.shadowRadius = 3;
     self.reviewButton.layer.shadowOpacity = 0.25;
+    
+    [self styleButtons];
+    
+}
+
+- (void)styleButtons {
+    
+    NSArray *buttons = @[self.starButton1, self.starButton2, self.starButton3, self.starButton4, self.starButton5];
+    
+    for (UIButton *button in buttons) {
+        button.layer.cornerRadius = 15;
+        button.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
+        button.layer.shadowOffset = CGSizeMake(0, 0);
+        button.layer.shadowRadius = 3;
+        button.layer.shadowOpacity = 0.25;
+    }
     
 }
 
