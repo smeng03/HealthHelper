@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (strong, nonatomic) GMSCoordinateBounds *bounds;
 @property (weak, nonatomic) IBOutlet UIView *mapContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @end
 
@@ -112,6 +113,9 @@
     
     // Set organization name label
     self.organizationNameLabel.text = self.opportunity.author.username;
+    
+    // Set address label
+    self.addressLabel.text = self.opportunity.author.address;
     
     // Setting marker on map
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake([self.opportunity.author.destinationLatValue doubleValue], [self.opportunity.author.destinationLngValue doubleValue]);

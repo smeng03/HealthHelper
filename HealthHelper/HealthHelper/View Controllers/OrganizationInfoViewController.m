@@ -58,6 +58,7 @@
     [self styleElements];
     [self setData];
     [self notificationSetup];
+    [self setStarText];
     
 }
 
@@ -271,7 +272,7 @@
 
 - (void)toggleOn:(UIButton *)button {
     
-    button.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+    button.backgroundColor = [UIColor colorWithRed:0/255.0 green:13/255.0 blue:112/255.0 alpha:1];
     button.layer.shadowOpacity = 0;
     
 }
@@ -332,6 +333,29 @@
         button.layer.shadowOffset = CGSizeMake(0, 0);
         button.layer.shadowRadius = 3;
         button.layer.shadowOpacity = 0.25;
+    }
+    
+}
+
+- (void)setStarText {
+    
+    // Set star filter button text
+    NSArray *buttons = @[self.starButton1, self.starButton2, self.starButton3, self.starButton4, self.starButton5];
+    
+    for (int i=0; i<5; i++) {
+        
+        UIButton *button = buttons[i];
+        
+        NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+        attachment.image = [UIImage imageNamed:@"star-filled-small"];
+
+        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+
+        NSMutableAttributedString *buttonText= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d  ", i+1]];
+        [buttonText appendAttributedString:attachmentString];
+
+        [button setAttributedTitle:buttonText forState:UIControlStateNormal];
+    
     }
     
 }

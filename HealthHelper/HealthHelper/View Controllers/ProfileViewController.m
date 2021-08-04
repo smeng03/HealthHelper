@@ -318,7 +318,7 @@ CLLocationManager *locationManager;
         
     } else {
         
-        self.volunteerButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        self.volunteerButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:13/255.0 blue:112/255.0 alpha:1];
         [self.filters addObject:volunteeringFilter];
         self.volunteerButton.layer.shadowOpacity = 0;
         
@@ -343,7 +343,7 @@ CLLocationManager *locationManager;
         
     } else {
         
-        self.shadowButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        self.shadowButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:13/255.0 blue:112/255.0 alpha:1];
         [self.filters addObject:shadowingFilter];
         self.shadowButton.layer.shadowOpacity = 0;
         
@@ -368,7 +368,7 @@ CLLocationManager *locationManager;
         
     } else {
         
-        self.donateButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        self.donateButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:13/255.0 blue:112/255.0 alpha:1];
         [self.filters addObject:donationFilter];
         self.donateButton.layer.shadowOpacity = 0;
         
@@ -393,7 +393,7 @@ CLLocationManager *locationManager;
         
     } else {
         
-        self.distanceButton.backgroundColor = [UIColor colorWithRed:47/255.0 green:59/255.0 blue:161/255.0 alpha:1];
+        self.distanceButton.backgroundColor = [UIColor colorWithRed:0/255.0 green:13/255.0 blue:112/255.0 alpha:1];
         [self.filters addObject:distanceFilter];
         self.distanceButton.layer.shadowOpacity = 0;
         
