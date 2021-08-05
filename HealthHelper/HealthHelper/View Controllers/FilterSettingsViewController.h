@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FilterSettingsControllerDelegate
 
-- (void)didUpdateDistance;
+- (void)didUpdateDistance:(int)sortType;
 
 @end
 

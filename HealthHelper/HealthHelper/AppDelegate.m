@@ -31,7 +31,10 @@
     }];
     [Parse initializeWithConfiguration:configuration];
     
+    // Changing appearance of UI elements
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0]} forState:UIControlStateNormal];
+    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateSelected];
+    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateNormal];
     
     return YES;
 }

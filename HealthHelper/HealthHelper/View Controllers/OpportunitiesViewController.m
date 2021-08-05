@@ -63,6 +63,7 @@ CLLocationManager *opportunitiesLocationManager;
     [super viewDidLoad];
     
     self.isFirstLoad = TRUE;
+    [self setDefaults];
     
     // Delegates and data sources
     self.tableView.delegate = self;
@@ -74,15 +75,6 @@ CLLocationManager *opportunitiesLocationManager;
     
     // Load opportunities
     [self checkCache];
-    
-    // Set default distance filter, units, and method of travel
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setDouble:10.0 forKey:@"maxDistance"];
-    [defaults setObject:@"imperial" forKey:@"units"];
-    [defaults setObject:@"driving" forKey:@"mode"];
-    [defaults synchronize];
-    self.units = @"imperial";
-    self.mode = @"driving";
     
     // Refresh when app comes to foreground
     [[NSNotificationCenter defaultCenter] addObserverForName:@"EnteredForeground" object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -258,7 +250,7 @@ CLLocationManager *opportunitiesLocationManager;
 
 #pragma mark - Sort opportunities
 
-- (void)sortOpportunities:(NSMutableArray *)opportunities {
+- (void)sortOpportunitiesByRelevance:(NSMutableArray *)opportunities {
     
     NSMutableArray *opportunitiesWithScores = [NSMutableArray new];
     NSMutableArray *sortedOpportunityArray = [NSMutableArray new];
@@ -300,6 +292,36 @@ CLLocationManager *opportunitiesLocationManager;
     }
     
     self.opportunities = sortedOpportunityArray;
+    self.filteredOpportunities = self.opportunities;
+    
+    // Save to cache
+    OpportunityArray *array = [OpportunityArray new];
+    [array setOpportunityArray:self.opportunities];
+    [self.opportunitiesCache setObject:array forKey:@"opportunities"];
+    
+}
+
+- (void)sortOpportunitiesByNewest:(NSMutableArray *)opportunities {
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeCreatedAt"
+                                               ascending:NO];
+    NSArray *sortedOpportunities = [[opportunities copy] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.opportunities = [sortedOpportunities mutableCopy];
+    self.filteredOpportunities = self.opportunities;
+    
+    // Save to cache
+    OpportunityArray *array = [OpportunityArray new];
+    [array setOpportunityArray:self.opportunities];
+    [self.opportunitiesCache setObject:array forKey:@"opportunities"];
+    
+}
+
+- (void)sortOpportunitiesByClosest:(NSMutableArray *)opportunities {
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"author.distanceValue"
+                                               ascending:YES];
+    NSArray *sortedOpportunities = [[opportunities copy] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.opportunities = [sortedOpportunities mutableCopy];
     self.filteredOpportunities = self.opportunities;
     
     // Save to cache
@@ -390,7 +412,7 @@ CLLocationManager *opportunitiesLocationManager;
 
 - (void)finishOpportunitySetup:(NSMutableArray *)opportunities {
     
-    [self sortOpportunities:opportunities];
+    [self sortOpportunitiesByRelevance:opportunities];
     
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -669,9 +691,23 @@ CLLocationManager *opportunitiesLocationManager;
 
 #pragma mark - Distance settings delegate method
 
-- (void)didUpdateDistance {
+- (void)didUpdateDistance:(int)sortType {
     
     [self updateDistanceButtonText];
+    
+    if (sortType == 0) {
+        
+        [self sortOpportunitiesByRelevance:self.opportunities];
+        
+    } else if (sortType == 1) {
+        
+        [self sortOpportunitiesByClosest:self.opportunities];
+        
+    } else {
+        
+        [self sortOpportunitiesByNewest:self.opportunities];
+        
+    }
     
     // Manually trigger search and refilter using updated distance filter
     [self searchBar:self.searchBar textDidChange: self.searchBar.text];
@@ -735,6 +771,22 @@ CLLocationManager *opportunitiesLocationManager;
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     });
+}
+
+- (void)setDefaults {
+    
+    // Set default distance filter, units, and method of travel
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setDouble:10.0 forKey:@"maxDistance"];
+    [defaults setObject:@"imperial" forKey:@"units"];
+    [defaults setObject:@"driving" forKey:@"mode"];
+    [defaults setInteger:0 forKey:@"sortSegment"];
+    [defaults setInteger:0 forKey:@"unitsSegment"];
+    [defaults setInteger:0 forKey:@"modeSegment"];
+    [defaults synchronize];
+    self.units = @"imperial";
+    self.mode = @"driving";
+    
 }
 
 

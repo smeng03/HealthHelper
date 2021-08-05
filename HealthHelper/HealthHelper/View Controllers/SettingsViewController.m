@@ -36,8 +36,9 @@
     [self notificationSetup];
     
     // Default highlighted segments
-    self.distanceUnitsControl.selectedSegmentIndex = 0;
-    self.modeOfTravelControl.selectedSegmentIndex = 0;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.distanceUnitsControl.selectedSegmentIndex = [defaults integerForKey:@"unitsSegment"];
+    self.modeOfTravelControl.selectedSegmentIndex = [defaults integerForKey:@"modeSegment"];
     
     [self styleButtons];
     
@@ -67,6 +68,7 @@
     NSArray *units = @[@"imperial", @"metric"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:units[self.distanceUnitsControl.selectedSegmentIndex] forKey:@"units"];
+    [defaults setInteger:self.distanceUnitsControl.selectedSegmentIndex forKey:@"unitsSegment"];
     [defaults synchronize];
     
 }
@@ -79,6 +81,7 @@
     NSArray *modes = @[@"driving", @"walking", @"bicycling"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:modes[self.modeOfTravelControl.selectedSegmentIndex] forKey:@"mode"];
+    [defaults setInteger:self.modeOfTravelControl.selectedSegmentIndex forKey:@"modeSegment"];
     [defaults synchronize];
     
 }

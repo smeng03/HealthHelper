@@ -346,6 +346,22 @@
                                     <constraint firstItem="ucZ-cN-eNQ" firstAttribute="centerY" secondItem="VSf-Xc-Zwf" secondAttribute="centerY" id="p64-aj-Djm"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Opportunities By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ae1-JC-KyH">
+                                <rect key="frame" x="20" y="223.5" width="374" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rlQ-lI-Mwg">
+                                <rect key="frame" x="20" y="267.5" width="374" height="32"/>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Most relevant"/>
+                                    <segment title="Closest"/>
+                                    <segment title="Newest"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" red="0.96078431369999995" green="0.96470588239999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BuN-Ur-0OX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -354,15 +370,21 @@
                             <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="wPy-kl-9rg" secondAttribute="trailing" constant="20" id="BE8-Zd-guZ"/>
                             <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="VSf-Xc-Zwf" secondAttribute="trailing" constant="20" id="FEC-vm-l6z"/>
                             <constraint firstItem="BuN-Ur-0OX" firstAttribute="bottom" secondItem="VSf-Xc-Zwf" secondAttribute="bottom" constant="20" id="KL5-da-t4I"/>
+                            <constraint firstItem="rlQ-lI-Mwg" firstAttribute="top" secondItem="Ae1-JC-KyH" secondAttribute="bottom" constant="20" id="M9K-E2-4jo"/>
                             <constraint firstItem="wPy-kl-9rg" firstAttribute="leading" secondItem="l32-WU-bky" secondAttribute="trailing" constant="10" id="Ne4-kg-d8G"/>
+                            <constraint firstItem="Ae1-JC-KyH" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="OGh-7h-9Jp"/>
                             <constraint firstItem="Ryk-0N-qTA" firstAttribute="top" secondItem="o9m-QE-QfO" secondAttribute="bottom" constant="20" id="OUB-hP-wZP"/>
                             <constraint firstItem="Soh-99-fRZ" firstAttribute="trailing" secondItem="BuN-Ur-0OX" secondAttribute="trailing" id="Qe8-7K-tjm"/>
+                            <constraint firstItem="rlQ-lI-Mwg" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="SZJ-WG-dig"/>
+                            <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="rlQ-lI-Mwg" secondAttribute="trailing" constant="20" id="Tr4-HR-OBM"/>
                             <constraint firstItem="VSf-Xc-Zwf" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="WnI-1i-WLe"/>
                             <constraint firstItem="Ryk-0N-qTA" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="ZyN-42-YUF"/>
                             <constraint firstItem="wPy-kl-9rg" firstAttribute="bottom" secondItem="l32-WU-bky" secondAttribute="bottom" id="bsO-ce-Lnz"/>
                             <constraint firstItem="l32-WU-bky" firstAttribute="bottom" secondItem="o9m-QE-QfO" secondAttribute="bottom" id="gxq-Zb-pwu"/>
+                            <constraint firstItem="Ae1-JC-KyH" firstAttribute="top" secondItem="Ryk-0N-qTA" secondAttribute="bottom" constant="50" id="hVV-s0-SoU"/>
                             <constraint firstItem="o9m-QE-QfO" firstAttribute="top" secondItem="Soh-99-fRZ" secondAttribute="bottom" constant="40" id="ioZ-E3-B1H"/>
                             <constraint firstItem="Soh-99-fRZ" firstAttribute="top" secondItem="BuN-Ur-0OX" secondAttribute="top" id="nno-om-jRG"/>
+                            <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="Ae1-JC-KyH" secondAttribute="trailing" constant="20" id="qKD-3V-d43"/>
                             <constraint firstItem="Soh-99-fRZ" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" id="qnB-bb-MnX"/>
                             <constraint firstItem="o9m-QE-QfO" firstAttribute="leading" secondItem="BuN-Ur-0OX" secondAttribute="leading" constant="20" id="rpL-fb-h2z"/>
                             <constraint firstItem="BuN-Ur-0OX" firstAttribute="trailing" secondItem="Ryk-0N-qTA" secondAttribute="trailing" constant="20" id="wEe-Uk-Xw5"/>
@@ -377,6 +399,7 @@
                         <outlet property="navigationBar" destination="Soh-99-fRZ" id="v8O-JU-sU3"/>
                         <outlet property="notificationLabel" destination="ucZ-cN-eNQ" id="ZuN-eX-G8x"/>
                         <outlet property="notificationView" destination="VSf-Xc-Zwf" id="KMu-0W-Fep"/>
+                        <outlet property="sortTypeControl" destination="rlQ-lI-Mwg" id="FVb-vO-mVN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iM-bj-t2I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2212,11 +2235,13 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lDh-5F-3mR">
                                 <rect key="frame" x="20" y="506" width="374" height="32"/>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <segments>
                                     <segment title="Driving"/>
                                     <segment title="Walking"/>
                                     <segment title="Biking"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" red="0.96078431372549022" green="0.96470588235294119" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="didChangeModeofTravel:" destination="hNz-0G-Mik" eventType="valueChanged" id="KmZ-Kp-lVt"/>
                                 </connections>
@@ -2244,10 +2269,12 @@ Other: Community Volunteers work at least four hours each volunteer session and 
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UFb-MY-b96">
                                 <rect key="frame" x="20" y="381" width="374" height="32"/>
+                                <color key="backgroundColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <segments>
                                     <segment title="Imperial"/>
                                     <segment title="Metric"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" red="0.96078431372549022" green="0.96470588235294119" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="didChangeUnits:" destination="hNz-0G-Mik" eventType="valueChanged" id="ZuN-CI-dD7"/>
                                 </connections>

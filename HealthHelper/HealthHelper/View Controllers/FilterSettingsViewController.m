@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sortTypeControl;
 
 @end
 
@@ -31,6 +32,9 @@
     
     // Allows notifications to be posted
     [self notificationSetup];
+    
+    // Default highlighted segments
+    self.sortTypeControl.selectedSegmentIndex = [defaults integerForKey:@"sortSegment"];
     
 }
 
@@ -68,9 +72,12 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setDouble:[maxDistance doubleValue] forKey:@"maxDistance"];
+    
+    int sortType = (int)self.sortTypeControl.selectedSegmentIndex;
+    [defaults setInteger:sortType forKey:@"sortSegment"];
     [defaults synchronize];
     
-    [self.delegate didUpdateDistance];
+    [self.delegate didUpdateDistance:sortType];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
