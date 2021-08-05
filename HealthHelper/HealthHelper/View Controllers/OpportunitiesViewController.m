@@ -48,6 +48,7 @@
 @property (nonatomic, strong) NSString *units;
 @property (nonatomic, strong) NSString *mode;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (assign, nonatomic) BOOL firstLoadComplete;
 
 
 @end
@@ -61,6 +62,7 @@ CLLocationManager *opportunitiesLocationManager;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.firstLoadComplete = FALSE;
     
     self.isFirstLoad = TRUE;
     [self setDefaults];
@@ -350,7 +352,11 @@ CLLocationManager *opportunitiesLocationManager;
     
     if (self.filteredOpportunities.count == 0) {
         
-        [self setEmptyMessage];
+        if (self.firstLoadComplete) {
+            
+            [self setEmptyMessage];
+            
+        }
         
     } else {
         
@@ -414,6 +420,7 @@ CLLocationManager *opportunitiesLocationManager;
     
     [self sortOpportunitiesByRelevance:opportunities];
     
+    self.firstLoadComplete = TRUE;
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
     [self stopAnimation];
@@ -640,19 +647,19 @@ CLLocationManager *opportunitiesLocationManager;
     // Button shadows
     self.volunteerButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.volunteerButton.layer.shadowRadius = 3;
-    self.volunteerButton.layer.shadowOpacity = 0.25;
+    self.volunteerButton.layer.shadowOpacity = 0.4;
     
     self.shadowButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.shadowButton.layer.shadowRadius = 3;
-    self.shadowButton.layer.shadowOpacity = 0.25;
+    self.shadowButton.layer.shadowOpacity = 0.4;
     
     self.donateButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.donateButton.layer.shadowRadius = 3;
-    self.donateButton.layer.shadowOpacity = 0.25;
+    self.donateButton.layer.shadowOpacity = 0.4;
     
     self.distanceButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.distanceButton.layer.shadowRadius = 3;
-    self.distanceButton.layer.shadowOpacity = 0.25;
+    self.distanceButton.layer.shadowOpacity = 0.4;
     
     [self updateDistanceButtonText];
     

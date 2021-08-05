@@ -14,6 +14,7 @@
 #import "FBShimmering.h"
 #import "FBShimmeringView.h"
 #import "FBShimmeringLayer.h"
+#import "DateTools.h"
 
 @implementation OpportunityCell
 
@@ -77,6 +78,9 @@
     // Duration label
     self.timeLabel.text = opportunity.author.duration;
     
+    // Datetime label
+    self.dateLabel.text = opportunity.timeCreatedAt.shortTimeAgoSinceNow;
+    
     // Setting opportunity
     self.opportunity = opportunity;
     
@@ -92,6 +96,24 @@
     self.containerView.layer.shadowRadius = 5;
     self.containerView.layer.shadowOpacity = 0.2;
     self.backgroundColor = [UIColor colorNamed:@"backgroundColor"];
+    
+    // Mode icon
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *mode = [defaults objectForKey:@"mode"];
+    
+    if ([mode isEqualToString: @"driving"]) {
+        
+        self.modeIcon.image = [UIImage systemImageNamed:@"car"];
+        
+    } else if ([mode isEqualToString: @"walking"]) {
+        
+        self.modeIcon.image = [UIImage systemImageNamed:@"figure.walk"];
+        
+    } else if ([mode isEqualToString: @"bicycling"]) {
+        
+        self.modeIcon.image = [UIImage systemImageNamed:@"bicycle"];
+        
+    }
     
 }
 

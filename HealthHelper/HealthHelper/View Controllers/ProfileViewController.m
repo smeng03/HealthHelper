@@ -63,6 +63,7 @@
 @property (nonatomic, strong) NSString *units;
 @property (nonatomic, strong) NSString *mode;
 @property (weak, nonatomic) IBOutlet UIView *mapContainerView;
+@property (assign, nonatomic) BOOL firstLoadComplete;
 
 @end
 
@@ -75,6 +76,7 @@ CLLocationManager *locationManager;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.firstLoadComplete = FALSE;
     
     // Delegates and data sources
     self.tableView.delegate = self;
@@ -207,6 +209,7 @@ CLLocationManager *locationManager;
                 self.opportunities = [NSMutableArray new];
                 self.filteredOpportunities = self.opportunities;
                 
+                self.firstLoadComplete = TRUE;
                 [self.tableView reloadData];
                 [self.refreshControl endRefreshing];
                 [self stopAnimation];
@@ -251,6 +254,7 @@ CLLocationManager *locationManager;
     self.opportunities = opportunities;
     self.filteredOpportunities = self.opportunities;
     
+    self.firstLoadComplete = TRUE;
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
     [self stopAnimation];
@@ -273,6 +277,32 @@ CLLocationManager *locationManager;
     // Re-centering map
     GMSCameraUpdate *updateCamera = [GMSCameraUpdate fitBounds:self.bounds withPadding:30];
     [self.mapView moveCamera:updateCamera];
+    
+}
+
+
+#pragma mark - Update map markers
+
+- (void)replaceMarkers {
+    
+    [self.mapView clear];
+    
+    for (Opportunity *opportunity in self.filteredOpportunities) {
+        
+        Organization *organization = opportunity.author;
+        CLLocationCoordinate2D position = CLLocationCoordinate2DMake([organization.destinationLatValue doubleValue], [organization.destinationLngValue doubleValue]);
+        GMSMarker *marker = [GMSMarker markerWithPosition:position];
+        marker.title = organization.username;
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor colorNamed:@"themeColor"]];
+        marker.map = self.mapView;
+        
+        self.bounds = [self.bounds includingCoordinate:marker.position];
+        
+        // Re-centering map
+        GMSCameraUpdate *updateCamera = [GMSCameraUpdate fitBounds:self.bounds withPadding:30];
+        [self.mapView moveCamera:updateCamera];
+        
+    }
     
 }
 
@@ -302,6 +332,7 @@ CLLocationManager *locationManager;
     }
     
     self.filteredOpportunities = [filteredData mutableCopy];
+    [self replaceMarkers];
 }
 
 
@@ -472,7 +503,11 @@ CLLocationManager *locationManager;
     
     if (self.filteredOpportunities.count == 0) {
         
-        [self setEmptyMessage];
+        if (self.firstLoadComplete) {
+            
+            [self setEmptyMessage];
+            
+        }
         
     } else {
         
@@ -844,19 +879,19 @@ CLLocationManager *locationManager;
     // Button shadows
     self.volunteerButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.volunteerButton.layer.shadowRadius = 3;
-    self.volunteerButton.layer.shadowOpacity = 0.25;
+    self.volunteerButton.layer.shadowOpacity = 0.4;
     
     self.shadowButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.shadowButton.layer.shadowRadius = 3;
-    self.shadowButton.layer.shadowOpacity = 0.25;
+    self.shadowButton.layer.shadowOpacity = 0.4;
     
     self.donateButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.donateButton.layer.shadowRadius = 3;
-    self.donateButton.layer.shadowOpacity = 0.25;
+    self.donateButton.layer.shadowOpacity = 0.4;
     
     self.distanceButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.distanceButton.layer.shadowRadius = 3;
-    self.distanceButton.layer.shadowOpacity = 0.25;
+    self.distanceButton.layer.shadowOpacity = 0.4;
     
     [self updateDistanceButtonText];
     

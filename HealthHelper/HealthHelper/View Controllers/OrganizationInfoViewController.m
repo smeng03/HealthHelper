@@ -332,7 +332,7 @@
         button.backgroundColor = [UIColor colorWithRed:73/255.0 green:93/255.0 blue:1 alpha:1];
         button.layer.shadowOffset = CGSizeMake(0, 0);
         button.layer.shadowRadius = 3;
-        button.layer.shadowOpacity = 0.25;
+        button.layer.shadowOpacity = 0.4;
     }
     
 }
