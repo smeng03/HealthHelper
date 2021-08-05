@@ -857,7 +857,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6nf-ki-u7H">
-                                <rect key="frame" x="0.0" y="235" width="414" height="558"/>
+                                <rect key="frame" x="0.0" y="257" width="414" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0El-Qa-ziq">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="825"/>
@@ -1228,7 +1228,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="cM3-hL-NXr"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hu-TS-5ny">
-                                <rect key="frame" x="120" y="180" width="160" height="35"/>
+                                <rect key="frame" x="120" y="202" width="160" height="35"/>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="1bD-9G-svF"/>
@@ -1261,23 +1261,44 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxH-K7-7mO">
-                                <rect key="frame" x="120" y="142" width="37.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="120" y="165" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLm-QT-QCN">
+                                <rect key="frame" x="120" y="138" width="274" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4be-Xa-xgH">
+                                <rect key="frame" x="300" y="202" width="50" height="35"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="XdG-y6-p37"/>
+                                    <constraint firstAttribute="width" constant="50" id="vot-wc-VUj"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="phone.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="didTapCallButton:" destination="pqk-1r-4y9" eventType="touchUpInside" id="WPl-xC-keg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MN9-Pq-nQi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4be-Xa-xgH" secondAttribute="trailing" constant="20" id="2MA-JY-5P4"/>
                             <constraint firstItem="7hu-TS-5ny" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="3il-om-Jiv"/>
-                            <constraint firstItem="RxH-K7-7mO" firstAttribute="top" secondItem="BnX-QH-LgV" secondAttribute="bottom" constant="10" id="3mw-7X-4Fo"/>
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="4ot-we-lGf"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="top" secondItem="7hu-TS-5ny" secondAttribute="bottom" constant="20" id="5Rb-IV-0li"/>
+                            <constraint firstItem="4be-Xa-xgH" firstAttribute="top" secondItem="7hu-TS-5ny" secondAttribute="top" id="6mB-Iv-Yru"/>
                             <constraint firstItem="7hu-TS-5ny" firstAttribute="top" secondItem="RxH-K7-7mO" secondAttribute="bottom" constant="20" id="79I-4x-GXG"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="bottom" secondItem="KeG-1X-qWN" secondAttribute="bottom" constant="20" id="8up-1N-2BP"/>
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" id="BKN-yw-sur"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="FmM-AN-Esh"/>
+                            <constraint firstItem="gLm-QT-QCN" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="GcY-og-D6O"/>
                             <constraint firstItem="KeG-1X-qWN" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="20" id="Iap-6V-Qgf"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RxH-K7-7mO" secondAttribute="trailing" constant="20" id="O86-F5-6WM"/>
                             <constraint firstItem="Zar-3q-aIr" firstAttribute="leading" secondItem="MN9-Pq-nQi" secondAttribute="leading" constant="10" id="Y9f-VZ-JkN"/>
@@ -1285,12 +1306,18 @@
                             <constraint firstItem="6nf-ki-u7H" firstAttribute="trailing" secondItem="MN9-Pq-nQi" secondAttribute="trailing" id="alS-0M-st1"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" secondItem="KeG-1X-qWN" secondAttribute="trailing" constant="20" id="fHj-Uk-fBv"/>
                             <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BnX-QH-LgV" secondAttribute="trailing" constant="20" id="jgt-ky-deZ"/>
+                            <constraint firstItem="gLm-QT-QCN" firstAttribute="top" secondItem="BnX-QH-LgV" secondAttribute="bottom" constant="6" id="jjJ-TB-yyB"/>
+                            <constraint firstItem="4be-Xa-xgH" firstAttribute="leading" secondItem="7hu-TS-5ny" secondAttribute="trailing" constant="20" id="lo5-GE-mqc"/>
                             <constraint firstItem="BnX-QH-LgV" firstAttribute="top" secondItem="MN9-Pq-nQi" secondAttribute="top" constant="20" id="oCK-Ky-2Tz"/>
                             <constraint firstItem="RxH-K7-7mO" firstAttribute="leading" secondItem="Zar-3q-aIr" secondAttribute="trailing" constant="10" id="qfh-J9-Rbm"/>
+                            <constraint firstItem="MN9-Pq-nQi" firstAttribute="trailing" secondItem="gLm-QT-QCN" secondAttribute="trailing" constant="20" id="qoW-Kp-Scs"/>
+                            <constraint firstItem="RxH-K7-7mO" firstAttribute="top" secondItem="gLm-QT-QCN" secondAttribute="bottom" constant="10" id="uHF-MP-6as"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pFP-1D-rzf"/>
                     <connections>
+                        <outlet property="addressLabel" destination="gLm-QT-QCN" id="sBk-V9-tHq"/>
+                        <outlet property="callButton" destination="4be-Xa-xgH" id="uPm-BM-Xje"/>
                         <outlet property="descriptionLabel" destination="Uv8-9d-i7p" id="qgk-DB-KPW"/>
                         <outlet property="notificationLabel" destination="jSK-De-HH9" id="oNF-GO-rTB"/>
                         <outlet property="notificationView" destination="KeG-1X-qWN" id="G94-I1-SBe"/>
@@ -2384,7 +2411,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Ejj-hJ-n4y"/>
-        <segue reference="poZ-lN-O9J"/>
+        <segue reference="FTI-N5-5SE"/>
         <segue reference="jGd-NA-SXj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.36470588240000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2394,6 +2421,7 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="hh_full" width="1073" height="232"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="star" width="48" height="48"/>
         <image name="timer" catalog="system" width="128" height="121"/>
@@ -2413,6 +2441,9 @@ Other: Community Volunteers work at least four hours each volunteer session and 
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

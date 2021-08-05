@@ -34,6 +34,7 @@
 @property (nonatomic, strong) NSString *distance;
 @property (nonatomic, assign) NSNumber *distanceValue;
 @property (nonatomic, strong) NSString *duration;
+@property (nonatomic, strong) NSString *phoneNumber;
 @property (nonatomic, weak) id<OrganizationDelegate> delegate;
 
 + (Organization *)initOrganizationWithObject:(PFObject *)object withLocationArray:(NSArray *)locationArray withController:controller;

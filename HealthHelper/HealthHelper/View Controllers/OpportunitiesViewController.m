@@ -225,6 +225,7 @@ CLLocationManager *opportunitiesLocationManager;
     [query includeKey:opportunityHoursQuery];
     [query includeKey:dateQuery];
     [query includeKey:positionQuery];
+    [query includeKey:authorPhoneNumberQuery];
     query.limit = 20;
     [query orderByDescending:createdAtQuery];
     

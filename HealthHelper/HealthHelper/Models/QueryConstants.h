@@ -41,5 +41,6 @@ extern NSString *volunteeringOpportunityType;
 extern NSString *userTagsQuery;
 extern NSString *totalScoreQuery;
 extern NSString *numReviewsQuery;
+extern NSString *authorPhoneNumberQuery;
     
 @end

@@ -51,6 +51,7 @@
     organization.numReviews = object[@"numReviews"];
     organization.reviews = object[@"reviews"];
     organization.username = object[@"username"];
+    organization.phoneNumber = object[@"phoneNumber"];
     organization.organizationId = object.objectId;
     organization.timeCreatedAt = object.createdAt;
     organization.timeUpdatedAt = object.updatedAt;

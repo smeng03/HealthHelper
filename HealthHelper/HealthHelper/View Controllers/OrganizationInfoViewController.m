@@ -37,6 +37,8 @@
 @property (nonatomic, assign) BOOL star3On;
 @property (nonatomic, assign) BOOL star4On;
 @property (nonatomic, assign) BOOL star5On;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *callButton;
 
 @end
 
@@ -278,6 +280,16 @@
 }
 
 
+#pragma mark - Call an organization
+
+- (IBAction)didTapCallButton:(id)sender {
+    
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:[NSURL URLWithString: [NSString stringWithFormat:@"tel:%@", self.opportunity.author.phoneNumber]] options:@{} completionHandler:nil];
+    
+}
+
+
 #pragma mark - Open full profile picture
 
 - (IBAction)didTapProfilePicture:(id)sender {
@@ -318,6 +330,11 @@
     self.reviewButton.layer.shadowOffset = CGSizeMake(0, 0);
     self.reviewButton.layer.shadowRadius = 3;
     self.reviewButton.layer.shadowOpacity = 0.25;
+    
+    self.callButton.layer.cornerRadius = 5;
+    self.callButton.layer.shadowOffset = CGSizeMake(0, 0);
+    self.callButton.layer.shadowRadius = 3;
+    self.callButton.layer.shadowOpacity = 0.25;
     
     [self styleButtons];
     
@@ -397,6 +414,9 @@
     } else {
         self.ratingLabel.text = [NSString stringWithFormat:@"Average rating: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
     }
+    
+    // Address label
+    self.addressLabel.text = self.opportunity.author.address;
     
 }
 

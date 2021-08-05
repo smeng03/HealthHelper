@@ -44,6 +44,7 @@ NSString *volunteeringOpportunityType = @"Volunteering";
 NSString *userTagsQuery = @"tags";
 NSString *totalScoreQuery = @"totalScore";
 NSString *numReviewsQuery = @"numReviews";
+NSString *authorPhoneNumberQuery = @"author.phoneNumber";
 
 @end
 
