@@ -778,7 +778,9 @@ CLLocationManager *locationManager;
     if (searchText.length != 0) {
         
         // Searches for objects containing what the user types
-        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(author.username CONTAINS[cd] %@)", searchText];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *searchBy = [defaults objectForKey:@"searchBy"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(%@ CONTAINS[cd] %@)", searchBy, searchText];
         
         // Filters opportunities based on search criteria
         NSArray *filteredData = [self.opportunities filteredArrayUsingPredicate:predicate];

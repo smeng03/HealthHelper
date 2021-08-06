@@ -310,7 +310,7 @@
     if ([self.opportunity.author.numReviews intValue] == 0) {
         self.ratingLabel.text = @"No ratings yet";
     } else {
-        self.ratingLabel.text = [NSString stringWithFormat:@"Average rating: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
+        self.ratingLabel.text = [NSString stringWithFormat:@"Average: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
     }
     
 }
@@ -412,7 +412,7 @@
     if ([self.opportunity.author.numReviews intValue] == 0) {
         self.ratingLabel.text = @"No ratings yet";
     } else {
-        self.ratingLabel.text = [NSString stringWithFormat:@"Average rating: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
+        self.ratingLabel.text = [NSString stringWithFormat:@"Average: %.1f/5.0", [self.opportunity.author.totalScore floatValue]/[self.opportunity.author.numReviews floatValue]];
     }
     
     // Address label

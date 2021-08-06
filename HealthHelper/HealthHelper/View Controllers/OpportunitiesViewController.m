@@ -461,7 +461,19 @@ CLLocationManager *opportunitiesLocationManager;
     if (searchText.length != 0) {
         
         // Searches for objects containing what the user types
-        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(text CONTAINS[cd] %@)", searchText];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *searchBy = [defaults objectForKey:@"searchBy"];
+        NSPredicate *predicate;
+        if (![searchBy isEqualToString:@"tags"]) {
+            
+            NSString *predicateString = [NSString stringWithFormat:@"%@ CONTAINS[cd] %%@", searchBy];
+            predicate = [NSPredicate predicateWithFormat: predicateString, searchText];
+            
+        } else {
+            
+            predicate = [NSPredicate predicateWithFormat: @"ANY tags CONTAINS[cd] %@", searchText];
+            
+        }
         
         // Filters opportunities based on search criteria
         NSArray *filteredData = [self.opportunities filteredArrayUsingPredicate:predicate];
@@ -788,9 +800,11 @@ CLLocationManager *opportunitiesLocationManager;
     [defaults setDouble:10.0 forKey:@"maxDistance"];
     [defaults setObject:@"imperial" forKey:@"units"];
     [defaults setObject:@"driving" forKey:@"mode"];
+    [defaults setObject:@"author.username" forKey:@"searchBy"];
     [defaults setInteger:0 forKey:@"sortSegment"];
     [defaults setInteger:0 forKey:@"unitsSegment"];
     [defaults setInteger:0 forKey:@"modeSegment"];
+    [defaults setInteger:0 forKey:@"searchSegment"];
     [defaults synchronize];
     self.units = @"imperial";
     self.mode = @"driving";

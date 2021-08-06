@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sortTypeControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *searchByControl;
 
 @end
 
@@ -35,6 +36,7 @@
     
     // Default highlighted segments
     self.sortTypeControl.selectedSegmentIndex = [defaults integerForKey:@"sortSegment"];
+    self.searchByControl.selectedSegmentIndex = [defaults integerForKey:@"searchSegment"];
     
 }
 
@@ -75,6 +77,12 @@
     
     int sortType = (int)self.sortTypeControl.selectedSegmentIndex;
     [defaults setInteger:sortType forKey:@"sortSegment"];
+    
+    NSArray *searchByArray = @[@"author.username", @"text", @"tags"];
+    int searchBy = (int)self.searchByControl.selectedSegmentIndex;
+    [defaults setInteger:searchBy forKey:@"searchSegment"];
+    [defaults setObject:searchByArray[searchBy] forKey:@"searchBy"];
+    
     [defaults synchronize];
     
     [self.delegate didUpdateDistance:sortType];
